@@ -1,0 +1,171 @@
+.main_info.profile_div {
+    /* min-height: 80vh;
+    min-height: 500px; */
+    height: 100%;
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+}
+
+.main_info.profile_div .profile_data {
+    height: 100%;
+}
+
+
+.profile_to_left {
+    /* background: #F7EEE3; */
+    /* position: fixed; */
+    height: 100%;
+    width: 100%;
+    padding-top: 15%;
+    border-right: 1px solid #F0F0F0;
+}
+
+.profile_to_left .fix-nav {
+    position: sticky;
+    top: 5%;
+}
+
+.profile_to_left ul {
+    padding-left: 30px;
+    margin-bottom: 0%;
+}
+
+.profile_to_left ul li {
+    list-style: none;
+    line-height: 2.4;
+}
+
+.profile_to_left ul li a {
+    color: #111;
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.profile_to_left .profile_nav {
+    height: 100%;
+}
+
+
+/* .profile_nav ul {
+    margin-left: 20px;
+} */
+
+.profile_div .profile_to_right .profile-data-display {
+    padding: 5% 0px;
+}
+
+.profile_nav ul li {
+    list-style: none;
+    padding-bottom: 10px;
+    line-height: 1.9;
+}
+
+.profile_nav ul h4 {
+    line-height: 1.9;
+}
+
+.profile_nav ul h4, .profile_nav ul li a {
+    color: #111;
+    font-size: 1.4rem;
+    font-weight: 500;
+    font-family: 'Gilroy';
+}
+
+.profile_nav ul li a ion-icon, .profile_nav ul h4 ion-icon {
+    font-size: 1.8rem;
+    margin-right: 10px;
+}
+
+.profile_title {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-top: 2%;
+    margin: 0px;
+}
+
+.profile_nav ul li:last-child {
+    margin-bottom: 0%;
+}
+
+.empty_div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.empty_div img {
+    width: 60%;
+    height: auto;
+    display: block;
+    margin: 0% auto;
+}
+
+.empty_div p {
+    font-size: 1.4rem;
+}
+
+.empty_div h3 {
+    font-size: 1.6rem;
+}
+
+/*  */
+/* .profile_to_left {
+    background: #fff;
+    border-right: 1px solid #e1ddef;
+    border: none;
+    float: left;
+    left: 0;
+    padding-top: 20px;
+    width: 20%;
+}
+
+.profile_to_right {
+    float: right;
+    margin: 0 1% 0 0;
+    width: 80%;
+    border-left: 1px solid #e1ddef;
+    overflow: scroll;
+}
+
+.profile_div {
+    width: 100%;
+    min-height: 50rem;
+    display: flex;
+    overflow: hidden;
+    height: 50rem;
+}
+
+.profile_div .grid_2_bias {
+    height: 100%;
+}
+
+.empty_div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30rem;
+    width: 100%;
+    text-align: center;
+}
+
+.empty_div h3 {
+    font-size: 1.8rem;
+    margin-bottom: 0%;
+}
+
+.empty_div p {
+    font-size: 1.4rem;
+}
+
+
+.width_60 {
+    width: 60%;
+}
+
+.profile_banner {
+    height: 20rem;
+    width: 100%;
+    border-radius: 16px;
+    background: var(--green);
+} */

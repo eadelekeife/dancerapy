@@ -1,0 +1,140 @@
+.form_detail.contain {
+    padding: 0 3rem;
+}
+
+.form_page h3 {
+    /* font-family: 'DM Sans', sans-serif; */
+    font-weight: 600;
+    font-size: 18px;
+    width: 80%;
+    line-height: 1.5;
+    padding-top: 20%;
+    margin-bottom: 0%;
+}
+
+.form_page p.form_text {
+    font-size: 14px;
+    width: 100%;
+    margin-bottom: 5%;
+}
+
+/* .form_page .ant-input, .form_page .ant-input-affix-wrapper {
+    border: 1px solid #707382;
+} */
+
+.img_side img {
+    width: 68%;
+    height: auto;
+    margin: 0% auto;
+    display: block;
+}
+
+.ant-divider-inner-text {
+    /* font-family: 'Avenir next', sans-serif; */
+    font-size: 14px;
+}
+
+.alignbothtoside {
+    display: grid;
+    grid-template-columns: 1fr 1.8fr;
+    min-height: 60vh;
+}
+
+.full_image_background {
+    background: url('../../assets/images/auth/mailchimp_image.jpeg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100%;
+}
+
+/* .real_form_boxes {
+    float: right;
+    width: calc(100% - 50%);
+} */
+
+label {
+    font-size: 1.4rem;
+}
+
+.form button {
+    padding: 10px 25px;
+    background: #00551E;
+    border: 1px solid #00551E;
+    color: #fff;
+    margin-bottom: 30px;
+    border-radius: 2px;
+    cursor: pointer;
+    /* font-family: 'DM Sans', sans-serif; */
+    margin-top: 3%;
+    width: 100%;
+    font-size: 1.4rem;
+}
+
+.form a {
+    display: block;
+    line-height: 1.5;
+    color: #060809;
+    font-size: 1.4rem;
+}
+
+.form a.margin-bottom {
+    margin-bottom: 5px;
+}
+
+.forgot_center {
+    height: 80vh;
+    display: table;
+    width: 100%;
+}
+
+.forgot_center .contain {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.forgot_center .form {
+    width: 40%;
+    margin: 0% auto;
+    display: block;
+}
+
+.forgot_center .form h3 {
+    /* font-family: 'DM Sans', sans-serif; */
+    font-size: 18px;
+    margin-bottom: 0%;
+}
+
+.forgot_center .form p {
+    /* font-family: 'DM Sans', sans-serif; */
+    font-size: 16px;
+    line-height: 1.5;
+    margin-bottom: 5%;
+}
+
+@media screen and (max-width: 720px) {
+    .alignbothtoside {
+        display: block;
+        min-height: max-content;
+    }
+    .forgot_center .form {
+        width: 100%;
+    }
+    .forgot_center {
+        height: 30rem;
+    }
+}
+
+.reset_page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.reset_page h3 {
+    padding-top: 0%;
+}
+
+.reset_page {
+    padding: 5% 0px;
+}

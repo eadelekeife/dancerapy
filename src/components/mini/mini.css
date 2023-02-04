@@ -1,0 +1,328 @@
+/* sec_shop_nav */
+.sec_shop_nav {
+    background: #fff;
+    padding: 15px 0px;
+}
+
+.sec_shop_nav ul {
+    margin: 0px;
+}
+
+.sec_shop_nav ul li {
+    display: inline-block;
+    padding-right: 20px;
+}
+
+.sec_shop_nav ul li a {
+    font-size: 1.4rem;
+    color: #111111;
+    font-family: 'DM Sans', sans-serif;
+}
+
+/* merchandise */
+
+.merchandise_hero {
+    background: linear-gradient(rgba(0, 0, 0, .4), rgba(0, 0, 0, .4)), url('../../assets/images/homepage/shop.webp');
+    height: 40rem;
+    background-position: top;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+/* instructor */
+.instructor_hero {
+    background: linear-gradient(to right, rgba(0, 0, 0, .8), rgba(0, 0, 0, .1)), url('../../assets/images/homepage/physical.jpeg');
+    height: 40rem;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+/* vid_plans */
+.vid_plans {
+    background: #237C3A;
+    background: #111;
+    padding: 5% 0;
+}
+
+.vid_plans .sec_plans_cove {
+    overflow: hidden;
+}
+
+.vid_plans .grid_3 p {
+    color: #fff;
+    margin-bottom: 0%;
+    color: #cccccc;
+}
+
+.vid_plans .grid_3 {
+    margin-top: 4%;
+}
+
+.vid_plans .grid_3 h4 {
+    color: #fff;
+    font-size: 1.6rem;
+    font-weight: 700;
+    /* color: #cccccc; */
+}
+
+.vid_plans .grid_2 h2 {
+    color: #fff;
+    font-size: 2.5rem;
+    font-weight: 700;
+    width: 60%;
+}
+
+.vid_plans .grid_2 p {
+    color: #fff;
+    font-size: 1.7rem;
+    line-height: 1.8;
+    width: 80%;
+}
+
+.vid_plans video {
+    position: absolute;
+    top: 0%;
+    width: 100%;
+}
+
+.vid_plans .video_cover {
+    position: relative;
+    height: 25rem;
+}
+
+
+/* instructor */
+.companies ul li img {
+    width: 80%;
+}
+
+.companies ul li {
+    display: inline-block;
+    padding-right: 15px;
+}
+
+
+.instructor_props_text {
+    /* background: #F2F2F2; */
+    padding: 40px 15px;
+    padding-bottom: 10px;
+}
+
+/* .instructor_props_text p.count {
+    border: 2px solid #000000;
+    border-radius: 50%;
+    padding: 10px 15px;
+    width: max-content;
+    font-weight: bolder;
+} */
+
+.instructor_props_text p, .instructor_faqs p {
+    font-size: 1.5rem;
+    line-height: 1.8;
+}
+
+.instructor_faqs p {
+    margin-bottom: 0%;
+}
+
+.instructor_props_text h3, .instructor_faqs h3 {
+    font-size: 1.7rem;
+    margin-bottom: 5px;
+}
+
+.instructor_faqs .grid_2 {
+    row-gap: 40px;
+    column-gap: 25px;
+}
+
+.sabi_props .grid_2 p {
+    font-size: 1.8rem;
+    line-height: 1.8;
+}
+
+.sabi_props .grid_2 h2 {
+    font-weight: 700;
+    font-size: 2.5rem;
+    width: 70%;
+}
+
+.no_event {
+    display: flex;
+    padding: 5% 0px;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.no_event p {
+    font-size: 1.4rem;
+    line-height: 1.8;
+}
+
+.no_event img {
+    margin-bottom: 10px;
+}
+
+/* team */
+
+.team_card {
+    height: 20vw;
+    border-radius: 8px;
+}
+
+.team_card._1 {
+    background-image: url('../../assets/images/team/_1.jpg');
+    background-position: 50% 0%, 50% 0%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: relative;
+    margin-bottom: 5px;
+}
+
+.team_card._2 {
+    background-image: url('../../assets/images/team/_2.jpg');
+    background-position: 50% 0%, 50% 0%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: relative;
+    margin-bottom: 5px;
+}
+
+.team_card._3 {
+    background-image: url('../../assets/images/team/_3.jpg');
+    background-position: 50% 0%, 50% 0%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: relative;
+    margin-bottom: 5px;
+}
+
+.team_card._4 {
+    background-image: url('../../assets/images/team/_4.jpg');
+    background-position: 50% 0%, 50% 0%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: relative;
+    margin-bottom: 5px;
+}
+
+.team_card._5 {
+    background-image: url('../../assets/images/team/_5.jpg');
+    background-position: 50% 0%, 50% 0%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: relative;
+    margin-bottom: 5px;
+}
+
+.team_card._6 {
+    background-image: url('../../assets/images/team/_6.jpg');
+    background-position: 50% 0%, 50% 0%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: relative;
+    margin-bottom: 5px;
+}
+
+.team_card._7 {
+    background-image: url('../../assets/images/team/_7.jpg');
+    background-position: 50% 0%, 50% 0%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: relative;
+    margin-bottom: 5px;
+}
+
+.team_card._8 {
+    background-image: url('../../assets/images/team/_8.jpg');
+    background-position: 50% 0%, 50% 0%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: relative;
+    margin-bottom: 5px;
+}
+
+.team_card._9 {
+    background-image: url('../../assets/images/team/_9.jpg');
+    background-position: 50% 0%, 50% 0%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: relative;
+    margin-bottom: 5px;
+}
+
+.team_card._10 {
+    background-image: url('../../assets/images/team/_10.jpg');
+    background-position: 50% 0%, 50% 0%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: relative;
+    margin-bottom: 5px;
+}
+
+.team_member_role {
+    margin-bottom: 0%;
+    font-size: 1.3rem;
+}
+
+.team_member_name {
+    font-size: 1.4rem;
+    margin-bottom: 0%;
+}
+
+
+.site_bg_overlay {
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    background: rgba(0, 0, 0, .8);
+    width: 100%;
+    height: 100%;
+    border-radius: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    cursor: pointer;
+    transition: opacity .5s ease-in-out;
+}
+
+.site_bg_overlay p {
+    color: #fff;
+    font-size: 1.3rem;
+    text-align: center;
+}
+
+.site_bg_overlay:hover {
+    opacity: .9;
+    line-height: 1.8;
+}
+
+.site_bg_overlay ion-icon {
+    font-size: 4rem;
+    color: #fff;
+    cursor: pointer;
+}
+
+.contact .grid_2 {
+    grid-gap: 150px;
+}
+
+.contact_div h3 {
+    font-size: 2rem;
+}
+
+.contact p {
+    font-size: 1.4rem;
+}
+
+.contact_div .sticky_social {
+    margin-top: 20px;
+}
+
+.contact_div ion-icon {
+    color: var(--red);
+    font-size: 2.5rem;
+    margin-right: 10px;
+}

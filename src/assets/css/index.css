@@ -1,0 +1,156 @@
+@font-face {
+    font-family: 'Ambit';
+    src: url('../fonts/Ambit/Ambit-Black.ttf');
+}
+
+@font-face {
+    font-family: 'Gilroy';
+    src: url('../fonts/Gilroy-FREE/Gilroy-FREE/Gilroy-Medium.ttf');
+}
+
+* {
+    margin: 0%;
+    padding: 0%;
+}
+
+body, html {
+    text-rendering: optimizeLegibility;
+    font-size: 10px;
+    color: #222;
+    font-family: 'Gilroy';
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Ambit';
+}
+
+:root {
+    --red: #D43361;
+    --black: #2c2d37;
+    --green: #81D742;
+}
+
+/* layout */
+
+.width_70 {
+    width: 70%;
+}
+
+.flex_form {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 10px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.container {
+    max-width: 85vw;
+    margin: 0% auto;
+    display: block;
+}
+
+.contain {
+    padding: 0% 3rem;
+}
+
+/* grid */
+.grid_flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.grid_2 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 10px;
+}
+
+.grid_4 {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 10px;
+}
+
+.grid_3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 10px;
+}
+
+.grid_3 img, .grid_4 img {
+    width: 100%;
+    height: 100%;
+}
+
+.grid_5 {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-gap: 10px;
+}
+
+.grid_2 img, .grid_4 img {
+    height: 100%;
+    width: 100%;
+}
+
+/* spacing */
+.mt-5 {
+    margin-top: 5%;
+}
+
+.pt-5 {
+    padding-top: 5%;
+}
+
+/* buttons */
+
+.btn_red {
+    background: var(--red);
+    padding: 10px 25px;
+    color: #fff;
+    border: 1px solid var(--red);
+    font-size: 1.4rem;
+    cursor: pointer;
+}
+
+.btn_green {
+    background: var(--green);
+    padding: 8px 25px;
+    color: #222;
+    border: 1px solid var(--green);
+    font-size: 1.4rem;
+    cursor: pointer;
+    border-radius: 2px;
+}
+
+.form_flex {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 5px;
+}
+
+.desktop-only {
+    display: block;
+}
+
+.mobile-only {
+    display: none;
+}
+
+@media screen and (max-width: 720px) {
+    .desktop-only {
+        display: none;
+    }
+
+    .mobile-only {
+        display: block;
+    }
+
+    .contain {
+        padding: 0% 3%;
+    }
+}

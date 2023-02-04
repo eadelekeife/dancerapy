@@ -1,0 +1,91 @@
+.hero_sect {
+    background: linear-gradient(rgba(0, 0, 0, .3), rgba(0, 0, 0, .3)), url('../../assets/images/homepage/hero.png');
+    background-position: top;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 50rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.hero_sect .hero_sect_text {
+    text-align: center;
+}
+
+.hero_sect .hero_sect_text h1 {
+    color: #fff;
+    font-size: 5rem;
+    margin-bottom: 0%;
+}
+
+/* props */
+.props {
+    background: #EFF0F6;
+    padding-bottom: 5%;
+}
+
+.props .props_cover {
+    display: block;
+    text-align: center;
+}
+
+.props .props_cover h3 {
+    font-size: 3rem;
+    margin-bottom: 5px;
+}
+
+.props .props_cover p {
+    font-size: 1.4rem;
+    line-height: 1.8;
+}
+
+/* Instructor */
+.instructor .instructor_cover {
+    background: url('../../assets/images/homepage/instructor.avif');
+    background: #FF9618;
+    min-height: 250px;
+    background-position: left;
+    background-repeat: no-repeat;
+    background-size: cover;
+    overflow: hidden;
+}
+
+.instructor .instructor_cover img {
+    width: 30rem;
+    height: 100%;
+    margin: 0% auto;
+    display: block;
+}
+
+.instructor .grid_2 {
+    align-items: center;
+    padding-left: 3rem;
+}
+
+.instructor .grid_2 p {
+    color: #EFF0F6;
+    font-size: 1.8rem;
+}
+
+.instructor .grid_2 h1 {
+    color: #fff;
+    font-size: 2.6rem;
+    width: 40%;
+    font-weight: 600;
+}
+
+.site_links img {
+    height: 16rem;
+    object-fit: cover;
+    object-position: top;
+}
+
+.site_links p {
+    font-size: 1.5rem;
+}
+
+.site_links h4 {
+    font-size: 1.6rem;
+    margin-bottom: 0%;
+}

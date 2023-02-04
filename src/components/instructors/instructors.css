@@ -1,0 +1,429 @@
+.inline_contact {
+    background: #EFF0F6;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    padding: 3% 0px;
+}
+
+.instructor_message_div {
+    border: 1px solid #E5E5E5;
+    padding: 15px 10px;
+}
+
+.instructor_testimonials .grid_3 {
+    grid-gap: 20px;
+}
+
+.instructor_testimonials h3.tile_header {
+    text-align: center;
+    margin: 0% auto;
+    display: block;
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+}
+
+.instructor_testimonials .instructor_message_div p.instructor_message {
+    font-size: 1.5rem;
+    line-height: 1.8;
+}
+
+.ant-rate-star {
+    color: var(--red);
+}
+
+.instructor_testimonials .instructor_message_div p.instructor_name {
+    font-size: 1.4rem;
+    margin-bottom: 0px;
+}
+
+.instructor_testimonials .instructor_message_div p.instructor_role {
+    font-size: 1.4rem;
+    color: rgba(0, 0, 0, .6);
+}
+
+.instructor_testimonials ul li {
+    margin-right: 40px;
+}
+
+.instructor_testimonials ul {
+    margin-bottom: 30px;
+}
+
+.instructor_testimonials ul li img {
+    height: 5rem;
+}
+
+.instructors_page .faqs .grid_2 {
+    grid-gap: 40px;
+}
+
+.instructors_page .faqs .tile_header {
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.center_div {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+.center_div ul li {
+    display: inline-block;
+}
+
+.gray_bg {
+    background: #2C2D37;
+    height: 25rem;
+    width: 100%;
+}
+
+.instructor_div_bg {
+    background: url('../../assets/images/homepage/instructor_sec.jpg');
+    height: 35rem;
+    position: relative;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.instructor_div_bg.corporate {
+    background: url('../../assets/images/homepage/about_hero.jpg');
+    height: 35rem;
+    position: relative;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.instructor_div_bg .grid_2 {
+    align-items: center;
+}
+
+.white_instructor_prop {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #fff;
+    text-align: center;
+    padding: 20px 15px;
+    box-shadow: 0px 0px 4px 4px rgba(0, 0, 0, .1);
+    box-shadow: 4px;
+}
+
+.white_instructor_prop ul {
+    -moz-column-count: 2;
+    -moz-column-gap: 20px;
+    -webkit-column-count: 2;
+    -webkit-column-gap: 20px;
+    column-count: 2;
+    column-gap: 20px;
+    text-align: left;
+}
+
+.white_instructor_prop ul li {
+    font-size: 1.3rem;
+    list-style: none;
+    line-height: 2.2;
+}
+
+.white_instructor_prop ul li ion-icon {
+    margin-right: 10px;
+    color: #46D1A3;
+}
+
+.divider_message {
+    font-size: 1.4rem;
+    margin: 0px;
+}
+
+.white_instructor_prop p {
+    font-size: 1.6rem;
+    line-height: 1.8;
+}
+
+.white_instructor_prop h2 {
+    font-size: 2rem;
+    margin-bottom: 0%;
+    margin-top: 2%;
+}
+
+.instructor_hero {
+    background: linear-gradient(rgba(0, 0, 0, .6), rgba(0, 0, 0, .6)), url('../../assets/images/homepage/instructor_hero.jpg');
+    height: 50rem;
+    position: relative;
+    display: flex;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    align-items: center;
+    justify-content: center;
+}
+
+.instructor_hero img {
+    /* position: absolute;
+    top: 0px; */
+    height: 40rem;
+    width: 100%;
+    display: none;
+}
+
+.instructor_hero .grid_2 {
+    align-items: center;
+}
+
+.instructor_hero p {
+    font-size: 2rem;
+    width: 60%;
+}
+
+.instructor_hero h2 {
+    font-size: 4rem;
+    width: 65%;
+    line-height: 1.2;
+    color: #fff;
+}
+
+.instructor_hero button {
+    background: var(--red);
+    padding: 10px 25px;
+    border-radius: 3px;
+    color: #fff;
+    font-size: 1.5rem;
+    border: 1px solid var(--red);
+    cursor: pointer;
+}
+
+.instructor_hero .container {
+    padding-right: 0.625rem;
+    width: 100%;
+    float: left;
+    padding-left: 147px;
+    position: relative;
+    /* padding-top: 7.75em; */
+}
+
+.faqs .grid_2 p {
+    font-size: 1.6rem;
+    line-height: 1.8;
+    margin-bottom: 0px;
+}
+
+.faqs .grid_2 {
+    row-gap: 30px;
+}
+
+.faqs .grid_2 h4 {
+    font-size: 1.6rem;
+    margin-bottom: 0px;
+}
+
+.instructor_how_to {
+    background: #2C2D37;
+    padding: 3% 0px;
+}
+
+.instructor_how_to .grid_2 p {
+    font-size: 1.4rem;
+}
+
+h3.tile_header {
+    font-size: 1.8rem;
+    width: 60%;
+}
+
+.instructor_how_to .grid_3 {
+    grid-gap: 15px;
+}
+
+.instructor_how_to .grid_3 p {
+    margin-bottom: 0%;
+    font-size: 1.5rem;
+    line-height: 1.8;
+    color: #fff;
+}
+
+.instructor_how_to .grid_3 h3 {
+    font-size: 1.6rem;
+    color: #fff;
+}
+
+.instructor_how_to h3.tile_header {
+    font-family: 'Ambit';
+    margin-bottom: 0%;
+    color: #fff;
+    font-size: 2.5rem;
+    width: 100%;
+}
+
+.processing {
+    margin-bottom: 0%;
+    color: #fff;
+    background-color: #D43361;
+    border-radius: 50px;
+    width: max-content;
+    padding: 0px 15px;
+    font-size: 1.4rem;
+}
+
+.delivered {
+    margin-bottom: 0%;
+    color: #fff;
+    background-color: #01E900;
+    border-radius: 50px;
+    width: max-content;
+    padding: 0px 15px;
+    font-size: 1.4rem;
+}
+
+.instructor_how_to .grid_3 p.count {
+    border: 2px solid #fff;
+    border-radius: 50%;
+    width: max-content;
+    height: 5rem;
+    width: 5rem;
+    text-align: center;
+    line-height: 5rem;
+    margin-bottom: 20px;
+}
+
+@media screen and (max-width: 720px) {
+    .instructor_hero h2 {
+        width: 100%;
+        font-size: 3rem;
+    }
+
+    .instructor_how_to {
+        padding: 10% 0px;
+    }
+
+    .instructor_how_to h3.tile_header {
+        font-size: 2.2rem;
+        margin-bottom: 30px;
+    }
+
+    .instructor_how_to .container {
+        padding: 0px;
+        padding-left: 3%;
+        width: calc(100% - 3%);
+        margin: 0%;
+        max-width: 100%;
+    }
+
+    .instructor_how_to .grid_3 p.count {
+        height: 4rem;
+        width: 4rem;
+        line-height: 4rem;
+        margin-bottom: 10px;
+    }
+
+    .instructor_how_to .grid_3 h3 {
+        font-size: 1.5rem;
+        margin-bottom: 0px;
+    }
+
+    .instructor_how_to .grid_3 p {
+        font-size: 1.4rem;
+    }
+
+    .instructor_hero .container {
+        padding: 0px;
+        padding-left: 3%;
+        width: calc(100% - 3%);
+    }
+
+    .instructor_hero .grid_2_bias {
+        display: block;
+    }
+
+    .instructor_how_to .grid_2 {
+        display: block;
+    }
+
+    .instructor_how_to .grid_3, .instructor_testimonials .grid_3 {
+        display: flex;
+        flex-direction: column;
+        grid-gap: 30px;
+    }
+
+    .instructor_testimonials ul li img {
+        height: 3rem;
+    }
+
+    .instructor_testimonials ul {
+        margin-bottom: 5px;
+        font-size: 18px;
+    }
+
+    .white_instructor_prop {
+        width: 100%;
+    }
+
+    .white_instructor_prop ul {
+        column-gap: unset;
+        column-count: unset;
+    }
+
+    .white_instructor_prop p {
+        font-size: 1.4rem;
+        text-align: left;
+        line-height: 1.8;
+    }
+
+    .white_instructor_prop h2 {
+        text-align: left;
+    }
+
+    .gray_bg, .instructor_div_bg {
+        height: 32rem;
+    }
+
+    .sec_gray .sec_gray_content, .instructor_testimonials {
+        padding: 0px;
+        padding-left: 3%;
+        width: calc(100% - 3%);
+        padding-right: 3%;
+        max-width: unset;
+        width: 100%;
+    }
+
+    .sec_gray .sec_gray_content .container, .instructor_testimonials .container {
+        width: 100%;
+        margin: 0%;
+        padding: 0%;
+    }
+
+    .instructor_form_div h3.tile_header, .instructor_testimonials h3.tile_header {
+        text-align: left;
+        font-size: 2.2rem;
+        margin: 0%;
+        margin-bottom: 20px;
+    }
+
+    .instructor_form_div .center_div, .instructor_testimonials .center_div {
+        text-align: left;
+        justify-content: unset;
+    }
+
+    .instructor_form_div label {
+        font-size: 1.2rem;
+    }
+
+    .instructor_testimonials .instructor_message_div p.instructor_message {
+        font-size: 1.3rem;
+        line-height: 1.8;
+    }
+
+    .instructor_testimonials .center_div ul {
+        display: flex;
+        flex-wrap: wrap;
+        grid-gap: 30px;
+    }
+
+    .instructor_testimonials .center_div ul li {
+        margin: 0px;
+    }
+}
