@@ -1,72 +1,74 @@
 import './auth.css';
 
-import React, { useState } from 'react';
-// import { connect } from 'react-redux';
+import React, { useState, useEffect } from 'react';
+import { connect } from 'react-redux';
 import { Controller, useForm } from 'react-hook-form';
 import { Input, Spin } from 'antd';
+import { Link } from 'react-router-dom';
 import { LoadingOutlined } from '@ant-design/icons';
+import { loginUser } from '../../utils/reducers/auth';
 import axios from '../../utils/axiosCall';
 
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 import Footer from '../../utils/footer';
+import Nav from "../../utils/sec-nav";
+import AppRoute from '../../utils/routes';
 
-const SignUp = () => {
+const SignIn = props => {
 
     const [loadingData, setLoadingData] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
 
     const antIcon = <LoadingOutlined style={{ fontSize: 24, color: '#fff' }} spin />;
 
-    const signupValidator = yup.object().shape({
-        emailAddress: yup.string().email('Please enter a valid email address').required('Please enter your email address'),
-        password: yup.string().required('Please enter your password'),
-        firstName: yup.string().required('Please enter your first name'),
-        lastName: yup.string().required('Please enter your last name')
+    const validator = yup.object().shape({
+        emailAddress: yup.string().email('Email is not valid').required('Email field can not be empty'),
+        password: yup.string().min(6).required('Password field can not be empty')
     })
 
     const { handleSubmit, control, formState: { errors } } = useForm({
-        resolver: yupResolver(signupValidator)
+        defaultValue: {
+            emailAddress: "",
+            password: "",
+        },
+        resolver: yupResolver(validator)
     });
 
-    const signUpUser = e => {
+    useEffect(() => {
+        if (props.auth.isAuthenticated) {
+            window.location = "/profile";
+        }
+        if (props.loginError.loginError.length) {
+            setErrorMessage(props.loginError.loginError);
+            setLoadingData(false);
+        }
+    }, [props.auth, props.loginError]);
+    const signInUser = e => {
         setLoadingData(true);
         setErrorMessage('');
-        let { firstName, lastName, emailAddress, password } = e;
-        axios.post('/signup', {
-            firstName, lastName, emailAddress, password
-        })
-            .then(userData => {
-                if (userData.data.statusMessage === "success") {
-                    window.location = `/signin`;
-                } else {
-                    setLoadingData(false);
-                    setErrorMessage(userData.data.summary);
-                }
-            })
-            .catch(err => {
-                setLoadingData(false);
-                setErrorMessage('An error occurred while saving data. Please try again.');
-            })
+        let { emailAddress, password } = e;
+        props.loginUser({
+            emailAddress, password
+        });
     }
 
     return (
         <div>
+            <Nav />
             <div className="form form_page">
                 <div className="alignbothtoside">
                     <div className="real_form_boxes">
                         <div className="form_detail contain">
                             <div>
-                                <h3>Create account</h3>
-                                <p className="form_text">Konnect is a customer centric app that provides
-                                    wholesale products to retail users it makes life easy.</p>
+                                <h3>Sign in to your account</h3>
                             </div>
                             {
                                 errorMessage ?
-                                    <p className="errorMessage">{errorMessage}</p> : ''
+                                    <p className="error-message">{errorMessage}</p> : ''
                             }
-                            <form onSubmit={handleSubmit(signUpUser)}>
+                            <form onSubmit={handleSubmit(signInUser)}>
                                 <div className="form-group">
                                     <label htmlFor="emailAddress">Email address</label>
                                     <Controller name="emailAddress" control={control}
@@ -96,7 +98,7 @@ const SignUp = () => {
                                             <span style={{ marginRight: '10px' }}>Creating Account. Please wait...</span>
                                             <Spin indicator={antIcon} /></button>
                                         :
-                                        <button>Create Account</button>
+                                        <button>Sign in now</button>
                                 }
                                 <p>By signing up for Cowrywealth, you agree to Cowrywealth's Terms of Service & Privacy Policy.</p>
                                 {/* <Divider orientation="left">Or</Divider>
@@ -117,10 +119,8 @@ const SignUp = () => {
     )
 }
 
-// const mapStateToProps = store => {
-//     return { auth: store.auth }
-// }
+const mapStateToProps = state => {
+    return { auth: state.auth, loginError: state.loginError }
+}
 
-// export default connect(mapStateToProps)(SignUp);
-
-export default SignUp;
+export default connect(mapStateToProps, { loginUser })(SignIn);

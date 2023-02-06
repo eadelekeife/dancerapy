@@ -8,6 +8,7 @@ import { Input, Spin } from 'antd';
 import { LoadingOutlined } from '@ant-design/icons';
 import axios from '../../utils/axiosCall';
 
+import Nav from "../../utils/sec-nav";
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 
@@ -38,6 +39,7 @@ const Profile = () => {
     }
     return (
         <div>
+            <Nav />
             <div className="profile_div main_info">
                 <div className="profile_to_left">
                     <div className="profile_nav">

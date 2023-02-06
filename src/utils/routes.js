@@ -14,6 +14,7 @@ const AppRoute = {
     people: "/people",
     events: "/events",
     plans: "/plans",
+    products: "/products",
     detail: "/detail",
     testimonials: "/testimonials",
     instructor: "/instructor",

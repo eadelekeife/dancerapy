@@ -50,28 +50,31 @@ const Nav = props => {
                     </ul>
                 </div>
             </div>
-            <div className={`navigation ${props.border ? "border" : ''} ${fixedNav ? 'fixed' : ''}`}>
+            <div className={`navigation sec ${props.border ? "border" : ''} ${fixedNav ? 'fixed' : ''}`}>
                 <div className="inner-nav">
                     <img src={Logo} alt="logo" className="logo" />
                     <ul className="desktop-only">
                         <li>
-                            <Link to={AppRoute.about}>About Us</Link>
+                            <Link to={AppRoute.instructor}>About Us</Link>
                         </li>
                         <li>
-                            <Link to={AppRoute.trainings}>Trainings</Link>
+                            <Link to={AppRoute.team}>Our Team</Link>
                         </li>
                         <li>
-                            <Link to={AppRoute.merch}>Merchandise</Link>
+                            <Link to={AppRoute.signup}>Trainings</Link>
                         </li>
                     </ul>
                 </div>
                 <div className="desktop-only">
                     <ul>
+                        {/* <li>
+                            <Link to={AppRoute.trainings}>Trainings</Link>
+                        </li> */}
                         <li>
-                            <Link to={AppRoute.instructor}>Become a Dance Instructor</Link>
+                            <Link to={AppRoute.merch}>Merchandise</Link>
                         </li>
                         <li>
-                            <Link to={AppRoute.club}>Events and Schools</Link>
+                            <Link to={AppRoute.instructor}>Become a Dance Instructor</Link>
                         </li>
                         <li>
                             <Link to={AppRoute.contact}>Contact Us</Link>

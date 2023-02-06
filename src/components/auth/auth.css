@@ -3,13 +3,13 @@
 }
 
 .form_page h3 {
-    /* font-family: 'DM Sans', sans-serif; */
     font-weight: 600;
     font-size: 18px;
     width: 80%;
+    font-size: 2rem;
     line-height: 1.5;
-    padding-top: 20%;
-    margin-bottom: 0%;
+    padding-top: 15%;
+    margin-bottom: 5%;
 }
 
 .form_page p.form_text {

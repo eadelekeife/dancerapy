@@ -1,181 +1,163 @@
 import "./trainings.css";
 
-import React from "react";
-
+import React, { useEffect, useState } from "react";
+import { Skeleton, Divider, notification, Select } from 'antd';
+import { UserOutlined } from '@ant-design/icons';
 import { Link } from "react-router-dom";
-// import _1 from "../../assets/images/trainings/_1.jpeg";
+import axiosCall from "../../utils/axiosCall";
+import AppRoute from "../../utils/routes";
 
-import _1 from "../../assets/images/homepage/flash.jpeg";
-import _2 from "../../assets/images/homepage/zoom.jpg";
-import _3 from "../../assets/images/homepage/physical.jpeg";
-import _4 from "../../assets/images/homepage/annual.jpeg";
-import Dance from "../../assets/images/homepage/dance.png";
-
-import Cart from "../../assets/images/cart.svg";
+import LocationMap from "../../assets/images/mini/map.jpeg";
 
 import Footer from "../../utils/footer";
+import Nav from "../../utils/nav";
 
-const Trainings = () => {
+const Plans = () => {
+    const openNotificationWithIcon = (type, message) => {
+        notification[type]({
+            message: '',
+            description: message
+        });
+    };
+
+    const [allProductPlans, setAllProductPlans] = useState([]);
+    const [errorOccurred, setErrorOccurred] = useState(false);
+    const [fetchingData, setFetchingData] = useState(true);
+
+    useEffect(() => {
+        axiosCall.get('/fetchallcourseplans')
+            .then(productPlans => {
+                if (productPlans.data.statusMessage === "success") {
+                    setErrorOccurred(false);
+                    setFetchingData(false);
+                    setAllProductPlans(productPlans.data.message);
+                } else {
+                    setErrorOccurred(true);
+                    setFetchingData(false);
+                    openNotificationWithIcon('error', productPlans.data.summary);
+                }
+            })
+            .catch(err => {
+                console.log(err)
+                setErrorOccurred(true);
+                setFetchingData(false);
+                openNotificationWithIcon('error', 'An error occurred while fetching product plans. Please reload page to try again')
+            })
+    }, [])
+    const { Option } = Select;
+    let skeleton = [];
+    for (let i = 0; i < 6; i++) {
+        skeleton.push(<Skeleton active />)
+    }
     return (
-        <div>
-            <div className="training_hero">
+        <div className="physical plans">
+            <Nav />
+            <div className="plan_bg">
+                <h3>Find a Physical Class</h3>
+                <div className="flex_form">
+                    <div className="select_box_filter_cover">
+                        <Select
+                            placeholder="Set Training Time"
+                            style={{ width: '300px' }}
+                            prefix={<UserOutlined />}>
+                            <Option value="morning">Morning Sessions</Option>
+                            <Option value="afternoon">Afternoon Sessions</Option>
+                            <Option value="evening">Evening Sessions</Option>
+                        </Select>
+                        <ion-icon name="alarm-outline" className="filter_box_icon"></ion-icon>
+                    </div>
+                    <div className="select_box_filter_cover">
+                        <Select
+                            placeholder="Set Training Location"
+                            style={{ width: '300px' }}
+                            prefix={<UserOutlined />}>
+                            <Option value="ikeja">Ikeja</Option>
+                            <Option value="ikoyi">Ikoyi</Option>
+                            <Option value="surulere">Surulere</Option>
+                        </Select>
+                        <ion-icon name="navigate-circle-outline" className="filter_box_icon"></ion-icon>
+                    </div>
+                    <button className="btn_red">FILTER CLASSES</button>
+                </div>
+            </div>
+            <div className="grid_2">
+                <div className="plans_content">
+                    {
+                        fetchingData ?
+                            <div>
+                                {skeleton.map((placeHolder, index) => (
+                                    <div className="item" key={index}>
+                                        {placeHolder}
+                                        <Divider />
+                                    </div>
+                                ))}
+                            </div>
+                            :
+                            errorOccurred ?
+                                <div className="center_align_message">
+                                    <div>
+                                        <h3>Oops!</h3>
+                                        <p>An error occurred while we were trying to fetch data. Please reload page to
+                                            try again.</p>
+                                    </div>
+                                </div>
+                                :
+                                <div className="">
+                                    <div className="grey_line">
 
-            </div>
-            <div className="trainings_sect">
-                <div className="container">
-                    <div className="training_div_cover mt-5">
-                        <div className="training_group">
-                            <div className="training_inside_group">
-                                <div className="training_inside_img">
-                                    <img src={_1} alt="_1" />
+                                    </div>
+                                    {allProductPlans.map((productPlans, index) => (
+                                        <div key={index}>
+                                            <div className="grid_3_bias">
+                                                <div className="plan_grid_duration">
+                                                    <ul>
+                                                        {productPlans.monday ? <li>&bull; Mon</li> : ''}
+                                                        {productPlans.tuesday ? <li>&bull; Tues</li> : ''}
+                                                        {productPlans.wednesday ? <li>&bull; Wed</li> : ''}
+                                                        {productPlans.thursday ? <li>&bull; Thurs</li> : ''}
+                                                        {productPlans.friday ? <li>&bull; Fri</li> : ''}
+                                                        {productPlans.saturday ? <li>&bull; Sat</li> : ''}
+                                                        {productPlans.sunday ? <li>&bull; Sun</li> : ''}
+                                                    </ul>
+                                                </div>
+                                                <div className="plan_grid_main">
+                                                    <div className="plan_grid_main_detail">
+                                                        <Link to={`${AppRoute.trainings}/detail?productName=${productPlans.title}&productId=${productPlans.id}`}>
+                                                            <h3 className="physical_plan_title">{productPlans.title}</h3>
+                                                        </Link>
+                                                        <ul className="physical_plans_list">
+                                                            <li>&bull; Muscle Toning</li>
+                                                            <li>&bull; Interval Training</li>
+                                                            <li>&bull; Muscle Memory</li>
+                                                            <li>&bull; Cardio</li>
+                                                            <li>&bull; Flexibility</li>
+                                                            <li>&bull; Mind and Body Coordination</li>
+                                                        </ul>
+                                                        <ul className="physical_plans_list">
+                                                            <li><ion-icon name="language-outline"></ion-icon> {productPlans.language}</li>
+                                                            <li><ion-icon name="heart-outline"></ion-icon> 0 reviews</li>
+                                                            <li><ion-icon name="alarm-outline"></ion-icon> {productPlans.openTime} &mdash; {productPlans.closeTime}</li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div className="plan_grid_props_list">
+                                                    <Link to={`${AppRoute.trainings}/detail?productName=${productPlans.title}&productId=${productPlans.id}`}
+                                                        className="btn_border_black">Details</Link>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    ))
+                                    }
                                 </div>
-                                <div className="training_inside_div">
-                                    <p className="unimportant">50% Discount</p>
-                                    <h4 className="plan_title">DANCE IN A FLASH INSTANT DOWNLOAD</h4>
-                                    <p>
-                                        These dance routines have been carefully created to take care of your fitness 
-                                        needs without you going to the gym, what is even super cool is, we have taken 
-                                        all the Boring exercise movements and made dance routines for them.
-                                    </p>
-                                    {/* <p className="plan_author">Wendy Galvan - 5.0(110)</p>
-                                    <div className="inline_list">
-                                        <p className="unimportant">Zumba Toning</p>
-                                        <ul>
-                                            <li>&bull; Medium Intensity</li>
-                                            <li>&bull; Great Music, Good Workout, Great Energy, Awesome Movies</li>
-                                        </ul>
-                                    </div> */}
-                                </div>
-                            </div>
-                            <div className="training_side_cover">
-                                <div>
-                                    <img src={Cart} alt="Cart" />
-                                </div>
-                                <div>
-                                    <Link to="/zoom">DETAILS</Link>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="training_group">
-                            <div className="training_inside_group">
-                                <div className="training_inside_img">
-                                    <img src={_2} alt="_1" />
-                                </div>
-                                <div className="training_inside_div">
-                                    <p className="unimportant">50% Discount</p>
-                                    <h4 className="plan_title">JOIN DANCERAPY PHYSICAL CLASS</h4>
-                                    {/* <p className="plan_author">NGN 10,000.00</p>
-                                    <div className="inline_list">
-                                        <p className="unimportant">Zumba Toning</p>
-                                        <ul>
-                                            <li>&bull; Medium Intensity</li>
-                                            <li>&bull; Great Music, Good Workout, Great Energy, Awesome Movies</li>
-                                        </ul>
-                                    </div> */}
-                                    <p>Dancerapy is a dance/fitness institution committed to helping you live your best life, achieve
-                                        your fitness dreams and ultimately fall in love with your body.
-                                        Join any of our dance studios around Lagos.</p>
-                                </div>
-                            </div>
-                            <div className="training_side_cover">
-                                <div>
-                                    <img src={Cart} alt="Cart" />
-                                </div>
-                                <div>
-                                    <Link to="/zoom">DETAILS</Link>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="training_group">
-                            <div className="training_inside_group">
-                                <div className="training_inside_img">
-                                    <img src={_3} alt="_1" />
-                                </div>
-                                <div className="training_inside_div">
-                                    <p className="unimportant">50% Discount</p>
-                                    <h4 className="plan_title">JOIN DANCERAPY LIVE ON ZOOM</h4>
-                                    <p>
-                                        An online experience that can help your fitness dreams
-                                        come true without leaving your house and still have workout buddies via
-                                        access to workout dance routines.
-                                    </p>
-                                    {/* <p className="plan_author">NGN 10,000.00</p>
-                                    <div className="inline_list">
-                                        <p className="unimportant">Zumba Toning</p>
-                                        <ul>
-                                            <li>&bull; Medium Intensity</li>
-                                            <li>&bull; Great Music, Good Workout, Great Energy, Awesome Movies</li>
-                                        </ul>
-                                    </div> */}
-                                </div>
-                            </div>
-                            <div className="training_side_cover">
-                                <div>
-                                    <img src={Cart} alt="Cart" />
-                                </div>
-                                <div>
-                                    <Link to="/zoom">DETAILS</Link>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="training_group">
-                            <div className="training_inside_group">
-                                <div className="training_inside_img">
-                                    <img src={_4} alt="_1" />
-                                </div>
-                                <div className="training_inside_div">
-                                    <p className="unimportant">50% Discount</p>
-                                    <h4 className="plan_title">DANCERPAY CLUB ANNUAL SUBSCRIPTION ONLINE</h4>
-                                    <p>
-                                        Join The Dancerapy Club Today and have access to over 30 Dance Fitness Videos,
-                                        Dance Choreophgries, Dance Trends and lots more monthly.
-                                        For ONLY #10 thousand naira per Year.
-                                    </p>
-                                    {/* <p className="plan_author">NGN 120,000.00</p>
-                                    <div className="inline_list">
-                                        <p className="unimportant">Zumba Toning</p>
-                                        <ul>
-                                            <li>&bull; Medium Intensity</li>
-                                            <li>&bull; Great Music, Good Workout, Great Energy, Awesome Movies</li>
-                                        </ul>
-                                    </div> */}
-                                </div>
-                            </div>
-                            <div className="training_side_cover">
-                                <div>
-                                    <img src={Cart} alt="Cart" />
-                                </div>
-                                <div>
-                                    <Link to="/zoom">DETAILS</Link>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    }
                 </div>
-            </div>
-            <div className="instructor mt-5">
-                {/* <div className="container"> */}
-                <div className="instructor_cover">
-                    <div className="grid_2">
-                        <div>
-                            <h1>Become a Dance Instructor</h1>
-                            <p>
-                                Dance your dreams into reality this summer and
-                                take 60% off your Basic Zumba® Instructor Training
-                                with code B1ZUMBA60! Limited time offer.
-                            </p>
-                            <button className="btn_red">Learn More</button>
-                        </div>
-                        <div className="">
-                            <img src={Dance} alt="dance" />
-                        </div>
-                    </div>
+                <div>
+                    <img src={LocationMap} alt="map" />
                 </div>
-                {/* </div> */}
             </div>
             <Footer />
-        </div>
+        </div >
     )
 }
 
-export default Trainings;
+export default Plans;

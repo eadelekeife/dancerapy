@@ -1,16 +1,19 @@
 import './auth.css';
 
 import React, { useState } from 'react';
-// import { connect } from 'react-redux';
+import { connect } from 'react-redux';
 import { Controller, useForm } from 'react-hook-form';
 import { Input, Spin } from 'antd';
 import { LoadingOutlined } from '@ant-design/icons';
 import axios from '../../utils/axiosCall';
+import { Link } from 'react-router-dom';
 
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 import Footer from '../../utils/footer';
+import Nav from "../../utils/sec-nav";
+import AppRoute from '../../utils/routes';
 
 const SignUp = () => {
 
@@ -53,18 +56,17 @@ const SignUp = () => {
 
     return (
         <div>
+            <Nav />
             <div className="form form_page">
                 <div className="alignbothtoside">
                     <div className="real_form_boxes">
                         <div className="form_detail contain">
                             <div>
-                                <h3>Create account</h3>
-                                <p className="form_text">Konnect is a customer centric app that provides
-                                    wholesale products to retail users it makes life easy.</p>
+                                <h3>Create a free account</h3>
                             </div>
                             {
                                 errorMessage ?
-                                    <p className="errorMessage">{errorMessage}</p> : ''
+                                    <p className="error-message">{errorMessage}</p> : ''
                             }
                             <form onSubmit={handleSubmit(signUpUser)}>
                                 <div className="flex_form">
@@ -147,4 +149,8 @@ const SignUp = () => {
 
 // export default connect(mapStateToProps)(SignUp);
 
-export default SignUp;
+const mapStateToProps = store => {
+    return { auth: store.auth }
+}
+
+export default connect(mapStateToProps)(SignUp);
