@@ -4,7 +4,7 @@ import React from "react";
 
 import AboutImage from "../../assets/images/homepage/about.webp";
 import John from "../../assets/images/homepage/john.webp";
-import { ReactComponent as About } from "./mini.svg";
+import { ReactComponent as About } from "../../assets/images/mini.svg";
 
 import Nav from "../../utils/nav";
 import Footer from "../../utils/footer";

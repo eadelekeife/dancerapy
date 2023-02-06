@@ -346,7 +346,7 @@
     left: 48%;
     width: 3%;
     top: 0px;
-    background: url('./mini.svg');
+    background: url('../../assets/images/mini.svg');
     background-position: center;
     background-size: cover;
 }
