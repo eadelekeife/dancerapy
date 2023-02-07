@@ -1,41 +1,73 @@
 import "./profile.css";
 
-import React, { useState } from "react";
-
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { Skeleton, notification, Table, Divider } from 'antd';
+import AppRoute from "../../utils/routes";
 import Footer from "../../utils/footer";
-import { Controller, useForm } from 'react-hook-form';
-import { Input, Spin } from 'antd';
-import { LoadingOutlined } from '@ant-design/icons';
-import axios from '../../utils/axiosCall';
-
+import { DateTime } from 'luxon';
 import Nav from "../../utils/nav";
-import * as yup from 'yup';
-import { yupResolver } from '@hookform/resolvers/yup';
 
 import SideNav from "./side_nav";
 
 import Empty from "../../assets/images/auth/empty.svg";
 import _1 from "../../assets/images/content/_1.avif";
 import _2 from "../../assets/images/content/_2.avif";
+import axiosCall from "../../utils/axiosCall";
 
-const Profile = () => {
-    const [loadingData, setLoadingData] = useState(false);
-    const [errorMessage, setErrorMessage] = useState('');
+const VirtualSubcriptions = props => {
+    const openNotificationWithIcon = (type, message) => {
+        notification[type]({
+            message: '',
+            description: message
+        });
+    };
+    const [userPlans, setUserPlans] = useState([]);
+    const [loadingdata, setLoadingData] = useState(true);
+    const [errorOccurred, setErrorOccurred] = useState(false);
+    const [userActiveSubscription, setUserActiveSubscription] = useState(false);
+    const [categoryBox, setCategoryBox] = useState([]);
+    const [userData] = useState(props.auth.isAuthenticated ? props.auth.userDetails : '');
+    const [filter, setFilter] = useState('all');
 
-    const antIcon = <LoadingOutlined style={{ fontSize: 24, color: '#fff' }} spin />;
-
-    const signupValidator = yup.object().shape({
-        emailAddress: yup.string().email('Please enter a valid email address').required('Please enter your email address'),
-        password: yup.string().required('Please enter your password'),
-        firstName: yup.string().required('Please enter your first name'),
-        lastName: yup.string().required('Please enter your last name')
-    })
-
-    const { handleSubmit, control, formState: { errors } } = useForm({
-        resolver: yupResolver(signupValidator)
-    });
-    const signUp = () => {
-        console.log('hit me')
+    useEffect(() => {
+        axiosCall.get(`/user/online-subscription`, {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}`
+            }
+        })
+            .then(userPlans => {
+                if (userPlans.data.statusMessage === "success") {
+                    if (userPlans.data.message.activeSubscription) {
+                        setLoadingData(false);
+                        let categoryBox = [];
+                        userPlans.data.message.virtualClassLinks.map(category => {
+                            if (!categoryBox.includes(category.videoCategory.name)) {
+                                categoryBox.push(category.videoCategory.name);
+                            }
+                        })
+                        setCategoryBox(categoryBox);
+                        setUserPlans(userPlans.data.message.virtualClassLinks);
+                        setUserActiveSubscription(true);
+                    } else {
+                        setLoadingData(false);
+                        setUserActiveSubscription(false);
+                    }
+                } else {
+                    setLoadingData(false);
+                    setErrorOccurred(true);
+                    openNotificationWithIcon('error', userPlans.data.summary);
+                }
+            })
+            .catch(err => {
+                setErrorOccurred(true);
+                setLoadingData(false)
+            })
+    }, [])
+    let skeleton = [];
+    for (let i = 0; i < 6; i++) {
+        skeleton.push(<Skeleton active />)
     }
     return (
         <div>
@@ -50,14 +82,110 @@ const Profile = () => {
                     <div className="contain">
                         <div className="profile-data-display">
                             <h3 className="profile_title">Your Videos</h3>
-                            <div className="empty_div">
-                                <div>
-                                    <img src={Empty} alt="empty" />
-                                    <h3>An empty space...</h3>
-                                    <p>You have not placed any orders yet</p>
-                                    <button className="btn_green">View Plans</button>
-                                </div>
-                            </div>
+                            <Divider style={{ margin: '10px 0px' }} />
+                            {
+                                loadingdata ?
+                                    <div>
+                                        {skeleton.map((placeHolder, index) => (
+                                            <div className="item" key={index}>
+                                                {placeHolder}
+                                                <Divider />
+                                            </div>
+                                        ))}
+                                    </div>
+                                    :
+                                    errorOccurred ?
+                                        <div className="center_align_message">
+                                            <div>
+                                                <h3>Oops!</h3>
+                                                <p>An error occurred while we were trying to fetch data. Please reload page to
+                                                    try again.</p>
+                                            </div>
+                                        </div>
+                                        :
+                                        userActiveSubscription ?
+                                            userPlans.length ?
+                                                <div className="plan_video_display">
+                                                    <div className="categoryDisplay">
+                                                        <div
+                                                            onClick={() => setFilter('all')}
+                                                            className="">
+                                                            <p className={`tag ${filter === 'all' ? 'active' : ''}`}>All</p>
+                                                        </div>
+                                                        {
+                                                            categoryBox.map((category, index) => (
+                                                                <div key={index}>
+                                                                    <div
+                                                                        onClick={() => setFilter(category)}
+                                                                        className="">
+                                                                        <p
+                                                                            className={`tag ${filter === category ? 'active' : ''}`}>{category}</p>
+                                                                    </div>
+                                                                </div>
+                                                            ))
+                                                        }
+                                                    </div>
+                                                    <div className="grid_3">
+                                                        {
+                                                            filter === "all" ?
+                                                                userPlans.map((productPlans, index) => (
+                                                                    <div key={index}>
+                                                                        <Link to={`${AppRoute.profileVideoToPlay}?videoName=${productPlans.title}&videoId=${productPlans.id}`}>
+                                                                            <div className="">
+                                                                                <div className="video-poster">
+                                                                                    <img src={productPlans.poster} alt={productPlans.name} />
+                                                                                    <h4>{productPlans.title}</h4>
+                                                                                </div>
+                                                                                <div className="inline_video_flex">
+                                                                                    <p>{productPlans.videoCategory.name}</p>
+                                                                                    <p>{productPlans.videoLength}mins</p>
+                                                                                </div>
+                                                                            </div>
+                                                                        </Link>
+                                                                    </div>
+                                                                ))
+                                                                :
+                                                                userPlans.map((productPlans, index) => (
+                                                                    filter === productPlans.videoCategory.name ?
+                                                                        <div key={index}>
+                                                                            <Link to={`${AppRoute.profileVideoToPlay}?videoName=${productPlans.title}&videoId=${productPlans.id}`}>
+                                                                                <div className="">
+                                                                                    <img src={productPlans.poster} alt={productPlans.name} />
+                                                                                    <h4>{productPlans.title}</h4>
+                                                                                    <div className="inline_video_flex">
+                                                                                        <p>{productPlans.videoCategory.name}</p>
+                                                                                        <p>{productPlans.videoLength}mins</p>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </Link>
+                                                                        </div> : ''
+                                                                ))
+                                                        }
+                                                    </div>
+                                                </div>
+                                                :
+                                                <div>
+                                                    <div className="empty_div">
+                                                        <div>
+                                                            <img src={Empty} alt="empty" />
+                                                            <p>There are no videos yet</p>
+                                                            {/* <p>You have not placed any orders yet</p> */}
+                                                            <Link to={AppRoute.products} className="btn_red">View Plans</Link>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            :
+                                            <div>
+                                                <div className="empty_div">
+                                                    <div>
+                                                        <img src={Empty} alt="empty" />
+                                                        <p>You don't have an active virtual subscription</p>
+                                                        {/* <p>You have not placed any orders yet</p> */}
+                                                        <Link to={AppRoute.products} className="btn_red">View Plans</Link>
+                                                    </div>
+                                                </div>
+                                            </div>
+                            }
                         </div>
                     </div>
                 </div>
@@ -67,4 +195,8 @@ const Profile = () => {
     )
 }
 
-export default Profile;
+const mapStateToProps = store => {
+    return { auth: store.auth }
+}
+
+export default connect(mapStateToProps)(VirtualSubcriptions);
