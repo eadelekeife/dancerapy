@@ -19,7 +19,7 @@ import { v4 as uuid } from 'uuid';
 // import locationMap from "../../assets/images/mini/locationmap.jpg";
 // import Testimonial from "../../assets/videos/testimonial.mp4";
 import Footer from "../../utils/footer";
-import Nav from "../../utils/sec-nav";
+import Nav from "../../utils/nav";
 import { connect } from "react-redux";
 import AppRoute from "../../utils/routes";
 import Empty from '../../assets/images/empty_history.svg';

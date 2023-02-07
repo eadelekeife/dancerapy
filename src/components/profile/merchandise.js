@@ -2,6 +2,7 @@ import "./profile.css";
 
 import React, { useState } from "react";
 
+import Nav from "../../utils/nav";
 import Footer from "../../utils/footer";
 import { Controller, useForm } from 'react-hook-form';
 import { Input, Spin } from 'antd';
@@ -38,6 +39,7 @@ const Profile = () => {
     }
     return (
         <div>
+            <Nav />
             <div className="profile_div main_info">
                 <div className="profile_to_left">
                     <div className="profile_nav">

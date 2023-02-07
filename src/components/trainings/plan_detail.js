@@ -17,7 +17,7 @@ import Empty from '../../assets/images/empty_history.svg';
 
 // import testimonialVideo from "../../assets/images/content/testimonial.mp4";
 import Footer from "../../utils/footer";
-import Nav from "../../utils/sec-nav";
+import Nav from "../../utils/nav";
 import { connect } from "react-redux";
 import AppRoute from "../../utils/routes";
 

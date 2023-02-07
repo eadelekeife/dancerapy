@@ -175,6 +175,7 @@ ul.physical_plans_list li {
 
 .plan_group .grid_2 {
     height: 100%;
+    grid-gap: 0px;
 }
 
 .plan_group .grid_2 .plan_bg {

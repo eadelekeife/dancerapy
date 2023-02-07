@@ -4,16 +4,15 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { Controller, useForm } from 'react-hook-form';
 import { Input, Spin } from 'antd';
+import { Link } from 'react-router-dom';
 import { LoadingOutlined } from '@ant-design/icons';
 import axios from '../../utils/axiosCall';
-import { Link } from 'react-router-dom';
 
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 import Footer from '../../utils/footer';
-import Nav from "../../utils/sec-nav";
-import AppRoute from '../../utils/routes';
+import Nav from "../../utils/nav";
 
 const SignUp = () => {
 
@@ -124,10 +123,7 @@ const SignUp = () => {
                                         :
                                         <button>Create Account</button>
                                 }
-                                <p>By signing up for Cowrywealth, you agree to Cowrywealth's Terms of Service & Privacy Policy.</p>
-                                {/* <Divider orientation="left">Or</Divider>
-                                <Link to="/signin"
-                                    className="margin-bottom">Have an account already? Sign in here</Link> */}
+                                <p>Have an account already? <Link to="/signin">Sign in here</Link></p>
                             </form>
                         </div>
                     </div>

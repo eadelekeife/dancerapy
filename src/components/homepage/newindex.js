@@ -1,70 +1,77 @@
-import "./home.css";
+import "./homepage.css";
 
 import React from "react";
 
+import { Rate } from "antd";
+
+import AboutImage from "../../assets/images/homepage/about.webp";
+import John from "../../assets/images/homepage/john.webp";
+import { ReactComponent as About } from "../../assets/images/mini.svg";
+import { ReactComponent as ArrowSvg } from '../../assets/images/arrow.svg';
+import { ReactComponent as ImageBlock1 } from '../../assets/images/homepage/imageblock1.svg';
+
+import Nav from "../../utils/nav";
 import Footer from "../../utils/footer";
 
-import StudioImage from "../../assets/images/homepage/ruby2.jpg";
-import StudioImage2 from "../../assets/images/homepage/ruby3.jpg";
-// import StudioImage from "../../assets/images/homepage/ruby1.jpg";
+import { Link } from "react-router-dom";
+import AppRoute from "../../utils/routes";
+import ReactPlayer from 'react-player';
 
-const Homepage = () => {
+import Block1 from '../../assets/images/homepage/header.jpg';
+import Block2 from '../../assets/images/homepage/header1.jpg';
+import Block3 from '../../assets/images/homepage/header2.jpg';
+
+import _1 from '../../assets/images/companies/access.webp';
+import _2 from '../../assets/images/companies/shell.png';
+import _3 from '../../assets/images/companies/terra.png';
+import _4 from '../../assets/images/companies/corona.png';
+import _6 from '../../assets/images/companies/dansol.png';
+import _7 from '../../assets/images/companies/gtco.png';
+import _8 from '../../assets/images/companies/mtn.png';
+
+const AboutUs = () => {
     return (
-        <div className="homepage">
-            <div className="homepage-header">
-                <div>
-                    <h2>Bring us your toughest challenges.</h2>
-                    {/* <p>We are an essential partnership link between produce growers and commercial purchasers
-                        from coast to coast. So bring it on. We are an essential partnership link between
-                        produce growers.</p> */}
-                    <button>View Instructor Plans</button>
+        <div className="new-homepage about_us">
+            <Nav />
+            <div className="homepage-hero">
+                <video src="https://lagostheatrevideos.s3.amazonaws.com/intro.mp4"
+                    playsInline={true} style={{ background: 'black' }}
+                    alt="Introduction Video" className="about_video" controls={true} loop />
+                <div className="black-bg">
+
                 </div>
             </div>
-            <div className="dance-props">
-                <div className="grid_2">
-                    <div className="text-block">
-                        <div className="contain">
-                            <p className="new-greeting">OUR COMPANY</p>
-                            <h2>Bring us your toughest challenges.</h2>
-                            <p>We are an essential partnership link between produce growers and commercial purchasers
-                                from coast to coast. So bring it on. We are an essential partnership link between
-                                produce growers.</p>
-                            <button>View Instructor Plans</button>
+            <div className="pt-5">
+
+            </div>
+            <div className="contain">
+                <div className="grid_3">
+                    <div className="grid-block-cover">
+                        <img src={Block1} alt="Block1" />
+                        <div className="block-text">
+                            <h2>Our Story</h2>
                         </div>
                     </div>
-                    <div>
-                        <img src={StudioImage} alt="people dancing" />
-                    </div>
-                </div>
-            </div>
-            <div className="bg-display">
-                <div>
-                    <h3>Our Produce</h3>
-                    <p>We are an essential partnership link between produce growers and commercial purchasers
-                        from coast to coast. So bring it on.</p>
-                    <button>View Instructor Plans</button>
-                </div>
-            </div>
-            <div className="dance-props inverse">
-                <div className="grid_2">
-                    <div className="text-block">
-                        <div className="contain">
-                            <p className="new-greeting">OUR COMPANY</p>
-                            <h2>Bring us your toughest challenges.</h2>
-                            <p>We are an essential partnership link between produce growers and commercial purchasers
-                                from coast to coast. So bring it on. We are an essential partnership link between
-                                produce growers and commercial purchasers from coast to coast. So bring it on.</p>
-                            <button>View Instructor Plans</button>
+                    <div className="grid-block-cover">
+                        <img src={Block2} alt="Block1" />
+                        <div className="block-text">
+                            <h2>Our Story</h2>
                         </div>
                     </div>
-                    <div>
-                        <img src={StudioImage2} alt="people dancing" />
+                    <div className="grid-block-cover">
+                        <img src={Block3} alt="Block1" />
+                        <div className="block-text">
+                            <h2>Our Story</h2>
+                        </div>
                     </div>
                 </div>
+            </div>
+            <div className="pt-5">
+
             </div>
             <Footer />
         </div>
     )
 }
 
-export default Homepage;
+export default AboutUs;

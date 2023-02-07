@@ -4,7 +4,7 @@ import React from "react";
 
 import { Rate } from "antd";
 
-import AboutImage from "../../assets/images/homepage/about.webp";
+import AboutImage from "../../assets/images/homepage/instructor.jpg";
 import John from "../../assets/images/homepage/john.webp";
 import { ReactComponent as About } from "../../assets/images/mini.svg";
 
@@ -26,7 +26,7 @@ const AboutUs = () => {
             <div className="about_hero">
                 <div className="grid_2">
                     <div className="about_hero_content">
-                        <h2>Bring us your toughest challenges.</h2>
+                        <h2>Join the Dancerapy Instructor Family</h2>
                         <p>We are an essential partnership link between produce growers and commercial purchasers
                             from coast to coast. So bring it on. We are an essential partnership link between
                             produce growers. We are an essential partnership link between produce growers and
@@ -42,48 +42,49 @@ const AboutUs = () => {
             </div>
             <div className="black-content">
                 <div>
-                    <p>Member-only Perks</p>
-                    <p>20% on every order</p>
-                    <p>Free Shipping</p>
-                    <p>Custom plans</p>
-                    <p>Member-only Perks</p>
-                    <p>Free Shipping</p>
-                    <p>Custom plans</p>
-                    <p>Member-only Perks</p>
+                    <p>Access to new choreographies</p>
+                    <p>Provision of Dancerapy merchandise</p>
+                    <p>Access to larger client base</p>
+                    <p>Free feature on publicity channels</p>
+                    <p>Access to free graphic designs for classes</p>
+                    <p>Invoicing</p>
+                    <p>Free feature on Dancerapy platforms</p>
+                    <p>Two free trainings and subsequent discounts</p>
                 </div>
             </div>
             <div className="about_hero_text mt-5">
                 <div className="contain">
-                    <h5>OUR PROMISE</h5>
-                    <h3>Never Be Thirsty Again</h3>
+                    <h5>GET STARTED</h5>
+                    <h3>Do something you love and get paid for it</h3>
                     <p className="edit">
-                        As we grew, we vowed to not only protect our customers from dehydration but create the
-                        most effective, science-backed lineup of wellness products. When assembled, these
-                        heroes empower you to live your best life. Onwards and upwards.
+                        This is a career empowerment system aimed at equipping you with the tools required
+                        for sustainable growth and income as a Dancerapy Instructor. The Dance Instructor Family
+                        comes with a lot of benefits ranging from further trainings to free publicity
                     </p>
                     <div className="grid_3">
                         <div>
                             <img src={John} alt="john" />
-                            <h5 className="hero-text-header">Mrs Onyinye</h5>
+                            <h5 className="hero-text-header">Create a free account</h5>
                             <p>
-                                As we grew, we vowed to not only protect our customers from dehydration but
-                                create the most effective, science-backed lineup of wellness products.
+                                Create a free account and register your details, select your preferred training
+                                method — in-person, online or private training.
                             </p>
                         </div>
                         <div>
                             <img src={John} alt="john" />
-                            <h5 className="hero-text-header">Mrs Onyinye</h5>
+                            <h5 className="hero-text-header">Training / Get your Certificate</h5>
                             <p>
-                                As we grew, we vowed to not only protect our customers from dehydration but
-                                create the most effective, science-backed lineup of wellness products.
+                                Training to span for a period of 6 months. After training, you
+                                showcase /audition for management. Certificates will
+                                be issued after training.
                             </p>
                         </div>
                         <div>
                             <img src={John} alt="john" />
-                            <h5 className="hero-text-header">Mrs Onyinye</h5>
+                            <h5 className="hero-text-header">Become a Dancerapy Instructor</h5>
                             <p>
-                                As we grew, we vowed to not only protect our customers from dehydration but
-                                create the most effective, science-backed lineup of wellness products.
+                                When you have successfully completed your training and are
+                                certified by our team of experts, you can now handle professional dance classes. Enjoy!
                             </p>
                         </div>
                     </div>

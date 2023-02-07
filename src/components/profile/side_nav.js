@@ -77,7 +77,7 @@ const Profile = () => {
                         {/* <span className="lnr lnr-gift"></span> */}
                         Product Orders</NavLink>
                 </li>
-                <li>
+                {/* <li>
                     <NavLink to={AppRoutes.profileEventTickets}
                         style={({ isActive }) => ({
                             color: !isActive ? '#111111' : '#258635',
@@ -86,9 +86,8 @@ const Profile = () => {
                         <ion-icon
                             class="profile_icon"
                             name="ticket-outline"></ion-icon>
-                        {/* <i className="lni lni-alarm-clock"></i> */}
                         Event Tickets</NavLink>
-                </li>
+                </li> */}
                 <li>
                     <NavLink to={AppRoutes.profileMerchandise}
                         style={({ isActive }) => ({

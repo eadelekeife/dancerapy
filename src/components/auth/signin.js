@@ -7,14 +7,12 @@ import { Input, Spin } from 'antd';
 import { Link } from 'react-router-dom';
 import { LoadingOutlined } from '@ant-design/icons';
 import { loginUser } from '../../utils/reducers/auth';
-import axios from '../../utils/axiosCall';
 
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 import Footer from '../../utils/footer';
-import Nav from "../../utils/sec-nav";
-import AppRoute from '../../utils/routes';
+import Nav from "../../utils/nav";
 
 const SignIn = props => {
 
@@ -100,7 +98,8 @@ const SignIn = props => {
                                         :
                                         <button>Sign in now</button>
                                 }
-                                <p>By signing up for Cowrywealth, you agree to Cowrywealth's Terms of Service & Privacy Policy.</p>
+                                <p className="no-margin">Forgot Password? <Link to="/signin">Reset Password here</Link></p>
+                                <p>No account yet? <Link to="/signup">Sign up here</Link></p>
                                 {/* <Divider orientation="left">Or</Divider>
                                 <Link to="/signin"
                                     className="margin-bottom">Have an account already? Sign in here</Link> */}

@@ -8,7 +8,7 @@ import { Input, Spin } from 'antd';
 import { LoadingOutlined } from '@ant-design/icons';
 import axios from '../../utils/axiosCall';
 
-import Nav from "../../utils/sec-nav";
+import Nav from "../../utils/nav";
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 

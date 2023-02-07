@@ -42,10 +42,10 @@ const Nav = props => {
                 <div className="">
                     <ul>
                         <li>
-                            <Link to={AppRoute.signin}>Sign In</Link>
+                            <Link to={AppRoute.signin}>Account</Link>
                         </li>
                         <li>
-                            <Link to={AppRoute.signup}>Sign Up</Link>
+                            <Link to={AppRoute.signup}>Cart</Link>
                         </li>
                     </ul>
                 </div>

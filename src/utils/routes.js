@@ -24,7 +24,7 @@ const AppRoute = {
     terms: "/terms",
     team: "/team",
     choreography: "/choreography",
-    profile: "/profile",
+    profile: "/dashboard",
     profileVideos: "/profile/videos",
     profileOrders: "/profile/orders",
     profileEventTickets: "/profile/reviews",

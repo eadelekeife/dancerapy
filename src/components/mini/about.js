@@ -54,26 +54,26 @@ const AboutUs = () => {
                     <div className="grid_3">
                         <div>
                             <img src={John} alt="john" />
-                            <h5 className="hero-text-header">Mrs Onyinye</h5>
+                            <h5 className="hero-text-header">Our Vision Statement</h5>
                             <p>
-                                As we grew, we vowed to not only protect our customers from dehydration but
-                                create the most effective, science-backed lineup of wellness products.
+                                To ensure that dance fitness becomes a lifestyle for everyone, millions of
+                                people around the world thereby increasing life expectancy by 15 – 20%.
                             </p>
                         </div>
                         <div>
                             <img src={John} alt="john" />
-                            <h5 className="hero-text-header">Mrs Onyinye</h5>
+                            <h5 className="hero-text-header">Our Mission Statement</h5>
                             <p>
-                                As we grew, we vowed to not only protect our customers from dehydration but
-                                create the most effective, science-backed lineup of wellness products.
+                                MISSION STATEMENT: We want to ensure that people have access to DANCERAPY worldwide
+                                through our S.T.U.N.D (Studio Next Door Program)
                             </p>
                         </div>
                         <div>
                             <img src={John} alt="john" />
-                            <h5 className="hero-text-header">Mrs Onyinye</h5>
+                            <h5 className="hero-text-header">Our Long-term Vision</h5>
                             <p>
-                                As we grew, we vowed to not only protect our customers from dehydration but
-                                create the most effective, science-backed lineup of wellness products.
+                                To inspire our community with non-competitive dance education and offer
+                                many opportunities in a facility that will develop an appreciation of the fine arts.
                             </p>
                         </div>
                     </div>

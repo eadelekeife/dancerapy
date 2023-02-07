@@ -290,6 +290,22 @@ h3.tile_header {
     margin-bottom: 20px;
 }
 
+.sec_gray {
+    background: #E5E5E5;
+    padding: 5% 0px;
+}
+
+.instructor_form_div h3.tile_header {
+    font-size: 2.5rem;
+    width: 100%;
+}
+
+.sec_gray_content .instructor_form_div form {
+    width: 80%;
+    margin: 0% auto;
+    display: block;
+}
+
 @media screen and (max-width: 720px) {
     .instructor_hero h2 {
         width: 100%;

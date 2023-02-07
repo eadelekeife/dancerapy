@@ -39,6 +39,7 @@ const Profile = () => {
     }
     return (
         <div>
+            <Nav />
             <div className="profile_div main_info">
                 <div className="profile_to_left">
                     <div className="profile_nav">

@@ -4,7 +4,7 @@
     align-items: center;
     display: flex;
     justify-content: space-between;
-    padding: 0.5em 1em;
+    padding: 0.5em 1.5rem;
 }
 
 .sec_navigation ul, .sec_navigation p {
@@ -17,9 +17,13 @@
     display: inline-block;
 }
 
+.sec_navigation ul li:last-child {
+    padding-right: 0px;
+}
+
 .sec_navigation ul li a, .sec_navigation p {
     color: #fff;
-    font-size: 1.4rem;
+    font-size: 1.3rem;
 }
 
 .navigation {
@@ -31,6 +35,8 @@
     justify-content: space-between;
     align-items: center;
     padding: 10px 15px;
+    box-shadow: 0px 0px 3px 3px rgba(0, 0, 0, .2);
+    position: relative;
 }
 
 .sec.navigation {

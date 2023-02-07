@@ -53,7 +53,7 @@ const Products = () => {
             <Nav />
             <div className="plan_bg">
                 <h3>Dancerapy Products and Services</h3>
-                <div className="flex_form">
+                <div className="flex_form filter">
                     <div className="select_box_filter_cover">
                         <Select
                             style={{ width: '300px' }}

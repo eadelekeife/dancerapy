@@ -30,6 +30,28 @@ h1, h2, h3, h4, h5, h6 {
     --green: #81D742;
 }
 
+
+/* spacing */
+.mt-5 {
+    margin-top: 5%;
+}
+
+.mt-3 {
+    margin-top: 3%;
+}
+
+.pt-5 {
+    padding-top: 5%;
+}
+
+.pt-3 {
+    padding-top: 3%;
+}
+
+.pt-4 {
+    padding-top: 4%;
+}
+
 /* layout */
 
 .width_70 {
@@ -134,6 +156,11 @@ h1, h2, h3, h4, h5, h6 {
     font-size: 1.4rem;
     padding: 8px 25px;
     color: var(--black);
+    background: var(--black);
+}
+
+.btn_border_black {
+    background: transparent;   
 }
 
 .form_flex {
@@ -159,6 +186,11 @@ h1, h2, h3, h4, h5, h6 {
 
 .mobile-only {
     display: none;
+}
+
+.filter .ant-select-selector {
+    padding-left: 40px !important;
+    font-size: 1.3rem;
 }
 
 @media screen and (max-width: 720px) {

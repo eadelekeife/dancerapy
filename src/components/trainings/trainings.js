@@ -54,7 +54,7 @@ const Plans = () => {
             <Nav />
             <div className="plan_bg">
                 <h3>Find a Physical Class</h3>
-                <div className="flex_form">
+                <div className="flex_form filter">
                     <div className="select_box_filter_cover">
                         <Select
                             placeholder="Set Training Time"

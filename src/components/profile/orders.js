@@ -3,6 +3,7 @@ import "./profile.css";
 import React from "react";
 
 import Footer from "../../utils/footer";
+import Nav from "../../utils/nav";
 
 import SideNav from "./side_nav";
 
@@ -13,6 +14,7 @@ import _2 from "../../assets/images/content/_2.avif";
 const Profile = () => {
     return (
         <div>
+            <Nav />
             <div className="profile_div main_info">
                 <div className="profile_to_left">
                     <div className="profile_nav">

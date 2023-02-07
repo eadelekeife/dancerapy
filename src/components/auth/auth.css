@@ -37,7 +37,7 @@
 .alignbothtoside {
     display: grid;
     grid-template-columns: 1fr 1.8fr;
-    min-height: 60vh;
+    min-height: 70vh;
 }
 
 .full_image_background {
@@ -71,12 +71,25 @@ label {
     font-size: 1.4rem;
 }
 
-.form a {
+.form button {
+    margin-bottom: 10px;
+}
+
+.form_detail.contain p {
+    font-size: 1.4rem;
+    margin-bottom: 35px;
+}
+
+/* .form a {
     display: block;
     line-height: 1.5;
     color: #060809;
     font-size: 1.4rem;
+} */
+.form_detail.contain p.no-margin {
+    margin-bottom: 10px;
 }
+
 
 .form a.margin-bottom {
     margin-bottom: 5px;
