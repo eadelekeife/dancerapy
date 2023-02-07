@@ -21,9 +21,10 @@
     padding-right: 0px;
 }
 
-.sec_navigation ul li a, .sec_navigation p {
+.sec_navigation ul li a, .sec_navigation p, .sec_navigation ul li {
     color: #fff;
     font-size: 1.3rem;
+    cursor: pointer;
 }
 
 .navigation {
