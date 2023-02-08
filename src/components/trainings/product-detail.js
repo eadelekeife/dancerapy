@@ -37,7 +37,8 @@ const ProductDetail = props => {
     };
     const paymentButton = useRef(null);
     // const publicKey = "pk_test_6001cfe393365d476119a4e494f32bcb1290cfea"
-    const publicKey = "FLWPUBK_TEST-0e746e210b6a35ba308e802e22489f09-X";
+    // const publicKey = "FLWPUBK_TEST-0e746e210b6a35ba308e802e22489f09-X";
+    const publicKey = "pk_test_a19a6e93c97960b1a49da3577caacd3f2194d2a7"
     const [uuidv4] = useState(uuid());
 
     const [amount, setAmount] = useState(0); // Remember, set in kobo!
@@ -116,6 +117,7 @@ const ProductDetail = props => {
                 })
                     .then(coursePlans => {
                         if (coursePlans.data.statusMessage === "success") {
+                            localStorage.setItem('purchaseSuccessful', true);
                             Navigate(AppRoute.plansuccess);
                         } else {
                             openNotificationWithIcon('error', coursePlans.data.summary);
@@ -228,10 +230,10 @@ const ProductDetail = props => {
 
     // Paystack
     const config = {
-        reference: (new Date()).getTime().toString(),
+        reference: uuidv4,
         email: props.auth.userDetails.emailAddress,
-        amount: `${+orderTotalCost}00`, //Amount is in the country's lowest currency. E.g Kobo, so 20000 kobo = N200
-        publicKey: privateKey,
+        amount: `${+amount}00`, //Amount is in the country's lowest currency. E.g Kobo, so 20000 kobo = N200
+        publicKey: publicKey,
     };
 
     const onSuccessPayStack = (reference) => {
@@ -268,7 +270,7 @@ const ProductDetail = props => {
         return (
             <div>
                 <button
-                    className="btn-accent full"
+                    className="btn_red full"
                     onClick={() => {
                         initializePayment(onSuccessPayStack, onClosePaystack)
                     }}>Go to Payment</button>

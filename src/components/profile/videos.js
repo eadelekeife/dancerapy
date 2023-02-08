@@ -32,6 +32,10 @@ const VirtualSubcriptions = props => {
     const [filter, setFilter] = useState('all');
 
     useEffect(() => {
+        if (localStorage.getItem('purchaseSuccessful')) {
+            openNotificationWithIcon('success', 'Transaction completed successfully. Please check your mail for further information');
+            localStorage.removeItem('purchaseSuccessful');
+        }
         axiosCall.get(`/user/online-subscription`, {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem('token')}`
