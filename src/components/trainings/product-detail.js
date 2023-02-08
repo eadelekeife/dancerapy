@@ -226,6 +226,56 @@ const ProductDetail = props => {
         });
     }
 
+    // Paystack
+    const config = {
+        reference: (new Date()).getTime().toString(),
+        email: props.auth.userDetails.emailAddress,
+        amount: `${+orderTotalCost}00`, //Amount is in the country's lowest currency. E.g Kobo, so 20000 kobo = N200
+        publicKey: privateKey,
+    };
+
+    const onSuccessPayStack = (reference) => {
+        setLoaderSpinning(true)
+        axiosCall.post(`/buyproduct`, {
+            productPlanId: productPlans.id,
+            userId: userData.id,
+            transId: reference.trxref
+        })
+            .then(coursePlans => {
+                if (coursePlans.data.statusMessage === "success") {
+                    Navigate(AppRoute.profileVideos)
+                } else {
+                    openNotificationWithIcon('error', coursePlans.data.summary);
+                    setLoaderSpinning(false);
+                }
+            })
+            .catch(err => {
+                console.log(err)
+                openNotificationWithIcon('error', 'An error occurred while completing product purchase. Please try again')
+                setLoaderSpinning(false);
+            })
+    };
+
+
+    // you can call this function anything
+    const onClosePaystack = () => {
+        // implementation for  whatever you want to do when the Paystack dialog closed.
+        openNotificationWithIcon('error', 'Transaction cancelled')
+    }
+
+    const PaystackHookExample = () => {
+        const initializePayment = usePaystackPayment(config);
+        return (
+            <div>
+                <button
+                    className="btn-accent full"
+                    onClick={() => {
+                        initializePayment(onSuccessPayStack, onClosePaystack)
+                    }}>Go to Payment</button>
+            </div>
+        );
+    };
+
     return (
         <div>
             <Nav />
@@ -270,7 +320,8 @@ const ProductDetail = props => {
                                                     props.auth.isAuthenticated ?
                                                         activePlan ? <button disabled className="btn_red">You have an Active Plan</button>
                                                             :
-                                                            <button className="btn_red" onClick={() => goToPayment()}>Buy Plan</button>
+                                                            <PaystackHookExample />
+                                                        // <button className="btn_red" onClick={() => goToPayment()}>Buy Plan</button>
                                                         :
                                                         <button className="btn_red" onClick={() => setIsModalOpen(true)}>Buy Plan</button>
                                                 }

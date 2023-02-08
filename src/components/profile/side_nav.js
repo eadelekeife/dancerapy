@@ -54,7 +54,7 @@ const Profile = () => {
                         Virtual Subscription</NavLink>
                 </li>
                 <li>
-                    <NavLink to={AppRoutes.profileOrders}
+                    <NavLink to={AppRoutes.profilePlanOrders}
                         style={({ isActive }) => ({
                             color: !isActive ? '#111111' : '#258635',
                         })}
@@ -63,10 +63,10 @@ const Profile = () => {
                             class="profile_icon"
                             name="card-outline"></ion-icon>
                         {/* <span className="lnr lnr-gift"></span> */}
-                        Dance Plan Orders</NavLink>
+                        Your Plan Orders</NavLink>
                 </li>
                 <li>
-                    <NavLink to={AppRoutes.profileOrders}
+                    <NavLink to={AppRoutes.profileProductOrders}
                         style={({ isActive }) => ({
                             color: !isActive ? '#111111' : '#258635',
                         })}
@@ -75,7 +75,7 @@ const Profile = () => {
                             class="profile_icon"
                             name="card-outline"></ion-icon>
                         {/* <span className="lnr lnr-gift"></span> */}
-                        Product Orders</NavLink>
+                        Your Product Orders</NavLink>
                 </li>
                 {/* <li>
                     <NavLink to={AppRoutes.profileEventTickets}

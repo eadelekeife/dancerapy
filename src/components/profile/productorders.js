@@ -30,7 +30,7 @@ const Profile = props => {
     const [userData] = useState(props.auth.isAuthenticated ? props.auth.userDetails : '');
 
     useEffect(() => {
-        axiosCall.get(`/fetchusercourseplans/${userData.id}`)
+        axiosCall.get(`/fetchuserproductplans/${userData.id}`)
             .then(userPlans => {
                 if (userPlans.data.statusMessage === "success") {
                     setLoadingData(false);
@@ -59,12 +59,13 @@ const Profile = props => {
         {
             title: 'Name',
             dataIndex: 'name',
+            // render: (text) => <a>{text}</a>,
         },
         {
             title: 'Puchase Date',
             className: 'column-money',
             dataIndex: 'date',
-            align: 'left',
+            // align: 'right',
         },
         {
             title: 'Expiry Date',
@@ -79,7 +80,7 @@ const Profile = props => {
         return {
             key: index,
             id: <p>{index + 1}</p>,
-            name: <p>{plan.coursePlan.title}</p>,
+            name: <p>{plan.productPlan.title}</p>,
             date: <p>{DateTime.fromISO(plan.createdAt).toLocaleString(DateTime.DATE_HUGE)}</p>,
             // expiry: <p>DateTime.fromFormat(plan.expiryDate).toLocaleString(DateTime.DATE_HUGE)</p>,
             expiry: <p>{DateTime.fromFormat(plan.expiryDate.split(' ')[0], 'yyyy-MM-dd').toLocaleString(DateTime.DATE_HUGE)}</p>,
@@ -91,14 +92,16 @@ const Profile = props => {
             <Nav />
             <div className="profile_div main_info">
                 <div className="profile_to_left">
-                    <div className="profile_nav">
-                        <SideNav />
+                    <div className="">
+                        <div className="profile_nav">
+                            <SideNav />
+                        </div>
                     </div>
                 </div>
                 <div className="profile_to_right">
                     <div className="contain">
                         <div className="profile-data-display">
-                            <h3 className="profile_title">Plan Orders</h3>
+                            <h3 className="profile_title">Product Orders</h3>
                             <Divider style={{ margin: '10px 0px' }} />
                             {
                                 loadingdata ?
@@ -131,35 +134,37 @@ const Profile = props => {
                                                         footer={null}
                                                     />
                                                 </div>
-                                                <div className="mobile-only">
-                                                    <div className="mt-5">
-                                                        {userPlans.map((plan, index) => {
-                                                            return (
-                                                                <Collapse defaultActiveKey={['1']} key={index}>
-                                                                    <Panel key={index + 1}
-                                                                        header={`${plan.coursePlan.title} purchased on ${DateTime.fromISO(plan.createdAt).toLocaleString(DateTime.DATE_HUGE)}`} key="1">
-                                                                        <ul className="transactionHistory">
-                                                                            <li>
-                                                                                <span>Name:</span>
-                                                                                <span>{plan.coursePlan.title}</span>
-                                                                            </li>
-                                                                            <li>
-                                                                                <span>Date:</span>
-                                                                                <span>{DateTime.fromISO(plan.createdAt).toLocaleString(DateTime.DATE_HUGE)}</span>
-                                                                            </li>
-                                                                            <li>
-                                                                                <span>Expiry Date:</span>
-                                                                                <span>{DateTime.fromFormat(plan.expiryDate.split(' ')[0], 'yyyy-MM-dd').toLocaleString(DateTime.DATE_HUGE)}</span>
-                                                                            </li>
-                                                                            <li>
-                                                                                <span>Transaction Id:</span>
-                                                                                <span>{plan.transactionId}</span>
-                                                                            </li>
-                                                                        </ul>
-                                                                    </Panel>
-                                                                </Collapse>
-                                                            )
-                                                        })}
+                                                <div>
+                                                    <div className="mobile-only">
+                                                        <div className="mt-5">
+                                                            {userPlans.map((plan, index) => {
+                                                                return (
+                                                                    <Collapse defaultActiveKey={['1']} key={index}>
+                                                                        <Panel key={index + 1}
+                                                                            header={`${plan.productPlan.title} purchased on ${DateTime.fromISO(plan.createdAt).toLocaleString(DateTime.DATE_HUGE)}`} key="1">
+                                                                            <ul className="transactionHistory">
+                                                                                <li>
+                                                                                    <span>Name:</span>
+                                                                                    <span>{plan.productPlan.title}</span>
+                                                                                </li>
+                                                                                <li>
+                                                                                    <span>Date:</span>
+                                                                                    <span>{DateTime.fromISO(plan.createdAt).toLocaleString(DateTime.DATE_HUGE)}</span>
+                                                                                </li>
+                                                                                <li>
+                                                                                    <span>Expiry Date:</span>
+                                                                                    <span>{DateTime.fromFormat(plan.expiryDate.split(' ')[0], 'yyyy-MM-dd').toLocaleString(DateTime.DATE_HUGE)}</span>
+                                                                                </li>
+                                                                                <li>
+                                                                                    <span>Transaction Id:</span>
+                                                                                    <span>{plan.transactionId}</span>
+                                                                                </li>
+                                                                            </ul>
+                                                                        </Panel>
+                                                                    </Collapse>
+                                                                )
+                                                            })}
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -177,7 +182,9 @@ const Profile = props => {
                     </div>
                 </div>
             </div>
-            <Footer />
+            <div className="mobile-only">
+                <Footer />
+            </div>
         </div>
     )
 }

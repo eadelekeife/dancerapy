@@ -12,6 +12,7 @@ import Homepage from "./components/homepage/newindex";
 import SignIn from "./components/auth/signin";
 import SignUp from "./components/auth/signup";
 import Reset from "./components/auth/reset";
+import SignOut from "./components/auth/signout";
 import Club from "./components/mini/club";
 import Merch from "./components/merchandise/merchandise";
 import Trainings from "./components/trainings/trainings";
@@ -22,6 +23,7 @@ import Instructors from "./components/instructors/instructors";
 import Profile from "./components/profile/dashboard";
 import ProfileEventTickets from "./components/profile/tickets";
 import ProfileOrders from "./components/profile/orders";
+import ProductOrders from "./components/profile/productorders";
 import ProfileVideos from "./components/profile/videos";
 import ProfileReviews from "./components/profile/reviews";
 import ProfileMerchandise from "./components/profile/merchandise";
@@ -41,6 +43,7 @@ const Navigator = () => {
                     <Route path={AppRoute.signin} element={<AuthProtectedRoutes><SignIn /></AuthProtectedRoutes>} />
                     <Route path={AppRoute.signup} element={<AuthProtectedRoutes><SignUp /></AuthProtectedRoutes>} />
                     <Route path={AppRoute.reset} element={<AuthProtectedRoutes><Reset /></AuthProtectedRoutes>} />
+                    <Route path={AppRoute.signout} element={<SignOut />} />
 
                     <Route path={AppRoute.contact} element={<Contact />} />
                     <Route path={AppRoute.trainings} element={<Trainings />} />
@@ -56,9 +59,9 @@ const Navigator = () => {
                     {/* profile */}
                     <Route path={AppRoute.profile} exact element={<ProtectedRoutes><Profile /></ProtectedRoutes>} />
                     <Route path={AppRoute.profileEventTickets} exact element={<ProtectedRoutes><ProfileEventTickets /></ProtectedRoutes>} />
-                    <Route path={AppRoute.profileOrders} exact element={<ProtectedRoutes><ProfileOrders /></ProtectedRoutes>} />
                     <Route path={AppRoute.profileVideos} exact element={<ProtectedRoutes><ProfileVideos /></ProtectedRoutes>} />
-                    <Route path={AppRoute.profileOrders} exact element={<ProtectedRoutes><ProfileOrders /></ProtectedRoutes>} />
+                    <Route path={AppRoute.profileProductOrders} exact element={<ProtectedRoutes><ProductOrders /></ProtectedRoutes>} />
+                    <Route path={AppRoute.profilePlanOrders} exact element={<ProtectedRoutes><ProfileOrders /></ProtectedRoutes>} />
                     <Route path={AppRoute.profileReviews} exact element={<ProtectedRoutes><ProfileReviews /></ProtectedRoutes>} />
                     <Route path={AppRoute.profileMerchandise} exact element={<ProtectedRoutes><ProfileMerchandise /></ProtectedRoutes>} />
                 </Routes>
