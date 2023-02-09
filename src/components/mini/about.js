@@ -2,7 +2,8 @@ import "./mini.css";
 
 import React from "react";
 
-import AboutImage from "../../assets/images/homepage/about.webp";
+import AboutHero from "../../assets/images/homepage/home_hero.jpeg";
+
 import John from "../../assets/images/homepage/john.webp";
 import { ReactComponent as About } from "../../assets/images/mini.svg";
 
@@ -16,14 +17,20 @@ const AboutUs = () => {
             <div className="about_hero">
                 <div className="grid_2">
                     <div className="about_hero_content">
-                        <h2>Bring us your toughest challenges.</h2>
-                        <p>We are an essential partnership link between produce growers and commercial purchasers
+                        <h2>Building Healthy <br /> Connections through Dance.</h2>
+                        <p>
+                            Dancerapy is a fitness and lifestyle brand invested in reintroducing dance as a choice
+                            therapy for healthy living. As a movement, Dancerapy personalizes the idea of dance as
+                            a culture towards achieving wholeness in health and fitness. Let Dancerapy help ignite
+                            the connections and build team bonding spirit within your organization.
+                        </p>
+                        {/* <p>We are an essential partnership link between produce growers and commercial purchasers
                             from coast to coast. So bring it on. We are an essential partnership link between
                             produce growers. We are an essential partnership link between produce growers and
-                            commercial purchasers from coast to coast. </p>
+                            commercial purchasers from coast to coast. </p> */}
                     </div>
                     <div>
-                        <img src={AboutImage} alt="about image" />
+                        <img src={AboutHero} alt="about image" />
                     </div>
                 </div>
                 <div className="bg-flow">
@@ -44,13 +51,19 @@ const AboutUs = () => {
             </div>
             <div className="about_hero_text mt-5">
                 <div className="contain">
-                    <h5>OUR PROMISE</h5>
-                    <h3>Never Be Thirsty Again</h3>
+                    <h5>OUR PLAN</h5>
+                    <h3>Keep Fit, Lose Weight, Learn Dance.</h3>
                     <p className="edit">
+                        Dancerapy’s long-term vision is to inspire our community with non-competitive dance
+                        education and many performance opportunities. We have 3 centers spread out across
+                        Lagos to make it easy for you to find us coupled with our numerous online training 
+                        sessions to fit your schedule.
+                    </p>
+                    {/* <p className="edit">
                         As we grew, we vowed to not only protect our customers from dehydration but create the
                         most effective, science-backed lineup of wellness products. When assembled, these
                         heroes empower you to live your best life. Onwards and upwards.
-                    </p>
+                    </p> */}
                     <div className="grid_3">
                         <div>
                             <img src={John} alt="john" />
@@ -179,7 +192,7 @@ const AboutUs = () => {
                     </div>
                 </div>
             </div>
-            <Footer />
+            <Footer margin={true} />
         </div>
     )
 }

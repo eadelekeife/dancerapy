@@ -183,7 +183,7 @@ const VirtualSubcriptions = props => {
                                                 <div className="empty_div">
                                                     <div>
                                                         <img src={Empty} alt="empty" />
-                                                        <p>You don't have an active virtual subscription</p>
+                                                        <p>Oops! Your subscription may have expired. Kindly renew to recover access</p>
                                                         {/* <p>You have not placed any orders yet</p> */}
                                                         <Link to={AppRoute.products} className="btn_red">View Plans</Link>
                                                     </div>

@@ -31,6 +31,8 @@ import Contact from "./components/mini/contact";
 import AboutUs from "./components/mini/about";
 import ProductDetail from "./components/trainings/product-detail";
 import PlanDetail from "./components/trainings/plan_detail";
+import FAQs from "./components/mini/faq";
+import Corporate from "./components/mini/corporate";
 
 const Navigator = () => {
     return (
@@ -51,10 +53,12 @@ const Navigator = () => {
                     <Route path={`${AppRoute.products}/detail`} element={<ProductDetail />} />
                     <Route path={`${AppRoute.trainings}/detail`} element={<PlanDetail />} />
                     <Route path={AppRoute.zoom} element={<Zoom />} />
-                    <Route path={AppRoute.club} element={<Club />} />
+                    <Route path={AppRoute.schools} element={<Club />} />
                     <Route path={AppRoute.team} element={<Team />} />
                     <Route path={AppRoute.merch} element={<Merch />} />
                     <Route path={AppRoute.instructor} element={<Instructors />} />
+                    <Route path={AppRoute.faqs} element={<FAQs />} />
+                    <Route path={AppRoute.corporate} element={<Corporate />} />
 
                     {/* profile */}
                     <Route path={AppRoute.profile} exact element={<ProtectedRoutes><Profile /></ProtectedRoutes>} />

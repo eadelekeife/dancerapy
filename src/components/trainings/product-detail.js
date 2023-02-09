@@ -117,7 +117,6 @@ const ProductDetail = props => {
                 })
                     .then(coursePlans => {
                         if (coursePlans.data.statusMessage === "success") {
-                            localStorage.setItem('purchaseSuccessful', true);
                             Navigate(AppRoute.plansuccess);
                         } else {
                             openNotificationWithIcon('error', coursePlans.data.summary);
@@ -245,6 +244,7 @@ const ProductDetail = props => {
         })
             .then(coursePlans => {
                 if (coursePlans.data.statusMessage === "success") {
+                    localStorage.setItem('purchaseSuccessful', true);
                     Navigate(AppRoute.profileVideos)
                 } else {
                     openNotificationWithIcon('error', coursePlans.data.summary);

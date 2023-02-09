@@ -190,7 +190,9 @@ const Nav = props => {
             </div>
             <div className={`navigation ${props.border ? "border" : ''} ${fixedNav ? 'fixed' : ''}`}>
                 <div className="inner-nav">
-                    <img src={Logo} alt="logo" className="logo" />
+                    <Link to="/">
+                        <img src={Logo} alt="logo" className="logo" />
+                    </Link>
                     <ul className="desktop-only">
                         <li>
                             <Link to={AppRoute.about}>About Us</Link>
@@ -209,7 +211,7 @@ const Nav = props => {
                             <Link to={AppRoute.instructor}>Become a Dance Instructor</Link>
                         </li>
                         <li>
-                            <Link to={AppRoute.club}>Events and Schools</Link>
+                            <Link to={AppRoute.schools}>Events and Schools</Link>
                         </li>
                         {/* <li>
                             <Link to={AppRoute.contact}>Contact Us</Link>

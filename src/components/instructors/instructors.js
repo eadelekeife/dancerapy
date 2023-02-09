@@ -11,6 +11,8 @@ import { ReactComponent as About } from "../../assets/images/mini.svg";
 import Nav from "../../utils/nav";
 import Footer from "../../utils/footer";
 
+import InstructorVideo from '../../assets/instructor.mp4';
+
 import _1 from '../../assets/images/companies/access.webp';
 import _2 from '../../assets/images/companies/shell.png';
 import _3 from '../../assets/images/companies/terra.png';
@@ -26,13 +28,19 @@ const AboutUs = () => {
             <div className="about_hero">
                 <div className="grid_2">
                     <div className="about_hero_content">
-                        <h2>Join the Dancerapy Instructor Family</h2>
-                        <p>We are an essential partnership link between produce growers and commercial purchasers
+                        <h2>Join the Dancerapy <br /> Instructor Family</h2>
+                        <p>
+                            Dancing imbibes a sense of well-being quite unlike any other exercise. It is good for
+                            your heart and makes you fit, helping you burn calories. Above all, you feel light 
+                            hearted and happy for no reason! As a movement, Dancerapy personalizes the idea
+                            of dance as a culture towards achieving wholeness in health and fitness.
+                        </p>
+                        {/* <p>We are an essential partnership link between produce growers and commercial purchasers
                             from coast to coast. So bring it on. We are an essential partnership link between
                             produce growers. We are an essential partnership link between produce growers and
-                            commercial purchasers from coast to coast. </p>
+                            commercial purchasers from coast to coast. </p> */}
                     </div>
-                    <div>
+                    <div className="side-video">
                         <img src={AboutImage} alt="about image" />
                     </div>
                 </div>
@@ -91,7 +99,9 @@ const AboutUs = () => {
                 </div>
             </div>
             <div className="team-bg mt-5">
-
+                <video
+                    src={InstructorVideo}
+                    autoPlay={false} style={{ background: 'black' }} playsInline={true} controls />
             </div>
             <div className="mt-5 instructor_testimonials">
                 <div className="container">
@@ -145,7 +155,7 @@ const AboutUs = () => {
                     </div>
                 </div>
             </div>
-            <Footer />
+            <Footer margin={true} />
         </div>
     )
 }

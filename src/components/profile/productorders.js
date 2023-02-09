@@ -182,9 +182,7 @@ const Profile = props => {
                     </div>
                 </div>
             </div>
-            <div className="mobile-only">
-                <Footer />
-            </div>
+            <Footer />
         </div>
     )
 }

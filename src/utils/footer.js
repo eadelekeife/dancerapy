@@ -62,10 +62,10 @@ const Footer = props => {
                                     <Link to={AppRoute.products}>DanceRapy Products and Services</Link>
                                 </li>
                                 <li>
-                                    <Link to={AppRoute.corporate}>Dancerapy corporate events/schools</Link>
+                                    <Link to={AppRoute.schools}>Dancerapy corporate events/schools</Link>
                                 </li>
                                 <li>
-                                    <Link to={AppRoute.marathon}>Dancerapy and Corporates</Link>
+                                    <Link to={AppRoute.corporate}>Dancerapy and Corporates</Link>
                                 </li>
                                 {/* <li>
                                 <Link to={AppRoute.ourteam}>Our Team</Link>
