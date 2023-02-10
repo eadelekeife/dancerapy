@@ -495,3 +495,45 @@
     margin-bottom: 0%;
     font-size: 1.3rem;
 }
+
+@media screen and (max-width:720px) {
+    .about_us .about_hero .grid_2 {
+        display: flex;
+        flex-direction: column-reverse;
+    }
+    .about_us .about_hero h2 {
+        font-size: 2.5rem;
+    }
+    .about_us .about_hero p {
+        font-size: 1.3rem;
+    }
+    .about_us .about_hero_content {
+        padding-left: 1.5%;
+    }
+
+    .about_us .bg-flow {
+        top: 50%;
+        left: 0px;
+        width: 100%;
+        height: 2rem;
+    }
+    .about_us .about_hero_text p.edit {
+        width: 100%;
+        font-size: 1.4rem;
+    }
+
+    .about_us .about_hero_text .grid_3 {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .grid_5 {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: 10px;
+    }
+
+    .team_card {
+        height: 50vw;
+    }
+}
