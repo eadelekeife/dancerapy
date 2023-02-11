@@ -589,10 +589,16 @@ ul.props {
         overflow: visible;
     }
 
-    .plans .container {
+    /* .plans .container {
         padding: 0px;
         padding-left: 1.5%;
         width: calc(100% - 1.5%);
+    } */
+
+    .plans .container {
+        padding: 0% 3%;
+        width: 100%;
+        max-width: unset;
     }
 
     .plan_group .grid_2 .story_bg {
@@ -650,5 +656,9 @@ ul.props {
 
     .center_align_message {
         padding: 10% 0px;
+    }
+
+    .detail_props .contain {
+        padding: 0px;
     }
 }

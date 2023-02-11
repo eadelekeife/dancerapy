@@ -1,10 +1,14 @@
 import "./mini.css";
+import "./_1.css";
 
 import React from "react";
 
 import AboutHero from "../../assets/images/homepage/home_hero.jpeg";
 
 import John from "../../assets/images/homepage/john.webp";
+import Award from "../../assets/images/content/award.svg";
+import Eye from "../../assets/images/content/eye.svg";
+import Target from "../../assets/images/content/target.svg";
 import { ReactComponent as About } from "../../assets/images/mini.svg";
 
 import Nav from "../../utils/nav";
@@ -38,15 +42,17 @@ const AboutUs = () => {
                 </div>
             </div>
             <div className="black-content">
-                <div>
-                    <p>Member-only Perks</p>
-                    <p>20% on every order</p>
-                    <p>Free Shipping</p>
-                    <p>Custom plans</p>
-                    <p>Member-only Perks</p>
-                    <p>Free Shipping</p>
-                    <p>Custom plans</p>
-                    <p>Member-only Perks</p>
+                <div className="scroll-container">
+                    <div className="scroll-text">
+                        <p><ion-icon name="checkmark-circle-outline"></ion-icon> Member-only Perks</p>
+                        <p><ion-icon name="checkmark-circle-outline"></ion-icon> 20% on every order</p>
+                        <p><ion-icon name="checkmark-circle-outline"></ion-icon> Free Shipping</p>
+                        <p><ion-icon name="checkmark-circle-outline"></ion-icon> Custom plans</p>
+                        <p><ion-icon name="checkmark-circle-outline"></ion-icon> Member-only Perks</p>
+                        <p><ion-icon name="checkmark-circle-outline"></ion-icon> Free Shipping</p>
+                        <p><ion-icon name="checkmark-circle-outline"></ion-icon> Custom plans</p>
+                        <p><ion-icon name="checkmark-circle-outline"></ion-icon> Member-only Perks</p>
+                    </div>
                 </div>
             </div>
             <div className="about_hero_text mt-5">
@@ -56,7 +62,7 @@ const AboutUs = () => {
                     <p className="edit">
                         Dancerapy’s long-term vision is to inspire our community with non-competitive dance
                         education and many performance opportunities. We have 3 centers spread out across
-                        Lagos to make it easy for you to find us coupled with our numerous online training 
+                        Lagos to make it easy for you to find us coupled with our numerous online training
                         sessions to fit your schedule.
                     </p>
                     {/* <p className="edit">
@@ -66,7 +72,9 @@ const AboutUs = () => {
                     </p> */}
                     <div className="grid_3">
                         <div>
-                            <img src={John} alt="john" />
+                            <div className="about_hero_text_image">
+                                <img src={Eye} alt="john" />
+                            </div>
                             <h5 className="hero-text-header">Our Vision Statement</h5>
                             <p>
                                 To ensure that dance fitness becomes a lifestyle for everyone, millions of
@@ -74,7 +82,9 @@ const AboutUs = () => {
                             </p>
                         </div>
                         <div>
-                            <img src={John} alt="john" />
+                            <div className="about_hero_text_image">
+                                <img src={Target} alt="john" />
+                            </div>
                             <h5 className="hero-text-header">Our Mission Statement</h5>
                             <p>
                                 MISSION STATEMENT: We want to ensure that people have access to DANCERAPY worldwide
@@ -82,7 +92,9 @@ const AboutUs = () => {
                             </p>
                         </div>
                         <div>
-                            <img src={John} alt="john" />
+                            <div className="about_hero_text_image">
+                                <img src={Award} alt="john" />
+                            </div>
                             <h5 className="hero-text-header">Our Long-term Vision</h5>
                             <p>
                                 To inspire our community with non-competitive dance education and offer
@@ -101,92 +113,130 @@ const AboutUs = () => {
                     <div className="grid_5">
                         <div className="">
                             <div className="team_img_cover team_card _1">
-                                {/* <img src={_1} alt="_1" /> */}
+                                <div
+                                    className="site_bg_overlay">
+                                    <div>
+                                        <p>
+                                            Bimbo Obafunwa is the CEO of Corporate Dance World (Africa’s leading dance agency)
+                                            Founder of The Dancerapy Club
+                                            Director of The Dancedeal Training foundation (2009 till date)
+                                            Winner of Celebrity Takes 2 season 1
+                                            Dance director for Maltina Dance All (2007 – 2016)
+                                        </p>
+                                    </div>
+                                </div>
                             </div>
                             <div>
-                                <h4 className="team_member_name">Obafunwa Bimbo</h4>
-                                <p className="team_member_role">Talent Manager</p>
+                                <h4 className="team_member_name">Bimbo Obafunwa David</h4>
+                                <p className="team_member_role">Artistic Director / Administrator</p>
                             </div>
                         </div>
                         <div className="">
                             <div className="team_img_cover team_card _2">
                                 {/* <img src={_1} alt="_1" /> */}
+                                <div className="site_bg_overlay">
+                                    <ion-icon name="logo-instagram"></ion-icon>
+                                </div>
                             </div>
                             <div>
-                                <h4 className="team_member_name">Obafunwa Bimbo</h4>
-                                <p className="team_member_role">Talent Manager</p>
+                                <h4 className="team_member_name">Olajumoke Sidiku Raliat</h4>
+                                <p className="team_member_role">Executive Assistant</p>
                             </div>
                         </div>
                         <div className="">
                             <div className="team_img_cover team_card _3">
                                 {/* <img src={_1} alt="_1" /> */}
+                                <div className="site_bg_overlay">
+                                    <ion-icon name="logo-instagram"></ion-icon>
+                                </div>
                             </div>
                             <div>
-                                <h4 className="team_member_name">Obafunwa Bimbo</h4>
-                                <p className="team_member_role">Talent Manager</p>
+                                <h4 className="team_member_name">Opemipo Ade Akingboye</h4>
+                                <p className="team_member_role">Healthcare Consultant / Dancerapy Physician</p>
                             </div>
                         </div>
                         <div className="">
                             <div className="team_img_cover team_card _4">
                                 {/* <img src={_1} alt="_1" /> */}
+                                <div className="site_bg_overlay">
+                                    <ion-icon name="logo-instagram"></ion-icon>
+                                </div>
                             </div>
                             <div>
-                                <h4 className="team_member_name">Obafunwa Bimbo</h4>
-                                <p className="team_member_role">Talent Manager</p>
+                                <h4 className="team_member_name">Michael Ayomikun Olanrewaju</h4>
+                                <p className="team_member_role">Dancerapy Instructor</p>
                             </div>
                         </div>
                         <div className="">
                             <div className="team_img_cover team_card _5">
                                 {/* <img src={_1} alt="_1" /> */}
+                                <div className="site_bg_overlay">
+                                    <ion-icon name="logo-instagram"></ion-icon>
+                                </div>
                             </div>
                             <div>
-                                <h4 className="team_member_name">Obafunwa Bimbo</h4>
-                                <p className="team_member_role">Talent Manager</p>
+                                <h4 className="team_member_name">Joseph Ogbor</h4>
+                                <p className="team_member_role">Dancerapy Instructor</p>
                             </div>
                         </div>
                         <div className="">
                             <div className="team_img_cover team_card _6">
                                 {/* <img src={_1} alt="_1" /> */}
+                                <div className="site_bg_overlay">
+                                    <ion-icon name="logo-instagram"></ion-icon>
+                                </div>
                             </div>
                             <div>
-                                <h4 className="team_member_name">Obafunwa Bimbo</h4>
-                                <p className="team_member_role">Talent Manager</p>
+                                <h4 className="team_member_name">Charles Ekwem</h4>
+                                <p className="team_member_role">Dancerapy Instructor</p>
                             </div>
                         </div>
                         <div className="">
                             <div className="team_img_cover team_card _7">
                                 {/* <img src={_1} alt="_1" /> */}
+                                <div className="site_bg_overlay">
+                                    <ion-icon name="logo-instagram"></ion-icon>
+                                </div>
                             </div>
                             <div>
-                                <h4 className="team_member_name">Obafunwa Bimbo</h4>
-                                <p className="team_member_role">Talent Manager</p>
+                                <h4 className="team_member_name">Anietienabasi Udoh</h4>
+                                <p className="team_member_role">Dancerapy Instructor</p>
                             </div>
                         </div>
                         <div className="">
                             <div className="team_img_cover team_card _8">
                                 {/* <img src={_1} alt="_1" /> */}
+                                <div className="site_bg_overlay">
+                                    <ion-icon name="logo-instagram"></ion-icon>
+                                </div>
                             </div>
                             <div>
-                                <h4 className="team_member_name">Obafunwa Bimbo</h4>
-                                <p className="team_member_role">Talent Manager</p>
+                                <h4 className="team_member_name">Jeremiah Balogun</h4>
+                                <p className="team_member_role">Dancerapy Instructor</p>
                             </div>
                         </div>
                         <div className="">
                             <div className="team_img_cover team_card _9">
                                 {/* <img src={_1} alt="_1" /> */}
+                                <div className="site_bg_overlay">
+                                    <ion-icon name="logo-instagram"></ion-icon>
+                                </div>
                             </div>
                             <div>
-                                <h4 className="team_member_name">Obafunwa Bimbo</h4>
-                                <p className="team_member_role">Talent Manager</p>
+                                <h4 className="team_member_name">Aniebet Emmanuel</h4>
+                                <p className="team_member_role">Dancerapy Instructor</p>
                             </div>
                         </div>
                         <div className="">
                             <div className="team_img_cover team_card _10">
                                 {/* <img src={_1} alt="_1" /> */}
+                                <div className="site_bg_overlay">
+                                    <ion-icon name="logo-instagram"></ion-icon>
+                                </div>
                             </div>
                             <div>
-                                <h4 className="team_member_name">Obafunwa Bimbo</h4>
-                                <p className="team_member_role">Talent Manager</p>
+                                <h4 className="team_member_name">Anozie Malachi</h4>
+                                <p className="team_member_role">Dancerapy Instructor</p>
                             </div>
                         </div>
                     </div>

@@ -6,8 +6,8 @@ import { Drawer, Skeleton, Divider, notification, Select, Spin } from 'antd';
 import NumberFormat from 'react-number-format';
 
 import Logo from "../assets/images/logo.jpg";
-import Menu from "../assets/images/menu.svg";
-import Cart from "../assets/images/cart.svg";
+import { ReactComponent as Menu } from "../assets/images/menu.svg";
+import { ReactComponent as Cart } from "../assets/images/cart.svg";
 import Cancel from "../assets/images/x.svg";
 import Call from "../assets/images/call.svg";
 import ArrowLeft from "../assets/images/arrow-left.svg";
@@ -247,8 +247,16 @@ const Nav = props => {
                     </ul>
                 </div>
                 <div className="mobile-only">
-                    <img onClick={showCartDrawer} src={Cart} alt="menu" />
-                    <img onClick={showDrawer} src={Menu} alt="menu" />
+                    <ul>
+                        <li>
+                            <Cart className="cart" onClick={showDrawer} />
+                            {/* <img onClick={showCartDrawer} src={Cart} alt="menu" /> */}
+                        </li>
+                        <li>
+                            <Menu className="menu" onClick={showDrawer} />
+                            {/* <img onClick={showDrawer} src={Menu} alt="menu" /> */}
+                        </li>
+                    </ul>
                 </div>
             </div>
             <Drawer title={null} placement="right" onClose={onClose} open={open}>
@@ -419,7 +427,7 @@ const Nav = props => {
                             <li>
                                 <Link
                                     onClick={() => setOpen(false)}
-                                    to={AppRoute.corporate}>
+                                    to={AppRoute.schools}>
                                     <span>Events and Schools</span>
                                     {/* <ion-icon name="arrow-forward-outline"></ion-icon> */}
                                 </Link>
@@ -427,7 +435,7 @@ const Nav = props => {
                             <li>
                                 <Link
                                     // onClick={e => { e.preventDefault(); setExtraNavDisplay(4) }}
-                                    to={AppRoute.marathon}>
+                                    to={AppRoute.corporate}>
                                     <span>Dancerapy and Corporates</span>
                                     {/* <ion-icon name="arrow-forward-outline"></ion-icon> */}
                                 </Link>

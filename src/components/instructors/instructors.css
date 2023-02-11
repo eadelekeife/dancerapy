@@ -410,6 +410,7 @@ h3.tile_header {
         width: 100%;
         margin: 0%;
         padding: 0%;
+        max-width: unset;
     }
 
     .instructor_form_div h3.tile_header, .instructor_testimonials h3.tile_header {
@@ -417,6 +418,7 @@ h3.tile_header {
         font-size: 2.2rem;
         margin: 0%;
         margin-bottom: 20px;
+        width: 70%;
     }
 
     .instructor_form_div .center_div, .instructor_testimonials .center_div {
@@ -441,5 +443,13 @@ h3.tile_header {
 
     .instructor_testimonials .center_div ul li {
         margin: 0px;
+    }
+
+    .instructor_div_bg.corporate.mt-5 {
+        margin-top: 10%;
+    }
+
+    .corporate_grid_4.pt-5 {
+        margin-top: 10%;
     }
 }

@@ -171,6 +171,11 @@
     border-radius: 8px;
 }
 
+.about_us .team h3 {
+    font-size: 2rem;
+    margin-bottom: 0px;
+}
+
 .team_card._1 {
     background-image: url('../../assets/images/team/_1.jpg');
     background-position: 50% 0%, 50% 0%;
@@ -439,6 +444,7 @@
 .about_us .about_hero_text p {
     font-size: 1.4rem;
     line-height: 1.8;
+    margin-bottom: 0px;
 }
 
 .about_us .about_hero_text p.edit {
@@ -466,11 +472,25 @@
 }
 
 .about_us .about_hero_text img {
-    width: 30%;
+    width: 60%;
     height: auto;
-    border-radius: 50%;
+}
+
+.about_us .about_hero_text .about_hero_text_image h2 {
+    font-size: 3rem;
+}
+
+.about_us .about_hero_text .about_hero_text_image {
     border: 2px solid #111;
+    background: #F8F8F8;
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    margin: 0px auto;
+    display: block;
     margin-bottom: 15px;
+    text-align: center;
+    line-height: 100px;
 }
 
 .about_us .about_hero_text h5 {
@@ -486,7 +506,7 @@
     display: flex;
     background: #111;
     grid-gap: 50px;
-    padding: 20px 0px;
+    padding: 10px 0px;
     text-align: center;
 }
 
@@ -494,6 +514,49 @@
     color: #fff;
     margin-bottom: 0%;
     font-size: 1.3rem;
+    width: max-content;
+    display: flex;
+    align-items: center;
+    grid-gap: 5px;
+}
+
+.about_us .black-content div p ion-icon {
+    font-size: 1.8rem;
+    margin-bottom: 0px;
+}
+
+
+.dancerapy_corporate .grid_4 {
+    grid-gap: 20px;
+    grid-row-gap: 55px;
+}
+
+.dancerapy_corporate .grid_4 h5 {
+    font-size: 1.6rem;
+}
+
+.dancerapy_corporate .grid_4 img {
+    margin-bottom: 5px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.dancerapy_corporate .dancerapy_corporate_title {
+    text-align: center;
+}
+
+.dancerapy_corporate .dancerapy_corporate_title h3 {
+    font-size: 2.5rem;
+    margin-bottom: 0%;
+    padding-top: 30px;
+}
+
+.dancerapy_corporate .dancerapy_corporate_title p {
+    font-size: 1.8rem;
+    width: 40%;
+    margin: 0% auto;
+    display: block;
+    margin-bottom: 50px;
 }
 
 @media screen and (max-width:720px) {
@@ -501,12 +564,22 @@
         display: flex;
         flex-direction: column-reverse;
     }
+
     .about_us .about_hero h2 {
         font-size: 2.5rem;
     }
+
+    .about_us .about_hero_text h3 {
+        font-size: 2.5rem;
+        width: 80%;
+        margin: 0% auto;
+        display: block;
+    }
+
     .about_us .about_hero p {
         font-size: 1.3rem;
     }
+
     .about_us .about_hero_content {
         padding-left: 1.5%;
     }
@@ -517,6 +590,7 @@
         width: 100%;
         height: 2rem;
     }
+
     .about_us .about_hero_text p.edit {
         width: 100%;
         font-size: 1.4rem;
@@ -525,6 +599,7 @@
     .about_us .about_hero_text .grid_3 {
         display: flex;
         flex-direction: column;
+        grid-gap: 40px;
     }
 
     .grid_5 {
@@ -536,4 +611,169 @@
     .team_card {
         height: 50vw;
     }
+
+    .about_us .team-bg {
+        height: 30rem;
+    }
+
+    .about_us .about_hero_text.mt-5 {
+        margin-top: 15%;
+    }
+
+    .about_us .side-video {
+        min-height: 35rem;
+        position: relative;
+        width: 100%;
+    }
+
+    .about_us .team-bg video {
+        height: 100%;
+        left: 50%;
+        position: absolute;
+        top: 50%;
+        transform: translate3d(-50%, -50%, 10px);
+        width: 125vw;
+        z-index: 1;
+        object-position: top;
+    }
+
+    .about_us .side-video img {
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        height: 100%;
+        width: 100%;
+    }
+
+    .dancerapy_corporate .grid_4 {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: 10px;
+        row-gap: 50px;
+    }
+
+    .dancerapy_corporate .grid_4 h5 {
+        font-size: 1.4rem;
+    }
+
+    .dancerapy_corporate .grid_4 img {
+        width: 100%;
+        height: 100%;
+        border-radius: 3px;
+    }
+
+    .corporate_grid_4 .grid_4 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .sec_gray_content .instructor_form_div form {
+        width: 100%;
+    }
+
+    .sec_gray {
+        padding: 15% 0px;
+    }
+
+    .contact .grid_2 {
+        display: flex;
+        flex-direction: column;
+        grid-gap: 50px;
+    }
+
+    .contact .grid_2 form button {
+        margin-top: 20px;
+    }
+
+    .dancerapy_corporate .pt-5 {
+        padding-top: 15%;
+    }
+
+    .dancerapy_corporate .plan_bg p {
+        text-align: center;
+        width: 90%;
+        margin: 0% auto;
+        display: block;
+        display: none;
+    }
+
+    .dancerapy_corporate .grid_4 {
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: 10px;
+    }
+
+    .dancerapy_corporate .grid_4 img {
+        height: 10rem;
+    }
+
+    .dancerapy_corporate .grid_4 h5 {
+        font-size: 1.4rem;
+        line-height: 1.2;
+    }
+    .about_us .about_hero_text .about_hero_text_image {
+        width: 80px;
+        height: 80px;
+        line-height: 80px;
+    }
+    .about_us .about_hero_text img {
+        width: 40%;
+        height: auto;
+    }
+    
+    .about_us .about_hero_text .about_hero_text_image h2 {
+        font-size: 2rem;
+    }
 }
+
+.videoPlayer .ant-modal-body {
+    padding: 0%;
+}
+
+.stopVideoButton button {
+    position: absolute;
+    top: 0%;
+    right: 0px;
+    background: #000;
+    border-radius: 50%;
+    width: 3.5rem;
+    height: 3.5rem;
+    padding: 0%;
+    margin: 0%;
+    cursor: pointer;
+}
+
+.stopVideoButton ion-icon {
+    color: #fff;
+    font-size: 2rem;
+    background: transparent;
+    margin: 0%;
+    padding: 0%;
+}
+
+/* .scroll-container {
+    border: 3px solid black;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+​ .scroll-text {
+    -moz-transform: translateX(100%);
+    -webkit-transform: translateX(100%);
+    transform: translateX(100%);
+    -moz-animation: my-animation 15s linear infinite;
+    -webkit-animation: my-animation 15s linear infinite;
+    animation: my-animation 15s linear infinite;
+}
+
+​@keyframes myanimation {
+    from {
+        -moz-transform: translateX(100%);
+        -webkit-transform: translateX(100%);
+        transform: translateX(100%);
+    }
+
+    to {
+        -moz-transform: translateX(-100%);
+        -webkit-transform: translateX(-100%);
+        transform: translateX(-100%);
+    }
+} */

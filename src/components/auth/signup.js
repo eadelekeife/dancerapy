@@ -56,6 +56,11 @@ const SignUp = () => {
     return (
         <div>
             <Nav />
+            <div className="mobile-only">
+                <div className="plan_bg">
+                    <h3>Create a free account</h3>
+                </div>
+            </div>
             <div className="form form_page">
                 <div className="alignbothtoside">
                     <div className="real_form_boxes">

@@ -5,7 +5,6 @@ import React from "react";
 import { Rate } from "antd";
 
 import AboutImage from "../../assets/images/homepage/instructor.jpg";
-import John from "../../assets/images/homepage/john.webp";
 import { ReactComponent as About } from "../../assets/images/mini.svg";
 
 import Nav from "../../utils/nav";
@@ -31,7 +30,7 @@ const AboutUs = () => {
                         <h2>Join the Dancerapy <br /> Instructor Family</h2>
                         <p>
                             Dancing imbibes a sense of well-being quite unlike any other exercise. It is good for
-                            your heart and makes you fit, helping you burn calories. Above all, you feel light 
+                            your heart and makes you fit, helping you burn calories. Above all, you feel light
                             hearted and happy for no reason! As a movement, Dancerapy personalizes the idea
                             of dance as a culture towards achieving wholeness in health and fitness.
                         </p>
@@ -49,15 +48,17 @@ const AboutUs = () => {
                 </div>
             </div>
             <div className="black-content">
-                <div>
-                    <p>Access to new choreographies</p>
-                    <p>Provision of Dancerapy merchandise</p>
-                    <p>Access to larger client base</p>
-                    <p>Free feature on publicity channels</p>
-                    <p>Access to free graphic designs for classes</p>
-                    <p>Invoicing</p>
-                    <p>Free feature on Dancerapy platforms</p>
-                    <p>Two free trainings and subsequent discounts</p>
+                <div className="scroll-container">
+                    <div className="scroll-text">
+                        <p><ion-icon name="checkmark-circle-outline"></ion-icon> Access to new choreographies</p>
+                        <p><ion-icon name="checkmark-circle-outline"></ion-icon> Provision of Dancerapy merchandise</p>
+                        <p><ion-icon name="checkmark-circle-outline"></ion-icon> Access to larger client base</p>
+                        <p><ion-icon name="checkmark-circle-outline"></ion-icon> Free feature on publicity channels</p>
+                        <p><ion-icon name="checkmark-circle-outline"></ion-icon> Access to free graphic designs for classes</p>
+                        <p><ion-icon name="checkmark-circle-outline"></ion-icon> Invoicing</p>
+                        <p><ion-icon name="checkmark-circle-outline"></ion-icon> Free feature on Dancerapy platforms</p>
+                        <p><ion-icon name="checkmark-circle-outline"></ion-icon> Two free trainings and subsequent discounts</p>
+                    </div>
                 </div>
             </div>
             <div className="about_hero_text mt-5">
@@ -71,7 +72,9 @@ const AboutUs = () => {
                     </p>
                     <div className="grid_3">
                         <div>
-                            <img src={John} alt="john" />
+                            <div className="about_hero_text_image">
+                                <h2>1</h2>
+                            </div>
                             <h5 className="hero-text-header">Create a free account</h5>
                             <p>
                                 Create a free account and register your details, select your preferred training
@@ -79,7 +82,9 @@ const AboutUs = () => {
                             </p>
                         </div>
                         <div>
-                            <img src={John} alt="john" />
+                            <div className="about_hero_text_image">
+                                <h2>2</h2>
+                            </div>
                             <h5 className="hero-text-header">Training / Get your Certificate</h5>
                             <p>
                                 Training to span for a period of 6 months. After training, you
@@ -88,7 +93,9 @@ const AboutUs = () => {
                             </p>
                         </div>
                         <div>
-                            <img src={John} alt="john" />
+                            <div className="about_hero_text_image">
+                                <h2>3</h2>
+                            </div>
                             <h5 className="hero-text-header">Become a Dancerapy Instructor</h5>
                             <p>
                                 When you have successfully completed your training and are

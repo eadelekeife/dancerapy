@@ -57,6 +57,7 @@
     padding: 10px 15px;
     box-shadow: 0px 0px 3px 3px rgba(0, 0, 0, .2);
     position: relative;
+    z-index: 100;
 }
 
 .sec.navigation {
@@ -242,4 +243,110 @@
 
 .sec_footer .sec_footer_block ul li:last-child {
     padding-right: 0px;
+}
+
+@media screen and (max-width:720px) {
+    .footer .biased_grid_4 {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: 10px;
+    }
+
+    .footer .sec_footer .grid_flex {
+        display: flex;
+        flex-direction: column;
+        margin-top: 15%;
+    }
+
+    .sec_footer .sec_footer_block div {
+        text-align: left;
+    }
+
+    .footer {
+        padding-top: 15%;
+    }
+
+    .navigation {
+        padding: 8px 15px;
+    }
+
+    .navigation img.logo {
+        height: 4.7rem;
+    }
+
+    .navigation .mobile-only ul {
+        display: flex;
+        grid-gap: 30px;
+    }
+
+    .navigation .mobile-only ul li {
+        padding-right: 0%;
+    }
+
+    .navigation .mobile-only svg {
+        height: 4rem;
+        display: block;
+    }
+
+    .navigation.fixed .mobile-only svg.cart path,
+    .navigation.fixed .mobile-only svg.cart circle {
+        stroke: #fff;
+    }
+
+    .navigation.fixed .mobile-only svg.menu path {
+        fill: #fff;
+    }
+
+    .drawer-nav-block {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: .1px solid #b3b3b3;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        margin-bottom: 30px;
+        padding-left: 10px;
+    }
+
+    .drawer-nav-block img.nav-logo {
+        width: auto;
+        height: 5rem;
+    }
+
+    .drawer-nav-block img {
+        width: auto;
+        height: 4rem;
+    }
+
+    .nav-drawer .ant-drawer-body {
+        padding: 0px;
+    }
+
+    .nav-drawer ul li a {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        color: var(--black);
+        font-weight: bolder;
+        font-size: 1.3rem;
+    }
+
+    .nav-drawer ul li {
+        list-style: none;
+        line-height: 2.2;
+        margin-bottom: 15px;
+        border-bottom: .1px solid #b3b3b3;
+        padding-bottom: 10px;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    .nav-drawer ul li ion-icon {
+        font-size: 2rem;
+        color: var(--black);
+    }
+
+    .footer.margin {
+        margin-top: 15%;
+    }
 }

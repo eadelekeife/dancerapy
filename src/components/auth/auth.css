@@ -130,9 +130,11 @@ label {
         display: block;
         min-height: max-content;
     }
+
     .forgot_center .form {
         width: 100%;
     }
+
     .forgot_center {
         height: 30rem;
     }
@@ -150,4 +152,10 @@ label {
 
 .reset_page {
     padding: 5% 0px;
+}
+
+@media screen and (max-width:720px) {
+    .form_detail.contain {
+        padding: 0% 3%;
+    }
 }

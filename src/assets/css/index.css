@@ -160,7 +160,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .btn_border_black {
-    background: transparent;   
+    background: transparent;
 }
 
 .form_flex {
@@ -223,5 +223,12 @@ h1, h2, h3, h4, h5, h6 {
 
     .contain {
         padding: 0% 3%;
+    }
+
+    .ant-drawer-content-wrapper {
+        width: 100% !important;
+    }
+    .mt-5 {
+        margin-top: 15%;
     }
 }
