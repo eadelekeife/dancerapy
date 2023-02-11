@@ -88,72 +88,10 @@ const AboutUs = () => {
             <Nav />
             <div className="homepage-hero">
                 <video src="https://lagostheatrevideos.s3.amazonaws.com/intro.mp4"
-                    playsInline={true} style={{ background: 'black' }}
+                    playsInline={true} style={{ background: 'black' }} autoPlay={true} muted
                     alt="Introduction Video" className="about_video" controls={true} loop />
                 <div className="black-bg">
 
-                </div>
-            </div>
-            <div className="homepage_plan">
-                <div className="desktop-only">
-                    <div className="flex-display">
-                        <div className="blur_me">
-                            <div className="show_homepage_content">
-                                <div className="contain">
-                                    <div>
-                                        <div className="grid_4">
-                                            <div >
-                                                <img src={Annual} alt="_1" />
-                                            </div>
-                                            <div>
-                                                <img src={Flash} alt="_1" />
-                                            </div>
-                                            <div>
-                                                <img src={Zoom} alt="_1" />
-                                            </div>
-                                            <div>
-                                                <img src={Physical} alt="_1" />
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="whiten_me">
-                        </div>
-                    </div>
-                </div>
-                <div className="mobile-only mt-5">
-                    <div>
-                        <div className="first-display contain">
-                            <h6>Welcome to Dancerapy</h6>
-                            <h2>Easy to follow Dance Fitness Trainings</h2>
-                            <Link to={AppRoute.about}>Learn more</Link>
-                        </div>
-                        {/* <Divider style={{ marginTop: 5, marginBottom: 10 }} /> */}
-                        <div className="contain">
-                            {/* <p>Easy to follow. Hard to stop! Get ready for your workout with
-                                our DanceRapy fitness series. See our dance plans below.</p> */}
-                            <p>Dancerapy is a dance and fitness program that infuses tenets of various African
-                                styles. It’s fun. It’s easy. It’s effective. See our dance plans below.</p>
-                        </div>
-                    </div>
-                    <div className="inner-contain">
-                        <Slider {...settings}>
-                            <div key={1}>
-                                <img src={Annual} alt="_1" />
-                            </div>
-                            <div key={2}>
-                                <img src={Flash} alt="_1" />
-                            </div>
-                            <div key={3}>
-                                <img src={Zoom} alt="_1" />
-                            </div>
-                            <div key={4}>
-                                <img src={Physical} alt="_1" />
-                            </div>
-                        </Slider>
-                    </div>
                 </div>
             </div>
             <div className="mt-5 instructor-cover">
@@ -248,7 +186,7 @@ const AboutUs = () => {
                     </div>
                 </div>
             </div>
-            <Footer />
+            <Footer margin={true} />
         </div>
     )
 }
