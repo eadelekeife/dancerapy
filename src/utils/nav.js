@@ -9,6 +9,7 @@ import Logo from "../assets/images/logo.jpg";
 import { ReactComponent as Menu } from "../assets/images/menu.svg";
 import { ReactComponent as Cart } from "../assets/images/cart.svg";
 import Cancel from "../assets/images/x.svg";
+import CancelWhite from "../assets/images/x-white.svg";
 import Call from "../assets/images/call.svg";
 import ArrowLeft from "../assets/images/arrow-left.svg";
 // import Empty from "../assets/images/auth/empty.svg";
@@ -356,9 +357,9 @@ const Nav = props => {
                     <div>
                         <div className="drawer-nav-block">
                             <div>
-                                <img src={Logo} className="nav-logo" alt="logo" />
+                                {/* <img src={Logo} className="nav-logo" alt="logo" /> */}
                             </div>
-                            <img onClick={closeDrawer} src={Cancel} alt="Cancel" />
+                            <img onClick={closeDrawer} src={CancelWhite} alt="Cancel" />
                         </div>
                         <ul>
                             <li>

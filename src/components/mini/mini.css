@@ -515,6 +515,7 @@
     margin-bottom: 0%;
     font-size: 1.3rem;
     width: max-content;
+    flex-wrap: nowrap;
     display: flex;
     align-items: center;
     grid-gap: 5px;
@@ -574,6 +575,7 @@
         width: 80%;
         margin: 0% auto;
         display: block;
+        color: #000;
     }
 
     .about_us .about_hero p {
@@ -710,9 +712,9 @@
         line-height: 1.2;
     }
     .about_us .about_hero_text .about_hero_text_image {
-        width: 80px;
-        height: 80px;
-        line-height: 80px;
+        width: 60px;
+        height: 60px;
+        line-height: 60px;
     }
     .about_us .about_hero_text img {
         width: 40%;

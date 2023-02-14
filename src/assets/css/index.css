@@ -18,6 +18,10 @@ body, html {
     font-size: 10px;
     color: #222;
     font-family: 'Gilroy';
+    background-color: #f5f4f1;
+    background-image: url('../images/homepage/body-bg.webp');
+    background-position: 0 0;
+    background-attachment: scroll;
 }
 
 h1, h2, h3, h4, h5, h6 {

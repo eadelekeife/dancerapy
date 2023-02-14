@@ -288,14 +288,14 @@
         display: block;
     }
 
-    .navigation.fixed .mobile-only svg.cart path,
+    /* .navigation.fixed .mobile-only svg.cart path,
     .navigation.fixed .mobile-only svg.cart circle {
         stroke: #fff;
     }
 
     .navigation.fixed .mobile-only svg.menu path {
         fill: #fff;
-    }
+    } */
 
     .drawer-nav-block {
         display: flex;
@@ -348,5 +348,16 @@
 
     .footer.margin {
         margin-top: 15%;
+    }
+
+    .ant-drawer-body {
+        background: #000;
+    }
+    .ant-drawer-body ul li a {
+        color: #EFF0F6;
+    }
+
+    .navigation.fixed {
+        background: #fff;
     }
 }

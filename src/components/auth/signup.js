@@ -7,6 +7,7 @@ import { Input, Spin } from 'antd';
 import { Link } from 'react-router-dom';
 import { LoadingOutlined } from '@ant-design/icons';
 import axios from '../../utils/axiosCall';
+import Logo from "../../assets/images/logo.jpg";
 
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -55,18 +56,21 @@ const SignUp = () => {
 
     return (
         <div>
-            <Nav />
-            <div className="mobile-only">
+            <div className="desktop-onl">
+                <Nav />
+            </div>
+            {/* <div className="mobile-only">
                 <div className="plan_bg">
                     <h3>Create a free account</h3>
                 </div>
-            </div>
-            <div className="form form_page">
+            </div> */}
+            <div className="form form_page form-redesign">
                 <div className="alignbothtoside">
                     <div className="real_form_boxes">
                         <div className="form_detail contain">
                             <div>
                                 <h3>Create a free account</h3>
+                                <p>Enter your email address, name and password to create a new account</p>
                             </div>
                             {
                                 errorMessage ?
@@ -137,9 +141,12 @@ const SignUp = () => {
                     </div>
                 </div>
             </div>
-            <div className="show-on-mobile-only">
+            <div className="desktop-onl">
                 <Footer />
             </div>
+            {/* <div className="show-on-mobile-only">
+                <Footer />
+            </div> */}
         </div >
     )
 }

@@ -3,7 +3,7 @@ import "./homepage.css";
 import React from "react";
 import Slider from "react-slick";
 
-import { Rate } from "antd";
+import { Divider, Rate } from "antd";
 
 import AboutImage from "../../assets/images/homepage/about.webp";
 import John from "../../assets/images/homepage/john.webp";
@@ -13,6 +13,9 @@ import { ReactComponent as ImageBlock1 } from '../../assets/images/homepage/imag
 
 import Nav from "../../utils/nav";
 import Footer from "../../utils/footer";
+
+import { Input } from 'antd';
+import { Controller, useForm } from "react-hook-form";
 
 import { Link } from "react-router-dom";
 import AppRoute from "../../utils/routes";
@@ -39,6 +42,14 @@ import _4 from '../../assets/images/companies/corona.png';
 import _6 from '../../assets/images/companies/dansol.png';
 import _7 from '../../assets/images/companies/gtco.png';
 import _8 from '../../assets/images/companies/mtn.png';
+
+import Loom1 from '../../assets/images/homepage/loom1.jpg';
+import Ready from '../../assets/images/homepage/ready.webp';
+
+import Loom from './_1.svg';
+import Loom2 from './img.svg';
+import AlvinWave from "./_2.svg";
+import { ReactComponent as Wave } from "./wave.svg";
 
 const AboutUs = () => {
 
@@ -83,56 +94,126 @@ const AboutUs = () => {
             }
         ]
     }
+    const { handleSubmit, control } = useForm({});
     return (
         <div className="new-homepage about_us">
             <Nav />
-            <div className="homepage-hero">
-                <video src="https://lagostheatrevideos.s3.amazonaws.com/intro.mp4"
-                    playsInline={true} style={{ background: 'black' }} autoPlay={true} muted
-                    alt="Introduction Video" className="about_video" controls={true} loop />
-                <div className="black-bg">
-
-                </div>
-            </div>
-            <div className="mt-5 instructor-cover">
+            <div className="dance-redesign-hero">
                 <div className="contain">
-                    <div className="instructor">
-                        <div className="contain">
-                            <div className="grid_2">
-                                <div>
-                                    <h4>Get ready for your workout with our DanceRapy fitness series</h4>
-                                    {/* <p>
-                                        Our vision is to ensure that dance fitness becomes a lifestyle for
-                                        everyone, millions of people around the world thereby increasing
-                                        life expectancy by 15 – 20%. Let Dancerapy help ignite the connections and
-                                        buuild team bonding spirit within your organization. We also have quarterly gatherings
-                                        nationwide to network, connect and have fun.
-                                    </p> */}
-
-                                    <p>
-                                        Dancerapy is a fitness and lifestyle brand invested in reintroducing dance as
-                                        a choice therapy for healthy living. As a movement, Dancerapy personalizes
-                                        the idea of dance as a culture towards achieving wholeness in health and
-                                        fitness. Let Dancerapy help ignite the connections and
-                                        buuild team bonding spirit within your organization.
-                                    </p>
-                                    <Link to={AppRoute.marathon} className="btn_border_black">See how we impact companies</Link>
-                                </div>
-                                <div>
-                                    <div className="video-cover">
-                                        <ReactPlayer
-                                            width="100%" height="100%"
-                                            playsinline={true} style={{ background: 'black' }}
-                                            url="https://lagostheatrevideos.s3.amazonaws.com/intro.mp4"
-                                            playing={false} controls={true} />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                    <div className="dance-hero-cover">
+                        <h3>Profession Fitness <br /> Dance Trainings</h3>
                     </div>
                 </div>
             </div>
-            <div className="mt-5 homepage_links">
+            <div className="dance-redesign-text-display mt-5">
+                <div className="contain">
+                    <h3>Integrated <br /> Digital Marketing</h3>
+                    {/* <h3>Integrated <br /> Digital Marketing</h3>
+                    <p>We’ve been skillfully weaving together the strands of strategic digital marketing since
+                        2009. Loom helps all kinds of ambitious businesses to improve their digital presence and
+                        make digital work for them commercially. Find out more about who we are.</p>
+                    <p>We’ve been skillfully weaving together the strands of strategic digital marketing since
+                        2009. Loom helps all kinds of ambitious businesses to improve their digital presence and
+                        make digital work for them commercially. Find out more about who we are.</p>
+                    <button>How we weave channels together</button>
+                    <img src={Loom2} alt="Loom2" /> */}
+                    {/* <div>
+                        <Divider />
+                        <p>We’ve been skillfully weaving together the strands of strategic digital marketing since
+                            2009. Loom helps all kinds of ambitious businesses to improve their digital presence and
+                            make digital work for them commercially. Find out more about who we are.</p>
+                        <button>How we weave channels together</button>
+                    </div>
+                    <div>
+                        <Divider />
+                        <p>We’ve been skillfully weaving together the strands of strategic digital marketing since
+                            2009. Loom helps all kinds of ambitious businesses to improve their digital presence and
+                            make digital work for them commercially. Find out more about who we are.</p>
+                        <button>How we weave channels together</button>
+                    </div> */}
+                    <div>
+                        <Divider />
+                        <p>We’ve been skillfully weaving together the strands of strategic digital marketing since
+                            2009. Loom helps all kinds of ambitious businesses to improve their digital presence and
+                            make digital work for them commercially. Find out more about who we are.</p>
+                        <button>How we weave channels together</button>
+                    </div>
+                    <div>
+                        <Divider />
+                        <p>We’ve been skillfully weaving together the strands of strategic digital marketing since
+                            2009. Loom helps all kinds of ambitious businesses to improve their digital presence and
+                            make digital work for them commercially. Find out more about who we are.</p>
+                        <button>How we weave channels together</button>
+                    </div>
+                </div>
+            </div>
+            <div className="dance-redesign-props-display mt-5">
+                <div className="dance-redesign-props-img-cover">
+                    <img src={Loom1} alt="loom 1" />
+                    <Wave className="wave-image" />
+                </div>
+                <div className="contain">
+                    <div className="block"></div>
+                    <h4>For over ten years.</h4>
+                    <p>We’ve been skillfully weaving together the strands of strategic digital marketing since
+                        2009. Loom helps all kinds of ambitious businesses to improve their digital presence and
+                        make digital work for them commercially. Find out more about who we are.</p>
+                    <button className="btn_red">Meet the Loom team</button>
+                </div>
+            </div>
+            <div className="dance-redesign-final-props mt-5">
+                <div className="contain">
+                    <div>
+                        <h2>All in a calendar, that's a joy to use</h2>
+                        <p>We’ve been skillfully weaving together the strands of strategic digital marketing since
+                            2009. Loom helps all kinds of ambitious businesses to improve their digital presence and
+                            make digital work for them commercially. Find out more about who we are.</p>
+                        <div className="tags">
+                            <p>Desktop App</p>
+                            <p>Keyboard Shortcuts</p>
+                            <p>Dark and Light Mode</p>
+                            <p>Google calendar sync</p>
+                            <p>Notifications</p>
+                        </div>
+                    </div>
+                    <div>
+                        <img src={Ready} alt="ready" />
+                    </div>
+                </div>
+            </div>
+            <div className="dance-redesign-props-display mt-5">
+                <div className="dance-redesign-props-img-cover">
+                    <img src={Loom1} alt="loom 1" />
+                    <Wave className="wave-image" />
+                </div>
+                <div className="contain">
+                    <div className="block"></div>
+                    <h4>For over ten years.</h4>
+                    <p>We’ve been skillfully weaving together the strands of strategic digital marketing since
+                        2009. Loom helps all kinds of ambitious businesses to improve their digital presence and
+                        make digital work for them commercially. Find out more about who we are.</p>
+                    <button className="btn_red">Meet the Loom team</button>
+                </div>
+            </div>
+            <div className="dance-redesign-email mt-5">
+                <div className="contain">
+                    <h4>For over ten years, Bristol-based Loom has been.</h4>
+                    <p>We’ve been skillfully weaving together the strands of strategic digital marketing since
+                        2009. Loom helps all kinds of ambitious businesses to improve their digital presence and
+                        make digital work for them commercially. Find out more about who we are.</p>
+                    <form>
+                        <div>
+                            <Controller name="email" defaultValue="" control={control}
+                                render={({ field }) => (
+                                    <Input {...field} />
+                                )}
+                            />
+                            <button>Subscribe</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            {/* <div className="mt-5 homepage_links">
                 <div className="blur_me">
                     <div className="show_homepage_content">
                         <div className="contain">
@@ -185,7 +266,7 @@ const AboutUs = () => {
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> */}
             <Footer margin={true} />
         </div>
     )
