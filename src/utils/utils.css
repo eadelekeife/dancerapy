@@ -47,8 +47,8 @@
 }
 
 .navigation {
-    background: #000;
-    background: #fff;
+    /* background: #000;
+    background: #fff; */
     top: 0px;
     width: 100%;
     display: flex;
@@ -83,8 +83,9 @@
 }
 
 .navigation.fixed {
-    background: #fff;
-    background: #000;
+    /* background: #fff;
+    background: #000; */
+    background-image: url('../assets/images/homepage/body-bg.webp');
     top: 0%;
     width: 100%;
     position: fixed;
@@ -357,7 +358,7 @@
         color: #EFF0F6;
     }
 
-    .navigation.fixed {
+    /* .navigation.fixed {
         background: #fff;
-    }
+    } */
 }

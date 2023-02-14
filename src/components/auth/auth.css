@@ -158,6 +158,16 @@ label {
     .form_detail.contain {
         padding: 0% 3%;
     }
+
+    .form_detail.contain p {
+        font-size: 1.4rem;
+        margin-bottom: 0px;
+        padding-bottom: 35px;
+    }
+
+    .form_detail.contain p.no-margin {
+        padding-bottom: 0px;
+    }
 }
 
 .form-redesign {

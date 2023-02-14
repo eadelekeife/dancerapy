@@ -52,32 +52,42 @@ const Plans = () => {
     return (
         <div className="physical plans">
             <Nav />
-            <div className="plan_bg">
-                <h3>Find a Physical Class</h3>
-                <div className="flex_form filter">
-                    <div className="select_box_filter_cover">
-                        <Select
-                            placeholder="Set Training Time"
-                            style={{ width: '300px' }}
-                            prefix={<UserOutlined />}>
-                            <Option value="morning">Morning Sessions</Option>
-                            <Option value="afternoon">Afternoon Sessions</Option>
-                            <Option value="evening">Evening Sessions</Option>
-                        </Select>
-                        <ion-icon name="alarm-outline" className="filter_box_icon"></ion-icon>
+            <div className="desktop-only">
+                <div className="plan_bg">
+                    <h3>Find a Physical Class</h3>
+                    <div className="flex_form filter">
+                        <div className="select_box_filter_cover">
+                            <Select
+                                placeholder="Set Training Time"
+                                style={{ width: '300px' }}
+                                prefix={<UserOutlined />}>
+                                <Option value="morning">Morning Sessions</Option>
+                                <Option value="afternoon">Afternoon Sessions</Option>
+                                <Option value="evening">Evening Sessions</Option>
+                            </Select>
+                            <ion-icon name="alarm-outline" className="filter_box_icon"></ion-icon>
+                        </div>
+                        <div className="select_box_filter_cover">
+                            <Select
+                                placeholder="Set Training Location"
+                                style={{ width: '300px' }}
+                                prefix={<UserOutlined />}>
+                                <Option value="ikeja">Ikeja</Option>
+                                <Option value="ikoyi">Ikoyi</Option>
+                                <Option value="surulere">Surulere</Option>
+                            </Select>
+                            <ion-icon name="navigate-circle-outline" className="filter_box_icon"></ion-icon>
+                        </div>
+                        <button className="btn_red">FILTER CLASSES</button>
                     </div>
-                    <div className="select_box_filter_cover">
-                        <Select
-                            placeholder="Set Training Location"
-                            style={{ width: '300px' }}
-                            prefix={<UserOutlined />}>
-                            <Option value="ikeja">Ikeja</Option>
-                            <Option value="ikoyi">Ikoyi</Option>
-                            <Option value="surulere">Surulere</Option>
-                        </Select>
-                        <ion-icon name="navigate-circle-outline" className="filter_box_icon"></ion-icon>
-                    </div>
-                    <button className="btn_red">FILTER CLASSES</button>
+                </div>
+            </div>
+            <div className="mobile-product-outline contain">
+                <h3>Dancerapy Physical Plans</h3>
+                <div className="product-tag">
+                    <p>Any day <ion-icon name="chevron-down-outline"></ion-icon></p>
+                    <p>Any type <ion-icon name="chevron-down-outline"></ion-icon></p>
+                    <p>Any distance <ion-icon name="chevron-down-outline"></ion-icon></p>
                 </div>
             </div>
             <div className="grid_2">
@@ -109,17 +119,6 @@ const Plans = () => {
                                     {allProductPlans.map((productPlans, index) => (
                                         <div key={index}>
                                             <div className="grid_3_bias">
-                                                <div className="plan_grid_duration">
-                                                    <ul>
-                                                        {productPlans.monday ? <li>&bull; Mon</li> : ''}
-                                                        {productPlans.tuesday ? <li>&bull; Tues</li> : ''}
-                                                        {productPlans.wednesday ? <li>&bull; Wed</li> : ''}
-                                                        {productPlans.thursday ? <li>&bull; Thurs</li> : ''}
-                                                        {productPlans.friday ? <li>&bull; Fri</li> : ''}
-                                                        {productPlans.saturday ? <li>&bull; Sat</li> : ''}
-                                                        {productPlans.sunday ? <li>&bull; Sun</li> : ''}
-                                                    </ul>
-                                                </div>
                                                 <div className="plan_grid_main">
                                                     <div className="plan_grid_main_detail">
                                                         <Link to={`${AppRoute.trainings}/detail?productName=${productPlans.title}&productId=${productPlans.id}`}>
@@ -139,6 +138,17 @@ const Plans = () => {
                                                             <li><ion-icon name="alarm-outline"></ion-icon> {productPlans.openTime} &mdash; {productPlans.closeTime}</li>
                                                         </ul>
                                                     </div>
+                                                </div>
+                                                <div className="plan_grid_duration">
+                                                    <ul>
+                                                        {productPlans.monday ? <li>&bull; Mon</li> : ''}
+                                                        {productPlans.tuesday ? <li>&bull; Tues</li> : ''}
+                                                        {productPlans.wednesday ? <li>&bull; Wed</li> : ''}
+                                                        {productPlans.thursday ? <li>&bull; Thurs</li> : ''}
+                                                        {productPlans.friday ? <li>&bull; Fri</li> : ''}
+                                                        {productPlans.saturday ? <li>&bull; Sat</li> : ''}
+                                                        {productPlans.sunday ? <li>&bull; Sun</li> : ''}
+                                                    </ul>
                                                 </div>
                                                 <div className="plan_grid_props_list">
                                                     <Link to={`${AppRoute.trainings}/detail?productName=${productPlans.title}&productId=${productPlans.id}`}

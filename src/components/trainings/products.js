@@ -51,37 +51,47 @@ const Products = () => {
     return (
         <div className="plans">
             <Nav />
-            <div className="plan_bg">
-                <h3>Dancerapy Products and Services</h3>
-                <div className="flex_form filter">
-                    <div className="select_box_filter_cover">
-                        <Select
-                            style={{ width: '300px' }}
-                            prefix={<UserOutlined />}>
-                            <Option value="jack">Jack</Option>
-                            <Option value="lucy">Lucy</Option>
-                            <Option value="disabled" disabled>
-                                Disabled
-                            </Option>
-                        </Select>
-                        <ion-icon name="alarm-outline" className="filter_box_icon"></ion-icon>
+            <div className="desktop-only">
+                <div className="plan_bg">
+                    <h3>Dancerapy Products and Services</h3>
+                    <div className="flex_form filter">
+                        <div className="select_box_filter_cover">
+                            <Select
+                                style={{ width: '300px' }}
+                                prefix={<UserOutlined />}>
+                                <Option value="jack">Jack</Option>
+                                <Option value="lucy">Lucy</Option>
+                                <Option value="disabled" disabled>
+                                    Disabled
+                                </Option>
+                            </Select>
+                            <ion-icon name="alarm-outline" className="filter_box_icon"></ion-icon>
+                        </div>
+                        <div className="select_box_filter_cover">
+                            <Select
+                                style={{ width: '300px' }}
+                                prefix={<UserOutlined />}>
+                                <Option value="jack">Jack</Option>
+                                <Option value="lucy">Lucy</Option>
+                                <Option value="disabled" disabled>
+                                    Disabled
+                                </Option>
+                            </Select>
+                            <ion-icon name="navigate-circle-outline" className="filter_box_icon"></ion-icon>
+                        </div>
+                        <button className="btn_red">FILTER CLASSES</button>
                     </div>
-                    <div className="select_box_filter_cover">
-                        <Select
-                            style={{ width: '300px' }}
-                            prefix={<UserOutlined />}>
-                            <Option value="jack">Jack</Option>
-                            <Option value="lucy">Lucy</Option>
-                            <Option value="disabled" disabled>
-                                Disabled
-                            </Option>
-                        </Select>
-                        <ion-icon name="navigate-circle-outline" className="filter_box_icon"></ion-icon>
-                    </div>
-                    <button className="btn_red">FILTER CLASSES</button>
                 </div>
             </div>
-            <div className="container mt-5">
+            <div className="mobile-product-outline contain">
+                <h3>Products and Services</h3>
+                <div className="product-tag">
+                    <p>Any day <ion-icon name="chevron-down-outline"></ion-icon></p>
+                    <p>Any type <ion-icon name="chevron-down-outline"></ion-icon></p>
+                    <p>Any distance <ion-icon name="chevron-down-outline"></ion-icon></p>
+                </div>
+            </div>
+            <div className="container">
                 <div>
                     <Divider />
                     {
@@ -108,18 +118,22 @@ const Products = () => {
                                     <div key={index}>
                                         <div className="training_group">
                                             <div className="training_inside_group">
-                                                <div className="training_inside_img">
-                                                    <img src={productPlans.image} alt="annual" />
-                                                </div>
                                                 <div className="training_inside_div">
                                                     <p className="unimportant">{productPlans.discount}% Discount</p>
                                                     <Link to={`${AppRoute.products}/detail?productName=${productPlans.title}&productId=${productPlans.id}`}>
-                                                            <h4 className="plan_title">{productPlans.title}</h4>
-                                                        </Link>
+                                                        <h4 className="plan_title">{productPlans.title}</h4>
+                                                    </Link>
                                                     <p className="plan_desc">
                                                         {productPlans.description}
                                                     </p>
                                                 </div>
+                                                <div className="training_inside_img">
+                                                    <img src={productPlans.image} alt="annual" />
+                                                </div>
+                                            </div>
+                                            <div className="sec-group mt-4 training_inside_group">
+                                                <p>NGN 10,000</p>
+                                                <ion-icon name="logo-whatsapp"></ion-icon>
                                             </div>
                                             <div className="training_side_cover">
                                                 <div>

@@ -3,7 +3,7 @@ import './auth.css';
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Controller, useForm } from 'react-hook-form';
-import { Input, Spin } from 'antd';
+import { Input, Spin, notification } from 'antd';
 import { Link } from 'react-router-dom';
 import { LoadingOutlined } from '@ant-design/icons';
 import { loginUser } from '../../utils/reducers/auth';
@@ -15,6 +15,13 @@ import Footer from '../../utils/footer';
 import Nav from "../../utils/nav";
 
 const SignIn = props => {
+
+    const openNotificationWithIcon = (type, message) => {
+        notification[type]({
+            message: '',
+            description: message
+        });
+    };
 
     const [loadingData, setLoadingData] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
@@ -35,6 +42,10 @@ const SignIn = props => {
     });
 
     useEffect(() => {
+        if (localStorage.getItem('new-account')) {
+            openNotificationWithIcon('success', 'Account created successfully! Please log in.');
+            localStorage.removeItem('new-account');
+        }
         if (props.auth.isAuthenticated) {
             window.location = "/profile";
         }
@@ -55,12 +66,13 @@ const SignIn = props => {
     return (
         <div>
             <Nav />
-            <div className="form form_page">
+            <div className="form form_page form-redesign">
                 <div className="alignbothtoside">
                     <div className="real_form_boxes">
                         <div className="form_detail contain">
                             <div>
                                 <h3>Sign in to your account</h3>
+                                <p>Enter your email address and password to sign in to your account</p>
                             </div>
                             {
                                 errorMessage ?
@@ -93,7 +105,6 @@ const SignIn = props => {
                                     loadingData
                                         ?
                                         <button>
-                                            <span style={{ marginRight: '10px' }}>Creating Account. Please wait...</span>
                                             <Spin indicator={antIcon} /></button>
                                         :
                                         <button>Sign in now</button>

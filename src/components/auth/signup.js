@@ -42,6 +42,7 @@ const SignUp = () => {
         })
             .then(userData => {
                 if (userData.data.statusMessage === "success") {
+                    localStorage.setItem('new-account', true);
                     window.location = `/signin`;
                 } else {
                     setLoadingData(false);
@@ -127,7 +128,6 @@ const SignUp = () => {
                                     loadingData
                                         ?
                                         <button>
-                                            <span style={{ marginRight: '10px' }}>Creating Account. Please wait...</span>
                                             <Spin indicator={antIcon} /></button>
                                         :
                                         <button>Create Account</button>

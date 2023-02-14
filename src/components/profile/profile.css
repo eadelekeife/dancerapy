@@ -165,6 +165,20 @@
     font-size: 1.5rem;
 }
 
+@media screen and (max-width: 720px) {
+    .profile_div.main_info {
+        display: block;
+    }
+
+    .profile_div.main_info .profile_to_left {
+        display: none;
+    }
+
+    .profile_div.main_info .width_70 {
+        width: 100%;
+    }
+}
+
 /*  */
 /* .profile_to_left {
     background: #fff;
