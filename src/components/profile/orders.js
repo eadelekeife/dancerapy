@@ -167,8 +167,7 @@ const Profile = props => {
                                             <div className="empty_div">
                                                 <div>
                                                     <img src={Empty} alt="empty" />
-                                                    <h3>An empty space...</h3>
-                                                    <p>You have not placed any orders yet</p>
+                                                    <p>Oops! Your subscription may have expired. Kindly renew to recover access</p>
                                                     <Link to={AppRoute.trainings} className="btn_red">View Plans</Link>
                                                 </div>
                                             </div>

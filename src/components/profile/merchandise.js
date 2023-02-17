@@ -17,6 +17,7 @@ import SideNav from "./side_nav";
 import Empty from "../../assets/images/auth/empty.svg";
 import _1 from "../../assets/images/content/_1.avif";
 import _2 from "../../assets/images/content/_2.avif";
+import AppRoute from "../../utils/routes";
 
 const Profile = () => {
     const [loadingData, setLoadingData] = useState(false);
@@ -53,9 +54,8 @@ const Profile = () => {
                             <div className="empty_div">
                                 <div>
                                     <img src={Empty} alt="empty" />
-                                    <h3>An empty space...</h3>
                                     <p>You have not placed any orders yet</p>
-                                    <button className="btn_red">View Plans</button>
+                                    <Link to={AppRoute.merch} className="btn_red">View Plans</Link>
                                 </div>
                             </div>
                         </div>

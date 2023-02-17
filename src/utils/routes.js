@@ -31,7 +31,8 @@ const AppRoute = {
     profileEventTickets: "/profile/reviews",
     profileEventTickets: "/profile/event_tickets",
     profileReviews: "/profile/reviews",
-    profileMerchandise: "/profile/merchandise"
+    profileMerchandise: "/profile/merchandise",
+    profileVirtualSubscription: "/profile/virtual_subscriptions"
 }
 
 export default AppRoute;

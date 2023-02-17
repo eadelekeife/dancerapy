@@ -498,7 +498,7 @@ const Nav = props => {
                                 </Link>
                             </li>
                             <li>
-                                <Link to={AppRoute.profileOrders}
+                                <Link to={AppRoute.profilePlanOrders}
                                 >
                                     Your Plan Orders
                                     {/* <ion-icon name="arrow-forward-outline"></ion-icon> */}

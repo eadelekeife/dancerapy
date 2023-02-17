@@ -42,7 +42,7 @@ const Profile = () => {
                         Your Videos</NavLink>
                 </li>
                 <li>
-                    <NavLink to={AppRoutes.profileVideos}
+                    <NavLink to={AppRoutes.profileVirtualSubscription}
                         style={({ isActive }) => ({
                             color: !isActive ? '#111111' : '#258635',
                         })}

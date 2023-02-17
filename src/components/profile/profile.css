@@ -177,6 +177,19 @@
     .profile_div.main_info .width_70 {
         width: 100%;
     }
+
+    .block-bg {
+        background: #111;
+        height: 18rem;
+        width: 100%;
+        border-radius: 3px;
+    }
+    .profile_div .profile_to_right .profile-data-display {
+        padding: 15% 0px;
+    }
+    .empty_div {
+        height: 40rem;
+    }
 }
 
 /*  */

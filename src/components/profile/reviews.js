@@ -27,8 +27,7 @@ const Profile = () => {
                         <div className="empty_div">
                             <div>
                                 <img src={Empty} alt="empty" />
-                                <h3>An empty space...</h3>
-                                <p>You have not placed any orders yet</p>
+                                <p>Oops! Your subscription may have expired. Kindly renew to recover access</p>
                                 <button className="btn_green">View Plans</button>
                             </div>
                         </div>

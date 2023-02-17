@@ -124,6 +124,9 @@ const Profile = props => {
                     <div className="contain">
                         <div className="profile-data-display">
                             <h3 className="profile_title">Account Information</h3>
+                            <div className="block-bg">
+
+                            </div>
                             <Divider style={{ marginTop: 0 }} />
                             <Tabs type="card">
                                 <Tabs.TabPane tab="Basic settings" key="1">
