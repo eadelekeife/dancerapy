@@ -251,10 +251,14 @@ h1, h2, h3, h4, h5, h6 {
         background: red;
         color: #fff !important;
     }
-    .ant-input {
+    .ant-input, .ant-input-password {
         background: #f5f4f1;
     }
-    /* .ant-tabs-nav {
-        border-bottom: 1px solid #d9d9d9;
-    } */
+    .new-cart-header {
+        padding-top: 20px;
+        padding-bottom: 0px;
+    }
+    .new-cart-header h2 {
+        font-size: 1.8rem;
+    }
 }

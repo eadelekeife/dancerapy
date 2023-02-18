@@ -9,10 +9,10 @@ import John from "../../assets/images/homepage/john.webp";
 import Award from "../../assets/images/content/award.svg";
 import Eye from "../../assets/images/content/eye.svg";
 import Target from "../../assets/images/content/target.svg";
-import { ReactComponent as About } from "../../assets/images/mini.svg";
 
 import Nav from "../../utils/nav";
 import Footer from "../../utils/footer";
+import { ReactComponent as Wave } from "../../assets/images/wave-yellow.svg";
 
 const AboutUs = () => {
     return (
@@ -33,13 +33,16 @@ const AboutUs = () => {
                             produce growers. We are an essential partnership link between produce growers and
                             commercial purchasers from coast to coast. </p> */}
                     </div>
-                    <div>
+                    <div className="about-redesign-img-cover">
                         <img src={AboutHero} alt="about image" />
+                        <div className="mobile-only">
+                            <Wave className="wave-image" />
+                        </div>
                     </div>
                 </div>
-                <div className="bg-flow">
+                {/* <div className="bg-flow">
                     <About />
-                </div>
+                </div> */}
             </div>
             <div className="black-content">
                 <div className="scroll-container">

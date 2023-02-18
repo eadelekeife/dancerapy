@@ -347,14 +347,18 @@
         color: var(--black);
     }
 
+    .nav-drawer ul li ion-icon.white {
+        color: #fff;
+    }
+
     .footer.margin {
         margin-top: 15%;
     }
 
-    .ant-drawer-body {
+    .nav-drawer .ant-drawer-body {
         background: #000;
     }
-    .ant-drawer-body ul li a {
+    .nav-drawer .ant-drawer-body ul li a {
         color: #EFF0F6;
     }
 

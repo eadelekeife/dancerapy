@@ -12,6 +12,7 @@ import Cancel from "../assets/images/x.svg";
 import CancelWhite from "../assets/images/x-white.svg";
 import Call from "../assets/images/call.svg";
 import ArrowLeft from "../assets/images/arrow-left.svg";
+import ArrowLeftWhite from "../assets/images/arrow-left-white.svg";
 // import Empty from "../assets/images/auth/empty.svg";
 import Empty from '../assets/images/empty_history.svg';
 
@@ -250,7 +251,7 @@ const Nav = props => {
                 <div className="mobile-only">
                     <ul>
                         <li>
-                            <Cart className="cart" onClick={showDrawer} />
+                            <Cart className="cart" onClick={() => showCartDrawer()} />
                             {/* <img onClick={showCartDrawer} src={Cart} alt="menu" /> */}
                         </li>
                         <li>
@@ -380,7 +381,7 @@ const Nav = props => {
                                             }}
                                             to={AppRoute.signup}>
                                             <span>Account</span>
-                                            <ion-icon name="chevron-forward-outline"></ion-icon>
+                                            <ion-icon class="white" name="chevron-forward-outline"></ion-icon>
                                         </Link>
                                     </li>
                                     : ''
@@ -467,9 +468,9 @@ const Nav = props => {
                     <div>
                         <div className="drawer-nav-block">
                             <div>
-                                <img src={Logo} className="nav-logo" alt="logo" />
+                                {/* <img src={Logo} className="nav-logo" alt="logo" /> */}
                             </div>
-                            <img onClick={() => setShowUserProfileNav(false)} src={ArrowLeft} alt="ArrowLeft" />
+                            <img onClick={() => setShowUserProfileNav(false)} src={ArrowLeftWhite} alt="ArrowLeft" />
                             {/* <ion-icon
                                 onClick={() => setShowUserProfileNav(false)}
                                 class="menu-bar"

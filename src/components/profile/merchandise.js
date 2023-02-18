@@ -4,13 +4,9 @@ import React, { useState } from "react";
 
 import Nav from "../../utils/nav";
 import Footer from "../../utils/footer";
-import { Controller, useForm } from 'react-hook-form';
-import { Input, Spin } from 'antd';
 import { LoadingOutlined } from '@ant-design/icons';
+import { Link } from "react-router-dom";
 import axios from '../../utils/axiosCall';
-
-import * as yup from 'yup';
-import { yupResolver } from '@hookform/resolvers/yup';
 
 import SideNav from "./side_nav";
 
@@ -25,19 +21,6 @@ const Profile = () => {
 
     const antIcon = <LoadingOutlined style={{ fontSize: 24, color: '#fff' }} spin />;
 
-    const signupValidator = yup.object().shape({
-        emailAddress: yup.string().email('Please enter a valid email address').required('Please enter your email address'),
-        password: yup.string().required('Please enter your password'),
-        firstName: yup.string().required('Please enter your first name'),
-        lastName: yup.string().required('Please enter your last name')
-    })
-
-    const { handleSubmit, control, formState: { errors } } = useForm({
-        resolver: yupResolver(signupValidator)
-    });
-    const signUp = () => {
-        console.log('hit me')
-    }
     return (
         <div>
             <Nav />

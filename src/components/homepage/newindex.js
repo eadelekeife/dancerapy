@@ -7,6 +7,7 @@ import { Divider, Rate } from "antd";
 
 import AboutImage from "../../assets/images/homepage/about.webp";
 import John from "../../assets/images/homepage/john.webp";
+import { ReactComponent as Mailchimp } from "./_3.svg";
 import { ReactComponent as About } from "../../assets/images/mini.svg";
 import { ReactComponent as ArrowSvg } from '../../assets/images/arrow.svg';
 import { ReactComponent as ImageBlock1 } from '../../assets/images/homepage/imageblock1.svg';
@@ -29,6 +30,8 @@ import Annual from "../../assets/images/homepage/annual.jpeg";
 import Flash from "../../assets/images/homepage/flash.jpeg";
 import Zoom from "../../assets/images/homepage/zoom.jpg";
 import Physical from "../../assets/images/homepage/physical.jpeg";
+import Instructor from "../../assets/images/homepage/instructor_hero.jpg";
+import Schools from "../../assets/images/homepage/link2.jpeg";
 
 import Insta1 from "../../assets/images/content/event_1.jpg";
 import Insta2 from "../../assets/images/content/event3.jpg";
@@ -46,9 +49,6 @@ import _8 from '../../assets/images/companies/mtn.png';
 import Loom1 from '../../assets/images/homepage/loom1.jpg';
 import Ready from '../../assets/images/homepage/ready.webp';
 
-import Loom from './_1.svg';
-import Loom2 from './img.svg';
-import AlvinWave from "./_2.svg";
 import { ReactComponent as Wave } from "./wave.svg";
 
 const AboutUs = () => {
@@ -98,7 +98,22 @@ const AboutUs = () => {
     return (
         <div className="new-homepage about_us">
             <Nav />
-            <div className="dance-redesign-hero">
+            <div className="dance-redesign-props-display">
+                <div className="dance-redesign-props-img-cover">
+                    <img src={Loom1} alt="loom 1" />
+                    <Wave className="wave-image" />
+                </div>
+                <div className="contain">
+                    <div className="block"></div>
+                    <h4>For over ten years.</h4>
+                    <p>We’ve been skillfully weaving together the strands of strategic digital marketing since
+                        2009. Loom helps all kinds of ambitious businesses to improve their digital presence and
+                        make digital work for them commercially. Find out more about who we are.</p>
+                    <button className="btn_red">Meet the Loom team</button>
+                </div>
+            </div>
+            <div
+                style={{ display: 'none' }} className="dance-redesign-hero">
                 <div className="contain">
                     <div className="dance-hero-cover">
                         <h3>Profession Fitness <br /> Dance Trainings</h3>
@@ -107,18 +122,13 @@ const AboutUs = () => {
             </div>
             <div className="dance-redesign-text-display mt-5">
                 <div className="contain">
-                    <h3>Integrated <br /> Digital Marketing</h3>
-                    {/* <h3>Integrated <br /> Digital Marketing</h3>
+                    {/* <h3>Integrated <br /> Digital Marketing</h3> */}
                     <p>We’ve been skillfully weaving together the strands of strategic digital marketing since
                         2009. Loom helps all kinds of ambitious businesses to improve their digital presence and
                         make digital work for them commercially. Find out more about who we are.</p>
-                    <p>We’ve been skillfully weaving together the strands of strategic digital marketing since
-                        2009. Loom helps all kinds of ambitious businesses to improve their digital presence and
-                        make digital work for them commercially. Find out more about who we are.</p>
-                    <button>How we weave channels together</button>
-                    <img src={Loom2} alt="Loom2" /> */}
-                    {/* <div>
+                    <div>
                         <Divider />
+                        <img src={Instructor} alt="Instructor" />
                         <p>We’ve been skillfully weaving together the strands of strategic digital marketing since
                             2009. Loom helps all kinds of ambitious businesses to improve their digital presence and
                             make digital work for them commercially. Find out more about who we are.</p>
@@ -126,20 +136,7 @@ const AboutUs = () => {
                     </div>
                     <div>
                         <Divider />
-                        <p>We’ve been skillfully weaving together the strands of strategic digital marketing since
-                            2009. Loom helps all kinds of ambitious businesses to improve their digital presence and
-                            make digital work for them commercially. Find out more about who we are.</p>
-                        <button>How we weave channels together</button>
-                    </div> */}
-                    <div>
-                        <Divider />
-                        <p>We’ve been skillfully weaving together the strands of strategic digital marketing since
-                            2009. Loom helps all kinds of ambitious businesses to improve their digital presence and
-                            make digital work for them commercially. Find out more about who we are.</p>
-                        <button>How we weave channels together</button>
-                    </div>
-                    <div>
-                        <Divider />
+                        <img src={Schools} alt="Instructor" />
                         <p>We’ve been skillfully weaving together the strands of strategic digital marketing since
                             2009. Loom helps all kinds of ambitious businesses to improve their digital presence and
                             make digital work for them commercially. Find out more about who we are.</p>
@@ -147,7 +144,9 @@ const AboutUs = () => {
                     </div>
                 </div>
             </div>
-            <div className="dance-redesign-props-display mt-5">
+            <div
+                style={{ display: 'none' }}
+                className="dance-redesign-props-display mt-5">
                 <div className="dance-redesign-props-img-cover">
                     <img src={Loom1} alt="loom 1" />
                     <Wave className="wave-image" />
@@ -164,6 +163,9 @@ const AboutUs = () => {
             <div className="dance-redesign-final-props mt-5">
                 <div className="contain">
                     <div>
+                        <img src={Ready} alt="ready" />
+                    </div>
+                    <div>
                         <h2>All in a calendar, that's a joy to use</h2>
                         <p>We’ve been skillfully weaving together the strands of strategic digital marketing since
                             2009. Loom helps all kinds of ambitious businesses to improve their digital presence and
@@ -176,12 +178,10 @@ const AboutUs = () => {
                             <p>Notifications</p>
                         </div>
                     </div>
-                    <div>
-                        <img src={Ready} alt="ready" />
-                    </div>
                 </div>
             </div>
-            <div className="dance-redesign-props-display mt-5">
+            <div
+                style={{ display: 'none' }} className="dance-redesign-props-display mt-5">
                 <div className="dance-redesign-props-img-cover">
                     <img src={Loom1} alt="loom 1" />
                     <Wave className="wave-image" />
@@ -197,6 +197,7 @@ const AboutUs = () => {
             </div>
             <div className="dance-redesign-email mt-5">
                 <div className="contain">
+                    <Mailchimp />
                     <h4>For over ten years, Bristol-based Loom has been.</h4>
                     <p>We’ve been skillfully weaving together the strands of strategic digital marketing since
                         2009. Loom helps all kinds of ambitious businesses to improve their digital presence and

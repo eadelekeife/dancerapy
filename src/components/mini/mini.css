@@ -579,7 +579,8 @@
     }
 
     .about_us .about_hero p {
-        font-size: 1.3rem;
+        font-size: 1.4rem;
+        width: 100%;
     }
 
     .about_us .about_hero_content {
@@ -711,18 +712,55 @@
         font-size: 1.4rem;
         line-height: 1.2;
     }
+
     .about_us .about_hero_text .about_hero_text_image {
         width: 60px;
         height: 60px;
         line-height: 60px;
     }
+
     .about_us .about_hero_text img {
         width: 40%;
         height: auto;
     }
-    
+
     .about_us .about_hero_text .about_hero_text_image h2 {
         font-size: 2rem;
+    }
+
+    .about-redesign-img-cover {
+        position: relative;
+        overflow: hidden;
+    }
+
+    .about_hero .wave-image {
+        position: absolute;
+        bottom: -30px;
+        left: 0%;
+        width: 100%;
+    }
+    .about_us .black-content div {
+        display: flex;
+        background: #111;
+        grid-gap: 50px;
+        padding: 5px 0px;
+        text-align: center;
+    }
+
+    .about_us .black-content div p {
+        color: #fff;
+        margin-bottom: 0%;
+        font-size: 1.1rem;
+        width: max-content;
+        flex-wrap: nowrap;
+        display: flex;
+        align-items: center;
+        grid-gap: 5px;
+    }
+
+    .team_member_role {
+        margin-bottom: 0%;
+        font-size: 1.1rem;
     }
 }
 

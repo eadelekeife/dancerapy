@@ -19,6 +19,7 @@ import _4 from '../../assets/images/companies/corona.png';
 import _6 from '../../assets/images/companies/dansol.png';
 import _7 from '../../assets/images/companies/gtco.png';
 import _8 from '../../assets/images/companies/mtn.png';
+import { ReactComponent as Wave } from "../../assets/images/wave-yellow.svg";
 
 const AboutUs = () => {
     return (
@@ -34,18 +35,17 @@ const AboutUs = () => {
                             hearted and happy for no reason! As a movement, Dancerapy personalizes the idea
                             of dance as a culture towards achieving wholeness in health and fitness.
                         </p>
-                        {/* <p>We are an essential partnership link between produce growers and commercial purchasers
-                            from coast to coast. So bring it on. We are an essential partnership link between
-                            produce growers. We are an essential partnership link between produce growers and
-                            commercial purchasers from coast to coast. </p> */}
                     </div>
-                    <div className="side-video">
+                    <div className="side-video about-redesign-img-cover">
                         <img src={AboutImage} alt="about image" />
+                        <div className="mobile-only">
+                            <Wave className="wave-image" />
+                        </div>
                     </div>
                 </div>
-                <div className="bg-flow">
+                {/* <div className="bg-flow">
                     <About />
-                </div>
+                </div> */}
             </div>
             <div className="black-content">
                 <div className="scroll-container">

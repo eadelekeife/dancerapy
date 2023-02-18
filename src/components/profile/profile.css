@@ -17,7 +17,7 @@
     height: 100%;
     width: 100%;
     padding-top: 15%;
-    border-right: 1px solid #F0F0F0;
+    border-right: 1px solid rgba(0, 0, 0, 0.06);
 }
 
 .profile_to_left .fix-nav {
@@ -92,6 +92,7 @@
     align-items: center;
     justify-content: center;
     text-align: center;
+    min-height: 35rem;
 }
 
 .empty_div img {
@@ -188,7 +189,7 @@
         padding: 15% 0px;
     }
     .empty_div {
-        height: 40rem;
+        min-height: 40rem;
     }
 }
 
