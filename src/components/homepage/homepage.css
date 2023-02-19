@@ -998,28 +998,42 @@
 .dance-redesign-text-display img {
     width: 100%;
     height: 100%;
-    height: 25rem;
+    height: 20rem;
     object-fit: cover;
     object-position: center;
     margin: 20px 0px;
+    border-radius: 3px;
 }
 
 .dance-redesign-text-display p {
     font-size: 1.4rem;
     line-height: 1.8;
+    color: #fff;
+    color: rgba(255,255,255,0.8);
 }
 
-.dance-redesign-text-display h3 {
-    font-size: 2.5rem;
+.dance-redesign-text-display h4 {
+    font-size: 1.6rem;
+    margin-bottom: 0px;
+    color: #fff;
+    color: rgba(255,255,255,0.9);
 }
 
-.dance-redesign-text-display button {
-    background: #000;
-    border: 1px solid #000;
-    padding: 10px 25px;
+.dance-redesign-text-display h2 {
+    font-size: 2.3rem;
+    margin-bottom: 0px;
+    color: #fff;
+    padding-top: 15%;
+}
+
+.dance-redesign-text-display a {
+    background: transparent;
+    border: none;
+    padding: 10px 0px;
     border-radius: 3px;
     font-size: 1.4rem;
     color: #fff;
+    color: rgba(255,255,255,0.8);
 }
 
 .dance-redesign-hero {
@@ -1038,6 +1052,10 @@
     position: absolute;
     bottom: 50px;
     left: 10px;
+}
+
+.dance-redesign-hero .first-display p {
+    margin-bottom: 0px;
 }
 
 .dance-redesign-hero .dance-hero-cover h3 {
@@ -1158,25 +1176,47 @@
 
 .final-cover {
     background: #222222;
-    padding-top: 10px;
+    padding-top: 15%;
 }
 
 .final-cover h3 {
-    font-size: 1.5rem;
+    font-size: 2rem;
     color: #cccccc;
+    line-height: 1.7;
 }
 
 .final-cover button {
     background: var(--red);
-    color: #fff;
+    color: #cccccc;
     padding: 10px 25px;
     border: 1px solid var(--red);
     width: 100%;
+    font-size: 1.3rem;
 }
 
 .final-cover h5 {
     font-size: 1.2rem;
     color: #cccccc;
+}
+
+.dance-props-sect .dance-hero-cover .first-display h3 {
+    font-size: 2.5rem;
+    line-height: 1.4;
+}
+
+.dance-props-sect .dance-props-summary {
+    border-left: 4px solid #000;
+    padding-left: 6%;
+}
+
+.dance-props-sect .dance-props-summary p {
+    margin-bottom: 0px;
+    line-height: 1;
+    font-size: 1.4rem;
+}
+
+.dance-props-sect .grid_2 {
+    row-gap: 4rem;
 }
 
 .dance-props-sect ul li,
@@ -1208,10 +1248,49 @@
 
 .dance-redesign-text-display {
     background: #44307a;
-    background: rgba(242,253,251,1);
+    background: rgba(242, 253, 251, 1);
+    background: #202641;
     padding-bottom: 15%;
 }
 
 /* .new-homepage {
     background: #fff;
 } */
+
+.final-props .first-display p {
+    font-size: 1.4rem;
+    line-height: 1.8;
+}
+
+.final-props .first-display h2 {
+    font-size: 2rem;
+}
+
+.dance-redesign-props-display {
+    display: flex;
+    flex-direction: column;
+}
+
+.dance-redesign-props-display .dance-redesign-props-img-cover {
+    flex: 1;
+    min-height: 30rem;
+    position: relative;
+}
+
+.dance-redesign-props-display .contain {
+    flex: 1;
+}
+
+.dance-redesign-props-display h4 {
+    font-size: 2.2rem;
+}
+
+.dance-redesign-props-display .dance-redesign-props-img-cover video {
+    position: absolute;
+    z-index: 1;
+    top: 50%;
+    left: 50%;
+    transform: translate3d(-50%, -50%, 10px);
+    width: 100vw;
+    height: 56.25vw;
+}

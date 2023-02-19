@@ -89,7 +89,7 @@
     top: 0%;
     width: 100%;
     position: fixed;
-    z-index: 10;
+    z-index: 1000;
     box-shadow: 0px 0px 6px 4px rgba(0, 0, 0, .2);
 }
 
@@ -399,7 +399,7 @@
         display: none;
     }
     .footer-sec.footer {
-        padding-top: 10%;
+        padding-top: 15%;
     }
 
     .sec_footer form {
