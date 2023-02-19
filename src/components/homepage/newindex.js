@@ -195,10 +195,12 @@ const AboutUs = () => {
             <div className="final-props mt-5">
                 <div className="contain">
                     <div>
-                        <h2>Your safety, our commitment</h2>
-                        <p>Every detail that is part of our service has been created with your safety in mind. We’ve been
-                            skillfully weaving together the strands of strategic digital marketing since
-                            2009. Loom helps all kinds of ambitious businesses to improve their digital presence.</p>
+                        <div className="first-display">
+                            <h2>Your safety, our commitment</h2>
+                            <p>Every detail that is part of our service has been created with your safety in mind. We’ve been
+                                skillfully weaving together the strands of strategic digital marketing since
+                                2009. Loom helps all kinds of ambitious businesses to improve their digital presence.</p>
+                        </div>
                         <div>
                             <ul>
                                 <li>
