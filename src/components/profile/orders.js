@@ -132,7 +132,7 @@ const Profile = props => {
                                                     />
                                                 </div>
                                                 <div className="mobile-only">
-                                                    <div className="mt-5">
+                                                    <div className="mt-5 mt-0">
                                                         {userPlans.map((plan, index) => {
                                                             return (
                                                                 <Collapse defaultActiveKey={['1']} key={index}>

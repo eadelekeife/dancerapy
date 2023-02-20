@@ -1009,14 +1009,14 @@
     font-size: 1.4rem;
     line-height: 1.8;
     color: #fff;
-    color: rgba(255,255,255,0.8);
+    color: rgba(255, 255, 255, 0.8);
 }
 
 .dance-redesign-text-display h4 {
     font-size: 1.6rem;
     margin-bottom: 0px;
     color: #fff;
-    color: rgba(255,255,255,0.9);
+    color: rgba(255, 255, 255, 0.9);
 }
 
 .dance-redesign-text-display h2 {
@@ -1033,7 +1033,7 @@
     border-radius: 3px;
     font-size: 1.4rem;
     color: #fff;
-    color: rgba(255,255,255,0.8);
+    color: rgba(255, 255, 255, 0.8);
 }
 
 .dance-redesign-hero {
@@ -1293,4 +1293,61 @@
     transform: translate3d(-50%, -50%, 10px);
     width: 100vw;
     height: 56.25vw;
+}
+
+@media screen and (min-width: 720px) {
+    .final-props ul {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .dance-redesign-text-display .first-display,
+    .final-props .first-display {
+        width: 40%;
+    }
+
+    .dance-redesign-text-display .grid_2 {
+        align-items: center;
+        margin-bottom: 2%;
+    }
+
+    .dance-redesign-text-display .grid_2 p {
+        margin-bottom: 0px;
+        font-size: 1.6rem;
+        line-height: 1.8;
+    }
+
+    .dance-redesign-text-display {
+        padding-bottom: 5%;
+        padding-top: 5%;
+    }
+
+    .dance-redesign-text-display h2 {
+        padding-top: 0%;
+    }
+
+    .dance-redesign-props-display {
+        display: flex;
+        flex-direction: row-reverse;
+        padding-bottom: 0px;
+        min-height: 500px;
+        align-items: center;
+    }
+
+    .dance-redesign-props-display .dance-redesign-props-img-cover video {
+        height: 500px;
+    }
+
+    .final-cover {
+        padding-top: 3%;
+        padding-bottom: 3%;
+    }
+
+    .final-cover button {
+        width: max-content;
+    }
+
+    .final-cover h3 {
+        width: 40%;
+    }
 }

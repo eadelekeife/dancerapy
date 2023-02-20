@@ -7,7 +7,6 @@ import { Divider, Rate } from "antd";
 
 import AboutImage from "../../assets/images/homepage/about.webp";
 import John from "../../assets/images/homepage/john.webp";
-import { ReactComponent as Mailchimp } from "./_3.svg";
 import { ReactComponent as About } from "../../assets/images/mini.svg";
 import { ReactComponent as ArrowSvg } from '../../assets/images/arrow.svg';
 import { ReactComponent as ImageBlock1 } from '../../assets/images/homepage/imageblock1.svg';
@@ -52,6 +51,7 @@ import Ready from '../../assets/images/homepage/ready.webp';
 
 import { ReactComponent as Wave } from "./wave.svg";
 import { ReactComponent as Cabify } from "./run.svg";
+import { ReactComponent as Mailchimp } from "./mailchimp.svg";
 
 const AboutUs = () => {
 
@@ -121,19 +121,18 @@ const AboutUs = () => {
                 </div>
             </div>
             <div
-                // className="dance-redesign-hero">
                 className="dance-props-sect mt-5">
-                <div className="">
+                <div className="grid_2">
                     <div className="dance-hero-cover">
                         <div className="first-display">
                             <div className="contain">
                                 <h3>Professional Fitness <br />Dance Trainings</h3>
                             </div>
-                            <Divider style={{margin: '10px 0px'}}/>
+                            <Divider style={{ margin: '10px 0px' }} />
                             <div className="contain">
-                                <p>Our dance trainings offers expert instruction, comprehensive training, performance 
-                                    opportunities, networking, and personal growth. Whether you're a beginner or an 
-                                    experienced dancer, our professional dance trainings can help you achieve your goals 
+                                <p>Our dance trainings offers expert instruction, comprehensive training, performance
+                                    opportunities, networking, and personal growth. Whether you're a beginner or an
+                                    experienced dancer, our professional dance trainings can help you achieve your goals
                                     and take your dance career to the next level.
                                 </p>
                             </div>
@@ -167,32 +166,51 @@ const AboutUs = () => {
                             </ul> */}
                         </div>
                     </div>
+                    <div>
+                        <div className="contain">
+                            <Mailchimp />
+                        </div>
+                    </div>
                 </div>
             </div>
             <div className="dance-redesign-text-display mt-5">
                 <div className="contain">
-                    <div className="first-display">
-                        <h2>Building Healthy Connections through Dance. Keep Fit, Lose Weight, Learn Dance.</h2>
-                        <p>We believe that everyone can benefit from dancing, and we're committed to helping
-                            our clients achieve their dance goals. Join us and let's dance!</p>
+                    <div className="first-displa">
+                        <div className="grid_2">
+                            <h2>Building Healthy Connections through Dance. Keep Fit, Lose Weight, Learn Dance.</h2>
+                            <p>We believe that everyone can benefit from dancing, and we're committed to helping
+                                our clients achieve their dance goals. Join us and let's dance!</p>
+                        </div>
                     </div>
-                    <div>
-                        <img src={Instructor} alt="Instructor" />
-                        <h4>Become an Instructor</h4>
-                        <p>This is a career empowerment system aimed at equipping you with the
-                            tools required for sustainable growth and income.
-                        </p>
-                        <Link to="">Learn More <ion-icon name="arrow-forward-circle-outline"></ion-icon></Link>
-                    </div>
-                    <div>
-                        <img src={Schools} alt="Instructor" />
-                        <h4>Corporate Events and Schools</h4>
-                        <p>
-                            Dancerapy’s long-term vision is to inspire our community with
-                            non-competitive dance education and many performance
-                            opportunities.
-                        </p>
-                        <Link to="">Learn More <ion-icon name="arrow-forward-circle-outline"></ion-icon></Link>
+                    <div className="grid_3">
+                        <div>
+                            <img src={Instructor} alt="Instructor" />
+                            <h4>Become an Instructor</h4>
+                            <p>This is a career empowerment system aimed at equipping you with the
+                                tools required for sustainable growth and income.
+                            </p>
+                            <Link to="">Learn More <ion-icon name="arrow-forward-circle-outline"></ion-icon></Link>
+                        </div>
+                        <div>
+                            <img src={Schools} alt="Instructor" />
+                            <h4>Corporate Events and Schools</h4>
+                            <p>
+                                Dancerapy’s long-term vision is to inspire our community with
+                                non-competitive dance education and many performance
+                                opportunities.
+                            </p>
+                            <Link to="">Learn More <ion-icon name="arrow-forward-circle-outline"></ion-icon></Link>
+                        </div>
+                        <div>
+                            <img src={Schools} alt="Instructor" />
+                            <h4>Corporate Events and Schools</h4>
+                            <p>
+                                Dancerapy’s long-term vision is to inspire our community with
+                                non-competitive dance education and many performance
+                                opportunities.
+                            </p>
+                            <Link to="">Learn More <ion-icon name="arrow-forward-circle-outline"></ion-icon></Link>
+                        </div>
                     </div>
                 </div>
             </div>

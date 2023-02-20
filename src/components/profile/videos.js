@@ -154,8 +154,11 @@ const VirtualSubcriptions = props => {
                                                                         <div key={index}>
                                                                             <Link to={`${AppRoute.profileVideoToPlay}?videoName=${productPlans.title}&videoId=${productPlans.id}`}>
                                                                                 <div className="">
-                                                                                    <img src={productPlans.poster} alt={productPlans.name} />
-                                                                                    <h4>{productPlans.title}</h4>
+                                                                                    {/* <img src={productPlans.poster} alt={productPlans.name} /> */}
+                                                                                    <div className="video-poster">
+                                                                                        <img src={productPlans.poster} alt={productPlans.name} />
+                                                                                        <h4>{productPlans.title}</h4>
+                                                                                    </div>
                                                                                     <div className="inline_video_flex">
                                                                                         <p>{productPlans.videoCategory.name}</p>
                                                                                         <p>{productPlans.videoLength}mins</p>
