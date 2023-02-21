@@ -38,7 +38,7 @@ const Profile = () => {
                                 <div>
                                     <img src={Empty} alt="empty" />
                                     <p>You have not placed any orders yet</p>
-                                    <Link to={AppRoute.merch} className="btn_red">View Plans</Link>
+                                    <Link to={AppRoute.merch} className="btn_red">View Merchandise</Link>
                                 </div>
                             </div>
                         </div>

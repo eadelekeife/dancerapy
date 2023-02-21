@@ -139,54 +139,54 @@ const ProductDetail = props => {
         skeleton.push(<Skeleton active />)
     }
 
-    const fwloyaltyConfig = {
-        public_key: publicKey,
-        tx_ref: uuidv4,
-        amount,
-        currency: 'NGN',
-        payment_options: 'card',
-        customer: {
-            // email: props.auth.isAuthenticated ? props.auth.userDetails.emailAddress : '',
-            email: 'eadelekeife@gmail.com',
-        },
-        customizations: {
-            title: productPlans?.title
-        },
-    }
+    // const fwloyaltyConfig = {
+    //     public_key: publicKey,
+    //     tx_ref: uuidv4,
+    //     amount,
+    //     currency: 'NGN',
+    //     payment_options: 'card',
+    //     customer: {
+    //         // email: props.auth.isAuthenticated ? props.auth.userDetails.emailAddress : '',
+    //         email: 'eadelekeife@gmail.com',
+    //     },
+    //     customizations: {
+    //         title: productPlans?.title
+    //     },
+    // }
 
-    const handleFlutterPayment = useFlutterwave(fwloyaltyConfig);
+    // const handleFlutterPayment = useFlutterwave(fwloyaltyConfig);
 
-    const watchMyAuthentication = () => {
-        // setWatchMe(true);
-        setWatchMe(true);
-        handleFlutterPayment({
-            callback: async response => {
-                if (response.status === "successful") {
-                    setLoaderSpinning(true)
-                    axiosCall.post(`/buyproduct`, {
-                        productPlanId: productPlans.id,
-                        userId: userData.id,
-                        transId: response.tx_ref
-                    })
-                        .then(coursePlans => {
-                            if (coursePlans.data.statusMessage === "success") {
-                                Navigate(AppRoute.profileVideos)
-                            } else {
-                                openNotificationWithIcon('error', coursePlans.data.summary);
-                                setLoaderSpinning(false);
-                            }
-                        })
-                        .catch(err => {
-                            console.log(err)
-                            openNotificationWithIcon('error', 'An error occurred while completing product purchase. Please try again')
-                            setLoaderSpinning(false);
-                        })
-                }
-                closePaymentModal() // this will close the modal programmatically
-            },
-            onClose: () => { console.log('done') },
-        });
-    }
+    // const watchMyAuthentication = () => {
+    //     // setWatchMe(true);
+    //     setWatchMe(true);
+    //     handleFlutterPayment({
+    //         callback: async response => {
+    //             if (response.status === "successful") {
+    //                 setLoaderSpinning(true)
+    //                 axiosCall.post(`/buyproduct`, {
+    //                     productPlanId: productPlans.id,
+    //                     userId: userData.id,
+    //                     transId: response.tx_ref
+    //                 })
+    //                     .then(coursePlans => {
+    //                         if (coursePlans.data.statusMessage === "success") {
+    //                             Navigate(AppRoute.profileVideos)
+    //                         } else {
+    //                             openNotificationWithIcon('error', coursePlans.data.summary);
+    //                             setLoaderSpinning(false);
+    //                         }
+    //                     })
+    //                     .catch(err => {
+    //                         console.log(err)
+    //                         openNotificationWithIcon('error', 'An error occurred while completing product purchase. Please try again')
+    //                         setLoaderSpinning(false);
+    //                     })
+    //             }
+    //             closePaymentModal() // this will close the modal programmatically
+    //         },
+    //         onClose: () => { console.log('done') },
+    //     });
+    // }
 
     const showModal = () => {
         setIsModalOpen(true);
@@ -199,32 +199,32 @@ const ProductDetail = props => {
     };
 
     const goToPayment = () => {
-        handleFlutterPayment({
-            callback: async response => {
-                if (response.status === "successful") {
-                    setLoaderSpinning(true)
-                    axiosCall.post(`/buyproduct`, {
-                        productPlanId: productPlans.id,
-                        userId: userData.id,
-                        transId: response.tx_ref
-                    })
-                        .then(coursePlans => {
-                            if (coursePlans.data.statusMessage === "success") {
-                                Navigate(AppRoute.profileVideos)
-                            } else {
-                                openNotificationWithIcon('error', coursePlans.data.summary);
-                                setLoaderSpinning(false);
-                            }
-                        })
-                        .catch(err => {
-                            console.log(err)
-                            openNotificationWithIcon('error', 'An error occurred while completing product purchase. Please try again')
-                            setLoaderSpinning(false);
-                        })
-                }
-            },
-            onClose: () => { console.log('done') },
-        });
+        // handleFlutterPayment({
+        //     callback: async response => {
+        //         if (response.status === "successful") {
+        //             setLoaderSpinning(true)
+        //             axiosCall.post(`/buyproduct`, {
+        //                 productPlanId: productPlans.id,
+        //                 userId: userData.id,
+        //                 transId: response.tx_ref
+        //             })
+        //                 .then(coursePlans => {
+        //                     if (coursePlans.data.statusMessage === "success") {
+        //                         Navigate(AppRoute.profileVideos)
+        //                     } else {
+        //                         openNotificationWithIcon('error', coursePlans.data.summary);
+        //                         setLoaderSpinning(false);
+        //                     }
+        //                 })
+        //                 .catch(err => {
+        //                     console.log(err)
+        //                     openNotificationWithIcon('error', 'An error occurred while completing product purchase. Please try again')
+        //                     setLoaderSpinning(false);
+        //                 })
+        //         }
+        //     },
+        //     onClose: () => { console.log('done') },
+        // });
     }
 
     // Paystack
@@ -311,13 +311,13 @@ const ProductDetail = props => {
                                                 <p>
                                                     {productPlans.description}
                                                 </p>
-                                                <div className="course_prop">
+                                                {/* <div className="course_prop">
                                                     <ul>
                                                         <li><ion-icon name="calendar-outline"></ion-icon> Last updated: 08/08/2022</li>
                                                         <li><ion-icon name="language-outline"></ion-icon> English</li>
                                                         <li><ion-icon name="videocam-outline"></ion-icon> 80+ videos</li>
                                                     </ul>
-                                                </div>
+                                                </div> */}
                                                 {
                                                     props.auth.isAuthenticated ?
                                                         activePlan ? <button disabled className="btn_red">You have an Active Plan</button>
@@ -421,10 +421,10 @@ const ProductDetail = props => {
                                 </div>
                             </div>
             }
-            <Modal title={null} footer={null} open={isModalOpen}
+            {/* <Modal title={null} footer={null} open={isModalOpen}
                 onOk={handleOk} onCancel={handleCancel}>
                 <SecLogIn newFunct={watchMyAuthentication} />
-            </Modal>
+            </Modal> */}
             <Footer />
         </div>
     )

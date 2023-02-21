@@ -26,6 +26,7 @@ const AppRoute = {
     team: "/team",
     profile: "/dashboard",
     profileVideos: "/profile/videos",
+    profileVideoToPlay: "/profile/video",
     profileProductOrders: "/profile/product_orders",
     profilePlanOrders: "/profile/orders",
     profileEventTickets: "/profile/reviews",

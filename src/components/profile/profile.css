@@ -170,10 +170,6 @@
     line-height: 1.3;
 }
 
-.plan_video_display .grid_3 {
-    grid-template-columns: repeat(2, 1fr);
-}
-
 .categoryDisplay {
     flex-wrap: wrap;
 }
@@ -186,7 +182,7 @@
     display: none;
 }
 
-.mobile-only .mt-5 .ant-collapse-header{
+.mobile-only .mt-5 .ant-collapse-header {
     padding: 10px;
 }
 
@@ -240,5 +236,15 @@
 
     .empty_div {
         min-height: 40rem;
+    }
+
+    .plan_video_display .grid_3 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media screen and (min-width: 720px) {
+    .profile_div .profile_to_right .profile-data-display {
+        min-height: 50rem;
     }
 }

@@ -9,6 +9,11 @@ import AppRoute from "../../utils/routes";
 
 import Cart from "../../assets/images/cart.svg";
 
+import Chowdeck1 from "./_1.webp";
+import Chowdeck2 from "./_2.webp";
+import Chowdeck3 from "./_3.webp";
+
+
 import Footer from "../../utils/footer";
 import Nav from "../../utils/nav";
 
@@ -49,108 +54,49 @@ const Products = () => {
         skeleton.push(<Skeleton active />)
     }
     return (
-        <div className="plans">
+        <div className="physical plans">
             <Nav />
-            <div className="desktop-only">
-                <div className="plan_bg">
-                    <h3>Dancerapy Products and Services</h3>
-                    <div className="flex_form filter">
-                        <div className="select_box_filter_cover">
-                            <Select
-                                style={{ width: '300px' }}
-                                prefix={<UserOutlined />}>
-                                <Option value="jack">Jack</Option>
-                                <Option value="lucy">Lucy</Option>
-                                <Option value="disabled" disabled>
-                                    Disabled
-                                </Option>
-                            </Select>
-                            <ion-icon name="alarm-outline" className="filter_box_icon"></ion-icon>
-                        </div>
-                        <div className="select_box_filter_cover">
-                            <Select
-                                style={{ width: '300px' }}
-                                prefix={<UserOutlined />}>
-                                <Option value="jack">Jack</Option>
-                                <Option value="lucy">Lucy</Option>
-                                <Option value="disabled" disabled>
-                                    Disabled
-                                </Option>
-                            </Select>
-                            <ion-icon name="navigate-circle-outline" className="filter_box_icon"></ion-icon>
-                        </div>
-                        <button className="btn_red">FILTER CLASSES</button>
-                    </div>
-                </div>
-            </div>
-            <div className="mobile-product-outline contain">
-                <h3>Products and Services</h3>
-                <div className="product-tag">
-                    <p>Any day <ion-icon name="chevron-down-outline"></ion-icon></p>
-                    <p>Any type <ion-icon name="chevron-down-outline"></ion-icon></p>
-                    <p>Any distance <ion-icon name="chevron-down-outline"></ion-icon></p>
-                </div>
-            </div>
-            <div className="container">
-                <div>
-                    <Divider />
-                    {
-                        fetchingData ?
-                            <div>
-                                {skeleton.map((placeHolder, index) => (
-                                    <div className="item" key={index}>
-                                        {placeHolder}
-                                        <Divider />
-                                    </div>
-                                ))}
+            <div className="contain">
+                <div className=" mt-5">
+                    <h1>Dancerapy Products and Services</h1>
+                    <div className="grid_3">
+                        <div className="dancerapy-products">
+                            <div className="text-block">
+                                <h2>Annual Online Subscription</h2>
+                                <p>Join The Dancerapy Club Today and have access to over 30 Dance Fitness
+                                    Videos, Dance Choreophgries, Dance Trends and lots more monthly.</p>
+                                <Link to="/products/detail?productName=Dancerapy%20Club%20Annual%20Online%20Subscription&productId=8">See More <ion-icon name="arrow-forward-outline"></ion-icon></Link>
                             </div>
-                            :
-                            errorOccurred ?
-                                <div className="center_align_message">
-                                    <div>
-                                        <h3>Oops!</h3>
-                                        <p>An error occurred while we were trying to fetch data. Please reload page to
-                                            try again.</p>
-                                    </div>
-                                </div>
-                                :
-                                allProductPlans.map((productPlans, index) => (
-                                    <div key={index}>
-                                        <div className="training_group">
-                                            <div className="training_inside_group">
-                                                <div className="training_inside_div">
-                                                    <p className="unimportant">{productPlans.discount}% Discount</p>
-                                                    <Link to={`${AppRoute.products}/detail?productName=${productPlans.title}&productId=${productPlans.id}`}>
-                                                        <h4 className="plan_title">{productPlans.title}</h4>
-                                                    </Link>
-                                                    <p className="plan_desc">
-                                                        {productPlans.description}
-                                                    </p>
-                                                </div>
-                                                <div className="training_inside_img">
-                                                    <img src={productPlans.image} alt="annual" />
-                                                </div>
-                                            </div>
-                                            <div className="sec-group mt-4 training_inside_group">
-                                                <p>NGN 10,000</p>
-                                                <ion-icon name="logo-whatsapp"></ion-icon>
-                                            </div>
-                                            <div className="training_side_cover">
-                                                <div>
-                                                    <img src={Cart} alt="Cart" />
-                                                </div>
-                                                <div>
-                                                    <Link
-                                                        to={`${AppRoute.products}/detail?productName=${productPlans.title}&productId=${productPlans.id}`}
-                                                        style={{ padding: '12px 25px' }}
-                                                        className="btn_red">Learn More</Link>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <Divider />
-                                    </div>
-                                ))
-                    }
+                            <div className="chow-1"></div>
+                        </div>
+                        <div className="dancerapy-products">
+                            <div className="text-block">
+                                <h2>Dance in a Flash</h2>
+                                <p>Join The Dancerapy Club Today and have access to over 30 Dance Fitness
+                                    Videos, Dance Choreophgries, Dance Trends and lots more monthly.</p>
+                                <Link to="/products/detail?productName=Dance%20in%20a%20Flash%20-%20Delivered%20to%20your%20Doorstep&productId=9">See More <ion-icon name="arrow-forward-outline"></ion-icon></Link>
+                            </div>
+                            <div className="chow-2"></div>
+                        </div>
+                        <div className="dancerapy-products">
+                            <div className="text-block">
+                                <h2>Dancerapy live on Zoom</h2>
+                                <p>Join The Dancerapy Club Today and have access to over 30 Dance Fitness
+                                    Videos, Dance Choreophgries, Dance Trends and lots more monthly.</p>
+                                <Link to="/products/detail?productName=Join%20Dancerapy%20live%20on%20Zoom&productId=10">See More <ion-icon name="arrow-forward-outline"></ion-icon></Link>
+                            </div>
+                            <div className="chow-3"></div>
+                        </div>
+                        <div className="dancerapy-products">
+                            <div className="text-block">
+                                <h2>Dancerapy Physical class</h2>
+                                <p>Join The Dancerapy Club Today and have access to over 30 Dance Fitness
+                                    Videos, Dance Choreophgries, Dance Trends and lots more monthly.</p>
+                                <Link to="/products/detail?productName=Join%20Dancerapy%20Physical%20Class&productId=11">See More <ion-icon name="arrow-forward-outline"></ion-icon></Link>
+                            </div>
+                            <div className="chow-1"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <Footer margin={true} />

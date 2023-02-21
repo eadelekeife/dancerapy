@@ -210,11 +210,14 @@ const Nav = props => {
                 <div className="desktop-only">
                     <ul>
                         <li>
-                            <Link to={AppRoute.instructor}>Become a Dance Instructor</Link>
+                            <Link to={AppRoute.products}>Products and Services</Link>
                         </li>
                         <li>
-                            <Link to={AppRoute.schools}>Events and Schools</Link>
+                            <Link to={AppRoute.instructor}>Become a Dance Instructor</Link>
                         </li>
+                        {/* <li>
+                            <Link to={AppRoute.schools}>Events and Schools</Link>
+                        </li> */}
                         {/* <li>
                             <Link to={AppRoute.contact}>Contact Us</Link>
                         </li> */}

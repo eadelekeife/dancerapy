@@ -924,6 +924,27 @@
     .sec_gray {
         padding: 10% 0px;
     }
+
+    .dance-props-sect .grid_2 {
+        display: block;
+    }
+
+    .dance-props-sect .grid_2 svg {
+        display: none;
+    }
+
+    .dance-props-sect .grid_2 .grid_2 {
+        display: grid;
+    }
+
+    .dance-redesign-text-display .first-displa .grid_2 {
+        display: block;
+    }
+
+    .dance-redesign-text-display .grid_3 {
+        flex-direction: column;
+        display: flex;
+    }
 }
 
 .dance-redesign-home {
