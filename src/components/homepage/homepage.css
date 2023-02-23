@@ -719,234 +719,6 @@
     font-size: 1.3rem;
 }
 
-@media screen and (max-width: 720px) {
-    .home_hero .about_hero_text {
-        background: unset;
-        width: 100%;
-    }
-
-    .about_hero_text h3 {
-        color: #fff;
-        font-size: 2.8rem;
-        line-height: 1.4;
-    }
-
-    .home_hero {
-        background: linear-gradient(rgba(0, 0, 0, .6), rgba(0, 0, 0, .6)), url('../../assets/images/content/about_hero.jpg');
-        background-position: center;
-        background-size: cover;
-        border-radius: 0px;
-        height: 500px;
-    }
-
-    .homepage .instructor .grid_2 {
-        display: flex;
-        flex-direction: column-reverse;
-        padding-left: 3%;
-        width: calc(100% - 3%);
-    }
-
-    .homepage .instructor video {
-        height: auto !important;
-        width: 100% !important;
-    }
-
-    .homepage .instructor .video-cover {
-        height: unset;
-    }
-
-    .homepage_plan .mobile-only h2 {
-        font-size: 2rem;
-    }
-
-    .homepage_plan .mobile-only p {
-        font-size: 1.6rem;
-        width: 100%;
-    }
-
-    .instructor-cover .contain {
-        padding: 0px;
-        width: 100%;
-    }
-
-    .instructor-cover .instructor {
-        border-radius: 0px;
-        padding: 15% 0px;
-    }
-
-    .instructor .grid_2 h4 {
-        width: 100%;
-        font-size: 2rem;
-        margin-bottom: 10px;
-    }
-
-    .instructor .grid_2 p {
-        font-size: 1.4rem;
-        margin-bottom: 20px;
-    }
-
-    .instructor .grid_2 button.btn_border_black {
-        padding: 6px 25px;
-    }
-
-    .instructor {
-        padding: 5% 0px;
-    }
-
-    .homepage_links .show_homepage_content .grid_4 {
-        display: flex;
-        flex-direction: column;
-    }
-
-    .homepage_links p {
-        font-size: 1.4rem;
-        margin-bottom: 10px;
-    }
-
-    .homepage_links button {
-        padding: 4px 25px;
-        font-size: 1.2rem;
-    }
-
-    .homepage_links h3 {
-        font-size: 1.6rem;
-        margin-bottom: 0px;
-    }
-
-    .homepage_links h3.page-title {
-        font-size: 2rem;
-        margin-bottom: 10px;
-        line-height: 1.4;
-    }
-
-    .homepage_links img {
-        margin-bottom: 10px;
-        height: 20rem;
-        border-radius: 3px;
-    }
-
-    .homepage_plan img {
-        width: 100%;
-        height: 35rem;
-    }
-
-    .corporate_grid_4 .grid_4 {
-        grid-template-columns: repeat(2, 1fr);
-        grid-gap: 10px;
-    }
-
-    .corporate_grid_4.pt-5 {
-        padding-top: 10%;
-    }
-
-    .homepage {
-        background: #F5F5F1;
-    }
-
-    .homepage .homepage_plan h6 {
-        color: #492f78;
-        font-family: 'DM Sans';
-        font-weight: 500;
-        text-transform: uppercase;
-        font-size: 1.1rem;
-        margin-bottom: 15px;
-    }
-
-    .homepage .homepage_plan a {
-        color: #181817;
-        font-size: 1.3rem;
-        font-family: 'DM Sans';
-        border-bottom: 1px solid #492f78;
-        margin-bottom: 20px;
-        display: block;
-        width: max-content;
-    }
-
-    .homepage_plan h2 {
-        margin-bottom: 20px;
-    }
-
-    .homepage_plan .mobile-only p {
-        font-size: 1.5rem;
-        line-height: 1.5;
-        color: #181817;
-    }
-
-    .homepage_plan .first-display {
-        border-bottom: 2px solid #D6C9AB;
-        width: 100%;
-        margin-bottom: 20px;
-    }
-
-    .homepage_plan .inner-contain {
-        padding-left: 3%;
-    }
-
-    .homepage .instructor .video-cover {
-        width: 100%;
-        height: 100%;
-    }
-
-    .homepage .home_hero .about_hero_text h1 {
-        color: #fff;
-        text-align: center;
-        font-size: 2.5rem;
-        margin-bottom: 0px;
-    }
-
-    .homepage .home_hero .about_hero_text h3 {
-        margin-bottom: 10px;
-        font-size: 1.5rem;
-        line-height: 1.8;
-        font-family: 'DM Sans', sans-serif;
-        font-weight: 500;
-    }
-
-    .homepage .home_hero .about_hero_text {
-        padding: 0px 3%;
-    }
-
-    .homepage .home_hero .about_hero_text a {
-        color: #fff;
-        text-align: center;
-        background: #fff;
-        border: 1px solid #fff;
-        color: #181817;
-        font-size: 1.3rem;
-        margin: 0% auto;
-        display: block;
-        font-weight: 500;
-        width: max-content;
-        border-radius: 3px;
-        padding: 8px 25px;
-    }
-
-    .sec_gray {
-        padding: 10% 0px;
-    }
-
-    .dance-props-sect .grid_2 {
-        display: block;
-    }
-
-    .dance-props-sect .grid_2 svg {
-        display: none;
-    }
-
-    .dance-props-sect .grid_2 .grid_2 {
-        display: grid;
-    }
-
-    .dance-redesign-text-display .first-displa .grid_2 {
-        display: block;
-    }
-
-    .dance-redesign-text-display .grid_3 {
-        flex-direction: column;
-        display: flex;
-    }
-}
-
 .dance-redesign-home {
     background: #070721;
     padding: 15% 0px;
@@ -955,6 +727,7 @@
 
 .dance-redesign-props-display {
     background: #000;
+    background: #0C513F;
     padding-bottom: 15%;
 }
 
@@ -1197,6 +970,7 @@
 
 .final-cover {
     background: #222222;
+    background: rgba(34, 34, 34, .9);
     padding-top: 15%;
 }
 
@@ -1206,11 +980,8 @@
     line-height: 1.7;
 }
 
-.final-cover button {
-    background: var(--red);
+.final-cover a {
     color: #cccccc;
-    padding: 10px 25px;
-    border: 1px solid var(--red);
     width: 100%;
     font-size: 1.3rem;
 }
@@ -1285,6 +1056,9 @@
 
 .final-props .first-display h2 {
     font-size: 2rem;
+    font-size: 2.5rem;
+    line-height: 1.4;
+    width: 60%;
 }
 
 .dance-redesign-props-display {
@@ -1294,8 +1068,10 @@
 
 .dance-redesign-props-display .dance-redesign-props-img-cover {
     flex: 1;
-    min-height: 30rem;
+    height: 100%;
+    /* min-height: 30rem; */
     position: relative;
+    min-height: 400px;
 }
 
 .dance-redesign-props-display .contain {
@@ -1303,7 +1079,9 @@
 }
 
 .dance-redesign-props-display h4 {
-    font-size: 2.2rem;
+    font-size: 3rem;
+    width: 80%;
+    line-height: 1.2;
 }
 
 .dance-redesign-props-display .dance-redesign-props-img-cover video {
@@ -1312,7 +1090,7 @@
     top: 50%;
     left: 50%;
     transform: translate3d(-50%, -50%, 10px);
-    width: 100vw;
+    width: 100vw !important;
     height: 56.25vw;
 }
 
@@ -1351,12 +1129,34 @@
         display: flex;
         flex-direction: row-reverse;
         padding-bottom: 0px;
-        min-height: 500px;
+        min-height: 400px;
         align-items: center;
     }
 
-    .dance-redesign-props-display .dance-redesign-props-img-cover video {
-        height: 500px;
+    .vjs-controls-disabled .vjs-big-play-button,
+    .vjs-using-native-controls .vjs-big-play-button {
+        display: block !important;
+        border: 1px solid #fff;
+        z-index: 1000;
+    }
+
+    .vjs-has-started .vjs-big-play-button,
+    .vjs-error .vjs-big-play-button {
+        display: none !important;
+    }
+
+    .video-js {
+        width: 100%;
+        min-height: 400px !important;
+    }
+
+    .dance-redesign-props-display .dance-redesign-props-img-cover video,
+    .dance-redesign-props-display .video-js.vjs-fluid,
+    .dance-redesign-props-display .video-js.vjs-16-9,
+    .dance-redesign-props-display .video-js.vjs-4-3,
+    .dance-redesign-props-display .video-js.vjs-9-16,
+    .dance-redesign-props-display .video-js.vjs-1-1 {
+        height: 400px !important;
     }
 
     .final-cover {
@@ -1370,5 +1170,285 @@
 
     .final-cover h3 {
         width: 40%;
+    }
+}
+
+
+@media screen and (max-width: 720px) {
+    .home_hero .about_hero_text {
+        background: unset;
+        width: 100%;
+    }
+
+    .about_hero_text h3 {
+        color: #fff;
+        font-size: 2.8rem;
+        line-height: 1.4;
+    }
+
+    .home_hero {
+        background: linear-gradient(rgba(0, 0, 0, .6), rgba(0, 0, 0, .6)), url('../../assets/images/content/about_hero.jpg');
+        background-position: center;
+        background-size: cover;
+        border-radius: 0px;
+        height: 400px;
+    }
+
+    .homepage .instructor .grid_2 {
+        display: flex;
+        flex-direction: column-reverse;
+        padding-left: 3%;
+        width: calc(100% - 3%);
+    }
+
+    .homepage .instructor video {
+        height: auto !important;
+        width: 100% !important;
+    }
+
+    .homepage .instructor .video-cover {
+        height: unset;
+    }
+
+    .homepage_plan .mobile-only h2 {
+        font-size: 2rem;
+    }
+
+    .homepage_plan .mobile-only p {
+        font-size: 1.6rem;
+        width: 100%;
+    }
+
+    .instructor-cover .contain {
+        padding: 0px;
+        width: 100%;
+    }
+
+    .instructor-cover .instructor {
+        border-radius: 0px;
+        padding: 15% 0px;
+    }
+
+    .instructor .grid_2 h4 {
+        width: 100%;
+        font-size: 2rem;
+        margin-bottom: 10px;
+    }
+
+    .instructor .grid_2 p {
+        font-size: 1.4rem;
+        margin-bottom: 20px;
+    }
+
+    .instructor .grid_2 button.btn_border_black {
+        padding: 6px 25px;
+    }
+
+    .instructor {
+        padding: 5% 0px;
+    }
+
+    .homepage_links .show_homepage_content .grid_4 {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .homepage_links p {
+        font-size: 1.4rem;
+        margin-bottom: 10px;
+    }
+
+    .homepage_links button {
+        padding: 4px 25px;
+        font-size: 1.2rem;
+    }
+
+    .homepage_links h3 {
+        font-size: 1.6rem;
+        margin-bottom: 0px;
+    }
+
+    .homepage_links h3.page-title {
+        font-size: 2rem;
+        margin-bottom: 10px;
+        line-height: 1.4;
+    }
+
+    .homepage_links img {
+        margin-bottom: 10px;
+        height: 20rem;
+        border-radius: 3px;
+    }
+
+    .homepage_plan img {
+        width: 100%;
+        height: 35rem;
+    }
+
+    .corporate_grid_4 .grid_4 {
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: 10px;
+    }
+
+    .corporate_grid_4.pt-5 {
+        padding-top: 10%;
+    }
+
+    .homepage {
+        background: #F5F5F1;
+    }
+
+    .homepage .homepage_plan h6 {
+        color: #492f78;
+        font-family: 'DM Sans';
+        font-weight: 500;
+        text-transform: uppercase;
+        font-size: 1.1rem;
+        margin-bottom: 15px;
+    }
+
+    .homepage .homepage_plan a {
+        color: #181817;
+        font-size: 1.3rem;
+        font-family: 'DM Sans';
+        border-bottom: 1px solid #492f78;
+        margin-bottom: 20px;
+        display: block;
+        width: max-content;
+    }
+
+    .homepage_plan h2 {
+        margin-bottom: 20px;
+    }
+
+    .homepage_plan .mobile-only p {
+        font-size: 1.5rem;
+        line-height: 1.5;
+        color: #181817;
+    }
+
+    .homepage_plan .first-display {
+        border-bottom: 2px solid #D6C9AB;
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .homepage_plan .inner-contain {
+        padding-left: 3%;
+    }
+
+    .homepage .instructor .video-cover {
+        width: 100%;
+        height: 100%;
+    }
+
+    .homepage .home_hero .about_hero_text h1 {
+        color: #fff;
+        text-align: center;
+        font-size: 2.5rem;
+        margin-bottom: 0px;
+    }
+
+    .homepage .home_hero .about_hero_text h3 {
+        margin-bottom: 10px;
+        font-size: 1.5rem;
+        line-height: 1.8;
+        font-family: 'DM Sans', sans-serif;
+        font-weight: 500;
+    }
+
+    .homepage .home_hero .about_hero_text {
+        padding: 0px 3%;
+    }
+
+    .homepage .home_hero .about_hero_text a {
+        color: #fff;
+        text-align: center;
+        background: #fff;
+        border: 1px solid #fff;
+        color: #181817;
+        font-size: 1.3rem;
+        margin: 0% auto;
+        display: block;
+        font-weight: 500;
+        width: max-content;
+        border-radius: 3px;
+        padding: 8px 25px;
+    }
+
+    .sec_gray {
+        padding: 10% 0px;
+    }
+
+    .dance-props-sect .grid_2 {
+        display: block;
+    }
+
+    .dance-props-sect .grid_2 svg {
+        display: none;
+    }
+
+    .dance-props-sect .grid_2 .grid_2 {
+        display: grid;
+    }
+
+    .dance-redesign-text-display .first-displa .grid_2 {
+        display: block;
+    }
+
+    .dance-redesign-text-display .grid_3 {
+        flex-direction: column;
+        display: flex;
+    }
+
+    .dance-redesign-props-display h4 {
+        font-size: 2.5rem;
+        width: 100%;
+        line-height: 1.2;
+        padding-top: 30px;
+    }
+
+    .final-props .first-display h2 {
+        width: 80%;
+    }
+
+    .final-cover {
+        height: max-content;
+        padding-bottom: 15%;
+    }
+
+    .final-cover h3 {
+        margin-bottom: 15px;
+    }
+
+    .dance-redesign-props-display .dance-redesign-props-img-cover {
+        min-height: 300px;
+    }
+
+    .dance-redesign-props-display .dance-redesign-props-img-cover video {
+        position: absolute;
+        z-index: 1;
+        top: 0%;
+        left: 0%;
+        width: 100% !important;
+        transform: none;
+        height: 350px;
+    }
+
+    .vjs_video_3-dimensions {
+        width: 100%;
+        height: 350px;
+    }
+
+    .vjs-controls-disabled .vjs-big-play-button,
+    .vjs-using-native-controls .vjs-big-play-button {
+        display: block !important;
+        border: 1px solid #fff;
+        z-index: 1000;
+    }
+
+    .vjs-has-started .vjs-big-play-button,
+    .vjs-error .vjs-big-play-button {
+        display: none !important;
     }
 }

@@ -67,12 +67,6 @@ const Footer = props => {
                                 <li>
                                     <Link to={AppRoute.corporate}>Dancerapy and Corporates</Link>
                                 </li>
-                                {/* <li>
-                                <Link to={AppRoute.ourteam}>Our Team</Link>
-                            </li>
-                            <li>
-                                <Link to={AppRoute.trainings}>Dancerapy corporate events/schools</Link>
-                            </li> */}
                             </ul>
                         </div>
                         <div>

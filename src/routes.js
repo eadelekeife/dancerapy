@@ -1,8 +1,8 @@
 import React from "react";
 
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import { useLayoutEffect } from 'react';
 
-import Nav from "./utils/nav";
 import AppRoute from "./utils/routes";
 import ProtectedRoutes from "./utils/protectedRoutes";
 import AuthProtectedRoutes from "./utils/AuthProtectedRoute";
@@ -36,42 +36,52 @@ import PlanDetail from "./components/trainings/plan_detail";
 import FAQs from "./components/mini/faq";
 import Corporate from "./components/mini/corporate";
 
+const Wrapper = ({ children }) => {
+    const location = useLocation();
+    useLayoutEffect(() => {
+        document.documentElement.scrollTo(0, 0);
+    }, [location.pathname]);
+    return children
+}
+
 const Navigator = () => {
     return (
         <div>
+
             <BrowserRouter>
-                {/* <Nav /> */}
-                <Routes>
-                    <Route path={AppRoute.homepage} exact element={<Homepage />} />
-                    <Route path={AppRoute.about} exact element={<AboutUs />} />
-                    <Route path={AppRoute.signin} element={<AuthProtectedRoutes><SignIn /></AuthProtectedRoutes>} />
-                    <Route path={AppRoute.signup} element={<AuthProtectedRoutes><SignUp /></AuthProtectedRoutes>} />
-                    <Route path={AppRoute.reset} element={<AuthProtectedRoutes><Reset /></AuthProtectedRoutes>} />
-                    <Route path={AppRoute.signout} element={<SignOut />} />
+                <Wrapper>
+                    <Routes>
+                        <Route path={AppRoute.homepage} exact element={<Homepage />} />
+                        <Route path={AppRoute.about} exact element={<AboutUs />} />
+                        <Route path={AppRoute.signin} element={<AuthProtectedRoutes><SignIn /></AuthProtectedRoutes>} />
+                        <Route path={AppRoute.signup} element={<AuthProtectedRoutes><SignUp /></AuthProtectedRoutes>} />
+                        <Route path={AppRoute.reset} element={<AuthProtectedRoutes><Reset /></AuthProtectedRoutes>} />
+                        <Route path={AppRoute.signout} element={<SignOut />} />
 
-                    <Route path={AppRoute.contact} element={<Contact />} />
-                    <Route path={AppRoute.trainings} element={<Trainings />} />
-                    <Route path={AppRoute.products} element={<Products />} />
-                    <Route path={`${AppRoute.products}/detail`} element={<ProductDetail />} />
-                    <Route path={`${AppRoute.trainings}/detail`} element={<PlanDetail />} />
-                    <Route path={AppRoute.zoom} element={<Zoom />} />
-                    <Route path={AppRoute.schools} element={<Club />} />
-                    <Route path={AppRoute.team} element={<Team />} />
-                    <Route path={AppRoute.merch} element={<Merch />} />
-                    <Route path={AppRoute.instructor} element={<Instructors />} />
-                    <Route path={AppRoute.faqs} element={<FAQs />} />
-                    <Route path={AppRoute.corporate} element={<Corporate />} />
+                        <Route path={AppRoute.contact} element={<Contact />} />
+                        <Route path={AppRoute.trainings} element={<Trainings />} />
+                        <Route path={AppRoute.products} element={<Products />} />
+                        <Route path={`${AppRoute.products}/detail`} element={<ProductDetail />} />
+                        <Route path={`${AppRoute.trainings}/detail`} element={<PlanDetail />} />
+                        <Route path={AppRoute.zoom} element={<Zoom />} />
+                        <Route path={AppRoute.schools} element={<Club />} />
+                        <Route path={AppRoute.team} element={<Team />} />
+                        <Route path={AppRoute.merch} element={<Merch />} />
+                        <Route path={AppRoute.instructor} element={<Instructors />} />
+                        <Route path={AppRoute.faqs} element={<FAQs />} />
+                        <Route path={AppRoute.corporate} element={<Corporate />} />
 
-                    <Route path={AppRoute.profile} exact element={<ProtectedRoutes><Profile /></ProtectedRoutes>} />
-                    <Route path={AppRoute.profileEventTickets} exact element={<ProtectedRoutes><ProfileEventTickets /></ProtectedRoutes>} />
-                    <Route path={AppRoute.profileVideos} exact element={<ProtectedRoutes><ProfileVideos /></ProtectedRoutes>} />
-                    <Route path={AppRoute.profileVideoToPlay} exact element={<ProtectedRoutes><ProfileVideoToPlay /></ProtectedRoutes>} />
-                    <Route path={AppRoute.profileProductOrders} exact element={<ProtectedRoutes><ProductOrders /></ProtectedRoutes>} />
-                    <Route path={AppRoute.profilePlanOrders} exact element={<ProtectedRoutes><ProfileOrders /></ProtectedRoutes>} />
-                    <Route path={AppRoute.profileReviews} exact element={<ProtectedRoutes><ProfileReviews /></ProtectedRoutes>} />
-                    <Route path={AppRoute.profileMerchandise} exact element={<ProtectedRoutes><ProfileMerchandise /></ProtectedRoutes>} />
-                    <Route path={AppRoute.profileVirtualSubscription} exact element={<ProtectedRoutes><ProfileVirtualSubscription /></ProtectedRoutes>} />
-                </Routes>
+                        <Route path={AppRoute.profile} exact element={<ProtectedRoutes><Profile /></ProtectedRoutes>} />
+                        <Route path={AppRoute.profileEventTickets} exact element={<ProtectedRoutes><ProfileEventTickets /></ProtectedRoutes>} />
+                        <Route path={AppRoute.profileVideos} exact element={<ProtectedRoutes><ProfileVideos /></ProtectedRoutes>} />
+                        <Route path={AppRoute.profileVideoToPlay} exact element={<ProtectedRoutes><ProfileVideoToPlay /></ProtectedRoutes>} />
+                        <Route path={AppRoute.profileProductOrders} exact element={<ProtectedRoutes><ProductOrders /></ProtectedRoutes>} />
+                        <Route path={AppRoute.profilePlanOrders} exact element={<ProtectedRoutes><ProfileOrders /></ProtectedRoutes>} />
+                        <Route path={AppRoute.profileReviews} exact element={<ProtectedRoutes><ProfileReviews /></ProtectedRoutes>} />
+                        <Route path={AppRoute.profileMerchandise} exact element={<ProtectedRoutes><ProfileMerchandise /></ProtectedRoutes>} />
+                        <Route path={AppRoute.profileVirtualSubscription} exact element={<ProtectedRoutes><ProfileVirtualSubscription /></ProtectedRoutes>} />
+                    </Routes>
+                </Wrapper>
             </BrowserRouter>
         </div>
     )

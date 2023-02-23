@@ -1,15 +1,10 @@
 import "./homepage.css";
 
 import React from "react";
-import Slider from "react-slick";
 
-import { Divider, Rate } from "antd";
+import { Divider } from "antd";
 
-import AboutImage from "../../assets/images/homepage/about.webp";
-import John from "../../assets/images/homepage/john.webp";
-import { ReactComponent as About } from "../../assets/images/mini.svg";
-import { ReactComponent as ArrowSvg } from '../../assets/images/arrow.svg';
-import { ReactComponent as ImageBlock1 } from '../../assets/images/homepage/imageblock1.svg';
+import VideoJS from '../profile/videoplayer';
 
 import Nav from "../../utils/nav";
 import Footer from "../../utils/footer-sec";
@@ -19,23 +14,9 @@ import { Controller, useForm } from "react-hook-form";
 
 import { Link } from "react-router-dom";
 import AppRoute from "../../utils/routes";
-import ReactPlayer from 'react-player';
 
-import Block1 from '../../assets/images/homepage/header.jpg';
-import Block2 from '../../assets/images/homepage/header1.jpg';
-import Block3 from '../../assets/images/homepage/header2.jpg';
-
-import Annual from "../../assets/images/homepage/annual.jpeg";
-import Flash from "../../assets/images/homepage/flash.jpeg";
-import Zoom from "../../assets/images/homepage/zoom.jpg";
-import Physical from "../../assets/images/homepage/physical.jpeg";
 import Instructor from "../../assets/images/homepage/instructor_hero.jpg";
 import Schools from "../../assets/images/homepage/link2.jpeg";
-import Community from "../../assets/images/homepage/community.jpg";
-
-import Insta1 from "../../assets/images/content/event_1.jpg";
-import Insta2 from "../../assets/images/content/event3.jpg";
-import Insta3 from "../../assets/images/content/testi.jpg";
 import Insta4 from "../../assets/images/content/event4.jpg";
 
 import _1 from '../../assets/images/companies/access.webp';
@@ -46,14 +27,12 @@ import _6 from '../../assets/images/companies/dansol.png';
 import _7 from '../../assets/images/companies/gtco.png';
 import _8 from '../../assets/images/companies/mtn.png';
 
-import Loom1 from '../../assets/images/homepage/loom1.jpg';
-import Ready from '../../assets/images/homepage/ready.webp';
-
-import { ReactComponent as Wave } from "./wave.svg";
 import { ReactComponent as Cabify } from "./run.svg";
 import { ReactComponent as Mailchimp } from "./mailchimp.svg";
 
 const AboutUs = () => {
+
+    const playerRef = React.useRef(null);
 
     let settings = {
         dots: false,
@@ -96,18 +75,47 @@ const AboutUs = () => {
             }
         ]
     }
+    const videoJsOptions = {
+        autoplay: false,
+        muted: false,
+        controls: false,
+        responsive: false,
+        playsinline: true,
+        fluid: false,
+        sources: [{
+            src: 'https://lagostheatrevideos.s3.amazonaws.com/intro.mp4',
+            type: 'video/mp4'
+        }]
+    };
+    const handlePlayerReady = (player) => {
+        playerRef.current = player;
+
+        // You can handle player events here, for example:
+        player.on('waiting', () => {
+            VideoJS.log('player is waiting');
+        });
+
+        player.on('dispose', () => {
+            VideoJS.log('player will dispose');
+        });
+    };
+    const playVideo = (player) => {
+        playerRef.current = player;
+        playerRef.playsinline(true);
+        playerRef.play();
+    }
     const { handleSubmit, control } = useForm({});
     return (
         <div className="new-homepage about_us">
             <Nav />
             <div className="dance-redesign-props-display">
                 <div className="dance-redesign-props-img-cover">
-                    <ReactPlayer
-                        width="100%" height="100%"
-                        playsinline={true}
-                        // style={{ background: 'black' }}
+                    <VideoJS playsinline={false} options={videoJsOptions} onReady={handlePlayerReady}
+                        onClick={playVideo} />
+                    {/* <ReactPlayer
+                        playsinline={false}
                         url="https://lagostheatrevideos.s3.amazonaws.com/intro.mp4"
-                        playing={false} controls={true} />
+                        playing={true} controls={true} /> */}
                 </div>
                 <div className="contain">
                     <div className="block"></div>
@@ -140,16 +148,16 @@ const AboutUs = () => {
                         <div className="contain">
                             <div className="grid_2">
                                 <div className="dance-props-summary">
-                                    <h2>365m</h2>
-                                    <p>transactions</p>
+                                    <h2>10+</h2>
+                                    <p>instructors</p>
                                 </div>
                                 <div className="dance-props-summary">
-                                    <h2>365m</h2>
-                                    <p>transactions</p>
+                                    <h2>15+</h2>
+                                    <p>dance plans</p>
                                 </div>
                                 <div className="dance-props-summary">
-                                    <h2>365m</h2>
-                                    <p>transactions</p>
+                                    <h2>2009</h2>
+                                    <p>established</p>
                                 </div>
                                 <div className="dance-props-summary">
                                     <h2>365m</h2>
@@ -187,9 +195,9 @@ const AboutUs = () => {
                             <img src={Instructor} alt="Instructor" />
                             <h4>Become an Instructor</h4>
                             <p>This is a career empowerment system aimed at equipping you with the
-                                tools required for sustainable growth and income.
+                                tools required for sustainable growth and income as a dance instructor in simple ways.
                             </p>
-                            <Link to="">Learn More <ion-icon name="arrow-forward-circle-outline"></ion-icon></Link>
+                            <Link to={AppRoute.instructor}>Learn More <ion-icon name="arrow-forward-circle-outline"></ion-icon></Link>
                         </div>
                         <div>
                             <img src={Schools} alt="Instructor" />
@@ -197,19 +205,18 @@ const AboutUs = () => {
                             <p>
                                 Dancerapy’s long-term vision is to inspire our community with
                                 non-competitive dance education and many performance
-                                opportunities.
+                                opportunities. See some examples and processes.
                             </p>
-                            <Link to="">Learn More <ion-icon name="arrow-forward-circle-outline"></ion-icon></Link>
+                            <Link to={AppRoute.schools}>Learn More <ion-icon name="arrow-forward-circle-outline"></ion-icon></Link>
                         </div>
                         <div>
-                            <img src={Schools} alt="Instructor" />
-                            <h4>Corporate Events and Schools</h4>
+                            <img src={Insta4} alt="event" />
+                            <h4>React out to us</h4>
                             <p>
-                                Dancerapy’s long-term vision is to inspire our community with
-                                non-competitive dance education and many performance
-                                opportunities.
+                                We have an efficient support team ready to take your calls and respond 
+                                to all of the messages you might have on our processes. Learn more about what we do
                             </p>
-                            <Link to="">Learn More <ion-icon name="arrow-forward-circle-outline"></ion-icon></Link>
+                            <Link to={AppRoute.contact}>Learn More <ion-icon name="arrow-forward-circle-outline"></ion-icon></Link>
                         </div>
                     </div>
                 </div>
@@ -254,9 +261,9 @@ const AboutUs = () => {
             </div>
             <div className="final-cover mt-5">
                 <div className="contain">
-                    <h5>CABIFY IN YOUR CITY</h5>
-                    <h3>We are available in 8 countries and more than 40 cities worldwide</h3>
-                    <button>Learn more about us</button>
+                    <h5>OUR PHYSICAL CLASSES</h5>
+                    <h3>We are available in different locations across the country to meet your fitness needs.</h3>
+                    <Link to={AppRoute.trainings} className="btn_red">See our locations</Link>
                 </div>
             </div>
             <Footer />

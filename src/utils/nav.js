@@ -176,7 +176,7 @@ const Nav = props => {
     return (
         <div>
             <div className="sec_navigation">
-                <p>Become an Instructor</p>
+                <Link to={AppRoute.instructor}>Become an Instructor</Link>
                 <div className="">
                     <ul>
                         <li>
@@ -368,7 +368,7 @@ const Nav = props => {
                         <ul>
                             <li>
                                 <Link
-                                    onClick={() => setOpen(false)}
+                                    onClick={() => setOpenDrawer(false)}
                                     to="/">
                                     <span>Home</span>
                                     {/* <ion-icon name="arrow-forward-outline"></ion-icon> */}
@@ -392,6 +392,7 @@ const Nav = props => {
                             <li>
                                 <Link
                                     // onClick={e => { e.preventDefault(); setExtraNavDisplay(1) }}
+                                    onClick={() => setOpenDrawer(false)}
                                     to={AppRoute.about}>
                                     <span>About Us</span>
                                     {/* <ion-icon name="arrow-forward-outline"></ion-icon> */}
@@ -400,6 +401,7 @@ const Nav = props => {
                             <li>
                                 <Link
                                     // onClick={e => { e.preventDefault(); setExtraNavDisplay(2) }}
+                                    onClick={() => setOpenDrawer(false)}
                                     to={AppRoute.trainings}>
                                     <span>Physical Classes</span>
                                     {/* <ion-icon name="arrow-forward-outline"></ion-icon> */}
@@ -408,6 +410,7 @@ const Nav = props => {
                             <li>
                                 <Link
                                     // onClick={e => { e.preventDefault(); setExtraNavDisplay(2) }}
+                                    onClick={() => setOpenDrawer(false)}
                                     to={AppRoute.products}>
                                     <span>Dancerapy Products and Services</span>
                                     {/* <ion-icon name="arrow-forward-outline"></ion-icon> */}
@@ -416,6 +419,7 @@ const Nav = props => {
                             <li>
                                 <Link
                                     // onClick={e => { e.preventDefault(); setExtraNavDisplay(3) }}
+                                    onClick={() => setOpenDrawer(false)}
                                     to={AppRoute.merch}>
                                     <span>Merchandise</span>
                                     {/* <ion-icon name="arrow-forward-outline"></ion-icon> */}
@@ -424,6 +428,7 @@ const Nav = props => {
                             <li>
                                 <Link
                                     // onClick={e => { e.preventDefault(); setExtraNavDisplay(4) }}
+                                    onClick={() => setOpenDrawer(false)}
                                     to={AppRoute.instructor}>
                                     <span>Become a Dancerapy Instructor</span>
                                     {/* <ion-icon name="arrow-forward-outline"></ion-icon> */}
@@ -431,7 +436,7 @@ const Nav = props => {
                             </li>
                             <li>
                                 <Link
-                                    onClick={() => setOpen(false)}
+                                    onClick={() => setOpenDrawer(false)}
                                     to={AppRoute.schools}>
                                     <span>Events and Schools</span>
                                     {/* <ion-icon name="arrow-forward-outline"></ion-icon> */}
@@ -440,6 +445,7 @@ const Nav = props => {
                             <li>
                                 <Link
                                     // onClick={e => { e.preventDefault(); setExtraNavDisplay(4) }}
+                                    onClick={() => setOpenDrawer(false)}
                                     to={AppRoute.corporate}>
                                     <span>Dancerapy and Corporates</span>
                                     {/* <ion-icon name="arrow-forward-outline"></ion-icon> */}
@@ -448,6 +454,7 @@ const Nav = props => {
                             <li>
                                 <Link
                                     // onClick={e => { e.preventDefault(); setExtraNavDisplay(5) }}
+                                    onClick={() => setOpenDrawer(false)}
                                     to={AppRoute.contact}>
                                     <span>Contact Us</span>
                                     {/* <ion-icon name="arrow-forward-outline"></ion-icon> */}
@@ -455,14 +462,24 @@ const Nav = props => {
                             </li>
                             {
                                 !props.auth.isAuthenticated ?
-                                    <li>
-                                        <Link
-                                            onClick={() => setOpen(false)}
-                                            to={AppRoute.signup}>
-                                            <span>Create a free Account</span>
-                                            <ion-icon name="arrow-forward-outline"></ion-icon>
-                                        </Link>
-                                    </li>
+                                    <React.Fragment>
+                                        <li>
+                                            <Link
+                                                onClick={() => setOpenDrawer(false)}
+                                                to={AppRoute.signin}>
+                                                <span>Login to your Account</span>
+                                                <ion-icon name="arrow-forward-outline"></ion-icon>
+                                            </Link>
+                                        </li>
+                                        <li>
+                                            <Link
+                                                onClick={() => setOpenDrawer(false)}
+                                                to={AppRoute.signup}>
+                                                <span>Create a free Account</span>
+                                                <ion-icon name="arrow-forward-outline"></ion-icon>
+                                            </Link>
+                                        </li>
+                                    </React.Fragment>
                                     : ''
                             }
                         </ul>
@@ -481,56 +498,56 @@ const Nav = props => {
                         </div>
                         <ul>
                             <li>
-                                <Link to={AppRoute.profile} exact
+                                <Link onClick={() => setOpenDrawer(false)} to={AppRoute.profile} exact
                                 >
                                     Profile Overview
                                     {/* <ion-icon name="arrow-forward-outline"></ion-icon> */}
                                 </Link>
                             </li>
                             <li>
-                                <Link to={AppRoute.profileVideos}
+                                <Link onClick={() => setOpenDrawer(false)} to={AppRoute.profileVideos}
                                 >
                                     Your Videos
                                     {/* <ion-icon name="arrow-forward-outline"></ion-icon> */}
                                 </Link>
                             </li>
                             <li>
-                                <Link to={AppRoute.profileVirtualSubscription}
+                                <Link onClick={() => setOpenDrawer(false)} to={AppRoute.profileVirtualSubscription}
                                 >
                                     Virtual Subscription
                                     {/* <ion-icon name="arrow-forward-outline"></ion-icon> */}
                                 </Link>
                             </li>
                             <li>
-                                <Link to={AppRoute.profilePlanOrders}
+                                <Link onClick={() => setOpenDrawer(false)} to={AppRoute.profilePlanOrders}
                                 >
                                     Your Plan Orders
                                     {/* <ion-icon name="arrow-forward-outline"></ion-icon> */}
                                 </Link>
                             </li>
                             <li>
-                                <Link to={AppRoute.profileProductOrders}
+                                <Link onClick={() => setOpenDrawer(false)} to={AppRoute.profileProductOrders}
                                 >
                                     Your Product Orders
                                     {/* <ion-icon name="arrow-forward-outline"></ion-icon> */}
                                 </Link>
                             </li>
                             <li>
-                                <Link to={AppRoute.profileMerchandise}
+                                <Link onClick={() => setOpenDrawer(false)} to={AppRoute.profileMerchandise}
                                 >
                                     Merchandise Orders
                                     {/* <ion-icon name="arrow-forward-outline"></ion-icon> */}
                                 </Link>
                             </li>
                             <li>
-                                <Link to={AppRoute.contact}
+                                <Link onClick={() => setOpenDrawer(false)} to={AppRoute.contact}
                                 >
                                     Contact Us
                                     {/* <ion-icon name="arrow-forward-outline"></ion-icon> */}
                                 </Link>
                             </li>
                             <li>
-                                <Link to="/signout">
+                                <Link onClick={() => setOpenDrawer(false)} to="/signout">
                                     {/* <span className="lnr lnr-exit"></span> */}
                                     Sign Out</Link>
                             </li>

@@ -77,7 +77,9 @@ const Footer = props => {
                         </div>
                         <div className="compartment last">
                             <h5>Reach out to us</h5>
-                            <div style={{ display: 'none' }}>
+                            <div
+                            // style={{ display: 'none' }}
+                            >
 
                                 <div>
                                     <ion-icon name="logo-facebook"></ion-icon>
