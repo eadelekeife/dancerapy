@@ -395,9 +395,10 @@
         padding-left: 1.5%;
     }
 
-    .footer-sec.footer .footer-grid ul {
+    .footer .footer-grid .hide-on-mobile {
         display: none;
     }
+
     .footer-sec.footer {
         padding-top: 15%;
     }

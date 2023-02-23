@@ -112,6 +112,7 @@ const ProfileVideoToPlay = props => {
         autoplay: true,
         controls: true,
         responsive: true,
+        playsinline: true,
         fluid: true,
         sources: [{
             src: productPlans.videoLink,
@@ -125,6 +126,7 @@ const ProfileVideoToPlay = props => {
         player.on('waiting', () => {
             VideoJS.log('player is waiting');
         });
+        playerRef.playsinline(true);
 
         player.on('dispose', () => {
             VideoJS.log('player will dispose');
@@ -163,13 +165,13 @@ const ProfileVideoToPlay = props => {
                                                 Join The Dancerapy Club Today and have access to over 30 Dance
                                                 Fitness Videos, Dance Choreophgries, Dance Trends and lots more monthly.
                                             </p>
-                                            <div className="course_prop">
+                                            {/* <div className="course_prop">
                                                 <ul>
                                                     <li><ion-icon name="calendar-outline"></ion-icon> Last updated: 08/08/2022</li>
                                                     <li><ion-icon name="language-outline"></ion-icon> English</li>
                                                     <li><ion-icon name="videocam-outline"></ion-icon> 80+ videos</li>
                                                 </ul>
-                                            </div>
+                                            </div> */}
                                             <Link className="btn_red" to={AppRoute.merch}>Buy Merchandise</Link>
                                         </div>
                                     </div>

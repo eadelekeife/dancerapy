@@ -161,13 +161,13 @@ const PlanDetail = props => {
                                                     <p>
                                                         {coursePlans.description}
                                                     </p>
-                                                    <div className="course_prop">
+                                                    {/* <div className="course_prop">
                                                         <ul>
                                                             <li><ion-icon name="calendar-outline"></ion-icon> Last updated: 08/08/2022</li>
                                                             <li><ion-icon name="language-outline"></ion-icon> English</li>
                                                             <li><ion-icon name="videocam-outline"></ion-icon> 80+ videos</li>
                                                         </ul>
-                                                    </div>
+                                                    </div> */}
                                                     {
                                                         props.auth.isAuthenticated ?
                                                             activePlan ? <button disabled className="btn_red">You have an Active Plan</button>

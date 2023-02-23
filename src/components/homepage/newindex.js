@@ -125,7 +125,7 @@ const AboutUs = () => {
                         therapy for healthy living. As a movement, Dancerapy personalizes the idea of dance
                         as a culture towards achieving wholeness in health and fitness.
                     </p>
-                    <button className="btn_red">Meet the Loom team</button>
+                    <Link to={AppRoute.products} className="btn_red full_width">See our dance plans</Link>
                 </div>
             </div>
             <div
@@ -160,8 +160,8 @@ const AboutUs = () => {
                                     <p>established</p>
                                 </div>
                                 <div className="dance-props-summary">
-                                    <h2>365m</h2>
-                                    <p>transactions</p>
+                                    <h2>200+</h2>
+                                    <p>users</p>
                                 </div>
                             </div>
                             {/* <ul>

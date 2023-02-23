@@ -17,7 +17,7 @@ const Footer = props => {
                     <div className="biased_grid_4">
                         <div>
                             <h5>About Us</h5>
-                            <ul>
+                            <ul className="hide-on-mobile">
                                 <li>
                                     <Link to={AppRoute.about}>About DanceRapy</Link>
                                 </li>
@@ -34,7 +34,7 @@ const Footer = props => {
                         </div>
                         <div>
                             <h5>Support</h5>
-                            <ul>
+                            <ul className="hide-on-mobile">
                                 <li>
                                     <Link to={AppRoute.faqs}>FAQs</Link>
                                 </li>
@@ -51,7 +51,7 @@ const Footer = props => {
                         </div>
                         <div>
                             <h5>Classes</h5>
-                            <ul>
+                            <ul className="hide-on-mobile">
                                 <li>
                                     <Link to={AppRoute.trainings}>Physical Classes</Link>
                                 </li>
@@ -71,22 +71,24 @@ const Footer = props => {
                         </div>
                         <div>
                             <h5>Reach out to us</h5>
-                            <div>
-                                <ion-icon name="logo-facebook"></ion-icon>
-                                <ion-icon name="logo-twitter"></ion-icon>
-                                <ion-icon name="logo-instagram"></ion-icon>
-                                <ion-icon name="logo-youtube"></ion-icon>
-                            </div>
-                            <div>
-                                <a href="+2348169511139">+234 816 951 1139</a>
-                                <a href="+2348023414932"> | +234 802 341 4932</a>
-                            </div>
-                            <a href="">info@dancerapy.com</a>
-                            {/* <a href="+2348033511964"> | +234 803 351 1964</a> */}
-                            <div>
-                                <p>Head Office &mdash; The Dance Place <br />
-                                    Behind Conoil filling Station, Eric Moore Rd, Surulere</p>
-                            </div>
+                            <React.Fragment className="hide-on-mobile">
+                                <div>
+                                    <ion-icon name="logo-facebook"></ion-icon>
+                                    <ion-icon name="logo-twitter"></ion-icon>
+                                    <ion-icon name="logo-instagram"></ion-icon>
+                                    <ion-icon name="logo-youtube"></ion-icon>
+                                </div>
+                                <div>
+                                    <a href="+2348169511139">+234 816 951 1139</a>
+                                    <a href="+2348023414932"> | +234 802 341 4932</a>
+                                </div>
+                                <a href="">info@dancerapy.com</a>
+                                {/* <a href="+2348033511964"> | +234 803 351 1964</a> */}
+                                <div>
+                                    <p>Head Office &mdash; The Dance Place <br />
+                                        Behind Conoil filling Station, Eric Moore Rd, Surulere</p>
+                                </div>
+                            </React.Fragment>
                         </div>
                     </div>
                 </div>

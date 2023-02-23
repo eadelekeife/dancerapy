@@ -147,6 +147,12 @@ h1, h2, h3, h4, h5, h6 {
     cursor: pointer;
 }
 
+.btn_red.full_width {
+    width: 100%;
+    display: block;
+    text-align: center;
+}
+
 .btn_green {
     background: var(--green);
     padding: 8px 25px;

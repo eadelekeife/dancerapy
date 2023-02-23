@@ -17,7 +17,7 @@ const Footer = props => {
                     <div className="biased_grid_4">
                         <div className="compartment">
                             <h5>About Us</h5>
-                            <ul>
+                            <ul className="hide-on-mobile">
                                 <li>
                                     <Link to={AppRoute.about}>About DanceRapy</Link>
                                 </li>
@@ -34,7 +34,7 @@ const Footer = props => {
                         </div>
                         <div className="compartment">
                             <h5>Support</h5>
-                            <ul>
+                            <ul className="hide-on-mobile">
                                 <li>
                                     <Link to={AppRoute.faqs}>FAQs</Link>
                                 </li>
@@ -51,7 +51,7 @@ const Footer = props => {
                         </div>
                         <div className="compartment">
                             <h5>Classes</h5>
-                            <ul>
+                            <ul className="hide-on-mobile">
                                 <li>
                                     <Link to={AppRoute.trainings}>Physical Classes</Link>
                                 </li>
@@ -78,7 +78,7 @@ const Footer = props => {
                         <div className="compartment last">
                             <h5>Reach out to us</h5>
                             <div
-                            // style={{ display: 'none' }}
+                                className="hide-on-mobile"
                             >
 
                                 <div>
