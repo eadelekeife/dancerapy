@@ -395,8 +395,19 @@
         padding-left: 1.5%;
     }
 
+    .footer .footer-grid-title {
+        display: flex;
+        justify-content: space-between;
+    }
+
     .footer .footer-grid .hide-on-mobile {
         display: none;
+    }
+
+    .footer .footer-grid .hide-on-mobile,
+    .footer .footer-grid .show-on-mobile {
+        padding-left: 1.5%;
+        padding-top: 20px;
     }
 
     .footer-sec.footer {

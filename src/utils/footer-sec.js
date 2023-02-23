@@ -1,6 +1,6 @@
 import "./utils.css";
 
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import { Input } from 'antd';
@@ -10,14 +10,20 @@ import AppRoute from './routes';
 
 const Footer = props => {
     const { handleSubmit, control } = useForm({});
+    const [currentNav, setCurrentNav] = useState(0);
     return (
         <div className={`footer footer-sec ${props.margin ? 'margin' : ''}`}>
             <div className="contain">
                 <div className="footer-grid">
                     <div className="biased_grid_4">
                         <div className="compartment">
-                            <h5>About Us</h5>
-                            <ul className="hide-on-mobile">
+                            <div
+                                className="footer-grid-title"
+                                onClick={() => setCurrentNav(1)}>
+                                <h5>About Us</h5>
+                                <ion-icon class="mobile" name="add-outline"></ion-icon>
+                            </div>
+                            <ul className={`${currentNav === 1 ? 'show-on-mobile' : 'hide-on-mobile'}`}>
                                 <li>
                                     <Link to={AppRoute.about}>About DanceRapy</Link>
                                 </li>
@@ -33,8 +39,13 @@ const Footer = props => {
                             </ul>
                         </div>
                         <div className="compartment">
-                            <h5>Support</h5>
-                            <ul className="hide-on-mobile">
+                            <div
+                                className="footer-grid-title"
+                                onClick={() => setCurrentNav(2)}>
+                                <h5>Support</h5>
+                                <ion-icon class="mobile" name="add-outline"></ion-icon>
+                            </div>
+                            <ul className={`${currentNav === 2 ? 'show-on-mobile' : 'hide-on-mobile'}`}>
                                 <li>
                                     <Link to={AppRoute.faqs}>FAQs</Link>
                                 </li>
@@ -50,8 +61,13 @@ const Footer = props => {
                             </ul>
                         </div>
                         <div className="compartment">
-                            <h5>Classes</h5>
-                            <ul className="hide-on-mobile">
+                            <div
+                                className="footer-grid-title"
+                                onClick={() => setCurrentNav(3)}>
+                                <h5>Classes</h5>
+                                <ion-icon class="mobile" name="add-outline"></ion-icon>
+                            </div>
+                            <ul className={`${currentNav === 3 ? 'show-on-mobile' : 'hide-on-mobile'}`}>
                                 <li>
                                     <Link to={AppRoute.trainings}>Physical Classes</Link>
                                 </li>
@@ -76,9 +92,14 @@ const Footer = props => {
                             </ul>
                         </div>
                         <div className="compartment last">
-                            <h5>Reach out to us</h5>
                             <div
-                                className="hide-on-mobile"
+                                className="footer-grid-title"
+                                onClick={() => setCurrentNav(4)}>
+                                <h5>Reach out to us</h5>
+                                <ion-icon class="mobile" name="add-outline"></ion-icon>
+                            </div>
+                            <div
+                                className={`${currentNav === 4 ? 'show-on-mobile' : 'hide-on-mobile'}`}
                             >
 
                                 <div>
