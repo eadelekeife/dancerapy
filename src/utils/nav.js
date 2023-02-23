@@ -199,38 +199,42 @@ const Nav = props => {
                         <li>
                             <Link to={AppRoute.about}>About Us</Link>
                         </li>
+                        {
+                            props.auth.isAuthenticated ?
+                                <li>
+                                    <Link
+                                        to={AppRoute.profileVideos}>
+                                        Your Videos
+                                    </Link>
+                                </li>
+                                :
+                                ''
+                        }
+
                         <li>
-                            <Link to={AppRoute.trainings}>Trainings</Link>
+                            <Link to={AppRoute.products}>Products and Services</Link>
                         </li>
                         <li>
-                            <Link to={AppRoute.merch}>Merchandise</Link>
+                            <Link to={AppRoute.trainings}>Trainings</Link>
                         </li>
                     </ul>
                 </div>
                 <div className="desktop-only">
                     <ul>
                         <li>
-                            <Link to={AppRoute.products}>Products and Services</Link>
+                            <Link to={AppRoute.instructor}>Become a Dancerapy Instructor</Link>
                         </li>
                         <li>
-                            <Link to={AppRoute.instructor}>Become a Dance Instructor</Link>
+                            <Link to={AppRoute.merch}>Merchandise</Link>
                         </li>
-                        {/* <li>
-                            <Link to={AppRoute.schools}>Events and Schools</Link>
-                        </li> */}
-                        {/* <li>
-                            <Link to={AppRoute.contact}>Contact Us</Link>
-                        </li> */}
                         {
                             props.auth.isAuthenticated ?
                                 <React.Fragment>
-                                    <li className="" style={{ textAlign: 'center' }}>
-                                        <Link activeClassName="active-nav"
-                                            to={AppRoute.profileVideos} className="button_like">
-                                            <span className="active-user">
-                                                Your Videos</span>
+                                    {/* <li className="" style={{ textAlign: 'center' }}>
+                                        <Link to={AppRoute.profileVideos}>
+                                                Your Videos
                                         </Link>
-                                    </li >
+                                    </li> */}
                                     <li className="style-me" style={{ textAlign: 'center' }}>
                                         <Link activeClassName="active-nav"
                                             to={AppRoute.profile} className="button_like">
@@ -241,8 +245,14 @@ const Nav = props => {
                                 </React.Fragment>
                                 :
                                 <React.Fragment>
-                                    <li>
+                                    {/* <li>
                                         <Link to={AppRoute.contact}>Contact Us</Link>
+                                    </li> */}
+                                    <li>
+                                        <Link
+                                            to={AppRoute.signin}>
+                                            Login
+                                        </Link>
                                     </li>
                                     <li className="style-me">
                                         <Link to={AppRoute.signup}>Create a free account</Link>

@@ -11,13 +11,14 @@ import Footer from "../../utils/footer-sec";
 
 import { Input } from 'antd';
 import { Controller, useForm } from "react-hook-form";
+import ReactPlayer from 'react-player';
 
 import { Link } from "react-router-dom";
 import AppRoute from "../../utils/routes";
 
+import AboutImage from "../../assets/images/homepage/instructor.jpg";
 import Instructor from "../../assets/images/homepage/instructor_hero.jpg";
 import Schools from "../../assets/images/homepage/link2.jpeg";
-import Insta4 from "../../assets/images/content/event4.jpg";
 
 import _1 from '../../assets/images/companies/access.webp';
 import _2 from '../../assets/images/companies/shell.png';
@@ -26,6 +27,17 @@ import _4 from '../../assets/images/companies/corona.png';
 import _6 from '../../assets/images/companies/dansol.png';
 import _7 from '../../assets/images/companies/gtco.png';
 import _8 from '../../assets/images/companies/mtn.png';
+
+
+import Annual from "../../assets/images/homepage/annual.jpeg";
+import Flash from "../../assets/images/homepage/flash.jpeg";
+import Zoom from "../../assets/images/homepage/zoom.jpg";
+import Physical from "../../assets/images/homepage/physical.jpeg";
+
+import Insta1 from "../../assets/images/content/event_1.jpg";
+import Insta2 from "../../assets/images/content/event3.jpg";
+import Insta3 from "../../assets/images/content/testi.jpg";
+import Insta4 from "../../assets/images/content/event4.jpg";
 
 import { ReactComponent as Cabify } from "./run.svg";
 import { ReactComponent as Mailchimp } from "./mailchimp.svg";
@@ -110,14 +122,26 @@ const AboutUs = () => {
             <Nav />
             <div className="dance-redesign-props-display">
                 <div className="dance-redesign-props-img-cover">
-                    <VideoJS playsinline={false} options={videoJsOptions} onReady={handlePlayerReady}
-                        onClick={playVideo} />
+                    {/* <VideoJS playsinline={false} options={videoJsOptions} onReady={handlePlayerReady}
+                        onClick={playVideo} /> */}
+
+                    <video
+                        // poster={Singer}
+                        src="https://lagostheatrevideos.s3.amazonaws.com/intro.mp4"
+                        // src="https://lagostheatrevideos.s3.amazonaws.com/home.mp4"
+                        playsInline autoPlay muted loop />
+                    <div className="black_overlay">
+
+                    </div>
+                    <div className="hero_section_div">
+                        <Link to={AppRoute.about}>Read About Us <ion-icon name="arrow-forward-outline"></ion-icon></Link>
+                    </div>
                     {/* <ReactPlayer
                         playsinline={false}
                         url="https://lagostheatrevideos.s3.amazonaws.com/intro.mp4"
                         playing={true} controls={true} /> */}
                 </div>
-                <div className="contain">
+                {/* <div className="contain">
                     <div className="block"></div>
                     <h4>Get ready for your workout with our Dancerapy fitness series</h4>
                     <p>
@@ -126,147 +150,134 @@ const AboutUs = () => {
                         as a culture towards achieving wholeness in health and fitness.
                     </p>
                     <Link to={AppRoute.products} className="btn_red full_width">See our dance plans</Link>
-                </div>
+                </div> */}
             </div>
-            <div
-                className="dance-props-sect mt-5">
-                <div className="grid_2">
-                    <div className="dance-hero-cover">
-                        <div className="first-display">
+            <div className="dance-redesign-props-data">
+                <div className="flex-display">
+                    <div className="blur_me">
+                        <div className="show_homepage_content pt-5">
                             <div className="contain">
-                                <h3>Professional Fitness <br />Dance Trainings</h3>
-                            </div>
-                            <Divider style={{ margin: '10px 0px' }} />
-                            <div className="contain">
-                                <p>Our dance trainings offers expert instruction, comprehensive training, performance
-                                    opportunities, networking, and personal growth. Whether you're a beginner or an
-                                    experienced dancer, our professional dance trainings can help you achieve your goals
-                                    and take your dance career to the next level.
-                                </p>
+                                <div>
+                                    <div className="grid_2">
+                                        <h2>Building Healthy Connections through Dance. Keep Fit, Lose Weight, Learn Dance.</h2>
+                                        <p>We believe that everyone can benefit from dancing, and we're committed to helping
+                                            our clients achieve their dance goals. Join us and let's dance!</p>
+                                    </div>
+                                    <div className="grid_4">
+                                        <div >
+                                            <img src={Annual} alt="_1" />
+                                        </div>
+                                        <div>
+                                            <img src={Flash} alt="_1" />
+                                        </div>
+                                        <div>
+                                            <img src={Zoom} alt="_1" />
+                                        </div>
+                                        <div>
+                                            <img src={Physical} alt="_1" />
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
+                    </div>
+                    <div className="whiten_me">
+                    </div>
+                </div>
+            </div>
+            <div className="mt-5 instructor-cover">
+                <div className="contain">
+                    <div className="instructor">
                         <div className="contain">
                             <div className="grid_2">
-                                <div className="dance-props-summary">
-                                    <h2>10+</h2>
-                                    <p>instructors</p>
+                                <div>
+                                    <h4>Get ready for your workout with our Dancerapy fitness series</h4>
+                                    <p>
+                                        Dancerapy is a fitness and lifestyle brand invested in reintroducing dance as
+                                        a choice therapy for healthy living. As a movement, Dancerapy personalizes
+                                        the idea of dance as a culture towards achieving wholeness in health and
+                                        fitness. Let Dancerapy help ignite the connections and
+                                        buuild team bonding spirit within your organization.
+                                    </p>
+                                    <Link to={AppRoute.marathon} className="btn_border_black">See how we impact companies</Link>
                                 </div>
-                                <div className="dance-props-summary">
-                                    <h2>15+</h2>
-                                    <p>dance plans</p>
-                                </div>
-                                <div className="dance-props-summary">
-                                    <h2>2009</h2>
-                                    <p>established</p>
-                                </div>
-                                <div className="dance-props-summary">
-                                    <h2>200+</h2>
-                                    <p>users</p>
+                                <div>
+                                    <div className="video-cover">
+                                        <img src={AboutImage} alt="about image" />
+                                        {/* <ReactPlayer
+                                            width="100%" height="100%"
+                                            playsinline={true} style={{ background: 'black' }}
+                                            url="https://lagostheatrevideos.s3.amazonaws.com/intro.mp4"
+                                            playing={false} controls={true} /> */}
+                                    </div>
                                 </div>
                             </div>
-                            {/* <ul>
-                                <li>
-                                    <img style={{ width: '100%', height: '100%' }} src={Instructor} alt="Instructor" />
-                                    <h5>Profession Fitness Dance Trainings</h5>
-                                    <p>We’ve been skillfully weaving together the strands of strategic digital marketing since
-                                        2009. Loom helps all kinds of ambitious businesses to improve their digital presence.</p>
-                                </li>
-                            </ul> */}
                         </div>
                     </div>
-                    <div>
+                </div>
+            </div>
+            <div className="mt-5 homepage_links">
+                <div className="blur_me">
+                    <div className="show_homepage_content">
                         <div className="contain">
-                            <Mailchimp />
+                            <h3 className="page-title">Learn more about what we do</h3>
+                            <div>
+                                <div className="grid_4">
+                                    <div>
+                                        <img src={Insta1} alt="event" />
+                                        <div>
+                                            <h3>Become a Dancerapy Instructor</h3>
+                                            <p>This is a career empowerment system aimed at equipping you with the
+                                                tools required for sustainable growth and income.
+                                            </p>
+                                            <Link to={AppRoute.instructor} className="btn_border_black">Learn More</Link>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <img src={Insta2} alt="event" />
+                                        <div>
+                                            <h3>Corporate Events and Schools</h3>
+                                            <p>
+                                                Dancerapy’s long-term vision is to inspire our community with
+                                                non-competitive dance education and many performance
+                                                opportunities.
+                                            </p>
+                                            <Link to={AppRoute.corporate} className="btn_border_black">Learn More</Link>
+                                        </div>
+                                    </div>
+                                    <div className="desktop-only">
+                                        <img src={Insta3} alt="event" />
+                                        <div>
+                                            <h3>Dancerapy Physical Classes</h3>
+                                            <p>We have 3 centers spread out across Lagos to make it easy for you to
+                                                find us coupled with our numerous training sessions to fit your
+                                                schedule.</p>
+                                            <Link to={AppRoute.trainings} className="btn_border_black">See our centers</Link>
+                                        </div>
+                                    </div>
+                                    <div className="desktop-only">
+                                        <img src={Insta4} alt="event" />
+                                        <div>
+                                            <h3>Reach out to us</h3>
+                                            <p>We have an efficient support team ready to take your calls and
+                                                respond to all of the messages you might have on our processes. </p>
+                                            <Link to={AppRoute.contact} className="btn_border_black">Find out how</Link>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div className="dance-redesign-text-display mt-5">
-                <div className="contain">
-                    <div className="first-displa">
-                        <div className="grid_2">
-                            <h2>Building Healthy Connections through Dance. Keep Fit, Lose Weight, Learn Dance.</h2>
-                            <p>We believe that everyone can benefit from dancing, and we're committed to helping
-                                our clients achieve their dance goals. Join us and let's dance!</p>
-                        </div>
-                    </div>
-                    <div className="grid_3">
-                        <div>
-                            <img src={Instructor} alt="Instructor" />
-                            <h4>Become an Instructor</h4>
-                            <p>This is a career empowerment system aimed at equipping you with the
-                                tools required for sustainable growth and income as a dance instructor in simple ways.
-                            </p>
-                            <Link to={AppRoute.instructor}>Learn More <ion-icon name="arrow-forward-circle-outline"></ion-icon></Link>
-                        </div>
-                        <div>
-                            <img src={Schools} alt="Instructor" />
-                            <h4>Corporate Events and Schools</h4>
-                            <p>
-                                Dancerapy’s long-term vision is to inspire our community with
-                                non-competitive dance education and many performance
-                                opportunities. See some examples and processes.
-                            </p>
-                            <Link to={AppRoute.schools}>Learn More <ion-icon name="arrow-forward-circle-outline"></ion-icon></Link>
-                        </div>
-                        <div>
-                            <img src={Insta4} alt="event" />
-                            <h4>React out to us</h4>
-                            <p>
-                                We have an efficient support team ready to take your calls and respond 
-                                to all of the messages you might have on our processes. Learn more about what we do
-                            </p>
-                            <Link to={AppRoute.contact}>Learn More <ion-icon name="arrow-forward-circle-outline"></ion-icon></Link>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div className="final-props mt-5">
-                <div className="contain">
-                    <div>
-                        <div className="first-display">
-                            <h2>Easy to follow Dance fitness routines</h2>
-                            <p>Every routine that is part of our service has been created with simplicity in
-                                mind. Our instructors are experienced professionals who have years of
-                                experience teaching a variety of dance styles. We also offer flexible
-                                scheduling options to fit your busy schedules.
-                            </p>
-                        </div>
-                        <div>
-                            <ul>
-                                <li>
-                                    <Cabify />
-                                    <h5>Personalized dance plans</h5>
-                                    <p>We work with clients to create a customized dance plan based on their goals and
-                                        interests. Our instructors will assess you and create a plan that is
-                                        tailored to your needs.</p>
-                                </li>
-                                <li>
-                                    <Cabify />
-                                    <h5>Expert dance instruction</h5>
-                                    <p>Our experienced instructors who have years of experience will provide you with
-                                        expert instruction, feedback, and support as you work towards your goals.
-                                    </p>
-                                </li>
-                                <li>
-                                    <Cabify />
-                                    <h5>Fun and engaging classes</h5>
-                                    <p>Our dance classes are designed to be fun and engaging. We want you to enjoy your dance
-                                        journey and feel motivated to continue working on your fitness goals.</p>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div className="final-cover mt-5">
+            {/* <div className="final-cover mt-5">
                 <div className="contain">
                     <h5>OUR PHYSICAL CLASSES</h5>
                     <h3>We are available in different locations across the country to meet your fitness needs.</h3>
                     <Link to={AppRoute.trainings} className="btn_red">See our locations</Link>
                 </div>
-            </div>
-            <Footer />
+            </div> */}
+            <Footer margin={true} />
         </div>
     )
 }

@@ -1,6 +1,6 @@
 import "./utils.css";
 
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import { Input } from 'antd';
@@ -10,14 +10,20 @@ import AppRoute from './routes';
 
 const Footer = props => {
     const { handleSubmit, control } = useForm({});
+    const [currentNav, setCurrentNav] = useState(0);
     return (
-        <div className={`footer ${props.margin ? 'margin' : ''}`}>
+        <div className={`footer footer-sec ${props.margin ? 'margin' : ''}`}>
             <div className="contain">
                 <div className="footer-grid">
                     <div className="biased_grid_4">
-                        <div>
-                            <h5>About Us</h5>
-                            <ul className="hide-on-mobile">
+                        <div className="compartment">
+                            <div
+                                className="footer-grid-title"
+                                onClick={() => setCurrentNav(1)}>
+                                <h5>About Us</h5>
+                                <ion-icon class="mobile" name="add-outline"></ion-icon>
+                            </div>
+                            <ul className={`${currentNav === 1 ? 'show-on-mobile' : 'hide-on-mobile'}`}>
                                 <li>
                                     <Link to={AppRoute.about}>About DanceRapy</Link>
                                 </li>
@@ -32,9 +38,14 @@ const Footer = props => {
                                 </li>
                             </ul>
                         </div>
-                        <div>
-                            <h5>Support</h5>
-                            <ul className="hide-on-mobile">
+                        <div className="compartment">
+                            <div
+                                className="footer-grid-title"
+                                onClick={() => setCurrentNav(2)}>
+                                <h5>Support</h5>
+                                <ion-icon class="mobile" name="add-outline"></ion-icon>
+                            </div>
+                            <ul className={`${currentNav === 2 ? 'show-on-mobile' : 'hide-on-mobile'}`}>
                                 <li>
                                     <Link to={AppRoute.faqs}>FAQs</Link>
                                 </li>
@@ -49,9 +60,14 @@ const Footer = props => {
                                 </li>
                             </ul>
                         </div>
-                        <div>
-                            <h5>Classes</h5>
-                            <ul className="hide-on-mobile">
+                        <div className="compartment">
+                            <div
+                                className="footer-grid-title"
+                                onClick={() => setCurrentNav(3)}>
+                                <h5>Classes</h5>
+                                <ion-icon class="mobile" name="add-outline"></ion-icon>
+                            </div>
+                            <ul className={`${currentNav === 3 ? 'show-on-mobile' : 'hide-on-mobile'}`}>
                                 <li>
                                     <Link to={AppRoute.trainings}>Physical Classes</Link>
                                 </li>
@@ -67,11 +83,25 @@ const Footer = props => {
                                 <li>
                                     <Link to={AppRoute.corporate}>Dancerapy and Corporates</Link>
                                 </li>
+                                {/* <li>
+                                <Link to={AppRoute.ourteam}>Our Team</Link>
+                            </li>
+                            <li>
+                                <Link to={AppRoute.trainings}>Dancerapy corporate events/schools</Link>
+                            </li> */}
                             </ul>
                         </div>
-                        <div>
-                            <h5>Reach out to us</h5>
-                            <React.Fragment className="hide-on-mobile">
+                        <div className="compartment last">
+                            <div
+                                className="footer-grid-title"
+                                onClick={() => setCurrentNav(4)}>
+                                <h5>Reach out to us</h5>
+                                <ion-icon class="mobile" name="add-outline"></ion-icon>
+                            </div>
+                            <div
+                                className={`${currentNav === 4 ? 'show-on-mobile' : 'hide-on-mobile'}`}
+                            >
+
                                 <div>
                                     <ion-icon name="logo-facebook"></ion-icon>
                                     <ion-icon name="logo-twitter"></ion-icon>
@@ -88,44 +118,51 @@ const Footer = props => {
                                     <p>Head Office &mdash; The Dance Place <br />
                                         Behind Conoil filling Station, Eric Moore Rd, Surulere</p>
                                 </div>
-                            </React.Fragment>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div className="sec_footer">
-                    <div className="grid_flex">
-                        <div className="sec_footer_block">
-                            <form>
+                    <div className="contain">
+                        <div className="grid_flex">
+                            <div className="sec_footer_block">
+                                <form>
+                                    <div>
+                                        <Controller name="email" defaultValue="" control={control}
+                                            render={({ field }) => (
+                                                <Input {...field} />
+                                            )}
+                                        />
+                                        {/* <div className="mobile-only"> */}
+                                        <button>Subscribe</button>
+                                        {/* </div> */}
+                                        {/* <div className="desktop-only">
+                                        <button>Subscribe to our mailing list</button>
+                                    </div> */}
+                                    </div>
+                                </form>
+                            </div>
+                            <div className="sec_footer_block">
                                 <div>
-                                    <Controller name="email" defaultValue="" control={control}
-                                        render={({ field }) => (
-                                            <Input {...field} />
-                                        )}
-                                    />
-                                    <button>Subscribe to our mailing list</button>
+                                    <p>© 2022 Lagos Theatre Igando</p>
+                                    <ul>
+                                        <li>
+                                            <Link to="">&mdash; Terms</Link>
+                                        </li>
+                                        <li>
+                                            <Link to="">&mdash; Accessibility</Link>
+                                        </li>
+                                        <li>
+                                            <Link to="">&mdash; Site map</Link>
+                                        </li>
+                                        <li>
+                                            <Link to="">&mdash; Privacy</Link>
+                                        </li>
+                                        <li>
+                                            <Link to="">&mdash; Do not sell my personal information</Link>
+                                        </li>
+                                    </ul>
                                 </div>
-                            </form>
-                        </div>
-                        <div className="sec_footer_block">
-                            <div>
-                                <p>© 2022 Lagos Theatre Igando</p>
-                                <ul>
-                                    <li>
-                                        <Link to="">&mdash; Terms</Link>
-                                    </li>
-                                    <li>
-                                        <Link to="">&mdash; Accessibility</Link>
-                                    </li>
-                                    <li>
-                                        <Link to="">&mdash; Site map</Link>
-                                    </li>
-                                    <li>
-                                        <Link to="">&mdash; Privacy</Link>
-                                    </li>
-                                    <li>
-                                        <Link to="">&mdash; Do not sell my personal information</Link>
-                                    </li>
-                                </ul>
                             </div>
                         </div>
                     </div>

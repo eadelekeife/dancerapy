@@ -22,7 +22,6 @@
 /* merchandise */
 
 .merchandise_hero {
-    background: linear-gradient(rgba(0, 0, 0, .4), rgba(0, 0, 0, .4)), url('../../assets/images/homepage/shop.webp');
     height: 40rem;
     background-position: top;
     background-size: cover;

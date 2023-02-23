@@ -1,5 +1,8 @@
+.new-homepage {
+    background: #fff;
+}
+
 .hero_sect {
-    background: linear-gradient(rgba(0, 0, 0, .3), rgba(0, 0, 0, .3)), url('../../assets/images/homepage/hero.png');
     background-position: top;
     background-repeat: no-repeat;
     background-size: cover;
@@ -63,13 +66,7 @@
     padding-left: 3rem;
 }
 
-.instructor .grid_2 p {
-    color: #EFF0F6;
-    font-size: 1.8rem;
-}
-
 .instructor .grid_2 h1 {
-    color: #fff;
     font-size: 2.6rem;
     width: 40%;
     font-weight: 600;
@@ -244,13 +241,8 @@
     /* padding-left: 3rem; */
 }
 
-.instructor .grid_2 p {
-    color: #EFF0F6;
-    font-size: 1.6rem;
-}
-
 .instructor .grid_2 h1 {
-    color: #fff;
+    /* color: #fff; */
     font-size: 2.6rem;
     width: 40%;
     font-weight: 600;
@@ -486,14 +478,15 @@
 }
 
 .instructor h2 {
-    color: #fff;
+    /* color: #fff; */
     font-size: 3rem;
     margin-bottom: 0px;
 }
 
-.instructor p {
-    color: #fff;
-    font-size: 2.2rem;
+.instructor .grid_2 p {
+    color: #EFF0F6;
+    font-size: 1.5rem;
+    line-height: 1.8;
 }
 
 .instructor div.first-div {
@@ -671,16 +664,18 @@
     width: 80%;
     line-height: 1.3;
     margin-bottom: 0%;
+    color: #fff;
 }
 
 .instructor .grid_2 h4 {
-    color: #fff;
+    /* color: #fff; */
 }
 
 .instructor .grid_2 a {
     color: #fff;
     border: 1px solid #fff;
     width: max-content;
+    padding: 12px 25px;
 }
 
 .instructor .grid_2 {
@@ -723,12 +718,6 @@
     background: #070721;
     padding: 15% 0px;
     padding-bottom: 10%;
-}
-
-.dance-redesign-props-display {
-    background: #000;
-    background: #0C513F;
-    padding-bottom: 15%;
 }
 
 .dance-redesign-props-display img {
@@ -799,12 +788,42 @@
     border-radius: 3px;
 }
 
-.dance-redesign-text-display p {
+.dance-redesign-props-data p {
     font-size: 1.4rem;
     line-height: 1.8;
-    color: #fff;
-    color: rgba(255, 255, 255, 0.8);
 }
+
+.dance-redesign-props-data .grid_2 {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.dance-redesign-props-data .flex-display {
+    flex-direction: row;
+    flex-direction: column;
+    display: flex;
+}
+
+.dance-redesign-props-data .show_homepage_content {
+    position: absolute;
+    /* padding-top: 5%; */
+}
+
+.dance-redesign-props-data .flex-display .blur_me {
+    background: #EFF0F6;
+    background-image: url('../../assets/images/homepage/body-bg.webp');
+    height: 30rem;
+    width: 100%;
+    position: relative;
+}
+
+.dance-redesign-props-data .flex-display .whiten_me {
+    height: 20rem;
+    width: 100%;
+}
+
+/* .dance-redesign-props-data {} */
 
 .dance-redesign-text-display h4 {
     font-size: 1.6rem;
@@ -813,11 +832,10 @@
     color: rgba(255, 255, 255, 0.9);
 }
 
-.dance-redesign-text-display h2 {
+.dance-redesign-props-data h2 {
     font-size: 2.3rem;
     margin-bottom: 0px;
-    color: #fff;
-    padding-top: 15%;
+    /* padding-top: 15%; */
 }
 
 .dance-redesign-text-display a {
@@ -831,7 +849,6 @@
 }
 
 .dance-redesign-hero {
-    background: linear-gradient(rgba(0, 0, 0, .3), rgba(0, 0, 0, .3)), url('../../assets/images/homepage/homepage.png');
     background-position: top;
     background-repeat: no-repeat;
     background-size: cover;
@@ -949,6 +966,11 @@
 .dance-redesign-props-display .dance-redesign-props-img-cover {
     position: relative;
     overflow: hidden;
+    position: relative;
+    height: 500px;
+    background: #000;
+    width: 100%;
+    overflow: hidden;
 }
 
 .dance-redesign-props-display .wave-image {
@@ -1061,17 +1083,16 @@
     width: 60%;
 }
 
-.dance-redesign-props-display {
+/* .dance-redesign-props-display {
     display: flex;
     flex-direction: column;
-}
+} */
 
 .dance-redesign-props-display .dance-redesign-props-img-cover {
-    flex: 1;
+    /* flex: 1;
     height: 100%;
-    /* min-height: 30rem; */
     position: relative;
-    min-height: 400px;
+    min-height: 400px; */
 }
 
 .dance-redesign-props-display .contain {
@@ -1090,8 +1111,42 @@
     top: 50%;
     left: 50%;
     transform: translate3d(-50%, -50%, 10px);
-    width: 100vw !important;
+    width: 100vw;
     height: 56.25vw;
+}
+
+.black_overlay {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, .1), rgba(0, 0, 0, 1));
+    z-index: 5;
+}
+
+.hero_section_div a {
+    position: absolute;
+    z-index: 10;
+    top: 50%;
+    left: 50%;
+    transform: translate3d(-50%, -50%, 10px);
+    padding: 10px 25px;
+    border-radius: 4px;
+    color: #fff;
+    background: var(--red);
+    border: 1px solid var(--red);
+    border-radius: 4px;
+    font-size: 1.4rem;
+}
+
+.instructor-cover .instructor {
+    background: #5B767B;
+    padding: 30px 0px;
+}
+
+.instructor-cover .instructor .grid_2 {
+    padding-left: 0px;
 }
 
 @media screen and (min-width: 720px) {
@@ -1126,11 +1181,11 @@
     }
 
     .dance-redesign-props-display {
-        display: flex;
-        flex-direction: row-reverse;
+        /* display: flex;
+        flex-direction: row-reverse; */
         padding-bottom: 0px;
         min-height: 400px;
-        align-items: center;
+        /* align-items: center; */
     }
 
     .vjs-controls-disabled .vjs-big-play-button,
@@ -1145,19 +1200,19 @@
         display: none !important;
     }
 
-    .video-js {
+    /* .video-js {
         width: 100%;
         min-height: 400px !important;
-    }
+    } */
 
-    .dance-redesign-props-display .dance-redesign-props-img-cover video,
+    /* .dance-redesign-props-display .dance-redesign-props-img-cover video,
     .dance-redesign-props-display .video-js.vjs-fluid,
     .dance-redesign-props-display .video-js.vjs-16-9,
     .dance-redesign-props-display .video-js.vjs-4-3,
     .dance-redesign-props-display .video-js.vjs-9-16,
     .dance-redesign-props-display .video-js.vjs-1-1 {
         height: 400px !important;
-    }
+    } */
 
     .final-cover {
         padding-top: 3%;
@@ -1227,6 +1282,7 @@
     .instructor-cover .instructor {
         border-radius: 0px;
         padding: 15% 0px;
+        padding-top: 0px;
     }
 
     .instructor .grid_2 h4 {
@@ -1421,7 +1477,7 @@
         margin-bottom: 15px;
     }
 
-    .dance-redesign-props-display .dance-redesign-props-img-cover {
+    /* .dance-redesign-props-display .dance-redesign-props-img-cover {
         min-height: 300px;
     }
 
@@ -1433,7 +1489,7 @@
         width: 100% !important;
         transform: none;
         height: 350px;
-    }
+    } */
 
     .vjs_video_3-dimensions {
         width: 100%;
@@ -1450,5 +1506,10 @@
     .vjs-has-started .vjs-big-play-button,
     .vjs-error .vjs-big-play-button {
         display: none !important;
+    }
+
+    .instructor-cover .instructor .grid_2 {
+        display: flex;
+        flex-direction: column-reverse;
     }
 }

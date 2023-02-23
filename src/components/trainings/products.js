@@ -65,7 +65,7 @@ const Products = () => {
                                 <h2>Annual Online Subscription</h2>
                                 <p>Join The Dancerapy Club Today and have access to over 30 Dance Fitness
                                     Videos, Dance Choreophgries, Dance Trends and lots more monthly.</p>
-                                <Link to="/products/detail?productName=Dancerapy%20Club%20Annual%20Online%20Subscription&productId=8">See More <ion-icon name="arrow-forward-outline"></ion-icon></Link>
+                                <Link to="/products/detail?productName=Dancerapy%20Club%20Annual%20Online%20Subscription&productId=1">See More <ion-icon name="arrow-forward-outline"></ion-icon></Link>
                             </div>
                             <div className="chow-1"></div>
                         </div>
@@ -74,7 +74,7 @@ const Products = () => {
                                 <h2>Dance in a Flash</h2>
                                 <p>Join The Dancerapy Club Today and have access to over 30 Dance Fitness
                                     Videos, Dance Choreophgries, Dance Trends and lots more monthly.</p>
-                                <Link to="/products/detail?productName=Dance%20in%20a%20Flash%20-%20Delivered%20to%20your%20Doorstep&productId=9">See More <ion-icon name="arrow-forward-outline"></ion-icon></Link>
+                                <Link to="/products/detail?productName=Dance%20in%20a%20Flash%20-%20Delivered%20to%20your%20Doorstep&productId=2">See More <ion-icon name="arrow-forward-outline"></ion-icon></Link>
                             </div>
                             <div className="chow-2"></div>
                         </div>
@@ -83,7 +83,7 @@ const Products = () => {
                                 <h2>Dancerapy live on Zoom</h2>
                                 <p>Join The Dancerapy Club Today and have access to over 30 Dance Fitness
                                     Videos, Dance Choreophgries, Dance Trends and lots more monthly.</p>
-                                <Link to="/products/detail?productName=Join%20Dancerapy%20live%20on%20Zoom&productId=10">See More <ion-icon name="arrow-forward-outline"></ion-icon></Link>
+                                <Link to="/products/detail?productName=Join%20Dancerapy%20live%20on%20Zoom&productId=3">See More <ion-icon name="arrow-forward-outline"></ion-icon></Link>
                             </div>
                             <div className="chow-3"></div>
                         </div>
@@ -92,7 +92,7 @@ const Products = () => {
                                 <h2>Dancerapy Physical class</h2>
                                 <p>Join The Dancerapy Club Today and have access to over 30 Dance Fitness
                                     Videos, Dance Choreophgries, Dance Trends and lots more monthly.</p>
-                                <Link to="/products/detail?productName=Join%20Dancerapy%20Physical%20Class&productId=11">See More <ion-icon name="arrow-forward-outline"></ion-icon></Link>
+                                <Link to="/products/detail?productName=Join%20Dancerapy%20Physical%20Class&productId=4">See More <ion-icon name="arrow-forward-outline"></ion-icon></Link>
                             </div>
                             <div className="chow-1"></div>
                         </div>

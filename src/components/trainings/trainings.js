@@ -82,7 +82,7 @@ const Plans = () => {
                     </div>
                 </div>
             </div>
-            <div className="mobile-product-outline contain">
+            <div className="mobile-only mobile-product-outline contain">
                 <h3>Dancerapy Physical Plans</h3>
                 <div className="product-tag">
                     <p>Any day <ion-icon name="chevron-down-outline"></ion-icon></p>
@@ -119,6 +119,19 @@ const Plans = () => {
                                     {allProductPlans.map((productPlans, index) => (
                                         <div key={index}>
                                             <div className="grid_3_bias">
+                                                <div className="desktop-only">
+                                                    <div className="plan_grid_duration">
+                                                        <ul>
+                                                            {productPlans.monday ? <li>&bull; Mon</li> : ''}
+                                                            {productPlans.tuesday ? <li>&bull; Tues</li> : ''}
+                                                            {productPlans.wednesday ? <li>&bull; Wed</li> : ''}
+                                                            {productPlans.thursday ? <li>&bull; Thurs</li> : ''}
+                                                            {productPlans.friday ? <li>&bull; Fri</li> : ''}
+                                                            {productPlans.saturday ? <li>&bull; Sat</li> : ''}
+                                                            {productPlans.sunday ? <li>&bull; Sun</li> : ''}
+                                                        </ul>
+                                                    </div>
+                                                </div>
                                                 <div className="plan_grid_main">
                                                     <div className="plan_grid_main_detail">
                                                         <Link to={`${AppRoute.trainings}/detail?productName=${productPlans.title}&productId=${productPlans.id}`}>
@@ -139,16 +152,18 @@ const Plans = () => {
                                                         </ul>
                                                     </div>
                                                 </div>
-                                                <div className="plan_grid_duration">
-                                                    <ul>
-                                                        {productPlans.monday ? <li>&bull; Mon</li> : ''}
-                                                        {productPlans.tuesday ? <li>&bull; Tues</li> : ''}
-                                                        {productPlans.wednesday ? <li>&bull; Wed</li> : ''}
-                                                        {productPlans.thursday ? <li>&bull; Thurs</li> : ''}
-                                                        {productPlans.friday ? <li>&bull; Fri</li> : ''}
-                                                        {productPlans.saturday ? <li>&bull; Sat</li> : ''}
-                                                        {productPlans.sunday ? <li>&bull; Sun</li> : ''}
-                                                    </ul>
+                                                <div className="mobile-only">
+                                                    <div className="plan_grid_duration">
+                                                        <ul>
+                                                            {productPlans.monday ? <li>&bull; Mon</li> : ''}
+                                                            {productPlans.tuesday ? <li>&bull; Tues</li> : ''}
+                                                            {productPlans.wednesday ? <li>&bull; Wed</li> : ''}
+                                                            {productPlans.thursday ? <li>&bull; Thurs</li> : ''}
+                                                            {productPlans.friday ? <li>&bull; Fri</li> : ''}
+                                                            {productPlans.saturday ? <li>&bull; Sat</li> : ''}
+                                                            {productPlans.sunday ? <li>&bull; Sun</li> : ''}
+                                                        </ul>
+                                                    </div>
                                                 </div>
                                                 <div className="plan_grid_props_list">
                                                     <Link to={`${AppRoute.trainings}/detail?productName=${productPlans.title}&productId=${productPlans.id}`}

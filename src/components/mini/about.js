@@ -5,7 +5,6 @@ import React from "react";
 
 import AboutHero from "../../assets/images/homepage/home_hero.jpeg";
 
-import John from "../../assets/images/homepage/john.webp";
 import Award from "../../assets/images/content/award.svg";
 import Eye from "../../assets/images/content/eye.svg";
 import Target from "../../assets/images/content/target.svg";
@@ -47,14 +46,14 @@ const AboutUs = () => {
             <div className="black-content">
                 <div className="scroll-container">
                     <div className="scroll-text">
-                        <p><ion-icon name="checkmark-circle-outline"></ion-icon> Member-only Perks</p>
-                        <p><ion-icon name="checkmark-circle-outline"></ion-icon> 20% on every order</p>
-                        <p><ion-icon name="checkmark-circle-outline"></ion-icon> Free Shipping</p>
-                        <p><ion-icon name="checkmark-circle-outline"></ion-icon> Custom plans</p>
-                        <p><ion-icon name="checkmark-circle-outline"></ion-icon> Member-only Perks</p>
-                        <p><ion-icon name="checkmark-circle-outline"></ion-icon> Free Shipping</p>
-                        <p><ion-icon name="checkmark-circle-outline"></ion-icon> Custom plans</p>
-                        <p><ion-icon name="checkmark-circle-outline"></ion-icon> Member-only Perks</p>
+                        <p><ion-icon name="checkmark-circle-outline"></ion-icon> Keep fit</p>
+                        <p><ion-icon name="checkmark-circle-outline"></ion-icon> Loose Weight</p>
+                        <p><ion-icon name="checkmark-circle-outline"></ion-icon> Learn dance steps</p>
+                        <p><ion-icon name="checkmark-circle-outline"></ion-icon> Fun and engaging classes</p>
+                        <p><ion-icon name="checkmark-circle-outline"></ion-icon> Personalized dance plans</p>
+                        <p><ion-icon name="checkmark-circle-outline"></ion-icon> Expert dance instruction</p>
+                        <p><ion-icon name="checkmark-circle-outline"></ion-icon> Superb customer support</p>
+                        <p><ion-icon name="checkmark-circle-outline"></ion-icon> Networking opportunities</p>
                     </div>
                 </div>
             </div>
