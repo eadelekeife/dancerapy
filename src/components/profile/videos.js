@@ -548,6 +548,17 @@ const VirtualSubcriptions = props => {
         }
     ];
 
+
+    // search video
+    const findVideoByName = (videoName) => {
+        let newVideoBox = userPlans.filter(video => {
+            if (video.title.toLowerCase().includes(videoName.toLowerCase())) {
+                return video;
+            }
+        });
+        console.log(newVideoBox);
+    }
+
     return (
         <div>
             <Nav />
@@ -591,7 +602,7 @@ const VirtualSubcriptions = props => {
                                                                 onClick={() => setIsModalOpen(true)}
                                                                 className="btn_red">See Calendar <span>| <ion-icon name="calendar-outline"></ion-icon></span></button>
                                                             <div>
-                                                                <form>
+                                                                <form onSubmit={handleSubmit(findVideoByName)}>
                                                                     <div>
                                                                         <Controller name="email" defaultValue="" control={control}
                                                                             render={({ field }) => (
