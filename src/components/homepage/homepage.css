@@ -1328,6 +1328,7 @@
         font-size: 2rem;
         margin-bottom: 10px;
         line-height: 1.4;
+        color: #000;
     }
 
     .homepage_links img {
@@ -1511,5 +1512,37 @@
     .instructor-cover .instructor .grid_2 {
         display: flex;
         flex-direction: column-reverse;
+    }
+
+    .dance-redesign-props-data .grid_2 {
+        flex-direction: column;
+    }
+
+    .show_homepage_content {
+        max-width: 100%;
+        overflow: hidden;
+    }
+
+    .show_homepage_content img {
+        height: 35rem;
+        width: 100%;
+        object-fit: cover;
+        object-position: center;
+    }
+
+    .dance-redesign-props-data .flex-display .blur_me {
+        height: max-content;
+    }
+    .dance-redesign-props-data .flex-display .whiten_me {
+        height: unset;
+    }
+    .dance-redesign-props-data .show_homepage_content {
+        position: relative;
+    }
+    .new-homepage {
+        background: unset;
+    }
+    .instructor-cover .instructor .grid_2 .text-cover {
+        padding: 0px 1.5%;
     }
 }

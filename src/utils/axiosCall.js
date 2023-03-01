@@ -5,7 +5,7 @@ import Axios from "axios";
 // 172.20.10.2
 
 const axiosCall = Axios.create({
-    baseURL: "https://backend.dancerapy.org/api/v1/dancerapy/"
+    baseURL: "http://localhost:8000/api/v1/dancerapy/"
 });
 
 export default axiosCall;

@@ -142,7 +142,7 @@ const Profile = () => {
                                                                                     href={productPlans.link}
                                                                                     target="_blank"
                                                                                     style={{ padding: '12px 25px' }}
-                                                                                    className="btn_red">Learn More</a>
+                                                                                    className="btn_red">Take Class</a>
                                                                             </div>
                                                                         </div>
                                                                     </div>

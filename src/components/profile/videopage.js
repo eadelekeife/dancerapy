@@ -16,7 +16,7 @@ import { Player, ControlBar } from 'video-react';
 import { PaystackButton } from 'react-paystack';
 import axiosCall from "../../utils/axiosCall";
 
-import locationMap from "../../assets/images/mini/locationmap.jpg";
+import Empty from "../../assets/images/auth/empty.svg";
 // import Testimonial from "../../assets/videos/testimonial.mp4";
 import Footer from "../../utils/footer";
 import Nav from "../../utils/nav";
@@ -132,6 +132,60 @@ const ProfileVideoToPlay = props => {
             VideoJS.log('player will dispose');
         });
     };
+
+    // videos display
+    const { handleSubmit, control } = useForm({});
+    const [currentNav, setCurrentNav] = useState(0);
+
+
+    const [userPlans, setUserPlans] = useState([]);
+    const [loadingdata, setLoadingData] = useState(true);
+    const [userActiveSubscription, setUserActiveSubscription] = useState(false);
+    const [categoryBox, setCategoryBox] = useState([]);
+    const [filter, setFilter] = useState('all');
+
+    useEffect(() => {
+        if (localStorage.getItem('purchaseSuccessful')) {
+            openNotificationWithIcon('success', 'Transaction completed successfully. Please check your mail for further information');
+            localStorage.removeItem('purchaseSuccessful');
+        }
+        axiosCall.get(`/user/online-subscription`, {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}`
+            }
+        })
+            .then(userPlans => {
+                if (userPlans.data.statusMessage === "success") {
+                    if (userPlans.data.message.activeSubscription) {
+                        setLoadingData(false);
+                        let categoryBox = [];
+                        userPlans.data.message.virtualClassLinks.map(category => {
+                            if (!categoryBox.includes(category.videoCategory.name)) {
+                                categoryBox.push(category.videoCategory.name);
+                            }
+                        })
+                        setCategoryBox(categoryBox);
+                        setUserPlans(userPlans.data.message.virtualClassLinks);
+                        setUserActiveSubscription(true);
+                    } else {
+                        setLoadingData(false);
+                        setUserActiveSubscription(false);
+                    }
+                } else {
+                    setLoadingData(false);
+                    setErrorOccurred(true);
+                    openNotificationWithIcon('error', userPlans.data.summary);
+                }
+            })
+            .catch(err => {
+                setErrorOccurred(true);
+                setLoadingData(false)
+            })
+    }, [])
+    for (let i = 0; i < 6; i++) {
+        skeleton.push(<Skeleton active />)
+    }
+
     return (
         <div>
             <Nav />
@@ -156,99 +210,83 @@ const ProfileVideoToPlay = props => {
                         </div>
                         :
                         <div>
-                            <div className="plan_group">
-                                <div className="grid_2">
-                                    <div className="plan_bg">
-                                        <div className="plan_props_detail">
-                                            <h1>{productPlans.title}</h1>
-                                            <p>
-                                                Join The Dancerapy Club Today and have access to over 30 Dance
-                                                Fitness Videos, Dance Choreophgries, Dance Trends and lots more monthly.
-                                            </p>
-                                            {/* <div className="course_prop">
-                                                <ul>
-                                                    <li><ion-icon name="calendar-outline"></ion-icon> Last updated: 08/08/2022</li>
-                                                    <li><ion-icon name="language-outline"></ion-icon> English</li>
-                                                    <li><ion-icon name="videocam-outline"></ion-icon> 80+ videos</li>
-                                                </ul>
-                                            </div> */}
-                                            <Link className="btn_red" to={AppRoute.merch}>Buy Merchandise</Link>
-                                        </div>
-                                    </div>
-                                    <div data-vjs-player>
-                                        <VideoJS options={videoJsOptions} onReady={handlePlayerReady} />
-                                    </div>
-                                </div>
+                            <div className="main_video plan_group">
+                                <video
+                                    src={productPlans.videoLink}
+                                    playsInline autoPlay loop />
                             </div>
                             <div className="detail_props pt-3">
                                 <div className="contain">
-                                    <div className="grid_3">
-                                        <div className="plan_story_block">
-                                            <div className="block_header">
-                                                <h3>About Dancerapy</h3>
-                                            </div>
-                                            <Divider style={{ marginTop: 0, marginBottom: 0 }} />
-                                            <div className="block_body">
+                                    <div className="profile-data-display">
+                                        <h3 className="profile_title">Your Videos</h3>
+                                        <Divider style={{ margin: '10px 0px' }} />
+                                        {
+                                            loadingdata ?
                                                 <div>
-                                                    <h4>Our Mission Statement</h4>
-                                                    <p>
-                                                        To ensure that people have access to
-                                                        DANCERAPY worldwide through our S.T.U.N.D (Studio Next Door Program)
-                                                    </p>
+                                                    {skeleton.map((placeHolder, index) => (
+                                                        <div className="item" key={index}>
+                                                            {placeHolder}
+                                                            <Divider />
+                                                        </div>
+                                                    ))}
                                                 </div>
-                                                <div>
-                                                    <h4>Our Vision Statement</h4>
-                                                    <p>
-                                                        To ensure that dance fitness becomes a lifestyle for
-                                                        everyone, millions of people around the world thereby increasing life
-                                                        expectancy by 15 – 20%.
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="plan_story_block">
-                                            <div className="block_header">
-                                                <h3>About Dance Plan</h3>
-                                            </div>
-                                            <Divider style={{ marginTop: 0, marginBottom: 0 }} />
-                                            <div className="block_body">
-                                                <ul>
-                                                    <li className="course_fitness_props">
-                                                        <span className="first_span">Flexibility</span>
-                                                        <span className="second_span"><Rate allowHalf defaultValue={5} /></span></li>
-                                                    <li className="course_fitness_props">
-                                                        <span className="first_span">Cardio</span>
-                                                        <span className="second_span"></span><Rate allowHalf defaultValue={5} /></li>
-                                                    <li className="course_fitness_props">
-                                                        <span className="first_span">Muscle Toning</span>
-                                                        <span className="second_span"><Rate allowHalf defaultValue={5} /></span></li>
-                                                    <li className="course_fitness_props">
-                                                        <span className="first_span">Interval Training</span>
-                                                        <span className="second_span"><Rate allowHalf defaultValue={5} /></span></li>
-                                                    <li className="course_fitness_props">
-                                                        <span className="first_span">Muscle Memory</span>
-                                                        <span className="second_span"><Rate allowHalf defaultValue={5} /></span></li>
-                                                    <li className="course_fitness_props">
-                                                        <span className="first_span">Mind and Body Coordination</span>
-                                                        <span className="second_span"><Rate allowHalf defaultValue={5} /></span></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <div className="plan_story_block">
-                                            <div className="block_header">
-                                                <h3>Dance Testimonials</h3>
-                                            </div>
-                                            <Divider style={{ marginTop: 0, marginBottom: 0 }} />
-                                            <div className="block_body">
-                                                <div className="black_div">
-                                                    <video src="https://lagostheatrevideos.s3.amazonaws.com/testimonial.mp4" controls />
-                                                </div>
-                                                {/* <ul style={{ display: 'flex', justifyContent: 'space-between' }}>
-                                                    <li><ion-icon name="call-outline"></ion-icon>: +234 803 432 6227</li>
-                                                    <li><ion-icon name="mail-outline"></ion-icon>: info@dancerapy.com</li>
-                                                </ul> */}
-                                            </div>
-                                        </div>
+                                                :
+                                                errorOccurred ?
+                                                    <div className="center_align_message">
+                                                        <div>
+                                                            <h3>Oops!</h3>
+                                                            <p>An error occurred while we were trying to fetch data. Please reload page to
+                                                                try again.</p>
+                                                        </div>
+                                                    </div>
+                                                    :
+                                                    userActiveSubscription ?
+                                                        userPlans.length ?
+                                                            <div className="plan_video_display">
+                                                                <div className="grid_4">
+                                                                    {
+                                                                        userPlans.splice(0, 4).map((productPlans, index) => (
+                                                                            <div key={index}>
+                                                                                <Link to={`${AppRoute.profileVideoToPlay}?videoName=${productPlans.title}&videoId=${productPlans.id}`}>
+                                                                                    <div className="">
+                                                                                        <div className="video-poster">
+                                                                                            <img src={productPlans.poster} alt={productPlans.name} />
+                                                                                            <h4>{productPlans.title}</h4>
+                                                                                        </div>
+                                                                                        <div className="inline_video_flex">
+                                                                                            <p>{productPlans.videoCategory.name}</p>
+                                                                                            <p>{productPlans.videoLength}mins</p>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </Link>
+                                                                            </div>
+                                                                        ))
+                                                                    }
+                                                                </div>
+                                                            </div>
+                                                            :
+                                                            <div>
+                                                                <div className="empty_div">
+                                                                    <div>
+                                                                        <img src={Empty} alt="empty" />
+                                                                        <p>There are no videos yet</p>
+                                                                        {/* <p>You have not placed any orders yet</p> */}
+                                                                        <Link to={AppRoute.products} className="btn_red">View Plans</Link>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        :
+                                                        <div>
+                                                            <div className="empty_div">
+                                                                <div>
+                                                                    <img src={Empty} alt="empty" />
+                                                                    <p>Oops! Your subscription may have expired. Kindly renew to recover access</p>
+                                                                    {/* <p>You have not placed any orders yet</p> */}
+                                                                    <Link to={AppRoute.products} className="btn_red">View Plans</Link>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                        }
                                     </div>
                                 </div>
                                 <div className="pt-4">

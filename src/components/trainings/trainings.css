@@ -171,6 +171,7 @@ ul.physical_plans_list li {
 .plan_group {
     height: 40rem;
     background: red;
+    overflow: hidden;
 }
 
 .plan_group .grid_2 {
@@ -765,6 +766,52 @@ ul.props {
 .dancerapy-products .text-block {
     padding: 10px;
     padding-top: 30px;
+}
+
+.products-cart .ant-modal-body {
+    padding: 30px 15px;
+}
+
+.products-cart .ant-modal-close {
+    display: none;
+}
+
+.products-cart .cart-grid-3 {
+    /* align-items: center; */
+}
+
+.products-cart .cart-grid-3 button {
+    font-size: 1.3rem;
+    padding: 8px 15px;
+    border-radius: 3px;
+    /* grid-template-columns: 1.5fr 5fr 1fr; */
+}
+
+.products-cart .cart-grid-3 .cart-image-cover {
+    height: unset;
+    width: unset;
+    background: unset;
+    display: unset;
+    margin-bottom: unset;
+}
+
+.products-cart .cart-grid-3 .cart-image-cover img {
+    width: 90%;
+    height: unset;
+}
+
+.products-cart .cart-grid-3 h3 {
+    line-height: 1.4;
+    margin-bottom: 0px;
+}
+
+.products-cart .products-cart-title {
+    font-size: 1.8rem;
+    margin-bottom: 0px;
+}
+
+.products-cart .cart-grid-3 p {
+    margin-bottom: 0px;
 }
 
 @media screen and (max-width: 720px) {

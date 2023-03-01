@@ -51,7 +51,7 @@ const Profile = () => {
                             class="profile_icon"
                             name="videocam-outline"></ion-icon>
                         {/* <i className="lni lni-wallet"></i> */}
-                        Virtual Subscription</NavLink>
+                        Past Live Classes</NavLink>
                 </li>
                 <li>
                     <NavLink to={AppRoutes.profilePlanOrders}
@@ -63,7 +63,7 @@ const Profile = () => {
                             class="profile_icon"
                             name="card-outline"></ion-icon>
                         {/* <span className="lnr lnr-gift"></span> */}
-                        Your Plan Orders</NavLink>
+                        Physical Classes</NavLink>
                 </li>
                 <li>
                     <NavLink to={AppRoutes.profileProductOrders}

@@ -3,6 +3,8 @@ import React, { useEffect, useState, useRef } from "react";
 import { useSearchParams, useNavigate, Link } from "react-router-dom";
 import { Controller, useForm } from 'react-hook-form';
 import { Skeleton, notification, Modal } from 'antd';
+import { DownOutlined, UserOutlined } from '@ant-design/icons';
+import { Button, Dropdown, message, Space, Tooltip, Menu } from 'antd';
 import { LoadingOutlined } from '@ant-design/icons';
 import axios from '../../utils/axiosCall';
 
@@ -23,8 +25,6 @@ import Nav from "../../utils/nav";
 import { connect } from "react-redux";
 import AppRoute from "../../utils/routes";
 import Empty from '../../assets/images/empty_history.svg';
-
-import SecLogIn from "./secauth";
 
 const ProductDetail = props => {
 
@@ -53,6 +53,13 @@ const ProductDetail = props => {
     const [fetchingData, setFetchingData] = useState(true);
     const [watchMe, setWatchMe] = useState(false);
     const [productNotFound, setProductNotFound] = useState(false);
+    const [currencyOptions, setCurrencyOptions] = useState([]);
+    const [currencyToUse, setCurrencyToUse] = useState('');
+    const [rentals, setRentals] = useState(null);
+
+    // fetch product plans
+    const [allProductPlans, setAllProductPlans] = useState([]);
+    const [productCart, setProductCart] = useState([]);
 
     useEffect(() => {
         let productId = searchParams.get('productId');
@@ -65,6 +72,7 @@ const ProductDetail = props => {
                         setProductPlans(productPlans.data.message);
                         let planAmount = productPlans.data.message.discount ? ((productPlans.data.message.discount * productPlans.data.message.price) / 100) : productPlans.data.message.price;
                         setAmount(`${planAmount}`);
+                        setAllProductPlans(productPlans.data.message.id);
                     }
                     setErrorOccurred(false);
                     setFetchingData(false);
@@ -97,16 +105,49 @@ const ProductDetail = props => {
                     openNotificationWithIcon('error', 'An error occurred while checking product plans. Please reload page to try again')
                 })
         }
+
+        const items = [
+            {
+                label: 'NGN',
+                key: '1',
+                onClick: () => {
+                    setCurrencyToUse('NGN');
+                    setIsModalOpen(true);
+                }
+            },
+            {
+                label: 'USD',
+                key: '2',
+                onClick: () => {
+                    setCurrencyToUse('USD');
+                    setIsModalOpen(true);
+                }
+            }
+        ];
+        setCurrencyOptions(items);
+        const rentals = (
+            <div className="runMyDrowdown">
+                <div className="dropdown-cover">
+                    <div className="dropdown-list">
+                        <Menu
+                            items={items}
+                        />
+                    </div>
+                </div>
+            </div>
+        )
+        setRentals(rentals);
     }, [])
     const componentProps = {
         email: userData.emailAddress,
-        amount,
+        // email: 'eadelekeife@yahoo.com',
+        amount: amount + '00',
         metadata: {
             name: userData.firstName + ' ' + userData.lastName,
             phone: userData?.phoneNumber,
         },
         publicKey,
-        text: "Buy Plan",
+        text: `Complete Order: NGN ${amount}`,
         onSuccess: (paymentData) => {
             if (paymentData.status === "success") {
                 setLoaderSpinning(true)
@@ -278,153 +319,239 @@ const ProductDetail = props => {
         );
     };
 
+    // product plans cart
+
+    useEffect(() => {
+        axiosCall.get('/fetchAllproductplans')
+            .then(productPlans => {
+                if (productPlans.data.statusMessage === "success") {
+                    setErrorOccurred(false);
+                    setFetchingData(false);
+                    setAllProductPlans(productPlans.data.message);
+                } else {
+                    setErrorOccurred(true);
+                    setFetchingData(false);
+                    openNotificationWithIcon('error', productPlans.data.summary);
+                }
+            })
+            .catch(err => {
+                setErrorOccurred(true);
+                setFetchingData(false);
+                openNotificationWithIcon('error', 'An error occurred while fetching product plans. Please reload page to try again')
+            })
+    }, [])
+
+    const removeProductFromCart = (product) => {
+        let productCartData = productCart;
+        let index = productCartData.indexOf(product.id);
+        productCartData.splice(index, 1);
+        let newAmount = +amount - +product.price;
+        setAmount(newAmount);
+        setProductCart([...productCartData]);
+    }
+
+    const addProductToCart = product => {
+        let newAmount = +amount + +product.price;
+        setAmount(newAmount);
+        setProductCart([...productCart, product.id]);
+    }
+
     return (
         <div>
             <Nav />
-            {
-                fetchingData ?
-                    <div>
-                        {skeleton.map((placeHolder, index) => (
-                            <div className="item" key={index}>
-                                {placeHolder}
-                                <Divider />
-                            </div>
-                        ))}
-                    </div>
-                    :
-                    errorOccurred ?
-                        <div className="center_align_message">
-                            <div>
-                                <h3>Oops!</h3>
-                                <p>An error occurred while we were trying to fetch data. Please reload page to
-                                    try again.</p>
-                            </div>
+            <React.Fragment>
+                {
+                    fetchingData ?
+                        <div>
+                            {skeleton.map((placeHolder, index) => (
+                                <div className="item" key={index}>
+                                    {placeHolder}
+                                    <Divider />
+                                </div>
+                            ))}
                         </div>
                         :
-                        !productNotFound ?
-                            <div>
-                                <div className="plan_group">
-                                    <div className="grid_2">
-                                        <div className="plan_bg">
-                                            <div className="plan_props_detail">
-                                                <h1>{productPlans.title}</h1>
-                                                <p>
-                                                    {productPlans.description}
-                                                </p>
-                                                {/* <div className="course_prop">
-                                                    <ul>
-                                                        <li><ion-icon name="calendar-outline"></ion-icon> Last updated: 08/08/2022</li>
-                                                        <li><ion-icon name="language-outline"></ion-icon> English</li>
-                                                        <li><ion-icon name="videocam-outline"></ion-icon> 80+ videos</li>
-                                                    </ul>
-                                                </div> */}
-                                                {
-                                                    props.auth.isAuthenticated ?
-                                                        activePlan ? <button disabled className="btn_red">You have an Active Plan</button>
-                                                            :
-                                                            <PaystackHookExample />
-                                                        // <button className="btn_red" onClick={() => goToPayment()}>Buy Plan</button>
-                                                        :
-                                                        <button className="btn_red" onClick={() => setIsModalOpen(true)}>Buy Plan</button>
-                                                }
-                                            </div>
-                                        </div>
-                                        <div className="story_bg">
-
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="detail_props pt-3">
-                                    <div className="contain">
-                                        <div className="grid_3">
-                                            <div className="plan_story_block">
-                                                <div className="block_header">
-                                                    <h3>About Dancerapy</h3>
-                                                </div>
-                                                <Divider style={{ marginTop: 0, marginBottom: 0 }} />
-                                                <div className="block_body">
-                                                    <div>
-                                                        <h4>Our Mission Statement</h4>
-                                                        <p>
-                                                            To ensure that people have access to
-                                                            DANCERAPY worldwide through our S.T.U.N.D (Studio Next Door Program)
-                                                        </p>
-                                                    </div>
-                                                    <div>
-                                                        <h4>Our Vision Statement</h4>
-                                                        <p>
-                                                            To ensure that dance fitness becomes a lifestyle for
-                                                            everyone, millions of people around the world thereby increasing life
-                                                            expectancy by 15 – 20%.
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div className="plan_story_block">
-                                                <div className="block_header">
-                                                    <h3>About Dance Plan</h3>
-                                                </div>
-                                                <Divider style={{ marginTop: 0, marginBottom: 0 }} />
-                                                <div className="block_body">
-                                                    <ul>
-                                                        <li className="course_fitness_props">
-                                                            <span className="first_span">Flexibility</span>
-                                                            <span className="second_span"><Rate disabled allowHalf defaultValue={5} /></span></li>
-                                                        <li className="course_fitness_props">
-                                                            <span className="first_span">Cardio</span>
-                                                            <span className="second_span"></span><Rate disabled allowHalf defaultValue={5} /></li>
-                                                        <li className="course_fitness_props">
-                                                            <span className="first_span">Muscle Toning</span>
-                                                            <span className="second_span"><Rate disabled allowHalf defaultValue={5} /></span></li>
-                                                        <li className="course_fitness_props">
-                                                            <span className="first_span">Interval Training</span>
-                                                            <span className="second_span"><Rate disabled allowHalf defaultValue={5} /></span></li>
-                                                        <li className="course_fitness_props">
-                                                            <span className="first_span">Muscle Memory</span>
-                                                            <span className="second_span"><Rate disabled allowHalf defaultValue={5} /></span></li>
-                                                        <li className="course_fitness_props">
-                                                            <span className="first_span">Mind and Body Coordination</span>
-                                                            <span className="second_span"><Rate disabled allowHalf defaultValue={5} /></span></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div className="plan_story_block">
-                                                <div className="block_header">
-                                                    <h3>Dance Testimonials</h3>
-                                                </div>
-                                                <Divider style={{ marginTop: 0, marginBottom: 0 }} />
-                                                <div className="block_body">
-                                                    <div className="black_div">
-                                                        <video
-                                                            src="https://lagostheatrevideos.s3.amazonaws.com/testimonial.mp4"
-                                                            autoPlay={false} style={{ background: 'black' }} playsInline={true} controls />
-                                                    </div>
-                                                    {/* <ul style={{ display: 'flex', justifyContent: 'space-between' }}>
-                                                    <li><ion-icon name="call-outline"></ion-icon>: +234 803 432 6227</li>
-                                                    <li><ion-icon name="mail-outline"></ion-icon>: info@dancerapy.com</li>
-                                                </ul> */}
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="pt-4">
-
-                                    </div>
+                        errorOccurred ?
+                            <div className="center_align_message">
+                                <div>
+                                    <h3>Oops!</h3>
+                                    <p>An error occurred while we were trying to fetch data. Please reload page to
+                                        try again.</p>
                                 </div>
                             </div>
                             :
-                            <div className="center_align_message">
+                            !productNotFound ?
                                 <div>
-                                    <img src={Empty} alt="empty" />
-                                    <p>An error occurred while we were trying to fetch data. Please return to previous
-                                        page to try again.</p>
+                                    <div className="plan_group">
+                                        <div className="grid_2">
+                                            <div className="plan_bg">
+                                                <div className="plan_props_detail">
+                                                    <h1>{productPlans.title}</h1>
+                                                    <p>
+                                                        {productPlans.description}
+                                                    </p>
+                                                    {
+                                                        props.auth.isAuthenticated ?
+                                                            !activePlan ? <button disabled className="btn_red">You have an Active Plan</button>
+                                                                :
+                                                                <Dropdown className="dropme" class="helllos"
+                                                                    overlay={rentals}>
+                                                                    <button className="btn_red" to="#">
+                                                                        Buy Plan <span>| <ion-icon name="chevron-down-outline"></ion-icon></span>
+                                                                    </button>
+                                                                </Dropdown>
+                                                            :
+                                                            <button className="btn_red" onClick={() => setIsModalOpen(true)}>Buy Plan</button>
+                                                    }
+                                                </div>
+                                            </div>
+                                            <div className="story_bg">
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="detail_props pt-3">
+                                        <div className="contain">
+                                            <div className="grid_3">
+                                                <div className="plan_story_block">
+                                                    <div className="block_header">
+                                                        <h3>About Dancerapy</h3>
+                                                    </div>
+                                                    <Divider style={{ marginTop: 0, marginBottom: 0 }} />
+                                                    <div className="block_body">
+                                                        <div>
+                                                            <h4>Our Mission Statement</h4>
+                                                            <p>
+                                                                To ensure that people have access to
+                                                                DANCERAPY worldwide through our S.T.U.N.D (Studio Next Door Program)
+                                                            </p>
+                                                        </div>
+                                                        <div>
+                                                            <h4>Our Vision Statement</h4>
+                                                            <p>
+                                                                To ensure that dance fitness becomes a lifestyle for
+                                                                everyone, millions of people around the world thereby increasing life
+                                                                expectancy by 15 – 20%.
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div className="plan_story_block">
+                                                    <div className="block_header">
+                                                        <h3>About Dance Plan</h3>
+                                                    </div>
+                                                    <Divider style={{ marginTop: 0, marginBottom: 0 }} />
+                                                    <div className="block_body">
+                                                        <ul>
+                                                            <li className="course_fitness_props">
+                                                                <span className="first_span">Flexibility</span>
+                                                                <span className="second_span"><Rate disabled allowHalf defaultValue={5} /></span></li>
+                                                            <li className="course_fitness_props">
+                                                                <span className="first_span">Cardio</span>
+                                                                <span className="second_span"></span><Rate disabled allowHalf defaultValue={5} /></li>
+                                                            <li className="course_fitness_props">
+                                                                <span className="first_span">Muscle Toning</span>
+                                                                <span className="second_span"><Rate disabled allowHalf defaultValue={5} /></span></li>
+                                                            <li className="course_fitness_props">
+                                                                <span className="first_span">Interval Training</span>
+                                                                <span className="second_span"><Rate disabled allowHalf defaultValue={5} /></span></li>
+                                                            <li className="course_fitness_props">
+                                                                <span className="first_span">Muscle Memory</span>
+                                                                <span className="second_span"><Rate disabled allowHalf defaultValue={5} /></span></li>
+                                                            <li className="course_fitness_props">
+                                                                <span className="first_span">Mind and Body Coordination</span>
+                                                                <span className="second_span"><Rate disabled allowHalf defaultValue={5} /></span></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div className="plan_story_block">
+                                                    <div className="block_header">
+                                                        <h3>Dance Testimonials</h3>
+                                                    </div>
+                                                    <Divider style={{ marginTop: 0, marginBottom: 0 }} />
+                                                    <div className="block_body">
+                                                        <div className="black_div">
+                                                            <video
+                                                                src="https://lagostheatrevideos.s3.amazonaws.com/testimonial.mp4"
+                                                                autoPlay={false} style={{ background: 'black' }} playsInline={true} controls />
+                                                        </div>
+                                                        {/* <ul style={{ display: 'flex', justifyContent: 'space-between' }}>
+                                                    <li><ion-icon name="call-outline"></ion-icon>: +234 803 432 6227</li>
+                                                    <li><ion-icon name="mail-outline"></ion-icon>: info@dancerapy.com</li>
+                                                </ul> */}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className="pt-4">
+
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-            }
-            {/* <Modal title={null} footer={null} open={isModalOpen}
+                                :
+                                <div className="center_align_message">
+                                    <div>
+                                        <img src={Empty} alt="empty" />
+                                        <p>An error occurred while we were trying to fetch data. Please return to previous
+                                            page to try again.</p>
+                                    </div>
+                                </div>
+                }
+            </React.Fragment>
+            <Modal title={null} footer={null} open={isModalOpen} className="products-cart"
                 onOk={handleOk} onCancel={handleCancel}>
-                <SecLogIn newFunct={watchMyAuthentication} />
-            </Modal> */}
+                <div>
+                    <h4 className="products-cart-title">Users also buy these</h4>
+                    <Divider style={{ marginTop: 0, marginBottom: 15 }} />
+                    <div>
+                        <div className="cart-data">
+                            {
+                                allProductPlans.map((productPlans, index) => {
+                                    return (
+                                        index === 0 ?
+                                            ''
+                                            :
+                                            <React.Fragment key={index}>
+                                                <div className="cart-grid-3 cart-grid-item">
+                                                    <div className="cart-image-cover">
+                                                        <img src={productPlans.image} alt={productPlans.title} />
+                                                    </div>
+                                                    <div>
+                                                        <h3>{productPlans.title}</h3>
+                                                        <p><span className="currency">NGN</span>{productPlans.price}</p>
+                                                    </div>
+                                                    <div>
+                                                        {
+                                                            productCart.indexOf(productPlans.id) !== -1 ?
+                                                                <button
+                                                                    onClick={() => {
+                                                                        removeProductFromCart(productPlans)
+                                                                    }}
+                                                                    className="btn_red">Remove</button>
+                                                                :
+                                                                <button
+                                                                    onClick={() => {
+                                                                        addProductToCart(productPlans)
+                                                                    }}
+                                                                    className="btn_red">Add to Cart</button>
+                                                        }
+                                                    </div>
+                                                </div>
+                                                {allProductPlans.length - 1 === index ? '' : <Divider />}
+                                            </React.Fragment>
+                                    )
+                                })
+                            }
+                            <Divider />
+                            <div className="grid_flex">
+                                <button onClick={() => setIsModalOpen(false)} className="btn_red">Cancel</button>
+                                <PaystackButton className="btn_red" {...componentProps} />
+                                {/* <button className="btn_red">Complete Order: NGN {amount}</button> */}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </Modal>
             <Footer />
         </div>
     )

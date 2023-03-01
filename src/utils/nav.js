@@ -225,7 +225,7 @@ const Nav = props => {
                             <Link to={AppRoute.instructor}>Become a Dancerapy Instructor</Link>
                         </li>
                         <li>
-                            <Link to={AppRoute.merch}>Merchandise</Link>
+                            <Link to={AppRoute.merch}>Shop Now</Link>
                         </li>
                         {
                             props.auth.isAuthenticated ?
@@ -255,7 +255,7 @@ const Nav = props => {
                                         </Link>
                                     </li>
                                     <li className="style-me">
-                                        <Link to={AppRoute.signup}>Create a free account</Link>
+                                        <Link to={AppRoute.signup}>Sign Up</Link>
                                     </li>
                                 </React.Fragment>
                         }
@@ -431,7 +431,7 @@ const Nav = props => {
                                     // onClick={e => { e.preventDefault(); setExtraNavDisplay(3) }}
                                     onClick={() => setOpenDrawer(false)}
                                     to={AppRoute.merch}>
-                                    <span>Merchandise</span>
+                                    <span>Shop Now</span>
                                     {/* <ion-icon name="arrow-forward-outline"></ion-icon> */}
                                 </Link>
                             </li>
@@ -485,7 +485,7 @@ const Nav = props => {
                                             <Link
                                                 onClick={() => setOpenDrawer(false)}
                                                 to={AppRoute.signup}>
-                                                <span>Create a free Account</span>
+                                                <span>Sign Up</span>
                                                 <ion-icon name="arrow-forward-outline"></ion-icon>
                                             </Link>
                                         </li>

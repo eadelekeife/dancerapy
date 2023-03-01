@@ -1,4 +1,6 @@
 import "./homepage.css";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 import React from "react";
 
@@ -11,6 +13,7 @@ import Footer from "../../utils/footer-sec";
 
 import { Input } from 'antd';
 import { Controller, useForm } from "react-hook-form";
+import Slider from "react-slick";
 import ReactPlayer from 'react-player';
 
 import { Link } from "react-router-dom";
@@ -163,18 +166,38 @@ const AboutUs = () => {
                                         <p>We believe that everyone can benefit from dancing, and we're committed to helping
                                             our clients achieve their dance goals. Join us and let's dance!</p>
                                     </div>
-                                    <div className="grid_4">
-                                        <div >
-                                            <img src={Annual} alt="_1" />
+                                    <div className="desktop-only">
+                                        <div className="grid_4">
+                                            <div >
+                                                <img src={Annual} alt="_1" />
+                                            </div>
+                                            <div>
+                                                <img src={Flash} alt="_1" />
+                                            </div>
+                                            <div>
+                                                <img src={Zoom} alt="_1" />
+                                            </div>
+                                            <div>
+                                                <img src={Physical} alt="_1" />
+                                            </div>
                                         </div>
-                                        <div>
-                                            <img src={Flash} alt="_1" />
-                                        </div>
-                                        <div>
-                                            <img src={Zoom} alt="_1" />
-                                        </div>
-                                        <div>
-                                            <img src={Physical} alt="_1" />
+                                    </div>
+                                    <div className="mobile-only">
+                                        <div className="inner-contai">
+                                            <Slider {...settings}>
+                                                <div key={1}>
+                                                    <img src={Annual} alt="_1" />
+                                                </div>
+                                                <div key={2}>
+                                                    <img src={Flash} alt="_1" />
+                                                </div>
+                                                <div key={3}>
+                                                    <img src={Zoom} alt="_1" />
+                                                </div>
+                                                <div key={4}>
+                                                    <img src={Physical} alt="_1" />
+                                                </div>
+                                            </Slider>
                                         </div>
                                     </div>
                                 </div>
@@ -190,7 +213,7 @@ const AboutUs = () => {
                     <div className="instructor">
                         <div className="contain">
                             <div className="grid_2">
-                                <div>
+                                <div className="text-cover">
                                     <h4>Get ready for your workout with our Dancerapy fitness series</h4>
                                     <p>
                                         Dancerapy is a fitness and lifestyle brand invested in reintroducing dance as

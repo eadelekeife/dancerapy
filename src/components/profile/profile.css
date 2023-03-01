@@ -248,3 +248,48 @@
         min-height: 50rem;
     }
 }
+
+.video-calendar-block button.btn_red {
+    padding: 6px 15px;
+    border-radius: 3px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    width: 20%;
+}
+.video-calendar-block {
+    margin-bottom: 40px;
+}
+
+.video-calendar-block form {
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+}
+
+.video-calendar-block form button {
+    height: 4rem;
+    padding: 0px 20px;
+    background: var(--red);
+    border: none;
+    color: #fff;
+    font-size: 1.3rem;
+    border-radius: 0px 3px 3px 0px;
+}
+
+.main_video.plan_group {
+    position: relative;
+    height: 500px;
+    background: #000;
+    width: 100%;
+    overflow: hidden;
+}
+
+.main_video.plan_group video {
+    position: absolute;
+    z-index: 1;
+    top: 50%;
+    left: 50%;
+    transform: translate3d(-50%, -50%, 10px);
+    width: 100vw;
+    height: 56.25vw;
+}
