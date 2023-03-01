@@ -3,7 +3,8 @@ import "./profile.css";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { Skeleton, notification, Input, Divider, Modal, Table, Tabs } from 'antd';
+import { Skeleton, notification, Input, Divider, Modal, Table, Tabs, Spin } from 'antd';
+import { LoadingOutlined } from '@ant-design/icons';
 import AppRoute from "../../utils/routes";
 import Footer from "../../utils/footer";
 import { DateTime } from 'luxon';
@@ -15,6 +16,7 @@ import SideNav from "./side_nav";
 import Empty from "../../assets/images/auth/empty.svg";
 import _1 from "../../assets/images/content/_1.avif";
 import _2 from "../../assets/images/content/_2.avif";
+import ArrowLeft from "../../assets/images/arrow-left.svg";
 import axiosCall from "../../utils/axiosCall";
 
 const VirtualSubcriptions = props => {
@@ -26,10 +28,15 @@ const VirtualSubcriptions = props => {
         });
     };
 
-    const { handleSubmit, control } = useForm({});
+    const antIcon = <LoadingOutlined style={{ fontSize: 24, color: '#fff' }} spin />;
+
+    const { handleSubmit, control, setValue } = useForm({});
     const [currentNav, setCurrentNav] = useState(0);
     const [isModalOpen, setIsModalOpen] = useState(false);
-
+    const [searchVideoDisplay, setSearchVideoDisplay] = useState(false);
+    const [searchedVideos, setSearchedVideo] = useState([]);
+    const [loadingSearchButton, setLoadingSearchButton] = useState(false);
+    const [searchKey, setSearchKey] = useState('');
 
     const [userPlans, setUserPlans] = useState([]);
     const [loadingdata, setLoadingData] = useState(true);
@@ -550,13 +557,26 @@ const VirtualSubcriptions = props => {
 
 
     // search video
-    const findVideoByName = (videoName) => {
+    const findVideoByName = (e) => {
+        setLoadingSearchButton(true);
         let newVideoBox = userPlans.filter(video => {
-            if (video.title.toLowerCase().includes(videoName.toLowerCase())) {
+            if (video.title.toLowerCase().includes(e.videoName.toLowerCase())) {
                 return video;
             }
         });
-        console.log(newVideoBox);
+        setSearchedVideo(newVideoBox);
+        setTimeout(() => {
+            setSearchVideoDisplay(true);
+            setLoadingSearchButton(false);
+            setSearchKey(e.videoName);
+            setValue('videoName', '');
+        }, 2000)
+    }
+
+    const goBacktoMainVideos = () => {
+        setSearchKey('');
+        setSearchVideoDisplay(false);
+        setSearchedVideo([]);
     }
 
     return (
@@ -595,71 +615,60 @@ const VirtualSubcriptions = props => {
                                         :
                                         userActiveSubscription ?
                                             userPlans.length ?
-                                                <div className="plan_video_display">
-                                                    <div className="video-calendar-block">
-                                                        <div className="grid_flex">
-                                                            <button
-                                                                onClick={() => setIsModalOpen(true)}
-                                                                className="btn_red">See Calendar <span>| <ion-icon name="calendar-outline"></ion-icon></span></button>
-                                                            <div>
-                                                                <form onSubmit={handleSubmit(findVideoByName)}>
-                                                                    <div>
-                                                                        <Controller name="email" defaultValue="" control={control}
-                                                                            render={({ field }) => (
-                                                                                <Input {...field} style={{ height: '4rem' }} />
-                                                                            )}
-                                                                        />
-                                                                    </div>
-                                                                    <button>Find Video</button>
-                                                                </form>
+                                                !searchVideoDisplay ?
+                                                    <div className="plan_video_display">
+                                                        <div className="video-calendar-block">
+                                                            <div className="grid_flex">
+                                                                <button
+                                                                    onClick={() => setIsModalOpen(true)}
+                                                                    className="btn_red">See Calendar <span>| <ion-icon name="calendar-outline"></ion-icon></span></button>
+                                                                <div>
+                                                                    <form autoComplete="off" onSubmit={handleSubmit(findVideoByName)}>
+                                                                        <div>
+                                                                            <Controller name="videoName" defaultValue="" control={control}
+                                                                                render={({ field }) => (
+                                                                                    <Input autoComplete="off" {...field} type="text" style={{ height: '4rem' }} />
+                                                                                )}
+                                                                            />
+                                                                        </div>
+                                                                        {
+                                                                            !loadingSearchButton ?
+                                                                                <button
+                                                                                    style={{ cursor: 'pointer' }}
+                                                                                >Find Video</button>
+                                                                                :
+                                                                                <button disabled><Spin indicator={antIcon} /></button>
+                                                                        }
+                                                                    </form>
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                    <div className="categoryDisplay">
-                                                        <div
-                                                            onClick={() => setFilter('all')}
-                                                            className="">
-                                                            <p className={`tag ${filter === 'all' ? 'active' : ''}`}>All</p>
-                                                        </div>
-                                                        {
-                                                            categoryBox.map((category, index) => (
-                                                                <div key={index}>
-                                                                    <div
-                                                                        onClick={() => setFilter(category)}
-                                                                        className="">
-                                                                        <p
-                                                                            className={`tag ${filter === category ? 'active' : ''}`}>{category}</p>
-                                                                    </div>
-                                                                </div>
-                                                            ))
-                                                        }
-                                                    </div>
-                                                    <div className="grid_3">
-                                                        {
-                                                            filter === "all" ?
-                                                                userPlans.map((productPlans, index) => (
+                                                        <div className="categoryDisplay">
+                                                            <div
+                                                                onClick={() => setFilter('all')}
+                                                                className="">
+                                                                <p className={`tag ${filter === 'all' ? 'active' : ''}`}>All</p>
+                                                            </div>
+                                                            {
+                                                                categoryBox.map((category, index) => (
                                                                     <div key={index}>
-                                                                        <Link to={`${AppRoute.profileVideoToPlay}?videoName=${productPlans.title}&videoId=${productPlans.id}`}>
-                                                                            <div className="">
-                                                                                <div className="video-poster">
-                                                                                    <img src={productPlans.poster} alt={productPlans.name} />
-                                                                                    <h4>{productPlans.title}</h4>
-                                                                                </div>
-                                                                                <div className="inline_video_flex">
-                                                                                    <p>{productPlans.videoCategory.name}</p>
-                                                                                    <p>{productPlans.videoLength}mins</p>
-                                                                                </div>
-                                                                            </div>
-                                                                        </Link>
+                                                                        <div
+                                                                            onClick={() => setFilter(category)}
+                                                                            className="">
+                                                                            <p
+                                                                                className={`tag ${filter === category ? 'active' : ''}`}>{category}</p>
+                                                                        </div>
                                                                     </div>
                                                                 ))
-                                                                :
-                                                                userPlans.map((productPlans, index) => (
-                                                                    filter === productPlans.videoCategory.name ?
+                                                            }
+                                                        </div>
+                                                        <div className="grid_3">
+                                                            {
+                                                                filter === "all" ?
+                                                                    userPlans.map((productPlans, index) => (
                                                                         <div key={index}>
                                                                             <Link to={`${AppRoute.profileVideoToPlay}?videoName=${productPlans.title}&videoId=${productPlans.id}`}>
                                                                                 <div className="">
-                                                                                    {/* <img src={productPlans.poster} alt={productPlans.name} /> */}
                                                                                     <div className="video-poster">
                                                                                         <img src={productPlans.poster} alt={productPlans.name} />
                                                                                         <h4>{productPlans.title}</h4>
@@ -670,11 +679,71 @@ const VirtualSubcriptions = props => {
                                                                                     </div>
                                                                                 </div>
                                                                             </Link>
-                                                                        </div> : ''
-                                                                ))
-                                                        }
+                                                                        </div>
+                                                                    ))
+                                                                    :
+                                                                    userPlans.map((productPlans, index) => (
+                                                                        filter === productPlans.videoCategory.name ?
+                                                                            <div key={index}>
+                                                                                <Link to={`${AppRoute.profileVideoToPlay}?videoName=${productPlans.title}&videoId=${productPlans.id}`}>
+                                                                                    <div className="">
+                                                                                        {/* <img src={productPlans.poster} alt={productPlans.name} /> */}
+                                                                                        <div className="video-poster">
+                                                                                            <img src={productPlans.poster} alt={productPlans.name} />
+                                                                                            <h4>{productPlans.title}</h4>
+                                                                                        </div>
+                                                                                        <div className="inline_video_flex">
+                                                                                            <p>{productPlans.videoCategory.name}</p>
+                                                                                            <p>{productPlans.videoLength}mins</p>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </Link>
+                                                                            </div> : ''
+                                                                    ))
+                                                            }
+                                                        </div>
                                                     </div>
-                                                </div>
+                                                    :
+                                                    <React.Fragment>
+                                                        <div className="search-display">
+                                                            <button
+                                                                onClick={() => goBacktoMainVideos()}
+                                                                className="btn_border_black"><img src={ArrowLeft} alt="Arrow left" />Go back</button>
+                                                            <h4 className="search-title">"{searchKey}"</h4>
+                                                            {
+                                                                searchedVideos.length ?
+                                                                    <div className="plan_video_display">
+                                                                        <div className="grid_3">
+                                                                            {searchedVideos.map((productPlans, index) => (
+                                                                                <div key={index}>
+                                                                                    <Link to={`${AppRoute.profileVideoToPlay}?videoName=${productPlans.title}&videoId=${productPlans.id}`}>
+                                                                                        <div className="">
+                                                                                            {/* <img src={productPlans.poster} alt={productPlans.name} /> */}
+                                                                                            <div className="video-poster">
+                                                                                                <img src={productPlans.poster} alt={productPlans.name} />
+                                                                                                <h4>{productPlans.title}</h4>
+                                                                                            </div>
+                                                                                            <div className="inline_video_flex">
+                                                                                                <p>{productPlans.videoCategory.name}</p>
+                                                                                                <p>{productPlans.videoLength}mins</p>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </Link>
+                                                                                </div>
+                                                                            ))
+                                                                            }
+                                                                        </div>
+                                                                    </div>
+                                                                    :
+                                                                    <div className="search_empty_div">
+                                                                        <div>
+                                                                            <img src={Empty} alt="empty" />
+                                                                            <p>Videos not found</p>
+                                                                        </div>
+                                                                    </div>
+                                                            }
+                                                        </div>
+                                                    </React.Fragment>
                                                 :
                                                 <div>
                                                     <div className="empty_div">

@@ -293,3 +293,33 @@
     width: 100vw;
     height: 56.25vw;
 }
+
+.search-display .search-title {
+    font-size: 1.6rem;
+    margin-bottom: 0px;
+}
+
+.search-display button.btn_border_black {
+    padding: 5px 15px;
+    font-size: 1.4rem;
+    margin-bottom: 30px;
+}
+
+.search-display button.btn_border_black img {
+    height: 1.6rem;
+    width: auto;
+}
+
+.search_empty_div {
+    width: 20%;
+}
+
+.search_empty_div img {
+    width: 70%;
+    height: auto;
+}
+
+.search_empty_div p {
+    font-size: 1.3rem;
+    /* text-align: center; */
+}

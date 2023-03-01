@@ -104,7 +104,7 @@ const SignIn = props => {
                                 {
                                     loadingData
                                         ?
-                                        <button>
+                                        <button disabled>
                                             <Spin indicator={antIcon} /></button>
                                         :
                                         <button>Sign in now</button>
