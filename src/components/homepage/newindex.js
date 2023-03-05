@@ -2,7 +2,7 @@ import "./homepage.css";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import { Divider, Modal } from "antd";
 
@@ -13,15 +13,14 @@ import Footer from "../../utils/footer-sec";
 
 import { Input } from 'antd';
 import { Controller, useForm } from "react-hook-form";
+import { connect } from 'react-redux';
 import Slider from "react-slick";
-import ReactPlayer from 'react-player';
 
 import { Link } from "react-router-dom";
 import AppRoute from "../../utils/routes";
+import SecSignIn from "../auth/signin-popup";
 
 import AboutImage from "../../assets/images/homepage/instructor.jpg";
-import Instructor from "../../assets/images/homepage/instructor_hero.jpg";
-import Schools from "../../assets/images/homepage/link2.jpeg";
 
 import _1 from '../../assets/images/companies/access.webp';
 import _2 from '../../assets/images/companies/shell.png';
@@ -45,7 +44,7 @@ import Insta4 from "../../assets/images/content/event4.jpg";
 import { ReactComponent as Cabify } from "./run.svg";
 import { ReactComponent as Mailchimp } from "./mailchimp.svg";
 
-const AboutUs = () => {
+const AboutUs = props => {
 
     const playerRef = React.useRef(null);
     const videoElement = React.useRef();
@@ -122,6 +121,15 @@ const AboutUs = () => {
     // }
     const { handleSubmit, control } = useForm({});
     const [buttonDisplay, setButtonDisplay] = useState(false);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    useEffect(() => {
+        if (!props.auth.isAuthenticated) {
+            setTimeout(() => {
+                setIsModalOpen(true);
+            }, 6000)
+        }
+    }, [])
 
     const playVideo = () => {
         let video = videoElement.current;
@@ -311,12 +319,19 @@ const AboutUs = () => {
                     <Link to={AppRoute.trainings} className="btn_red">See our locations</Link>
                 </div>
             </div> */}
-            <Modal
-            
-            />
+            <Modal title={null} footer={null} open={isModalOpen} className="products-cart"
+                onOk={() => setIsModalOpen(false)} onCancel={() => setIsModalOpen(false)}>
+                <div className="auth-display">
+                    <SecSignIn />
+                </div>
+            </Modal>
             <Footer margin={true} />
         </div>
     )
 }
 
-export default AboutUs;
+const mapStateToProps = state => {
+    return { auth: state.auth }
+}
+
+export default connect(mapStateToProps)(AboutUs);

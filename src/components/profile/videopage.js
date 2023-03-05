@@ -56,6 +56,7 @@ const ProfileVideoToPlay = props => {
                 if (productPlans.data.statusMessage === "success") {
                     setErrorOccurred(false);
                     setFetchingData(false);
+                    console.log(productPlans.data)
                     setProductPlans(productPlans.data.message.virtualClassLinks);
                 } else {
                     setErrorOccurred(true);
@@ -263,6 +264,9 @@ const ProfileVideoToPlay = props => {
                                     <button onClick={() => fullScreenVideo()}>
                                         <ion-icon name="expand-outline"></ion-icon>
                                     </button>
+                                    <div>
+{/* <p>{productPlans.me}</p> */}
+                                    </div>
                                 </div>
                             </div>
                             <div className="detail_props pt-3">
