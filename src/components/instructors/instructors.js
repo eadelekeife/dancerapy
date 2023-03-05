@@ -1,6 +1,6 @@
 import "./instructors.css";
 
-import React from "react";
+import React, { useState } from "react";
 
 import { Rate } from "antd";
 
@@ -22,6 +22,20 @@ import _8 from '../../assets/images/companies/mtn.png';
 import { ReactComponent as Wave } from "../../assets/images/wave-yellow.svg";
 
 const AboutUs = () => {
+
+    const videoElement = React.useRef();
+    const [buttonDisplay, setButtonDisplay] = useState(false);
+
+    const playVideo = () => {
+        let video = videoElement.current;
+        video.play();
+        setButtonDisplay(true);
+    }
+    const pauseVideo = () => {
+        let video = videoElement.current;
+        video.pause();
+        setButtonDisplay(false);
+    }
     return (
         <div className="about_us">
             <Nav />
@@ -107,8 +121,20 @@ const AboutUs = () => {
             </div>
             <div className="team-bg mt-5">
                 <video
-                    src={InstructorVideo}
+                    src={InstructorVideo} ref={videoElement} loop
                     autoPlay={false} style={{ background: 'black' }} playsInline={true} controls />
+                <div className="black_overlay">
+                </div>
+                <div className="hero_section_div">
+                    {
+                        !buttonDisplay ?
+                            <button onClick={() => playVideo()}>
+                                <ion-icon name="play-circle-outline"></ion-icon></button>
+                            :
+                            <button onClick={() => pauseVideo()}>
+                                <ion-icon name="pause-circle-outline"></ion-icon></button>
+                    }
+                </div>
             </div>
             <div className="mt-5 instructor_testimonials">
                 <div className="container">

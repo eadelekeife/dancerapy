@@ -9,6 +9,8 @@ import Footer from "../../utils/footer";
 import Nav from "../../utils/nav";
 import { DateTime } from 'luxon';
 
+import VideoPlans from "./product-plans";
+
 import SideNav from "./side_nav";
 
 import Empty from "../../assets/images/auth/empty.svg";
@@ -169,11 +171,15 @@ const Profile = props => {
                                                 </div>
                                             </div>
                                             :
-                                            <div className="empty_div">
+                                            <div>
+                                                <div className="product-display empty_div">
+                                                    <div>
+                                                        <img src={Empty} alt="empty" />
+                                                        <p>You have not placed any orders yet</p>
+                                                    </div>
+                                                </div>
                                                 <div>
-                                                    <img src={Empty} alt="empty" />
-                                                    <p>You have not placed any orders yet</p>
-                                                    <Link to={AppRoute.trainings} className="btn_red">View Plans</Link>
+                                                    <VideoPlans />
                                                 </div>
                                             </div>
                             }

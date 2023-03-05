@@ -210,19 +210,18 @@ const Nav = props => {
                                 :
                                 ''
                         }
-
                         <li>
-                            <Link to={AppRoute.products}>Products and Services</Link>
-                        </li>
-                        <li>
-                            <Link to={AppRoute.trainings}>Trainings</Link>
+                            <Link to={AppRoute.instructor}>Become a Dancerapy Instructor</Link>
                         </li>
                     </ul>
                 </div>
                 <div className="desktop-only">
                     <ul>
                         <li>
-                            <Link to={AppRoute.instructor}>Become a Dancerapy Instructor</Link>
+                            <Link to={AppRoute.products}>Products and Services</Link>
+                        </li>
+                        <li>
+                            <Link to={AppRoute.trainings}>Physical Trainings</Link>
                         </li>
                         <li>
                             <Link to={AppRoute.merch}>Shop Now</Link>

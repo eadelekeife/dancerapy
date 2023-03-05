@@ -667,13 +667,17 @@
     color: #fff;
 }
 
+.homepage_links h3.page-title {
+    color: unset;
+}
+
 .instructor .grid_2 h4 {
     /* color: #fff; */
 }
 
 .instructor .grid_2 a {
-    color: #fff;
-    border: 1px solid #fff;
+    color: #EFF0F6;
+    border: 1px solid #EFF0F6;
     width: max-content;
     padding: 12px 25px;
 }
@@ -836,6 +840,10 @@
     font-size: 2.3rem;
     margin-bottom: 0px;
     /* padding-top: 15%; */
+}
+
+.dance-redesign-props-data img {
+    height: 35rem;
 }
 
 .dance-redesign-text-display a {
@@ -1123,14 +1131,34 @@
     height: 100%;
     background: linear-gradient(to bottom, rgba(0, 0, 0, .1), rgba(0, 0, 0, 1));
     z-index: 5;
+    /* display: flex;
+    justify-content: center;
+    align-items: center; */
+}
+
+.hero_section_div button {
+    background: rgba(0, 0, 0, .2);
+    width: max-content;
+    cursor: pointer;
+}
+
+.hero_section_div button ion-icon {
+    color: #fff;
+    font-size: 6rem;
+    position: relative;
+    z-index: 100;
+}
+
+.hero_section_div {
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
 }
 
 .hero_section_div a {
-    position: absolute;
-    z-index: 10;
-    top: 50%;
-    left: 50%;
-    transform: translate3d(-50%, -50%, 10px);
     padding: 10px 25px;
     border-radius: 4px;
     color: #fff;
@@ -1138,6 +1166,9 @@
     border: 1px solid var(--red);
     border-radius: 4px;
     font-size: 1.4rem;
+    z-index: 10;
+    height: max-content;
+    width: max-content;
 }
 
 .instructor-cover .instructor {
@@ -1281,7 +1312,7 @@
 
     .instructor-cover .instructor {
         border-radius: 0px;
-        padding: 15% 0px;
+        padding: 12% 0px;
         padding-top: 0px;
     }
 
@@ -1289,10 +1320,12 @@
         width: 100%;
         font-size: 2rem;
         margin-bottom: 10px;
+        line-height: 1.6;
     }
 
     .instructor .grid_2 p {
-        font-size: 1.4rem;
+        font-size: 1.35rem;
+        line-height: 1.8;
         margin-bottom: 20px;
     }
 
@@ -1304,14 +1337,29 @@
         padding: 5% 0px;
     }
 
+    .instructor .grid_2 a {
+        margin-top: 20px;
+        display: block;
+        width: max-content;
+        font-size: 1.35rem;
+        padding: 10px 25px;
+    }
+
     .homepage_links .show_homepage_content .grid_4 {
         display: flex;
         flex-direction: column;
+        grid-gap: 30px;
     }
 
-    .homepage_links p {
-        font-size: 1.4rem;
+    .homepage_links a {
+        display: block;
+        width: max-content;
+    }
+
+    .homepage_links p{
+        font-size: 1.3rem;
         margin-bottom: 10px;
+        line-height: 1.8;
     }
 
     .homepage_links button {
@@ -1320,7 +1368,7 @@
     }
 
     .homepage_links h3 {
-        font-size: 1.6rem;
+        font-size: 1.5rem;
         margin-bottom: 0px;
     }
 
@@ -1524,10 +1572,14 @@
     }
 
     .show_homepage_content img {
-        height: 35rem;
+        height: 18rem;
         width: 100%;
         object-fit: cover;
         object-position: center;
+    }
+
+    .dance-redesign-props-data .show_homepage_content img {
+        height: 35rem;
     }
 
     .dance-redesign-props-data .flex-display .blur_me {
@@ -1538,11 +1590,24 @@
     }
     .dance-redesign-props-data .show_homepage_content {
         position: relative;
+        padding-top: 0px;
     }
     .new-homepage {
         background: unset;
     }
     .instructor-cover .instructor .grid_2 .text-cover {
         padding: 0px 1.5%;
+    }
+
+    .instructor-cover .video-cover img {
+        height: 25rem;
+    }
+
+    .dance-redesign-props-data h2 {
+        font-size: 2rem;
+        /* width: 90%;
+        margin: unset; */
+        margin-bottom: 0px;
+        padding-top: 15%;
     }
 }

@@ -151,23 +151,31 @@
     position: relative;
 }
 
-.plan_video_display .grid_3 img {
+.plan_video_display .grid_4 img {
     height: 12rem;
 }
 
-.plan_video_display .grid_3 .video-poster h4 {
-    /* position: absolute; */
-    /* background: rgba(0, 0, 0, .9); */
+.other-dance-styles.plan_video_display .grid_4 img {
+    height: 16rem;
+}
+
+.plan_video_display .grid_4 .video-poster h4 {
     bottom: 10px;
     width: 100%;
     margin-bottom: 0px;
     border-radius: 0px 0px 10px 10px;
     padding-top: 10px;
-    /* color: #fff; */
-    /* padding-left: 10px; */
     padding-bottom: 5px;
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     line-height: 1.3;
+}
+
+.other-dance-styles.plan_video_display .grid_4 .video-poster h4 {
+    font-size: 1.4rem;
+}
+
+.other_profile_title {
+    font-size: 1.8rem;
 }
 
 .categoryDisplay {
@@ -210,6 +218,47 @@
     text-align: right;
 }
 
+.product-display.empty_div {
+    min-height: unset;
+}
+
+.product-display.empty_div img {
+    height: auto;
+    width: 30%;
+}
+
+.product-display.empty_div p {
+    margin-bottom: 0px;
+}
+
+.profile_div.main_info .profile_to_right h3.other-prroducts-title {
+    font-size: 1.8rem;
+}
+
+.profile_div.main_info .profile_to_right .empty-product-display img {
+    height: 25rem;
+}
+
+.profile_div.main_info .profile_to_right .empty-product-display p {
+    font-size: 1.4rem;
+    margin-top: 10px;
+    margin-bottom: 0px;
+}
+
+.profile_div.main_info .profile_to_right .empty-product-display a {
+    font-size: 1.4rem;
+}
+
+.profile_div.main_info p.merch_name {
+    font-family: inherit;
+}
+
+.flex-btn span {
+    display: flex;
+    align-items: center;
+    grid-gap: 5px;
+}
+
 @media screen and (max-width: 720px) {
     .profile_div.main_info {
         display: block;
@@ -249,7 +298,8 @@
     }
 }
 
-.video-calendar-block button.btn_red {
+.video-calendar-block button.btn_red,
+.flex-btn.btn_red {
     padding: 6px 15px;
     border-radius: 3px;
     display: flex;
@@ -257,6 +307,7 @@
     justify-content: space-between;
     width: 20%;
 }
+
 .video-calendar-block {
     margin-bottom: 40px;
 }
@@ -322,4 +373,50 @@
 .search_empty_div p {
     font-size: 1.3rem;
     /* text-align: center; */
+}
+
+
+.video-calendar {
+    width: 720px !important;
+}
+
+.video-calendar .ant-modal-body {
+    padding: 30px 15px;
+}
+
+.video-calendar .ant-pagination.ant-table-pagination {
+    display: none;
+}
+
+.video-calendar .ant-table-thead>tr>th,
+.video-calendar .ant-table-tbody>tr>td,
+.video-calendar .ant-table tfoot>tr>th,
+.video-calendar .ant-table tfoot>tr>td {
+    padding: 10px;
+    font-size: 1.3rem;
+}
+
+.video-calendar .inner-fragment {
+    padding-top: 10px;
+}
+
+.video-player-controls {
+    position: absolute;
+    z-index: 100;
+    background: #fff;
+    bottom: 0px;
+    display: flex;
+    padding: 5px 30px;
+    padding-top: 10px;
+    grid-gap: 20px;
+}
+
+.video-player-controls button {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.video-player-controls button ion-icon {
+    font-size: 3rem;
 }

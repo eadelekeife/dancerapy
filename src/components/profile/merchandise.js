@@ -99,7 +99,7 @@ const Profile = props => {
                     <div className="contain">
                         <div className="profile-data-display">
                             <h3 className="profile_title">Merchandise Orders</h3>
-                            <div className="empty_div">
+                            <div className="product-display empty_div mt-4">
                                 <div>
                                     <img src={Empty} alt="empty" />
                                     <p>You have not placed any orders yet</p>
@@ -107,7 +107,7 @@ const Profile = props => {
                                 </div>
                             </div>
                             <div className="mt-5">
-                                <h3>Some items users buy</h3>
+                                <h3 className="other-prroducts-title">Some items users buy</h3>
                                 {
                                     fetchingData ?
                                         <div>

@@ -11,9 +11,6 @@ import { loginUser } from '../../utils/reducers/auth';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 
-import Footer from '../../utils/footer';
-import Nav from "../../utils/nav";
-
 const SignIn = props => {
 
     const openNotificationWithIcon = (type, message) => {
@@ -65,7 +62,6 @@ const SignIn = props => {
 
     return (
         <div>
-            <Nav />
             <div className="form form_page form-redesign">
                 <div className="alignbothtoside">
                     <div className="real_form_boxes">
@@ -121,9 +117,6 @@ const SignIn = props => {
                         {/* <img src={WomanPicture} alt="woman" /> */}
                     </div>
                 </div>
-            </div>
-            <div className="show-on-mobile-only">
-                <Footer />
             </div>
         </div >
     )

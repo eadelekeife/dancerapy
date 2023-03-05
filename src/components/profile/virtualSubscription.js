@@ -11,6 +11,8 @@ import { Input, Spin, Modal, Divider, Skeleton, notification } from 'antd';
 import { LoadingOutlined } from '@ant-design/icons';
 import axiosCall from '../../utils/axiosCall';
 
+import VideoPlans from "./product-plans";
+
 // This imports the functional component from the previous sample.
 
 import * as yup from 'yup';
@@ -82,7 +84,7 @@ const Profile = () => {
                     <div className="profile_to_right">
                         <div className="contain">
                             <div className="profile-data-display">
-                                <h3 className="profile_title">Annual Subscriptions</h3>
+                                <h3 className="profile_title">Past Live Classes</h3>
                                 <Divider style={{ margin: '0px 0px' }} />
                                 {
                                     loadingdata ?
@@ -110,6 +112,7 @@ const Profile = () => {
                                                         {
                                                             userPlans.map((productPlans, index) => (
                                                                 <div key={index}>
+                                                                    <div className={`${index === 0 ? "mt-3" : ""}`}></div>
                                                                     <div className="training_group">
                                                                         <div className="training_inside_group">
                                                                             <div className="training_inside_img">
@@ -126,11 +129,11 @@ const Profile = () => {
                                                                                     <li>&bull; Muscle Memory</li>
                                                                                     <li>&bull; Mind and Body Coordination</li>
                                                                                 </ul>
-                                                                                <ul className="physical_plans_list">
+                                                                                {/* <ul className="physical_plans_list">
                                                                                     <li><ion-icon name="language-outline"></ion-icon> English</li>
                                                                                     <li><ion-icon name="heart-outline"></ion-icon> 0 reviews</li>
                                                                                     <li><ion-icon name="alarm-outline"></ion-icon> 1 hour</li>
-                                                                                </ul>
+                                                                                </ul> */}
                                                                             </div>
                                                                         </div>
                                                                         <div className="training_side_cover">
@@ -164,12 +167,14 @@ const Profile = () => {
                                                     </div>
                                                 :
                                                 <div>
-                                                    <div className="empty_div">
+                                                    <div className="product-display empty_div">
                                                         <div>
                                                             <img src={Empty} alt="empty" />
                                                             <p>Oops! Your subscription may have expired. Kindly renew to recover access</p>
-                                                            <Link to={AppRoute.products} className="btn_red">View Plans</Link>
                                                         </div>
+                                                    </div>
+                                                    <div>
+                                                        <VideoPlans />
                                                     </div>
                                                 </div>
                                 }
@@ -179,7 +184,7 @@ const Profile = () => {
                 </div>
             </div>
             <Footer />
-        </div>
+        </div >
     )
 }
 

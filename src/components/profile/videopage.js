@@ -136,6 +136,7 @@ const ProfileVideoToPlay = props => {
     // videos display
     const { handleSubmit, control } = useForm({});
     const [currentNav, setCurrentNav] = useState(0);
+    const videoElement = React.useRef();
 
 
     const [userPlans, setUserPlans] = useState([]);
@@ -143,6 +144,7 @@ const ProfileVideoToPlay = props => {
     const [userActiveSubscription, setUserActiveSubscription] = useState(false);
     const [categoryBox, setCategoryBox] = useState([]);
     const [filter, setFilter] = useState('all');
+    const [buttonDisplay, setButtonDisplay] = useState(false);
 
     useEffect(() => {
         if (localStorage.getItem('purchaseSuccessful')) {
@@ -186,6 +188,31 @@ const ProfileVideoToPlay = props => {
         skeleton.push(<Skeleton active />)
     }
 
+    const playVideo = () => {
+        let video = videoElement.current;
+        setButtonDisplay(true);
+        video.play();
+    }
+
+    const pauseVideo = () => {
+        let video = videoElement.current;
+        setButtonDisplay(false);
+        video.pause();
+    }
+
+    const fullScreenVideo = () => {
+        let video = videoElement.current;
+        if (video.requestFullscreen) {
+            video.requestFullscreen();
+        } else if (video.mozRequestFullScreen) {
+            video.mozRequestFullScreen();
+        } else if (video.webkitRequestFullscreen) {
+            video.webkitRequestFullscreen();
+        } else if (video.msRequestFullscreen) {
+            video.msRequestFullscreen();
+        }
+    }
+
     return (
         <div>
             <Nav />
@@ -212,14 +239,37 @@ const ProfileVideoToPlay = props => {
                         <div>
                             <div className="main_video plan_group">
                                 <video
+                                    ref={videoElement}
                                     src={productPlans.videoLink}
-                                    playsInline autoPlay loop />
+                                    playsInline loop />
+                                <div className="hero_section_div">
+                                    {
+                                        !buttonDisplay ?
+                                            <button onClick={() => playVideo()}>
+                                                <ion-icon name="play-circle-outline"></ion-icon></button>
+                                            : ''
+                                    }
+                                </div>
+                                <div className="video-player-controls">
+                                    <button onClick={() => playVideo()}>
+                                        <ion-icon
+                                            style={{ color: !buttonDisplay ? '#000' : 'grey' }}
+                                            name="play-circle-outline"></ion-icon></button>
+                                    <button onClick={() => pauseVideo()}>
+                                        <ion-icon
+                                            style={{ color: buttonDisplay ? '#000' : 'grey' }}
+                                            name="pause-circle-outline"></ion-icon>
+                                    </button>
+                                    <button onClick={() => fullScreenVideo()}>
+                                        <ion-icon name="expand-outline"></ion-icon>
+                                    </button>
+                                </div>
                             </div>
                             <div className="detail_props pt-3">
                                 <div className="contain">
                                     <div className="profile-data-display">
-                                        <h3 className="profile_title">Your Videos</h3>
-                                        <Divider style={{ margin: '10px 0px' }} />
+                                        <h3 className="other_profile_title">Trending dance styles</h3>
+                                        {/* <Divider style={{ margin: 0 }} /> */}
                                         {
                                             loadingdata ?
                                                 <div>
@@ -242,7 +292,7 @@ const ProfileVideoToPlay = props => {
                                                     :
                                                     userActiveSubscription ?
                                                         userPlans.length ?
-                                                            <div className="plan_video_display">
+                                                            <div className="other-dance-styles plan_video_display">
                                                                 <div className="grid_4">
                                                                     {
                                                                         userPlans.splice(0, 4).map((productPlans, index) => (

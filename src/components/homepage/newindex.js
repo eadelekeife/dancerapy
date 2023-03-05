@@ -2,9 +2,9 @@ import "./homepage.css";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-import React from "react";
+import React, { useState } from "react";
 
-import { Divider } from "antd";
+import { Divider, Modal } from "antd";
 
 import VideoJS from '../profile/videoplayer';
 
@@ -48,6 +48,7 @@ import { ReactComponent as Mailchimp } from "./mailchimp.svg";
 const AboutUs = () => {
 
     const playerRef = React.useRef(null);
+    const videoElement = React.useRef();
 
     let settings = {
         dots: false,
@@ -114,12 +115,20 @@ const AboutUs = () => {
             VideoJS.log('player will dispose');
         });
     };
-    const playVideo = (player) => {
-        playerRef.current = player;
-        playerRef.playsinline(true);
-        playerRef.play();
-    }
+    // const playVideo = (player) => {
+    //     playerRef.current = player;
+    //     playerRef.playsinline(true);
+    //     playerRef.play();
+    // }
     const { handleSubmit, control } = useForm({});
+    const [buttonDisplay, setButtonDisplay] = useState(false);
+
+    const playVideo = () => {
+        let video = videoElement.current;
+        video.play();
+        setButtonDisplay(true);
+    }
+
     return (
         <div className="new-homepage about_us">
             <Nav />
@@ -130,13 +139,15 @@ const AboutUs = () => {
 
                     <video
                         // poster={Singer}
+                        ref={videoElement}
                         src="https://lagostheatrevideos.s3.amazonaws.com/intro.mp4"
                         // src="https://lagostheatrevideos.s3.amazonaws.com/home.mp4"
-                        playsInline autoPlay muted loop />
+                        playsInline loop />
                     <div className="black_overlay">
-
                     </div>
                     <div className="hero_section_div">
+                        <button style={{ display: buttonDisplay ? 'none' : 'block' }} onClick={() => playVideo()}>
+                            <ion-icon name="play-circle-outline"></ion-icon></button>
                         <Link to={AppRoute.about}>Read About Us <ion-icon name="arrow-forward-outline"></ion-icon></Link>
                     </div>
                     {/* <ReactPlayer
@@ -215,12 +226,12 @@ const AboutUs = () => {
                             <div className="grid_2">
                                 <div className="text-cover">
                                     <h4>Get ready for your workout with our Dancerapy fitness series</h4>
-                                    <p>
+                                    <p className="desktop-onl">
                                         Dancerapy is a fitness and lifestyle brand invested in reintroducing dance as
                                         a choice therapy for healthy living. As a movement, Dancerapy personalizes
                                         the idea of dance as a culture towards achieving wholeness in health and
                                         fitness. Let Dancerapy help ignite the connections and
-                                        buuild team bonding spirit within your organization.
+                                        build team bonding spirit within your organization.
                                     </p>
                                     <Link to={AppRoute.marathon} className="btn_border_black">See how we impact companies</Link>
                                 </div>
@@ -300,6 +311,9 @@ const AboutUs = () => {
                     <Link to={AppRoute.trainings} className="btn_red">See our locations</Link>
                 </div>
             </div> */}
+            <Modal
+            
+            />
             <Footer margin={true} />
         </div>
     )

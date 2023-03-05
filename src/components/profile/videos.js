@@ -11,6 +11,8 @@ import { DateTime } from 'luxon';
 import { Controller, useForm } from "react-hook-form";
 import Nav from "../../utils/nav";
 
+import VideoPlans from "./product-plans";
+
 import SideNav from "./side_nav";
 
 import Empty from "../../assets/images/auth/empty.svg";
@@ -621,7 +623,7 @@ const VirtualSubcriptions = props => {
                                                             <div className="grid_flex">
                                                                 <button
                                                                     onClick={() => setIsModalOpen(true)}
-                                                                    className="btn_red">See Calendar <span>| <ion-icon name="calendar-outline"></ion-icon></span></button>
+                                                                    className="flex-btn btn_red">See Dance Calendar <span>| <ion-icon name="calendar-outline"></ion-icon></span></button>
                                                                 <div>
                                                                     <form autoComplete="off" onSubmit={handleSubmit(findVideoByName)}>
                                                                         <div>
@@ -662,7 +664,7 @@ const VirtualSubcriptions = props => {
                                                                 ))
                                                             }
                                                         </div>
-                                                        <div className="grid_3">
+                                                        <div className="grid_4">
                                                             {
                                                                 filter === "all" ?
                                                                     userPlans.map((productPlans, index) => (
@@ -713,7 +715,7 @@ const VirtualSubcriptions = props => {
                                                             {
                                                                 searchedVideos.length ?
                                                                     <div className="plan_video_display">
-                                                                        <div className="grid_3">
+                                                                        <div className="grid_4">
                                                                             {searchedVideos.map((productPlans, index) => (
                                                                                 <div key={index}>
                                                                                     <Link to={`${AppRoute.profileVideoToPlay}?videoName=${productPlans.title}&videoId=${productPlans.id}`}>
@@ -757,54 +759,14 @@ const VirtualSubcriptions = props => {
                                                 </div>
                                             :
                                             <div>
-                                                <div className="empty_div">
+                                                <div className="product-display empty_div">
                                                     <div>
                                                         <img src={Empty} alt="empty" />
                                                         <p>Oops! Your subscription may have expired. Kindly renew to recover access</p>
-                                                        {/* <p>You have not placed any orders yet</p> */}
-                                                        <Link to={AppRoute.products} className="btn_red">View Plans</Link>
                                                     </div>
                                                 </div>
                                                 <div>
-                                                    <h1>Dancerapy Products and Services</h1>
-                                                    <div className="grid_3">
-                                                        <div className="dancerapy-products">
-                                                            <div className="text-block">
-                                                                <h2>Annual Online Subscription</h2>
-                                                                <p>Join The Dancerapy Club Today and have access to over 30 Dance Fitness
-                                                                    Videos, Dance Choreophgries, Dance Trends and lots more monthly.</p>
-                                                                <Link to="/products/detail?productName=Dancerapy%20Club%20Annual%20Online%20Subscription&productId=1">See More <ion-icon name="arrow-forward-outline"></ion-icon></Link>
-                                                            </div>
-                                                            <div className="chow-1"></div>
-                                                        </div>
-                                                        <div className="dancerapy-products">
-                                                            <div className="text-block">
-                                                                <h2>Dance in a Flash</h2>
-                                                                <p>Join The Dancerapy Club Today and have access to over 30 Dance Fitness
-                                                                    Videos, Dance Choreophgries, Dance Trends and lots more monthly.</p>
-                                                                <Link to="/products/detail?productName=Dance%20in%20a%20Flash%20-%20Delivered%20to%20your%20Doorstep&productId=2">See More <ion-icon name="arrow-forward-outline"></ion-icon></Link>
-                                                            </div>
-                                                            <div className="chow-2"></div>
-                                                        </div>
-                                                        <div className="dancerapy-products">
-                                                            <div className="text-block">
-                                                                <h2>Dancerapy live on Zoom</h2>
-                                                                <p>Join The Dancerapy Club Today and have access to over 30 Dance Fitness
-                                                                    Videos, Dance Choreophgries, Dance Trends and lots more monthly.</p>
-                                                                <Link to="/products/detail?productName=Join%20Dancerapy%20live%20on%20Zoom&productId=3">See More <ion-icon name="arrow-forward-outline"></ion-icon></Link>
-                                                            </div>
-                                                            <div className="chow-3"></div>
-                                                        </div>
-                                                        <div className="dancerapy-products">
-                                                            <div className="text-block">
-                                                                <h2>Dancerapy Physical class</h2>
-                                                                <p>Join The Dancerapy Club Today and have access to over 30 Dance Fitness
-                                                                    Videos, Dance Choreophgries, Dance Trends and lots more monthly.</p>
-                                                                <Link to="/products/detail?productName=Join%20Dancerapy%20Physical%20Class&productId=4">See More <ion-icon name="arrow-forward-outline"></ion-icon></Link>
-                                                            </div>
-                                                            <div className="chow-1"></div>
-                                                        </div>
-                                                    </div>
+                                                    <VideoPlans />
                                                 </div>
                                             </div>
                             }
@@ -812,57 +774,63 @@ const VirtualSubcriptions = props => {
                     </div>
                 </div>
             </div>
-            <Modal title={null} footer={null} open={isModalOpen} className="products-cart"
+            <Modal title={null} footer={null} open={isModalOpen} className="video-calendar" size="large"
                 onOk={() => setIsModalOpen(false)} onCancel={() => setIsModalOpen(false)}>
                 <div>
                     <Tabs type="card">
                         <Tabs.TabPane tab="Month 1" key="1">
-                            <Tabs type="card">
-                                <Tabs.TabPane tab="Week 1" key="1">
-                                    <Table dataSource={week1month1} columns={columns} bordered />
-                                </Tabs.TabPane>
-                                <Tabs.TabPane tab="Week 2" key="2">
-                                    <Table dataSource={week2month1} columns={columns} bordered />
-                                </Tabs.TabPane>
-                                <Tabs.TabPane tab="Week 3" key="3">
-                                    <Table dataSource={week3month1} columns={columns} bordered />
-                                </Tabs.TabPane>
-                                <Tabs.TabPane tab="Week 4" key="4">
-                                    <Table dataSource={week4month1} columns={columns} bordered />
-                                </Tabs.TabPane>
-                            </Tabs>
+                            <div className="inner-fragment">
+                                <Tabs type="card">
+                                    <Tabs.TabPane tab="Week 1" key="1">
+                                        <Table dataSource={week1month1} columns={columns} bordered />
+                                    </Tabs.TabPane>
+                                    <Tabs.TabPane tab="Week 2" key="2">
+                                        <Table dataSource={week2month1} columns={columns} bordered />
+                                    </Tabs.TabPane>
+                                    <Tabs.TabPane tab="Week 3" key="3">
+                                        <Table dataSource={week3month1} columns={columns} bordered />
+                                    </Tabs.TabPane>
+                                    <Tabs.TabPane tab="Week 4" key="4">
+                                        <Table dataSource={week4month1} columns={columns} bordered />
+                                    </Tabs.TabPane>
+                                </Tabs>
+                            </div>
                         </Tabs.TabPane>
                         <Tabs.TabPane tab="Month 2" key="2">
-                            <Tabs type="card">
-                                <Tabs.TabPane tab="Week 1" key="1">
-                                    <Table dataSource={week1month2} columns={columns} bordered />
-                                </Tabs.TabPane>
-                                <Tabs.TabPane tab="Week 2" key="2">
-                                    <Table dataSource={week2month2} columns={columns} bordered />
-                                </Tabs.TabPane>
-                                <Tabs.TabPane tab="Week 3" key="3">
-                                    <Table dataSource={week3month2} columns={columns} bordered />
-                                </Tabs.TabPane>
-                                <Tabs.TabPane tab="Week 4" key="4">
-                                    <Table dataSource={week4month2} columns={columns} bordered />
-                                </Tabs.TabPane>
-                            </Tabs>
+                            <div className="inner-fragment">
+                                <Tabs type="card">
+                                    <Tabs.TabPane tab="Week 1" key="1">
+                                        <Table dataSource={week1month2} columns={columns} bordered />
+                                    </Tabs.TabPane>
+                                    <Tabs.TabPane tab="Week 2" key="2">
+                                        <Table dataSource={week2month2} columns={columns} bordered />
+                                    </Tabs.TabPane>
+                                    <Tabs.TabPane tab="Week 3" key="3">
+                                        <Table dataSource={week3month2} columns={columns} bordered />
+                                    </Tabs.TabPane>
+                                    <Tabs.TabPane tab="Week 4" key="4">
+                                        <Table dataSource={week4month2} columns={columns} bordered />
+                                    </Tabs.TabPane>
+                                </Tabs>
+                            </div>
                         </Tabs.TabPane>
                         <Tabs.TabPane tab="Month 3" key="3">
-                            <Tabs type="card">
-                                <Tabs.TabPane tab="Week 1" key="1">
-                                    <Table dataSource={week1month3} columns={columns} bordered />
-                                </Tabs.TabPane>
-                                <Tabs.TabPane tab="Week 2" key="2">
-                                    <Table dataSource={week2month3} columns={columns} bordered />
-                                </Tabs.TabPane>
-                                <Tabs.TabPane tab="Week 3" key="3">
-                                    <Table dataSource={week3month3} columns={columns} bordered />
-                                </Tabs.TabPane>
-                                <Tabs.TabPane tab="Week 4" key="4">
-                                    <Table dataSource={week4month3} columns={columns} bordered />
-                                </Tabs.TabPane>
-                            </Tabs>
+                            <div className="inner-fragment">
+                                <Tabs type="card">
+                                    <Tabs.TabPane tab="Week 1" key="1">
+                                        <Table dataSource={week1month3} columns={columns} bordered />
+                                    </Tabs.TabPane>
+                                    <Tabs.TabPane tab="Week 2" key="2">
+                                        <Table dataSource={week2month3} columns={columns} bordered />
+                                    </Tabs.TabPane>
+                                    <Tabs.TabPane tab="Week 3" key="3">
+                                        <Table dataSource={week3month3} columns={columns} bordered />
+                                    </Tabs.TabPane>
+                                    <Tabs.TabPane tab="Week 4" key="4">
+                                        <Table dataSource={week4month3} columns={columns} bordered />
+                                    </Tabs.TabPane>
+                                </Tabs>
+                            </div>
                         </Tabs.TabPane>
                     </Tabs>
                 </div>

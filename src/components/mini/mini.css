@@ -476,20 +476,20 @@
 }
 
 .about_us .about_hero_text .about_hero_text_image h2 {
-    font-size: 3rem;
+    font-size: 2rem;
 }
 
 .about_us .about_hero_text .about_hero_text_image {
     border: 2px solid #111;
     background: #F8F8F8;
     border-radius: 50%;
-    width: 100px;
-    height: 100px;
+    width: 60px;
+    height: 60px;
     margin: 0px auto;
     display: block;
     margin-bottom: 15px;
     text-align: center;
-    line-height: 100px;
+    line-height: 60px;
 }
 
 .about_us .about_hero_text h5 {

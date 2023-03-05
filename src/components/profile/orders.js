@@ -9,6 +9,8 @@ import Footer from "../../utils/footer";
 import Nav from "../../utils/nav";
 import { DateTime } from 'luxon';
 
+import VideoPlans from "./product-plans";
+
 import SideNav from "./side_nav";
 
 import Empty from "../../assets/images/auth/empty.svg";
@@ -98,7 +100,7 @@ const Profile = props => {
                 <div className="profile_to_right">
                     <div className="contain">
                         <div className="profile-data-display">
-                            <h3 className="profile_title">Plan Orders</h3>
+                            <h3 className="profile_title">Physical Classes</h3>
                             <Divider style={{ margin: '10px 0px' }} />
                             {
                                 loadingdata ?
@@ -164,11 +166,13 @@ const Profile = props => {
                                                 </div>
                                             </div>
                                             :
-                                            <div className="empty_div">
-                                                <div>
-                                                    <img src={Empty} alt="empty" />
-                                                    <p>You have not placed any orders yet</p>
-                                                    <Link to={AppRoute.trainings} className="btn_red">View Plans</Link>
+                                            <div>
+                                                <div className="empty_div">
+                                                    <div>
+                                                        <img src={Empty} alt="empty" />
+                                                        <p>You have not placed any orders yet</p>
+                                                        <Link to={AppRoute.trainings} className="btn_red">View Plans</Link>
+                                                    </div>
                                                 </div>
                                             </div>
                             }

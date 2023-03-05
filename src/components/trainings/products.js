@@ -1,4 +1,4 @@
-import "./trainings";
+import "./trainings.css";
 
 import React, { useEffect, useState } from "react";
 import { Skeleton, Divider, notification, Select } from 'antd';

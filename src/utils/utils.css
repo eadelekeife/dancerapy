@@ -271,8 +271,12 @@
         padding-top: 15%;
     }
 
+    .sec_navigation {
+        padding: 0.5em 1.5%;
+    }
+
     .navigation {
-        padding: 8px 15px;
+        padding: 8px 1.5%;
     }
 
     .navigation img.logo {
@@ -376,7 +380,7 @@
     }
 
     .footer-sec.footer .footer-grid .biased_grid_4 div.compartment {
-        padding: 25px 0px;
+        padding: 40px 0px;
         padding-bottom: 5px;
         border-top: 1px solid #b3b3b3;
     }
@@ -391,7 +395,7 @@
     }
 
     .footer-sec.footer .sec_footer .contain {
-        padding: 0% 3%;
+        padding: 0% 1.5%;
     }
 
     .footer-sec.footer h5 {
@@ -419,7 +423,7 @@
     }
 
     .footer-sec.footer {
-        padding-top: 15%;
+        padding-top: 0%;
     }
 
     .sec_footer form {

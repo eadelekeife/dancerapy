@@ -72,7 +72,7 @@ const ProductDetail = props => {
                         setProductPlans(productPlans.data.message);
                         let planAmount = productPlans.data.message.discount ? ((productPlans.data.message.discount * productPlans.data.message.price) / 100) : productPlans.data.message.price;
                         setAmount(`${planAmount}`);
-                        setAllProductPlans(productPlans.data.message.id);
+                        setProductCart([productPlans.data.message.id]);
                     }
                     setErrorOccurred(false);
                     setFetchingData(false);
@@ -396,7 +396,7 @@ const ProductDetail = props => {
                                                                 :
                                                                 <Dropdown className="dropme" class="helllos"
                                                                     overlay={rentals}>
-                                                                    <button className="btn_red" to="#">
+                                                                    <button className="flex-btn btn_red" to="#">
                                                                         Buy Plan <span>| <ion-icon name="chevron-down-outline"></ion-icon></span>
                                                                     </button>
                                                                 </Dropdown>
@@ -527,24 +527,24 @@ const ProductDetail = props => {
                                                                     onClick={() => {
                                                                         removeProductFromCart(productPlans)
                                                                     }}
-                                                                    className="btn_red">Remove</button>
+                                                                    className="btn_border_black">Remove</button>
                                                                 :
                                                                 <button
                                                                     onClick={() => {
                                                                         addProductToCart(productPlans)
                                                                     }}
-                                                                    className="btn_red">Add to Cart</button>
+                                                                    className="btn_border_black">Add to Cart</button>
                                                         }
                                                     </div>
                                                 </div>
-                                                {allProductPlans.length - 1 === index ? '' : <Divider />}
+                                                {allProductPlans.length - 1 === index ? '' : <Divider style={{ marginTop: 10, marginBottom: 10 }} />}
                                             </React.Fragment>
                                     )
                                 })
                             }
                             <Divider />
-                            <div className="grid_flex">
-                                <button onClick={() => setIsModalOpen(false)} className="btn_red">Cancel</button>
+                            <div className="grid_flex grid-button">
+                                <button onClick={() => setIsModalOpen(false)} className="btn_border_black">Cancel</button>
                                 <PaystackButton className="btn_red" {...componentProps} />
                                 {/* <button className="btn_red">Complete Order: NGN {amount}</button> */}
                             </div>
