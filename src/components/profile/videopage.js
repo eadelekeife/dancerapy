@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 
 import { useSearchParams, useNavigate, Link } from "react-router-dom";
 import { Controller, useForm } from 'react-hook-form';
-import { Skeleton, notification } from 'antd';
+import { Skeleton, notification, Popover } from 'antd';
 import { LoadingOutlined } from '@ant-design/icons';
 import axios from '../../utils/axiosCall';
 import VideoJS from './videoplayer';
@@ -208,10 +208,12 @@ const ProfileVideoToPlay = props => {
                                         <button onClick={() => fullScreenVideo()}>
                                             <ion-icon name="expand-outline"></ion-icon>
                                         </button>
-                                        <button onClick={() => fullScreenVideo()}>
-                                            <ion-icon
-                                                style={{ color: productPlans.description.length ? '#000' : 'grey' }}
-                                                name="information-circle-outline"></ion-icon>
+                                        <button>
+                                            <Popover content={productPlans.description} title="" trigger="click">
+                                                <ion-icon
+                                                    style={{ color: productPlans.description.length ? '#000' : 'grey' }}
+                                                    name="information-circle-outline"></ion-icon>
+                                            </Popover>
                                         </button>
                                     </div>
                                     <div>

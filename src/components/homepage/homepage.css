@@ -793,7 +793,7 @@
 }
 
 .dance-redesign-props-data p {
-    font-size: 1.4rem;
+    font-size: 1.6rem;
     line-height: 1.8;
 }
 
@@ -1631,6 +1631,11 @@
         height: auto;
         z-index: 0;
         overflow: hidden;
+    }
+
+    .dance-redesign-props-data p {
+        font-size: 1.4rem;
+        line-height: 1.8;
     }
 }
 
