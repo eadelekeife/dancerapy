@@ -44,9 +44,24 @@ const ProfileVideoToPlay = props => {
     const [productPlans, setProductPlans] = useState({});
     const [errorOccurred, setErrorOccurred] = useState(false);
     const [fetchingData, setFetchingData] = useState(true);
+
+    // videos display
+    const videoElement = React.useRef();
+
+
+    const [userPlans, setUserPlans] = useState([]);
+    const [loadingdata, setLoadingData] = useState(true);
+    const [userActiveSubscription, setUserActiveSubscription] = useState(false);
+    const [categoryBox, setCategoryBox] = useState([]);
+    const [filter, setFilter] = useState('all');
+    const [buttonDisplay, setButtonDisplay] = useState(false);
+
     useEffect(() => {
         let videoId = searchParams.get('videoId');
-        // video/:videoId
+        setProductPlans({});
+        setFetchingData(true);
+        setButtonDisplay(false);
+        setUserPlans([]);
         axiosCall.get(`/video/${videoId}`, {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem('token')}`
@@ -56,7 +71,6 @@ const ProfileVideoToPlay = props => {
                 if (productPlans.data.statusMessage === "success") {
                     setErrorOccurred(false);
                     setFetchingData(false);
-                    console.log(productPlans.data)
                     setProductPlans(productPlans.data.message.virtualClassLinks);
                 } else {
                     setErrorOccurred(true);
@@ -69,83 +83,12 @@ const ProfileVideoToPlay = props => {
                 setFetchingData(false);
                 openNotificationWithIcon('error', 'An error occurred while fetching product plans. Please reload page to try again')
             })
-    }, [])
-    const componentProps = {
-        email: userData.emailAddress,
-        amount,
-        metadata: {
-            name: userData.firstName + ' ' + userData.lastName,
-            phone: userData?.phoneNumber,
-        },
-        publicKey,
-        text: "Buy Plan",
-        onSuccess: (paymentData) => {
-            if (paymentData.status === "success") {
-                setLoaderSpinning(true)
-                axiosCall.post(`/buyproduct`, {
-                    productPlanId: productPlans.id,
-                    userId: userData.id,
-                    transId: paymentData.trxref
-                })
-                    .then(coursePlans => {
-                        if (coursePlans.data.statusMessage === "success") {
-                            Navigate(AppRoute.plansuccess);
-                        } else {
-                            openNotificationWithIcon('error', coursePlans.data.summary);
-                            setLoaderSpinning(false);
-                        }
-                    })
-                    .catch(err => {
-                        console.log(err)
-                        openNotificationWithIcon('error', 'An error occurred while completing product purchase. Please try again')
-                        setLoaderSpinning(false);
-                    })
-            }
-        },
-        // alert("Thanks for doing business with us! Come back soon!!"),
-        onClose: () => openNotificationWithIcon('error', 'Transaction cancelled'),
-    }
+    }, [searchParams.get('videoId')])
+
     let skeleton = [];
     for (let i = 0; i < 6; i++) {
         skeleton.push(<Skeleton active />)
     }
-    const videoJsOptions = {
-        autoplay: true,
-        controls: true,
-        responsive: true,
-        playsinline: true,
-        fluid: true,
-        sources: [{
-            src: productPlans.videoLink,
-            type: 'video/mp4'
-        }]
-    };
-    const handlePlayerReady = (player) => {
-        playerRef.current = player;
-
-        // You can handle player events here, for example:
-        player.on('waiting', () => {
-            VideoJS.log('player is waiting');
-        });
-        playerRef.playsinline(true);
-
-        player.on('dispose', () => {
-            VideoJS.log('player will dispose');
-        });
-    };
-
-    // videos display
-    const { handleSubmit, control } = useForm({});
-    const [currentNav, setCurrentNav] = useState(0);
-    const videoElement = React.useRef();
-
-
-    const [userPlans, setUserPlans] = useState([]);
-    const [loadingdata, setLoadingData] = useState(true);
-    const [userActiveSubscription, setUserActiveSubscription] = useState(false);
-    const [categoryBox, setCategoryBox] = useState([]);
-    const [filter, setFilter] = useState('all');
-    const [buttonDisplay, setButtonDisplay] = useState(false);
 
     useEffect(() => {
         if (localStorage.getItem('purchaseSuccessful')) {
@@ -184,7 +127,7 @@ const ProfileVideoToPlay = props => {
                 setErrorOccurred(true);
                 setLoadingData(false)
             })
-    }, [])
+    }, [searchParams.get('videoId')])
     for (let i = 0; i < 6; i++) {
         skeleton.push(<Skeleton active />)
     }
@@ -251,25 +194,32 @@ const ProfileVideoToPlay = props => {
                                             : ''
                                     }
                                 </div>
-                                <div className="video-player-controls">
-                                    <button onClick={() => playVideo()}>
-                                        <ion-icon
-                                            style={{ color: !buttonDisplay ? '#000' : 'grey' }}
-                                            name="play-circle-outline"></ion-icon></button>
-                                    <button onClick={() => pauseVideo()}>
-                                        <ion-icon
-                                            style={{ color: buttonDisplay ? '#000' : 'grey' }}
-                                            name="pause-circle-outline"></ion-icon>
-                                    </button>
-                                    <button onClick={() => fullScreenVideo()}>
-                                        <ion-icon name="expand-outline"></ion-icon>
-                                    </button>
+                                <div className="video-player-information">
+                                    <div className="video-player-controls">
+                                        <button onClick={() => playVideo()}>
+                                            <ion-icon
+                                                style={{ color: !buttonDisplay ? '#000' : 'grey' }}
+                                                name="play-circle-outline"></ion-icon></button>
+                                        <button onClick={() => pauseVideo()}>
+                                            <ion-icon
+                                                style={{ color: buttonDisplay ? '#000' : 'grey' }}
+                                                name="pause-circle-outline"></ion-icon>
+                                        </button>
+                                        <button onClick={() => fullScreenVideo()}>
+                                            <ion-icon name="expand-outline"></ion-icon>
+                                        </button>
+                                        <button onClick={() => fullScreenVideo()}>
+                                            <ion-icon
+                                                style={{ color: productPlans.description.length ? '#000' : 'grey' }}
+                                                name="information-circle-outline"></ion-icon>
+                                        </button>
+                                    </div>
                                     <div>
-{/* <p>{productPlans.me}</p> */}
+                                        <p>{productPlans.title}</p>
                                     </div>
                                 </div>
                             </div>
-                            <div className="detail_props pt-3">
+                            <div className="detail_props trending_videos pt-3">
                                 <div className="contain">
                                     <div className="profile-data-display">
                                         <h3 className="other_profile_title">Trending dance styles</h3>
@@ -299,7 +249,7 @@ const ProfileVideoToPlay = props => {
                                                             <div className="other-dance-styles plan_video_display">
                                                                 <div className="grid_4">
                                                                     {
-                                                                        userPlans.splice(0, 4).map((productPlans, index) => (
+                                                                        userPlans.slice(0, 8).map((productPlans, index) => (
                                                                             <div key={index}>
                                                                                 <Link to={`${AppRoute.profileVideoToPlay}?videoName=${productPlans.title}&videoId=${productPlans.id}`}>
                                                                                     <div className="">

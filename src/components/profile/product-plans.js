@@ -73,7 +73,9 @@ const Products = () => {
                                                 <div className="text-block">
                                                     <img src={productPlans.image} alt={productPlans.title} />
                                                     <p>{productPlans.title}</p>
-                                                    <Link to="/products/detail?productName=Dancerapy%20Club%20Annual%20Online%20Subscription&productId=1">See More <ion-icon name="arrow-forward-outline"></ion-icon></Link>
+                                                    <Link
+                                                        style={{ display: 'block', width: 'max-content', padding: '6px 10px', fontSize: '1.2rem' }}
+                                                        className="btn_red" to={`/products/detail?productName=${productPlans.title}&productId=${productPlans.id}`}>See More <ion-icon name="arrow-forward-outline"></ion-icon></Link>
                                                 </div>
                                             </div>
                                         ))

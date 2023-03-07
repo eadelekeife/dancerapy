@@ -401,14 +401,24 @@
 }
 
 .video-player-controls {
+    display: flex;
+    grid-gap: 20px;
+}
+
+.video-player-information {
     position: absolute;
     z-index: 100;
     background: #fff;
     bottom: 0px;
-    display: flex;
     padding: 5px 30px;
     padding-top: 10px;
-    grid-gap: 20px;
+}
+
+.video-player-information p {
+    font-size: 1.4rem;
+    color: unset;
+    margin-bottom: 0px;
+    font-family: 'Ambit';
 }
 
 .video-player-controls button {
@@ -419,4 +429,86 @@
 
 .video-player-controls button ion-icon {
     font-size: 3rem;
+}
+
+@media screen and (max-width: 720px) {
+    .empty-product-display.physical.plans .grid_4 {
+        grid-template-columns: repeat(2, 1fr);
+        row-gap: 40px;
+    }
+
+    .product-display.empty_div {
+        min-height: 30rem;
+    }
+
+    .profile_div.main_info .profile_to_right .empty-product-display img {
+        height: 20rem;
+    }
+
+    .profile-data-display .grid_4.merch_box {
+        grid-template-columns: repeat(2, 1fr);
+        row-gap: 40px;
+    }
+
+    .plan_video_display .grid_4 {
+        grid-template-columns: repeat(2, 1fr);
+        row-gap: 20px;
+    }
+
+    .video-calendar-block .grid_flex {
+        display: flex;
+        flex-direction: column;
+        row-gap: 10px;
+        align-items: unset;
+    }
+
+    .video-calendar-block .flex-btn.btn_red {
+        width: max-content;
+        grid-gap: 10px;
+        padding: 10px 25px;
+    }
+
+    .video-calendar-block form {
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+    }
+
+    .video-calendar-block form button,
+    .video-calendar-block form input {
+        height: 5rem !important;
+    }
+
+    .detail_props.trending_videos .contain {
+        padding: 0% 2%;
+    }
+
+    .other-dance-styles.plan_video_display .grid_4 img {
+        height: 12rem;
+    }
+
+    .other_profile_title {
+        margin-bottom: 0px;
+    }
+
+    .other-dance-styles.plan_video_display .grid_4 .video-poster h4 {
+        font-size: 1.2rem;
+    }
+
+    .main_video.plan_group {
+        height: 550px;
+    }
+
+    .main_video.plan_group video {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        -webkit-transform: translateX(-50%) translateY(-50%);
+        transform: translateX(-50%) translateY(-50%);
+        min-width: 100%;
+        min-height: 100%;
+        width: auto;
+        height: auto;
+        z-index: 0;
+        overflow: hidden;
+    }
 }

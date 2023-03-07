@@ -128,7 +128,7 @@ const Profile = props => {
                                                 </div>
                                             </div>
                                             :
-                                            <div className="grid_4">
+                                            <div className="merch_box grid_4">
                                                 {allMerchandise.map((product, index) => (
                                                     <div key={index}>
                                                         <div>

@@ -1,20 +1,12 @@
 import React, { useEffect, useState, useRef } from "react";
 
 import { useSearchParams, useNavigate, Link } from "react-router-dom";
-import { Controller, useForm } from 'react-hook-form';
 import { Skeleton, notification, Modal } from 'antd';
-import { DownOutlined, UserOutlined } from '@ant-design/icons';
 import { Button, Dropdown, message, Space, Tooltip, Menu } from 'antd';
-import { LoadingOutlined } from '@ant-design/icons';
-import axios from '../../utils/axiosCall';
+import NumberFormat from 'react-number-format';
 
-import * as yup from 'yup';
-import { yupResolver } from '@hookform/resolvers/yup';
 import { Divider, Rate } from "antd";
-import ReactPlayer from 'react-player/lazy';
-import { Player, ControlBar } from 'video-react';
 import { PaystackButton, usePaystackPayment } from 'react-paystack';
-import { useFlutterwave, closePaymentModal } from 'flutterwave-react-v3';
 import axiosCall from "../../utils/axiosCall";
 import { v4 as uuid } from 'uuid';
 
@@ -70,7 +62,7 @@ const ProductDetail = props => {
                         setProductNotFound(true);
                     } else {
                         setProductPlans(productPlans.data.message);
-                        let planAmount = productPlans.data.message.discount ? ((productPlans.data.message.discount * productPlans.data.message.price) / 100) : productPlans.data.message.price;
+                        let planAmount = productPlans.data.message.discount > 0 ? ((productPlans.data.message.discount * productPlans.data.message.price) / 100) : productPlans.data.message.price;
                         setAmount(`${planAmount}`);
                         setProductCart([productPlans.data.message.id]);
                     }
@@ -279,7 +271,8 @@ const ProductDetail = props => {
     const onSuccessPayStack = (reference) => {
         setLoaderSpinning(true)
         axiosCall.post(`/buyproduct`, {
-            productPlanId: productPlans.id,
+            // productPlanId: productPlans.id, productCart
+            productPlanId: productCart,
             userId: userData.id,
             transId: reference.trxref
         })
@@ -293,7 +286,6 @@ const ProductDetail = props => {
                 }
             })
             .catch(err => {
-                console.log(err)
                 openNotificationWithIcon('error', 'An error occurred while completing product purchase. Please try again')
                 setLoaderSpinning(false);
             })
@@ -392,7 +384,7 @@ const ProductDetail = props => {
                                                     </p>
                                                     {
                                                         props.auth.isAuthenticated ?
-                                                            !activePlan ? <button disabled className="btn_red">You have an Active Plan</button>
+                                                            activePlan ? <button disabled className="btn_red">You have an Active Plan</button>
                                                                 :
                                                                 <Dropdown className="dropme" class="helllos"
                                                                     overlay={rentals}>
@@ -401,7 +393,7 @@ const ProductDetail = props => {
                                                                     </button>
                                                                 </Dropdown>
                                                             :
-                                                            <button className="btn_red" onClick={() => setIsModalOpen(true)}>Buy Plan</button>
+                                                            <a href={AppRoute.signin} className="btn_red">Buy Plan</a>
                                                     }
                                                 </div>
                                             </div>
@@ -518,7 +510,8 @@ const ProductDetail = props => {
                                                     </div>
                                                     <div>
                                                         <h3>{productPlans.title}</h3>
-                                                        <p><span className="currency">NGN</span>{productPlans.price}</p>
+                                                        <p><span className="currency">NGN</span><NumberFormat value={(+productPlans.price).toFixed(2)} displayType={'text'} thousandSeparator={true}
+                                                        /></p>
                                                     </div>
                                                     <div>
                                                         {

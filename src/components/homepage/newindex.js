@@ -21,6 +21,7 @@ import AppRoute from "../../utils/routes";
 import SecSignIn from "../auth/signin-popup";
 
 import AboutImage from "../../assets/images/homepage/instructor.jpg";
+import VideoScreenshot from "../../assets/images/homepage/screenshot_homepage-min.png";
 
 import _1 from '../../assets/images/companies/access.webp';
 import _2 from '../../assets/images/companies/shell.png';
@@ -146,7 +147,7 @@ const AboutUs = props => {
                         onClick={playVideo} /> */}
 
                     <video
-                        // poster={Singer}
+                        poster={VideoScreenshot}
                         ref={videoElement}
                         src="https://lagostheatrevideos.s3.amazonaws.com/intro.mp4"
                         // src="https://lagostheatrevideos.s3.amazonaws.com/home.mp4"
@@ -156,23 +157,13 @@ const AboutUs = props => {
                     <div className="hero_section_div">
                         <button style={{ display: buttonDisplay ? 'none' : 'block' }} onClick={() => playVideo()}>
                             <ion-icon name="play-circle-outline"></ion-icon></button>
-                        <Link to={AppRoute.about}>Read About Us <ion-icon name="arrow-forward-outline"></ion-icon></Link>
+                        <Link to={AppRoute.about}>Start Dancing Today <ion-icon name="arrow-forward-outline"></ion-icon></Link>
                     </div>
                     {/* <ReactPlayer
                         playsinline={false}
                         url="https://lagostheatrevideos.s3.amazonaws.com/intro.mp4"
                         playing={true} controls={true} /> */}
                 </div>
-                {/* <div className="contain">
-                    <div className="block"></div>
-                    <h4>Get ready for your workout with our Dancerapy fitness series</h4>
-                    <p>
-                        Dancerapy is a fitness and lifestyle brand invested in reintroducing dance as a choice
-                        therapy for healthy living. As a movement, Dancerapy personalizes the idea of dance
-                        as a culture towards achieving wholeness in health and fitness.
-                    </p>
-                    <Link to={AppRoute.products} className="btn_red full_width">See our dance plans</Link>
-                </div> */}
             </div>
             <div className="dance-redesign-props-data">
                 <div className="flex-display">

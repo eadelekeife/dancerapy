@@ -507,15 +507,24 @@ ul.props {
         margin-bottom: 5px;
     }
 
-    .training_group, .training_inside_group {
-        display: block;
-    }
-
     .training_inside_group {
         display: flex;
         display: grid;
         grid-template-columns: 1.2fr 4fr;
         grid-template-columns: 4fr 1.2fr;
+    }
+
+    .training_group, .training_inside_group {
+        display: block;
+    }
+
+    .training_inside_group .training_inside_img {
+        width: 20%;
+        margin-bottom: 10px;
+    }
+
+    .training_inside_group .unimportant {
+        display: block;
     }
 
     .training_inside_group.sec-group p {
@@ -594,7 +603,7 @@ ul.props {
         font-size: 1.5rem;
         line-height: 1.2;
         color: var(--red);
-        margin-bottom: 5px;
+        margin-bottom: 0px;
     }
 
     .unimportant {
