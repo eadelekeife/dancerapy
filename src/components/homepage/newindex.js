@@ -158,7 +158,7 @@ const AboutUs = props => {
                         <button style={{ display: buttonDisplay ? 'none' : 'block' }} onClick={() => playVideo()}>
                             <ion-icon name="play-circle-outline"></ion-icon></button>
                         <Link
-                            to="/products/detail?productName=Dancerapy%20Club%20Annual%20Online%20Subscription&productId=8">Start Dancing Today <ion-icon name="arrow-forward-outline"></ion-icon></Link>
+                            to="/club">Start Dancing Today <ion-icon name="arrow-forward-outline"></ion-icon></Link>
                     </div>
                     {/* <ReactPlayer
                         playsinline={false}

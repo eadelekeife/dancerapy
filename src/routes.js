@@ -13,7 +13,7 @@ import SignIn from "./components/auth/signin";
 import SignUp from "./components/auth/signup";
 import Reset from "./components/auth/reset";
 import SignOut from "./components/auth/signout";
-import Club from "./components/mini/club";
+import Club from "./components/trainings/club";
 import Merch from "./components/merchandise/merchandise";
 import Trainings from "./components/trainings/trainings";
 import Products from "./components/trainings/products";
@@ -80,6 +80,10 @@ const Navigator = () => {
                         <Route path={AppRoute.profileReviews} exact element={<ProtectedRoutes><ProfileReviews /></ProtectedRoutes>} />
                         <Route path={AppRoute.profileMerchandise} exact element={<ProtectedRoutes><ProfileMerchandise /></ProtectedRoutes>} />
                         <Route path={AppRoute.profileVirtualSubscription} exact element={<ProtectedRoutes><ProfileVirtualSubscription /></ProtectedRoutes>} />
+                    
+
+
+                        <Route path="/club" exact element={<Club />} />
                     </Routes>
                 </Wrapper>
             </BrowserRouter>

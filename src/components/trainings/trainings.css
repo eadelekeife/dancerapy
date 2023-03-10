@@ -856,3 +856,109 @@ ul.props {
         grid-gap: 20px;
     }
 }
+
+
+.product-story .grid_2 p {
+    font-size: 1.4rem;
+    line-height: 1.8;
+}
+
+.product-story-block p {
+    text-align: center;
+    font-size: 1.4rem;
+    line-height: 1.6;
+    width: 70%;
+    margin: 0px auto;
+    display: block;
+    margin-bottom: 1em;
+}
+
+.product-story .grid_2 img {
+    height: 35rem;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 4px;
+}
+
+.product-story .grid_2 {
+    margin-bottom: 60px;
+    align-items: center;
+    grid-gap: 30px;
+}
+
+.product-design .first-design-display {
+    text-align: center;
+}
+
+.product-design .first-design-display video {
+    height: 50rem !important;
+    width: 80% !important;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 4px;
+    margin-bottom: 30px;
+}
+
+.product-design .first-design-display h3 {
+    font-size: 2.8rem;
+    padding-bottom: 0%;
+    line-height: 1.4;
+    width: 60%;
+    margin: 0% auto;
+    display: block;
+    margin-bottom: .5em;
+}
+
+.product-design {
+    position: relative;
+    padding-top: 5%;
+}
+
+.product-design button.full_width {
+    position: sticky;
+    bottom: 0px;
+}
+
+.product-design .grid_2.mb-0 {
+    margin-bottom: 5%;
+}
+
+@media screen and (max-width: 720px) {
+    .product-design .first-design-display h3 {
+        font-size: 2.2rem;
+        padding-bottom: 0%;
+        line-height: 1.4;
+        width: 100%;
+        margin: 0% auto;
+        display: block;
+        margin-bottom: .5em;
+    }
+    .product-design .first-design-display video {
+        height: auto !important;
+        width: 100% !important;
+        object-fit: cover;
+        object-position: center;
+        border-radius: 4px;
+        margin-bottom: 30px;
+    }
+    .product-story-block p {
+        width: 100%;
+    }
+    .product-story .grid_2 {
+        display: flex;
+        flex-direction: column-reverse;
+        margin-bottom: 40px;
+    }
+    .product-story .grid_2.mobile-reverse {
+        flex-direction: column;
+    }
+    .product-story .grid_2 img {
+        height: auto;
+    }
+    .product-design {
+        padding-top: 15%;
+    }
+    .product-design p.mb-0 {
+        margin-bottom: 0px;
+    }
+}
