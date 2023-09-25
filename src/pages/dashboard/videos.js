@@ -3,6 +3,7 @@ import "./dashboard.css";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
+import OwlCarousel from 'react-owl-carousel';
 import { Skeleton, notification, Input, Divider, Modal, Table, Drawer, Spin } from 'antd';
 import { LoadingOutlined } from '@ant-design/icons';
 import AppRoute from "../../utils/routes";
@@ -63,12 +64,37 @@ const VideosPage = props => {
     const [videoBox, setVideoBox] = useState([]);
     const [openVideoPurchaseModal, setOpenVideoPurchaseModal] = useState(false);
     const [currentVideo, setCurrentVideo] = useState({});
+    const [trendVideos, setTrendVideos] = useState([]);
+    const [fitnessVideos, setFitnessVideos] = useState([]);
+    const [trendingVideos, setTrendingVideos] = useState([]);
 
     const fetchUserVideosData = async () => {
         try {
             let videoTempData = await _fetch_app_videos();
             if (videoTempData.data.statusMessage === "success") {
                 setVideoBox(videoTempData.data.message);
+                let trends = [];
+                let fitness = [];
+                videoTempData.data.message.forEach(video => {
+                    if (video.videoCategory.name === "Dance Trends") {
+                        trends.push(video);
+                    } else {
+                        fitness.push(video);
+                    }
+                })
+                // let currRating = 0;
+                // let topRated = '';
+                // videoTempData.data.message.forEach(video => {
+                //     if (+video.counter > +currRating) {
+                //         currRating = video.counter;
+                //         topRated = video;
+                //     }
+                // })
+                // console.log(topRated);
+                // trendingVideos
+                // setTrendingVideos();
+                setTrendVideos(trends);
+                setFitnessVideos(fitness);
                 setLoadingData(false);
             } else {
                 setLoadingData(false);
@@ -79,6 +105,30 @@ const VideosPage = props => {
             setErrorOccurred(true);
             setLoadingData(false);
             openNotificationWithIcon('error', 'An error occurred while fetching data. Please reload to try again');
+        }
+    }
+
+    const responsive = {
+        0: {
+            items: 1,
+            nav: false,
+            margin: 10,
+            stagePadding: 50,
+            loop: true
+        },
+        600: {
+            items: 3,
+            nav: false,
+            margin: 20,
+            stagePadding: 50,
+            loop: true
+        },
+        1000: {
+            items: 4,
+            nav: false,
+            margin: 10,
+            stagePadding: 20,
+            loop: true
         }
     }
 
@@ -141,39 +191,6 @@ const VideosPage = props => {
             openNotificationWithIcon('success', 'Transaction completed successfully. Please check your mail for further information');
             localStorage.removeItem('purchaseSuccessful');
         }
-        // axiosCall.get(`/user/online-subscription`, {
-        //     headers: {
-        //         Authorization: `Bearer ${localStorage.getItem('token')}`
-        //     }
-        // })
-        //     .then(userPlans => {
-        //         console.log(userPlans)
-        //         if (userPlans.data.statusMessage === "success") {
-        //             if (userPlans.data.message.activeSubscription) {
-        //                 setLoadingData(false);
-        //                 let categoryBox = [];
-        //                 userPlans.data.message.virtualClassLinks.map(category => {
-        //                     if (!categoryBox.includes(category.videoCategory.name)) {
-        //                         categoryBox.push(category.videoCategory.name);
-        //                     }
-        //                 })
-        //                 setCategoryBox(categoryBox);
-        //                 setUserPlans(userPlans.data.message.virtualClassLinks);
-        //                 setUserActiveSubscription(true);
-        //             } else {
-        //                 setLoadingData(false);
-        //                 setUserActiveSubscription(false);
-        //             }
-        //         } else {
-        //             setLoadingData(false);
-        //             setErrorOccurred(true);
-        //             openNotificationWithIcon('error', userPlans.data.summary);
-        //         }
-        //     })
-        //     .catch(err => {
-        //         setErrorOccurred(true);
-        //         setLoadingData(false)
-        //     })
         fetchUserVideosData()
     }, [])
     let skeleton = [];
@@ -214,273 +231,73 @@ const VideosPage = props => {
                 <div className="dash-main-div">
                     <div className="contain">
                         <div className="dash-main-content">
-                            <div className="tag-block">
+                            {/* <div className="tag-block">
                                 <button className="tab active">All</button>
                                 <button className="tab">Dance Trends</button>
                                 <button className="tab">10 Mins Dance Blast</button>
                                 <button className="tab">Dancerapy Choreographies</button>
-                            </div>
-                            <div className="grid-4">
-                                {
-                                    filter === "all" ?
-                                        videoBox.map((productPlans, index) => (
-                                            <div key={index}>
-                                                {/* <Link to={`${AppRoute.profileVideoToPlay}?videoName=${productPlans.title}&videoId=${productPlans.id}`}> */}
-                                                <div
-                                                    onClick={e => updateCurrentVideo(productPlans)}>
-                                                    <div className="">
-                                                        <div className="card-display">
-                                                            <div className="card-header">
-                                                                {/* <img src={productPlans.poster} alt={productPlans.name} /> */}
-                                                                {
-                                                                    (index % 2 === 1) ?
-                                                                        <img src={Image1} alt="_1" />
-                                                                        :
-                                                                        <img src={Image2} alt="_1" />
-                                                                }
-                                                                {/* <img src={Image1} alt="_1" /> */}
-                                                                <div className="card-header-fee">
-                                                                    <div className="card-header-cover">
-                                                                        <ion-icon name="lock-closed-outline"></ion-icon>
-                                                                    </div>
-                                                                    {/* <div className="card-header-cover">
-                                                                        <ion-icon name="lock-closed-outline"></ion-icon>
-                                                                    </div> */}
-                                                                </div>
-                                                                <div className="card-overlay">
-                                                                </div>
-                                                            </div>
-                                                            <div className="card-body">
-                                                                <div className="card-body-header">
-                                                                    <p>Dance Trends</p>
-                                                                    <p>02:20 mins</p>
-                                                                </div>
-                                                                <h4 className="card-body-title">{productPlans.title}</h4>
-                                                                {/* <div className="inline_video_flex">
-                                                                                                <p>{productPlans.videoCategory.name}</p>
-                                                                                                <p>{productPlans.videoLength}mins</p>
-                                                                                            </div> */}
-                                                                <div className="card-body-footer noMargin={true}">
-                                                                    <p>Adeleke Ifeoluwase</p>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                {/* </Link> */}
-                                            </div>
-                                        ))
-                                        :
-                                        videoBox.map((productPlans, index) => (
-                                            filter === productPlans.videoCategory.name ?
-                                                <div key={index}>
-                                                    <Link to={`${AppRoute.profileVideoToPlay}?videoName=${productPlans.title}&videoId=${productPlans.id}`}>
-                                                        <div className="">
-                                                            <div className="video-poster">
-                                                                <img src={productPlans.poster} alt={productPlans.name} />
-                                                                <h4>{productPlans.title}</h4>
-                                                            </div>
-                                                            <div className="inline_video_flex">
-                                                                <p>{productPlans.videoCategory.name}</p>
-                                                                <p>{productPlans.videoLength}mins</p>
-                                                            </div>
-                                                        </div>
-                                                    </Link>
-                                                </div> : ''
-                                        ))
-                                }
-                            </div>
-                            {/* <div className="white-dash-gri">
+                            </div> */}
+                            <div>
+                                <h4 className="page-tile">Dance Trend Videos</h4>
                                 <div>
-                                    <div className="white-dash-data">
-                                        {
-                                            loadingdata ?
-                                                <div>
-                                                    {skeleton.map((placeHolder, index) => (
-                                                        <div className="item" key={index}>
-                                                            {placeHolder}
-                                                            <Divider />
+                                    {
+                                        trendVideos.length ?
+                                            <OwlCarousel className="owl-theme" lazyLoad={true}
+                                                responsive={responsive} autoPlay={true}
+                                                responsiveClass={true} loop={true} margin={10} nav>
+                                                {
+                                                    trendVideos.map((productPlans, index) => (
+                                                        <div className="card-display" key={index}>
+                                                            <Link to={`/profile/video/play/${productPlans._id}/${productPlans.title}`}>
+                                                                <div class='item'>
+                                                                    <img src={productPlans.poster} alt={productPlans.title} />
+                                                                </div>
+                                                            </Link>
                                                         </div>
                                                     ))}
-                                                </div>
-                                                :
-                                                errorOccurred ?
-                                                    <div className="center_align_messag product-display empty_div_product">
-                                                        <div>
-                                                            <div className="empty_div_square">
-
+                                            </OwlCarousel>
+                                            : ''
+                                    }
+                                </div>
+                            </div>
+                            <div className="mt_4">
+                                <h4 className="page-tile">Fitness Videos</h4>
+                                <div className="grid-4">
+                                    {
+                                        fitnessVideos.map((productPlans, index) => (
+                                            <div className="card-display" key={index}>
+                                                <Link to={`/profile/video/play/${productPlans._id}/${productPlans.title}`}>
+                                                    <div>
+                                                        <div className="card-header">
+                                                            <img src={productPlans.poster} alt={productPlans.name} />
+                                                            <div className="card-header-fee">
+                                                                <div className="card-header-cover">
+                                                                    <ion-icon name="lock-closed-outline"></ion-icon>
+                                                                </div>
                                                             </div>
-                                                            <h4>Oops!</h4>
-                                                            <p>An error occurred while we were trying to fetch data. Please reload page to
-                                                                try again.</p>
+                                                            <div className="card-overlay">
+                                                            </div>
+                                                        </div>
+                                                        <div className="card-body">
+                                                            <div className="card-body-header">
+                                                                <p>{productPlans?.videoCategory?.name}</p>
+                                                                <p>{productPlans.videoLength}</p>
+                                                            </div>
+                                                            <div className="card-body-title-cover">
+                                                                <h4 className="card-body-title">{productPlans.title}</h4>
+                                                            </div>
+                                                            <div className="card-body-footer noMargin={true}">
+                                                                <p>{productPlans.instructorName}</p>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                    :
-                                                    videoBox.length ?
-                                                        !searchVideoDisplay ?
-                                                            <div className="plan_video_display">
-                                                                <div className="video-calendar-block">
-                                                                    <div className="grid-flex">
-                                                                        <button
-                                                                            onClick={() => setIsModalOpen(true)}
-                                                                            className="flex-btn btn-red">See Dance Calendar <span>| <ion-icon name="calendar-outline"></ion-icon></span></button>
-                                                                        <div>
-                                                                            <form autoComplete="off" onSubmit={handleSubmit(findVideoByName)}>
-                                                                                <div>
-                                                                                    <Controller name="videoName" defaultValue="" control={control}
-                                                                                        render={({ field }) => (
-                                                                                            <Input autoComplete="off" {...field} type="text" style={{ height: '5rem' }} />
-                                                                                        )}
-                                                                                    />
-                                                                                </div>
-                                                                                {
-                                                                                    !loadingSearchButton ?
-                                                                                        <button
-                                                                                            style={{ cursor: 'pointer' }}
-                                                                                        >Find Video</button>
-                                                                                        :
-                                                                                        <button disabled><Spin indicator={antIcon} /></button>
-                                                                                }
-                                                                            </form>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div className="categoryDisplay">
-                                                                    <div
-                                                                        onClick={() => setFilter('all')}
-                                                                        className="">
-                                                                        <p className={`tag ${filter === 'all' ? 'active' : ''}`}>All</p>
-                                                                    </div>
-                                                                    {
-                                                                        categoryBox.map((category, index) => (
-                                                                            <div key={index}>
-                                                                                <div
-                                                                                    onClick={() => setFilter(category)}
-                                                                                    className="">
-                                                                                    <p
-                                                                                        className={`tag ${filter === category ? 'active' : ''}`}>{category}</p>
-                                                                                </div>
-                                                                            </div>
-                                                                        ))
-                                                                    }
-                                                                </div>
-                                                                <div className="grid-4">
-                                                                    {
-                                                                        filter === "all" ?
-                                                                            videoBox.map((productPlans, index) => (
-                                                                                <div key={index}>
-                                                                                    <div
-                                                                                        onClick={e => updateCurrentVideo(productPlans)}>
-                                                                                        <div className="">
-                                                                                            <div className="card-display">
-                                                                                                <div className="card-header">
-                                                                                                    {
-                                                                                                        (index % 2 === 1) ?
-                                                                                                            <img src={Image1} alt="_1" />
-                                                                                                            :
-                                                                                                            <img src={Image2} alt="_1" />
-                                                                                                    }
-                                                                                                    <div className="card-header-fee">
-                                                                                                        <div className="card-header-cover">
-                                                                                                            <ion-icon name="lock-closed-outline"></ion-icon>
-                                                                                                        </div>
-                                                                                                        <div className="card-header-cover">
-                                                                                                            <ion-icon name="lock-closed-outline"></ion-icon>
-                                                                                                        </div>
-                                                                                                    </div>
-                                                                                                </div>
-                                                                                                <div className="card-body">
-                                                                                                    <div className="card-body-header">
-                                                                                                        <p>Dance Trends</p>
-                                                                                                        <p>02:20 mins</p>
-                                                                                                    </div>
-                                                                                                    <h4 className="card-body-title">{productPlans.title}</h4>
-                                                                                                    <div className="card-body-footer noMargin={true}">
-                                                                                                        <p>Adeleke Ifeoluwase</p>
-                                                                                                    </div>
-                                                                                                    <div className="card-overlay">
-                                                                                                    </div>
-                                                                                                </div>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                            ))
-                                                                            :
-                                                                            videoBox.map((productPlans, index) => (
-                                                                                filter === productPlans.videoCategory.name ?
-                                                                                    <div key={index}>
-                                                                                        <Link to={`${AppRoute.profileVideoToPlay}?videoName=${productPlans.title}&videoId=${productPlans.id}`}>
-                                                                                            <div className="">
-                                                                                                <div className="video-poster">
-                                                                                                    <img src={productPlans.poster} alt={productPlans.name} />
-                                                                                                    <h4>{productPlans.title}</h4>
-                                                                                                </div>
-                                                                                                <div className="inline_video_flex">
-                                                                                                    <p>{productPlans.videoCategory.name}</p>
-                                                                                                    <p>{productPlans.videoLength}mins</p>
-                                                                                                </div>
-                                                                                            </div>
-                                                                                        </Link>
-                                                                                    </div> : ''
-                                                                            ))
-                                                                    }
-                                                                </div>
-                                                            </div>
-                                                            :
-                                                            <React.Fragment>
-                                                                <div className="search-display">
-                                                                    <button
-                                                                        onClick={() => goBacktoMainVideos()}
-                                                                        className="btn_border_black"><img src={ArrowLeft} alt="Arrow left" />Go back</button>
-                                                                    <h4 className="search-title">"{searchKey}"</h4>
-                                                                    {
-                                                                        searchedVideos.length ?
-                                                                            <div className="plan_video_display">
-                                                                                <div className="grid-4">
-                                                                                    {searchedVideos.map((productPlans, index) => (
-                                                                                        <div key={index}>
-                                                                                            <Link to={`${AppRoute.profileVideoToPlay}?videoName=${productPlans.title}&videoId=${productPlans.id}`}>
-                                                                                                <div className="">
-                                                                                                    <div className="video-poster">
-                                                                                                        <img src={productPlans.poster} alt={productPlans.name} />
-                                                                                                        <h4>{productPlans.title}</h4>
-                                                                                                    </div>
-                                                                                                    <div className="inline_video_flex">
-                                                                                                        <p>{productPlans.videoCategory.name}</p>
-                                                                                                        <p>{productPlans.videoLength}mins</p>
-                                                                                                    </div>
-                                                                                                </div>
-                                                                                            </Link>
-                                                                                        </div>
-                                                                                    ))
-                                                                                    }
-                                                                                </div>
-                                                                            </div>
-                                                                            :
-                                                                            <div className="search_empty_div">
-                                                                                <div>
-                                                                                    <img src={Empty} alt="empty" />
-                                                                                    <p>Videos not found</p>
-                                                                                </div>
-                                                                            </div>
-                                                                    }
-                                                                </div>
-                                                            </React.Fragment>
-                                                        :
-                                                        <div>
-                                                            <div className="empty_div">
-                                                                <div>
-                                                                    <img src={Empty} alt="empty" />
-                                                                    <p>There are no videos yet</p>
-                                                                    <Link to={AppRoute.products} className="btn_red">View Plans</Link>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                        }
-                                    </div>
+                                                </Link>
+                                            </div>
+                                        ))
+                                    }
                                 </div>
-                            </div> */}
+                            </div>
+                            <div className="mt_5"></div>
                         </div>
                     </div>
                 </div>

@@ -1,8 +1,9 @@
 import "../assets/css/homepage.css";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Nav from "../components/nav";
-import { Divider } from "antd";
+import { notification, Skeleton } from "antd";
+import { connect } from "react-redux";
 
 import VideoJS from '../components/video-player';
 import OwlCarousel from 'react-owl-carousel';
@@ -39,7 +40,10 @@ import Instructor5 from "../assets/images/team/_7.jpg";
 import Instructor6 from "../assets/images/team/_8.jpg";
 
 // import Hero1 from "../assets/images/a-company/_1.webp";
-import Hero1 from "../assets/images/homepage/home.png";
+import Hero1 from "../assets/images/homepage/main1.png";
+import Hero2 from "../assets/images/homepage/main2.png";
+import Image1 from "../assets/images/product/_1.png";
+import Image2 from "../assets/images/product/_2.png";
 // import Props1 from "../assets/images/illustrations/1_sneaker.png";
 // import Props2 from "../assets/images/illustrations/3_cup.png";
 // import Props3 from "../assets/images/illustrations/7_gift.png";
@@ -72,9 +76,14 @@ import CorporateHero from "../assets/images/content/event4.jpg";
 import InstructorHero from "../assets/images/content/event3.jpg";
 import AllAppRoutes from "../utils/routes";
 import { Link } from "react-router-dom";
+import { _fetch_app_videos } from "../utils/axiosroutes";
 // import OfficePeople from "../assets/images/homepage/office.jpg";
 
-const Homepage = () => {
+const Homepage = props => {
+    const [videoBox, setVideoBox] = useState([]);
+    const [loadingdata, setLoadingData] = useState(true);
+    const [minRandomFilter, setMinRandomFilter] = useState(0);
+
     const responsive = {
         0: {
             items: 1,
@@ -133,9 +142,53 @@ const Homepage = () => {
         }]
     };
 
+    const openNotificationWithIcon = (type, message) => {
+        notification[type]({
+            message: '',
+            description: message
+        });
+    };
+
+    const fetchUserVideosData = async () => {
+        try {
+            let videoTempData = await _fetch_app_videos();
+            if (videoTempData.data.statusMessage === "success") {
+                setVideoBox(videoTempData.data.message);
+                setLoadingData(false);
+                let videoLength = videoTempData.data.message.length;
+                let minRandom = Math.trunc(Math.random() * (videoLength - 8));
+                setMinRandomFilter(minRandom);
+            } else {
+                setLoadingData(false);
+                openNotificationWithIcon('error', videoTempData.data.summary);
+            }
+        } catch (err) {
+            setLoadingData(false);
+            openNotificationWithIcon('error', 'An error occurred while fetching data. Please reload to try again');
+        }
+    }
+
+    useEffect(() => {
+        fetchUserVideosData()
+    }, [])
+
     const handlePlayerReady = (player) => {
         // playerRef.current = player;
     };
+    // let skeleton = [];
+    // for (let i = 0; i < 6; i++) {
+    //     skeleton.push(<div>
+    //         <Skeleton.Image active={true} />
+    //         <Skeleton active />
+    //     </div>)
+    // }
+    let skeleton = [];
+    for (let i = 0; i < 8; i++) {
+        skeleton.push(<span>
+            <Skeleton.Image active={true} />
+            <Skeleton.Input style={{ marginTop: 10 }} active={true} />
+        </span>)
+    }
     return (
         <div className="homepage">
             <Nav />
@@ -247,141 +300,81 @@ const Homepage = () => {
                 <div className="contain">
                     <div className="center-div">
                         <h2>Building Healthy Connections through Dance.</h2>
-                        {/* <h2>Explore Inspiring Online Courses</h2> */}
                         <div className="btn-array">
-                            <button className="btn-default">Access to new Choreographies</button>
-                            <button className="btn-default">Provision of Dancerapy merchandise</button>
-                            <button className="btn-default">Invoicing</button>
-                            <button className="btn-default">Access to larger client base</button>
-                            <button className="btn-default">Fun and Engaging Classes</button>
-                            <button className="btn-default">Keep Fit</button>
-                            <button className="btn-default">Loose Weight</button>
-                            <button className="btn-default">Personalized Dance Plans</button>
+                            <button className="btn-default">Weight Loss</button>
+                            <button className="btn-default">Burn Calories</button>
+                            <button className="btn-default">Empowerment</button>
+                            <button className="btn-default">Enhanced Flexibility</button>
+                            <button className="btn-default">Muscle Strength</button>
+                            <button className="btn-default">Cardio</button>
+                            <button className="btn-default">Versatility</button>
+                            <button className="btn-default">Self Confidence</button>
+                            <button className="btn-default">Muscle Toning</button>
+                            <button className="btn-default">Improved Coordination</button>
+                            <button className="btn-default">Community Feeling</button>
                         </div>
                     </div>
                     <div className="desktop-only">
-                        <div className="grid-4">
-                            <div className="card-display">
-                                <div className="card-header">
-
+                        {
+                            loadingdata ?
+                                <div className="grid-4">
+                                    {skeleton.map((placeHolder, index) => (
+                                        <div>
+                                            {placeHolder}
+                                        </div>
+                                    ))}
+                                </div> :
+                                <div className="grid-4">
+                                    {
+                                        videoBox.length ?
+                                            videoBox.slice(minRandomFilter, +minRandomFilter + 8).map((productPlans, index) => (
+                                                <div key={index}>
+                                                    <Link to={props.auth.isAuthenticated ?
+                                                        `/profile/video/play/${productPlans._id}/${productPlans.title}` : `/signin?auth_redirect=/profile/video/play/${productPlans._id}/${productPlans.title}`}>
+                                                        <div>
+                                                            <div className="">
+                                                                <div className="card-display">
+                                                                    <div className="card-header">
+                                                                        <img src={productPlans.poster} alt={productPlans.name} />
+                                                                        <div className="card-header-fee">
+                                                                            {
+                                                                                productPlans.amount !== 0 ?
+                                                                                    <div className="card-header-cover">
+                                                                                        <ion-icon name="lock-closed-outline"></ion-icon>
+                                                                                    </div>
+                                                                                    : ''
+                                                                            }
+                                                                        </div>
+                                                                        <div className="card-overlay">
+                                                                        </div>
+                                                                    </div>
+                                                                    <div className="card-body">
+                                                                        <div className="card-body-header">
+                                                                            <p>{productPlans?.videoCategory?.name}</p>
+                                                                            <p>{productPlans.videoLength}</p>
+                                                                        </div>
+                                                                        <div className="card-body-title-cover">
+                                                                            <h4 className="card-body-title">{productPlans.title}</h4>
+                                                                        </div>
+                                                                        <div className="card-body-footer noMargin={true}">
+                                                                            <p>Adeleke Ifeoluwase</p>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </Link>
+                                                </div>
+                                            ))
+                                            :
+                                            skeleton.map((placeHolder, index) => (
+                                                <div>
+                                                    {placeHolder}
+                                                </div>
+                                            ))
+                                    }
                                 </div>
-                                <div className="card-body">
-                                    <div className="card-body-header">
-                                        <p>Dance Trends</p>
-                                        <p>02:20 mins</p>
-                                    </div>
-                                    <h4 className="card-body-title">Azonto in 2 minutes</h4>
-                                    <div className="card-body-footer">
-                                        <p>Adeleke Ifeoluwase</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="card-display">
-                                <div className="card-header">
-
-                                </div>
-                                <div className="card-body">
-                                    <div className="card-body-header">
-                                        <p>Dance Trends</p>
-                                        <p>02:20 mins</p>
-                                    </div>
-                                    <h4 className="card-body-title">Azonto in 2 minutes</h4>
-                                    <div className="card-body-footer">
-                                        <p>Adeleke Ifeoluwase</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="card-display">
-                                <div className="card-header">
-
-                                </div>
-                                <div className="card-body">
-                                    <div className="card-body-header">
-                                        <p>Dance Trends</p>
-                                        <p>02:20 mins</p>
-                                    </div>
-                                    <h4 className="card-body-title">Azonto in 2 minutes</h4>
-                                    <div className="card-body-footer">
-                                        <p>Adeleke Ifeoluwase</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="card-display">
-                                <div className="card-header">
-
-                                </div>
-                                <div className="card-body">
-                                    <div className="card-body-header">
-                                        <p>Dance Trends</p>
-                                        <p>02:20 mins</p>
-                                    </div>
-                                    <h4 className="card-body-title">Azonto in 2 minutes</h4>
-                                    <div className="card-body-footer">
-                                        <p>Adeleke Ifeoluwase</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="card-display">
-                                <div className="card-header">
-
-                                </div>
-                                <div className="card-body">
-                                    <div className="card-body-header">
-                                        <p>Dance Trends</p>
-                                        <p>02:20 mins</p>
-                                    </div>
-                                    <h4 className="card-body-title">Azonto in 2 minutes</h4>
-                                    <div className="card-body-footer">
-                                        <p>Adeleke Ifeoluwase</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="card-display">
-                                <div className="card-header">
-
-                                </div>
-                                <div className="card-body">
-                                    <div className="card-body-header">
-                                        <p>Dance Trends</p>
-                                        <p>02:20 mins</p>
-                                    </div>
-                                    <h4 className="card-body-title">Azonto in 2 minutes</h4>
-                                    <div className="card-body-footer">
-                                        <p>Adeleke Ifeoluwase</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="card-display">
-                                <div className="card-header">
-
-                                </div>
-                                <div className="card-body">
-                                    <div className="card-body-header">
-                                        <p>Dance Trends</p>
-                                        <p>02:20 mins</p>
-                                    </div>
-                                    <h4 className="card-body-title">Azonto in 2 minutes</h4>
-                                    <div className="card-body-footer">
-                                        <p>Adeleke Ifeoluwase</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="card-display">
-                                <div className="card-header">
-
-                                </div>
-                                <div className="card-body">
-                                    <div className="card-body-header">
-                                        <p>Dance Trends</p>
-                                        <p>02:20 mins</p>
-                                    </div>
-                                    <h4 className="card-body-title">Azonto in 2 minutes</h4>
-                                    <div className="card-body-footer">
-                                        <p>Adeleke Ifeoluwase</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        }
                     </div>
                     <div className="mobile-only">
                         <OwlCarousel className="owl-theme" lazyLoad={true}
@@ -534,10 +527,10 @@ const Homepage = () => {
                             </div>
                         </div>
                         <div>
-                            <div className="sec-homepage-img-div">
+                            {/* <div className="sec-homepage-img-div">
 
-                            </div>
-                            {/* <img src={Hero1} alt="" /> */}
+                            </div> */}
+                            <img src={Hero2} alt="" />
                         </div>
                     </div>
                 </div>
@@ -545,12 +538,10 @@ const Homepage = () => {
             <div className="sec-homepage-extra-desc reverse mt_5">
                 <div className="contain">
                     <div className="grid-2 grid-first-outline">
-                        <div className="sec-homepage-img-div">
+                        {/* <div className="sec-homepage-img-div">
 
-                        </div>
-                        {/* <div>
-                            <img src={Hero1} alt="" />
                         </div> */}
+                        <img src={Hero1} alt="" />
                         <div>
                             <div>
                                 <h2>On-demand, stepped care for all life's moments</h2>
@@ -585,4 +576,8 @@ const Homepage = () => {
     )
 }
 
-export default Homepage;
+const mapStateToProps = store => {
+    return { auth: store.auth }
+}
+
+export default connect(mapStateToProps)(Homepage);

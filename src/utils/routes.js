@@ -15,11 +15,12 @@ const AllAppRoutes = {
     physical_plans: "/physical-plans/all",
     physical_detail: "/physical/detail",
     sign_up: "/signup",
-    profile: "/dashboard",
+    profile: "/dash",
     appVideos: "/videos",
     help: "/help",
     healthcare: "/healthcare",
     profileVideos: "/profile/videos",
+    profileSettings: "/profile/settings",
     playProfileVideo: "/profile/video/play/:videoId/:videoName",
     profileVideoToPlay: "/profile/video",
     videoViewsAnalytics: "/profile/users/videoViewsAnalytics",
@@ -35,7 +36,8 @@ const AllAppRoutes = {
     profileMerchandise: "/profile/merchandise",
     profileVirtualSubscription: "/profile/virtual_subscriptions",
     profileVideoPurchaseSuccess: "/profile/video-purchase-success",
-    profileFundWalletSuccess: "/profile/fund-wallet-success"
+    profileFundWalletSuccess: "/profile/fund-wallet-success",
+    profileSubscriptionSuccess: "/profile/user-subscription-success",
 }
 
 export default AllAppRoutes;

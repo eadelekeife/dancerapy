@@ -29,7 +29,7 @@
 
 /* auth */
 .auth-display {
-    min-height: 55rem;
+    min-height: 85vh;
     display: flex;
     width: 100%;
     padding-top: 0%;
@@ -74,6 +74,28 @@
     margin-bottom: 30px;
 }
 
+.auth-display.account-verification.sendmail .message-div a {
+    background: transparent;
+    border: none;
+    display: inline;
+    color: var(--green);
+    padding: 0px;
+}
+
+.auth-display.account-verification.sendmail .message-div h3 {
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+}
+
+.auth-display.account-verification.sendmail .message-div p {
+    margin-bottom: 20px;
+}
+
+
+.auth-display.account-verification.sendmail .message-div .form_detail {
+    padding-top: 0px;
+}
+
 .auth-display.account-verification .message-div ion-icon {
     font-size: 8rem;
 }
@@ -82,37 +104,90 @@
     font-size: 1.8rem;
 }
 
-.auth-display form {
+/* .auth-display form {
     width: 80%;
-}
+} */
 
 .auth-display .grid-2 {
     height: 100%;
     width: 100%;
     height: inherit;
+    /* align-items: center; */
 }
 
 .auth-image-bg {
     background: #000;
     background: url('../images/content/signup.jpeg');
+    background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
     height: 100%;
     width: 100%;
     border-radius: 0px;
     position: relative;
+
+    /*  */
+    background: #1C212C;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* text-align: center; */
+    overflow: hidden;
+    padding: 0px 5%;
+}
+
+.auth-image-bg h2 {
+    font-size: 4rem;
+    width: 90%;
+    margin-bottom: 30px;
+    color: #fff;
+    text-align: left;
+}
+
+.auth-image-bg p {
+    font-size: 1.6rem;
+    margin-bottom: 30px;
+}
+
+.auth-image-bg .logo {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+}
+
+.auth-image-bg .bubble {
+    position: absolute;
+    background: #FBE4D1;
+    top: -40px;
+    right: -40px;
+    height: 200px;
+    width: 200px;
+    border-radius: 50%;
+}
+
+.auth-image-bg .bubble._2 {
+    background: #CFD1FF;
+    bottom: -40px;
+    top: unset;
+    left: -40px;
 }
 
 .auth-image-bg img {
-    width: 100%;
-    height: 100%;
-    top: 0px;
-    left: 0px;
-    right: 0px;
-    bottom: 0px;
-    position: absolute;
-    border-radius: 0px;
-    display: none;
+    height: 50px;
+    width: 100px;
+    border-radius: 4px;
+}
+
+.auth-image-bg ion-icon {
+    font-size: 3rem;
+}
+
+.auth-image-bg .socials {
+    display: flex;
+    flex-wrap: wrap;
+    grid-gap: 10px;
+    justify-content: center;
+    align-items: center;
 }
 
 .auth-image-bg .signup-text {
@@ -154,17 +229,45 @@
 }
 
 .form_detail {
-    padding-top: 10%;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, .2);
+    box-shadow: rgba(0, 0, 0, 0.03) 0px 30px 60px;
+    padding: 30px 30px 15px;
+    /* padding-top: 10%; */
+    width: max-content;
+    border-radius: 4px;
+}
+
+.auth-form-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.auth-form-content button.btn-red {
+    width: 100%;
+}
+
+.external-auth {
+    text-align: center;
+}
+
+.external-auth p {
+    margin-bottom: 0px;
+}
+
+.external-auth p.no-margin {
+    margin-bottom: 10px;
 }
 
 .form_detail h3 {
-    font-size: 1.8rem;
+    font-size: 2.2rem;
     padding-bottom: 10px;
 }
 
 .form_detail .first-display p {
     font-size: 1.4rem;
     padding-bottom: 20px;
+    margin-bottom: 0px;
 }
 
 .form_detail form button {
@@ -195,6 +298,7 @@
 
     .auth-image-bg {
         height: unset;
+        padding: 40px 3%;
     }
 
     .auth-display {
@@ -209,5 +313,59 @@
     .contact .grid-2 {
         display: flex;
         flex-direction: column;
+    }
+
+    .contact .grid-4,
+    .contact .grid-5 {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .auth-image-bg h2 {
+        font-size: 2.5rem;
+        width: 100%;
+        margin-bottom: 10px;
+        line-height: 1.5;
+    }
+
+    .form_detail {
+        padding: 0px 3%;
+        padding-bottom: 15%;
+        width: 100%;
+    }
+
+    .form_detail p,
+    .form_detail label,
+    .form_detail a {
+        font-family: 'Graphik';
+    }
+
+    .form_detail h3 {
+        font-size: 2rem;
+        margin-bottom: 5px !important;
+    }
+
+    .form_detail .first-display p {
+        font-size: 1.5rem;
+        line-height: 1.8;
+    }
+
+    .auth-display.account-verification .message-div {
+        padding: 0px 3%;
+        width: 100% !important;
+    }
+    .auth-display-center {
+        background: #fff;
+    }
+    .auth-display.account-verification.sendmail .message-div .form_detail {
+        padding: 0px;
+        padding-bottom: 15%;
+    }
+    .auth-display.account-verification {
+        flex-direction: column;
+        text-align: left;
+    }
+    .auth-display.account-verification.sendmail .message-div h3 {
+        padding-top: 10%;
     }
 }

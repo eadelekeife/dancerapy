@@ -1,15 +1,18 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { connect } from 'react-redux';
 import { Drawer, Skeleton, Divider, notification, Select, Spin } from 'antd';
 import AllAppRoutes from "../utils/routes";
 
 import Logo from "../assets/images/logo.jpg";
-import ArrowLeftWhite from "../assets/images/arrow-left-white.svg";
+import ArrowLeftWhite from "../assets/images/arrow-left.svg";
+import { ReactComponent as ArrowRight } from "../assets/images/arrow-right.svg";
+// import { ReactComponent as Menu } from "../assets/images/menu-r.svg";
 import { ReactComponent as Menu } from "../assets/images/menu.svg";
+import { ReactComponent as AvatarIcon } from "../assets/images/icons/user-cropped.svg";
 import { ReactComponent as Cart } from "../assets/images/cart.svg";
 import Cancel from "../assets/images/x.svg";
-import CancelWhite from "../assets/images/x-white.svg";
+import CancelWhite from "../assets/images/x.svg";
 
 const Nav = props => {
     const [fixedNav, setFixed] = useState(false);
@@ -42,75 +45,62 @@ const Nav = props => {
     };
 
     return (
-        <div className={`navigation ${fixedNav ? 'fixed' : ''}`}>
+        <div className={`navigation ${fixedNav ? 'fixed' : ''} ${props.pageFixedNav ? 'fixed' : ''}`}>
             {/* <div className="sec-nav">
-                <Link to="/instructors">Become an Instructor</Link>
+                <NavLink className={({ isActive }) => isActive ? 'active-link' : ''} to="/instructors">Become an Instructor<span className="cover-nav-bg"></span></NavLink>
                 <ul>
                     <li>
-                        <Link to="">Account</Link>
+                        <NavLink className={({ isActive }) => isActive ? 'active-link' : ''} to="">Account<span className="cover-nav-bg"></span></NavLink>
                     </li>
                     <li>
-                        <Link to="">Cart</Link>
+                        <NavLink className={({ isActive }) => isActive ? 'active-link' : ''} to="">Cart<span className="cover-nav-bg"></span></NavLink>
                     </li>
                 </ul>
             </div> */}
             <div className="nav">
                 <div className="inner-nav">
                     <div className="logo">
-                        <Link to="/">
+                        <NavLink className={({ isActive }) => isActive ? 'active-link' : ''} to="/">
                             <img src={Logo} alt="dancerapy logo" />
-                        </Link>
+                            <span className="cover-nav-bg"></span></NavLink>
                     </div>
                     <ul className="desktop-only">
-                        {/* <li>
-                            <Link to={AllAppRoutes.about_us}>About Us</Link>
-                        </li> */}
                         <li>
-                            <Link to={AllAppRoutes.appVideos}>Fitness Videos</Link>
+                            <NavLink className={({ isActive }) => isActive ? 'active-link' : ''} to={AllAppRoutes.appVideos}><span className="nav-text">Fitness Videos</span><span className="cover-nav-bg"></span></NavLink>
                         </li>
                         <li>
-                            <Link to={AllAppRoutes.healthcare}>Health Plans</Link>
+                            <NavLink className={({ isActive }) => isActive ? 'active-link' : ''} to={AllAppRoutes.about_us}><span className="nav-text">Who We Are</span><span className="cover-nav-bg"></span></NavLink>
                         </li>
-                        {/* <li>
-                            <Link to={AllAppRoutes.instructors}>Become a Dancerapy Instructor</Link>
-                        </li> */}
-                        {/* <li>
-                            <Link to={AllAppRoutes.contact_us}>Contact</Link>
-                        </li> */}
                     </ul>
                 </div>
                 <div className="desktop-only">
                     <ul>
                         <li>
-                            <Link to={AllAppRoutes.contact_us}>Contact Us</Link>
+                            <NavLink className={({ isActive }) => isActive ? 'active-link' : ''} to={AllAppRoutes.contact_us}><span className="nav-text">Contact Us</span><span className="cover-nav-bg"></span></NavLink>
                         </li>
                         <li>
-                            <Link to={AllAppRoutes.contact_us}>About</Link>
+                            <NavLink className={({ isActive }) => isActive ? 'active-link' : ''} to={AllAppRoutes.our_team}><span className="nav-text">Our Team</span><span className="cover-nav-bg"></span></NavLink>
                         </li>
                         <li>
-                            <Link to={AllAppRoutes.help}>Help</Link>
+                            <NavLink className={({ isActive }) => isActive ? 'active-link' : ''} to={AllAppRoutes.merch}><span className="nav-text">Merchandise</span><span className="cover-nav-bg"></span></NavLink>
                         </li>
-                        {/* <li>
-                            <Link to={AllAppRoutes.physical_plans}>Physical Trainings</Link>
-                        </li> */}
                         {
                             props.auth.isAuthenticated ?
                                 <React.Fragment>
                                     <li className="bg-auth" style={{ textAlign: 'center' }}>
-                                        <Link activeClassName="active-nav"
-                                            to="/dash" className="bg-auth">
+                                        <NavLink className={`({ isActive }) => isActive ? 'active-link' : '' bg-auth`} activeClassName="active-nav"
+                                            to="/dash">
                                             <span className="active-user">
-                                                Hi, {props.auth.userDetails.firstName} {props.auth.userDetails.lastName}</span>
-                                        </Link>
+                                                Hi, {props.auth.userDetails.firstName} {props.auth.userDetails.lastName}</span></NavLink>
                                     </li>
                                 </React.Fragment>
                                 :
                                 <React.Fragment>
                                     <li>
-                                        <Link to={AllAppRoutes.sign_in}>Log In</Link>
+                                        <NavLink className={({ isActive }) => isActive ? 'active-link' : ''} to={AllAppRoutes.sign_in}>Log In<span className="cover-nav-bg"></span></NavLink>
                                     </li>
                                     <li className="bg-auth">
-                                        <Link to={AllAppRoutes.sign_up}>Create Account</Link>
+                                        <NavLink className={({ isActive }) => isActive ? 'active-link' : ''} to={AllAppRoutes.sign_up}>Create Account<span className="cover-nav-bg"></span></NavLink>
                                     </li>
                                 </React.Fragment>
                         }
@@ -118,8 +108,14 @@ const Nav = props => {
                 </div>
                 <div className="mobile-only">
                     <ul>
-                        <li>
+                        {/* <li>
                             <button className="btn-black">Your Videos</button>
+                        </li> */}
+                        <li>
+                            <AvatarIcon className="menu" />
+                        </li>
+                        <li>
+                            <Cart className="menu" />
                         </li>
                         <li>
                             <Menu className="menu" onClick={showDrawer} />
@@ -140,117 +136,96 @@ const Nav = props => {
                         </div>
                         <ul>
                             <li>
-                                <Link
+                                <NavLink
                                     onClick={() => setOpenDrawer(false)}
                                     to="/">
                                     <span>Home</span>
-                                    {/* <ion-icon name="arrow-forward-outline"></ion-icon> */}
-                                </Link>
+                                </NavLink>
                             </li>
                             {
                                 props.auth.isAuthenticated ?
                                     <li>
-                                        <Link
+                                        <NavLink
                                             onClick={e => {
                                                 e.preventDefault();
                                                 setShowUserProfileNav(true)
                                             }}
                                             to={AllAppRoutes.signup}>
                                             <span>Account</span>
-                                            <ion-icon class="white" name="chevron-forward-outline"></ion-icon>
-                                        </Link>
+                                            <ArrowRight className="nav-arrow" />
+                                        </NavLink>
                                     </li>
                                     : ''
                             }
                             <li>
-                                <Link
-                                    // onClick={e => { e.preventDefault(); setExtraNavDisplay(1) }}
+                                <NavLink
+                                    onClick={() => setOpenDrawer(false)}
+                                    to={AllAppRoutes.appVideos}>
+                                    <span>Videos</span></NavLink>
+                            </li>
+                            <li>
+                                <NavLink
+                                    // onClick={e => { e.preventDefault(); setExtraNavDisplay(2) }}
                                     onClick={() => setOpenDrawer(false)}
                                     to={AllAppRoutes.about_us}>
                                     <span>About Us</span>
-                                    {/* <ion-icon name="arrow-forward-outline"></ion-icon> */}
-                                </Link>
+                                    {/* <ion-icon name="arrow-forward-outline"></ion-icon> */}</NavLink>
                             </li>
                             <li>
-                                <Link
+                                <NavLink
                                     // onClick={e => { e.preventDefault(); setExtraNavDisplay(2) }}
-                                    onClick={() => setOpenDrawer(false)}
-                                    to={AllAppRoutes.physical_plans}>
-                                    <span>Physical Classes</span>
-                                    {/* <ion-icon name="arrow-forward-outline"></ion-icon> */}
-                                </Link>
-                            </li>
-                            <li>
-                                <Link
-                                    // onClick={e => { e.preventDefault(); setExtraNavDisplay(2) }}
-                                    onClick={() => setOpenDrawer(false)}
-                                    to={AllAppRoutes.products}>
-                                    <span>Dancerapy Products and Services</span>
-                                    {/* <ion-icon name="arrow-forward-outline"></ion-icon> */}
-                                </Link>
-                            </li>
-                            <li>
-                                <Link
-                                    // onClick={e => { e.preventDefault(); setExtraNavDisplay(3) }}
                                     onClick={() => setOpenDrawer(false)}
                                     to={AllAppRoutes.merch}>
-                                    <span>Shop Now</span>
-                                    {/* <ion-icon name="arrow-forward-outline"></ion-icon> */}
-                                </Link>
+                                    <span>Dancerapy Merchandise</span>
+                                    {/* <ion-icon name="arrow-forward-outline"></ion-icon> */}</NavLink>
                             </li>
                             <li>
-                                <Link
-                                    // onClick={e => { e.preventDefault(); setExtraNavDisplay(4) }}
-                                    onClick={() => setOpenDrawer(false)}
-                                    to={AllAppRoutes.instructors}>
-                                    <span>Become a Dancerapy Instructor</span>
-                                    {/* <ion-icon name="arrow-forward-outline"></ion-icon> */}
-                                </Link>
-                            </li>
-                            <li>
-                                <Link
-                                    onClick={() => setOpenDrawer(false)}
-                                    to={AllAppRoutes.schools}>
-                                    <span>Events and Schools</span>
-                                    {/* <ion-icon name="arrow-forward-outline"></ion-icon> */}
-                                </Link>
-                            </li>
-                            <li>
-                                <Link
-                                    // onClick={e => { e.preventDefault(); setExtraNavDisplay(4) }}
-                                    onClick={() => setOpenDrawer(false)}
-                                    to={AllAppRoutes.corporate}>
-                                    <span>Dancerapy and Corporates</span>
-                                    {/* <ion-icon name="arrow-forward-outline"></ion-icon> */}
-                                </Link>
-                            </li>
-                            <li>
-                                <Link
+                                <NavLink
                                     // onClick={e => { e.preventDefault(); setExtraNavDisplay(5) }}
                                     onClick={() => setOpenDrawer(false)}
                                     to={AllAppRoutes.contact_us}>
                                     <span>Contact Us</span>
-                                    {/* <ion-icon name="arrow-forward-outline"></ion-icon> */}
-                                </Link>
+                                    {/* <ion-icon name="arrow-forward-outline"></ion-icon> */}</NavLink>
+                            </li>
+                            <li>
+                                <NavLink
+                                    onClick={() => setOpenDrawer(false)}
+                                    to="#">
+                                    <span>Become a Dancerapy Instructor</span>
+                                </NavLink>
+                            </li>
+                            <li>
+                                <NavLink
+                                    onClick={() => setOpenDrawer(false)}
+                                    to="#">
+                                    <span>Events and Schools</span>
+                                </NavLink>
+                            </li>
+                            <li>
+                                <NavLink
+                                    onClick={() => setOpenDrawer(false)}
+                                    to="#">
+                                    <span>Dancerapy and Corporates</span>
+                                </NavLink>
                             </li>
                             {
                                 !props.auth.isAuthenticated ?
                                     <React.Fragment>
                                         <li>
-                                            <Link
+                                            <NavLink
                                                 onClick={() => setOpenDrawer(false)}
                                                 to={AllAppRoutes.sign_in}>
                                                 <span>Login to your Account</span>
                                                 <ion-icon name="arrow-forward-outline"></ion-icon>
-                                            </Link>
+                                            </NavLink>
                                         </li>
                                         <li>
-                                            <Link
+                                            <NavLink
                                                 onClick={() => setOpenDrawer(false)}
                                                 to={AllAppRoutes.sign_up}>
                                                 <span>Sign Up</span>
                                                 <ion-icon name="arrow-forward-outline"></ion-icon>
-                                            </Link>
+                                            </NavLink>
                                         </li>
                                     </React.Fragment>
                                     : ''
@@ -264,65 +239,37 @@ const Nav = props => {
                                 {/* <img src={Logo} className="nav-logo" alt="logo" /> */}
                             </div>
                             <img onClick={() => setShowUserProfileNav(false)} src={ArrowLeftWhite} alt="ArrowLeft" />
-                            {/* <ion-icon
-                                onClick={() => setShowUserProfileNav(false)}
-                                class="menu-bar"
-                                name="arrow-back-outline"></ion-icon> */}
                         </div>
                         <ul>
                             <li>
-                                <Link onClick={() => setOpenDrawer(false)} to={AllAppRoutes.profile} exact
+                                <NavLink className={({ isActive }) => isActive ? 'active-link' : ''} onClick={() => setOpenDrawer(false)} to={AllAppRoutes.profile} exact
                                 >
                                     Profile Overview
-                                    {/* <ion-icon name="arrow-forward-outline"></ion-icon> */}
-                                </Link>
+                                </NavLink>
                             </li>
                             <li>
-                                <Link onClick={() => setOpenDrawer(false)} to={AllAppRoutes.profileVideos}
+                                <NavLink className={({ isActive }) => isActive ? 'active-link' : ''} onClick={() => setOpenDrawer(false)} to={AllAppRoutes.profileSettings}
                                 >
-                                    Your Videos
-                                    {/* <ion-icon name="arrow-forward-outline"></ion-icon> */}
-                                </Link>
+                                    Profile Settings
+                                </NavLink>
                             </li>
                             <li>
-                                <Link onClick={() => setOpenDrawer(false)} to={AllAppRoutes.profileVirtualSubscription}
+                                <NavLink className={({ isActive }) => isActive ? 'active-link' : ''} onClick={() => setOpenDrawer(false)} to={AllAppRoutes.profileTransactionHistory}
                                 >
-                                    Past Live Classes
-                                    {/* <ion-icon name="arrow-forward-outline"></ion-icon> */}
-                                </Link>
+                                    Transaction History
+                                </NavLink>
                             </li>
                             <li>
-                                <Link onClick={() => setOpenDrawer(false)} to={AllAppRoutes.profilePlanOrders}
+                                <NavLink className={({ isActive }) => isActive ? 'active-link' : ''} onClick={() => setOpenDrawer(false)} to={AllAppRoutes.videoViewsAnalytics}
                                 >
-                                    Physical Classes
-                                    {/* <ion-icon name="arrow-forward-outline"></ion-icon> */}
-                                </Link>
+                                    Video Views Analytics
+                                </NavLink>
                             </li>
                             <li>
-                                <Link onClick={() => setOpenDrawer(false)} to={AllAppRoutes.profileProductOrders}
-                                >
-                                    Your Product Orders
-                                    {/* <ion-icon name="arrow-forward-outline"></ion-icon> */}
-                                </Link>
-                            </li>
-                            <li>
-                                <Link onClick={() => setOpenDrawer(false)} to={AllAppRoutes.profileMerchandise}
+                                <NavLink className={({ isActive }) => isActive ? 'active-link' : ''} onClick={() => setOpenDrawer(false)} to={AllAppRoutes.profileMerchandise}
                                 >
                                     Merchandise Orders
-                                    {/* <ion-icon name="arrow-forward-outline"></ion-icon> */}
-                                </Link>
-                            </li>
-                            <li>
-                                <Link onClick={() => setOpenDrawer(false)} to={AllAppRoutes.contact}
-                                >
-                                    Contact Us
-                                    {/* <ion-icon name="arrow-forward-outline"></ion-icon> */}
-                                </Link>
-                            </li>
-                            <li>
-                                <Link onClick={() => setOpenDrawer(false)} to="/signout">
-                                    {/* <span className="lnr lnr-exit"></span> */}
-                                    Sign Out</Link>
+                                </NavLink>
                             </li>
                         </ul>
                     </div>

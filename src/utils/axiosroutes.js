@@ -17,8 +17,48 @@ export const _signin_user_from_trial = req => {
     return axiosCall.post('/week-trial-subscription-signin', req);
 }
 
+export const _signout_user_ = req => {
+    return userAxiosCall.post('/users/signout-user', {}, {
+        headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`
+        }
+    });
+}
+
 export const _signup_new_user = req => {
     return userAxiosCall.post('/users/signup-user', req);
+}
+
+export const _update_basic_user_info = req => {
+    return userAxiosCall.post('/users/update-user', req, {
+        headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`
+        }
+    });
+}
+
+export const _get_all_merchandise = () => {
+    return userAxiosCall.get('/users/all-merchandise', {
+        headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`
+        }
+    });
+}
+
+export const _add_merchandise_to_cart = req => {
+    return userAxiosCall.post('/users/add-merch-to-cart', req, {
+        headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`
+        }
+    });
+}
+
+export const _update_password_from_settings = req => {
+    return userAxiosCall.post('/users/changepasswordfromprofile', req, {
+        headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`
+        }
+    });
 }
 
 export const _fetch_user_wallet = req => {
@@ -30,6 +70,14 @@ export const _fetch_user_wallet = req => {
 }
 export const _fetch_user_wallet_transactions = req => {
     return userAxiosCall('/users/fetch-user-wallet-transactions', {
+        headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`
+        }
+    });
+}
+
+export const _fetch_user_subscription_history = req => {
+    return userAxiosCall('/users/fetch-user-subscription-history', {
         headers: {
             Authorization: `Bearer ${localStorage.getItem('token')}`
         }
@@ -184,8 +232,71 @@ export const _delete_video_from_cart = req => {
     })
 }
 
+export const _initiate_user_subscription = req => {
+    return userAxiosCall.post('/users/initiate-user-subscription', req, {
+        headers: {
+            authorization: `Bearer ${localStorage.getItem('token')}`
+        }
+    })
+}
+
+export const _complete_user_subscription = req => {
+    return userAxiosCall.post('/users/complete-user-subscription', req, {
+        headers: {
+            authorization: `Bearer ${localStorage.getItem('token')}`
+        }
+    })
+}
+
+export const _cancel_user_subscription = req => {
+    return userAxiosCall.post('/users/cancel-user-subscription', req, {
+        headers: {
+            authorization: `Bearer ${localStorage.getItem('token')}`
+        }
+    })
+}
+
+export const _initiate_user_subscription_with_wallet = req => {
+    return userAxiosCall.post('/users/initiate-user-subscription-with-wallet', req, {
+        headers: {
+            authorization: `Bearer ${localStorage.getItem('token')}`
+        }
+    })
+}
+
+export const _complete_user_subscription_with_wallet = req => {
+    return userAxiosCall.post('/users/complete-user-subscription-with-wallet', req, {
+        headers: {
+            authorization: `Bearer ${localStorage.getItem('token')}`
+        }
+    })
+}
+
+export const _fetch_subscription_plans = req => {
+    return userAxiosCall('/users/app-sub-plans', {
+        headers: {
+            authorization: `Bearer ${localStorage.getItem('token')}`
+        }
+    })
+}
+
 export const _find_video_by_id = videoId => {
     return userAxiosCall(`/videos/find-video-by-id/${videoId}`, {
+        headers: {
+            authorization: `Bearer ${localStorage.getItem('token')}`
+        }
+    })
+}
+export const _reset_password = req => {
+    return userAxiosCall.post(`/users/resetpassword`, req, {
+        headers: {
+            authorization: `Bearer ${localStorage.getItem('token')}`
+        }
+    })
+}
+
+export const _send_token_to_mail = req => {
+    return userAxiosCall.post(`/users/resetsendmail`, req, {
         headers: {
             authorization: `Bearer ${localStorage.getItem('token')}`
         }

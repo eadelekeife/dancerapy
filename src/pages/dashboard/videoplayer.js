@@ -9,7 +9,7 @@ import axios from '../../utils/axiosCall';
 // import videojs from 'video.js';
 import VideoJS from '../../components/main-video-player';
 import 'video.js/dist/video-js.css';
-
+import NumberFormat from 'react-number-format';
 import { Divider, Rate } from "antd";
 
 import Image1 from "../../assets/images/product/_1.png";
@@ -55,6 +55,7 @@ const ProfileVideoToPlay = props => {
     const [userActiveSubscription, setUserActiveSubscription] = useState(false);
     const [categoryBox, setCategoryBox] = useState([]);
     const [filter, setFilter] = useState('all');
+    const [userWalletData, setUserWalletData] = useState({});
     const [buttonDisplay, setButtonDisplay] = useState(false);
     const [minRandomFilter, setMinRandomFilter] = useState(0);
     const [videoPurchased, setVideoPurchased] = useState(false);
@@ -75,12 +76,13 @@ const ProfileVideoToPlay = props => {
             if (videoData.data.statusMessage === "success") {
                 setErrorOccurred(false);
                 setFetchingData(false);
-                setVideoPurchased(videoData.data.message.videoPurchased);
+                setVideoPurchased(videoData.data.message.activeSubscription);
                 setVideoData(videoData.data.message.videoData);
+                setUserWalletData(videoData.data.message.userWalletBalance);
                 let categoryLength = videoData.data.message.videoData.videoCategory?.videos.length;
                 let minRandom = Math.trunc(Math.random() * (categoryLength - 4));
                 setMinRandomFilter(minRandom);
-                if (!videoData.data.message.videoPurchased) setOpenVideoPurchaseModal(true);
+                if (!videoData.data.message.activeSubscription) setOpenVideoPurchaseModal(true);
             } else {
                 setErrorOccurred(true);
                 setFetchingData(false);
@@ -124,6 +126,8 @@ const ProfileVideoToPlay = props => {
         try {
             let videoPurchase = await _buy_single_video(videoPurchaseData);
             if (videoPurchase.data.statusMessage === "success") {
+                let redLink = `/profile/video/play/${videoData._id}/${videoData.title}`;
+                localStorage.setItem('redLink', redLink);
                 Navigate(AllAppRoutes.profileVideoPurchaseSuccess);
             } else {
                 openNotificationWithIcon('error', videoPurchase.data.summary);
@@ -144,6 +148,8 @@ const ProfileVideoToPlay = props => {
         try {
             let videoPurchase = await _buy_single_video_with_tokens(videoPurchaseData);
             if (videoPurchase.data.statusMessage === "success") {
+                let redLink = `/profile/video/play/${videoData._id}/${videoData.title}`;
+                localStorage.setItem('redLink', redLink);
                 Navigate(AllAppRoutes.profileVideoPurchaseSuccess);
             } else {
                 openNotificationWithIcon('error', videoPurchase.data.summary);
@@ -160,9 +166,9 @@ const ProfileVideoToPlay = props => {
         try {
             let videoCart = await _add_video_to_cart({ videoId: videoData._id });
             if (videoCart.data.statusMessage === "success") {
-                console.log('yo', videoCart.data.message.length)
                 localStorage.setItem('cartQuantity', videoCart.data.message.length);
                 openNotificationWithIcon('success', 'Video added to cart successfully');
+                Navigate('/videos');
             } else {
                 openNotificationWithIcon('error', videoCart.data.summary);
             }
@@ -220,7 +226,7 @@ const ProfileVideoToPlay = props => {
     }
 
     return (
-        <div>
+        <div className="extra-videos-detail-display">
             <Nav />
             {
                 fetchingData ?
@@ -248,11 +254,11 @@ const ProfileVideoToPlay = props => {
                             <div className="new-video-player">
                                 <div className="contain">
                                     <div className="video-story">
-                                        <h2>Dance Trends - Azonto</h2>
+                                        <h2>{videoData.title}</h2>
                                         <div className="specific-dance-detail">
-                                            <p>&mdash; BJ Miah</p>
-                                            <p>&mdash; 02 mins</p>
-                                            <p>&mdash; Dance Trends</p>
+                                            <p>&mdash; {videoData.instructorName}</p>
+                                            <p>&mdash; {videoData.videoLength}</p>
+                                            <p>&mdash; {videoData?.videoCategory?.name}</p>
                                         </div>
                                     </div>
                                     <div>
@@ -270,18 +276,13 @@ const ProfileVideoToPlay = props => {
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div>
+                                            <div className="extra-unnecessary-data">
                                                 <div className="grid-2">
                                                     <div className="video-sect-story">
                                                         <h4>Video Summary</h4>
-                                                        <p>The Yahooze dance is a Nigerian dance style that gained popularity in
-                                                            the mid-2000s, particularly within the country's entertainment and music
-                                                            scenes. Named after a hit song titled "Yahooze" by Nigerian musician Olu
-                                                            Maintain, the dance became synonymous with a specific era of Nigerian pop culture.</p>
-                                                        {/* <p>Dancerapy is a fitness and lifestyle brand invested in
-                                                            reintroducing dance as a choice therapy for healthy living. As a
-                                                            movement, Dancerapy personalizes the idea of dance as a culture towards
-                                                            achieving wholeness in health and fitness.</p> */}
+                                                        <div className="video-sect-story-description">
+                                                            <p dangerouslySetInnerHTML={{ __html: videoData.videoDescription }}></p>
+                                                        </div>
                                                     </div>
                                                     <div className="video-sect-story _2">
                                                         <h4>Video Summary</h4>
@@ -302,7 +303,7 @@ const ProfileVideoToPlay = props => {
                                         <div className="avatar-sect">
                                             <div className="avatar-circle-showcase"></div>
                                             <div>
-                                                <h3>BJ Miah</h3>
+                                                <h3>{videoData.instructorName}</h3>
                                                 <p>Dance Instrutor</p>
                                             </div>
                                         </div>
@@ -311,83 +312,49 @@ const ProfileVideoToPlay = props => {
                                         </div>
                                     </div>
                                     <div>
-                                        <div className="banner-tab">
-                                            <button>Weight Loss</button>
-                                            <button>Burn Calories</button>
-                                            <button>Empowerment</button>
-                                            <button>Enhanced Flexibility</button>
-                                            <button>Muscle Strength</button>
-                                            <button>Cardio</button>
-                                            <button>Versatility</button>
-                                            <button>Self Confidence</button>
-                                            <button>Muscle Toning</button>
-                                            <button>Improved Coordination</button>
-                                            <button>Community Feeling</button>
-                                            <button>Social Interaction</button>
-                                        </div>
-                                        <div>
-                                            <div className="grid-4 mt_4">
-                                                <div className="small-card">
-                                                    <ion-icon name="tv-outline"></ion-icon>
-                                                    <p>Responsive</p>
-                                                </div>
-                                                <div className="small-card">
-                                                    <ion-icon name="cellular-outline"></ion-icon>
-                                                    <p>Easy to use</p>
-                                                </div>
-                                                <div className="small-card">
-                                                    <ion-icon name="expand-outline"></ion-icon>
-                                                    <p>Fullscreen</p>
-                                                </div>
-                                                <div className="small-card">
-                                                    <ion-icon name="ticket-outline"></ion-icon>
-                                                    <p>Free Tokens</p>
+                                        <div className="side-banner-tab">
+                                            <div className="banner-tab">
+                                                <button>Weight Loss</button>
+                                                <button>Burn Calories</button>
+                                                <button>Empowerment</button>
+                                                <button>Enhanced Flexibility</button>
+                                                <button>Muscle Strength</button>
+                                                <button>Cardio</button>
+                                                <button>Versatility</button>
+                                                <button>Self Confidence</button>
+                                                <button>Muscle Toning</button>
+                                                <button>Improved Coordination</button>
+                                                <button>Community Feeling</button>
+                                                <button>Social Interaction</button>
+                                            </div>
+                                            <div>
+                                                <div className="grid-4 mt_4">
+                                                    <div className="small-card">
+                                                        <ion-icon name="tv-outline"></ion-icon>
+                                                        <p>Responsive</p>
+                                                    </div>
+                                                    <div className="small-card">
+                                                        <ion-icon name="cellular-outline"></ion-icon>
+                                                        <p>Easy to use</p>
+                                                    </div>
+                                                    <div className="small-card">
+                                                        <ion-icon name="expand-outline"></ion-icon>
+                                                        <p>Fullscreen</p>
+                                                    </div>
+                                                    <div className="small-card">
+                                                        <ion-icon name="ticket-outline"></ion-icon>
+                                                        <p>Free Tokens</p>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            {/* <div className="main_video_player">
-                                <div className="grid-2">
-                                    <div>
-                                        <div className="contain">
-                                            <h3>{videoData.title}</h3>
-                                            <div className="">
-                                                <ul className="video-product-tag">
-                                                    <p className="">
-                                                        <span className="first_span">Flexibility</span>
-                                                    </p>
-                                                    <p className="">
-                                                        <span className="first_span">Cardio</span>
-                                                    </p>
-                                                    <p className="">
-                                                        <span className="first_span">Muscle Toning</span>
-                                                    </p>
-                                                    <p className="">
-                                                        <span className="first_span">Interval Training</span>
-                                                    </p>
-                                                    <p className="">
-                                                        <span className="first_span">Muscle Memory</span>
-                                                    </p>
-                                                    <p className="">
-                                                        <span className="first_span">Mind and Body Coordination</span>
-                                                    </p>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="main_video plan_group">
-                                        <VideoJS options={videoJsOptions} videoId={videoId}
-                                            onReady={handlePlayerReady} />
-                                    </div>
-                                </div>
-                            </div> */}
                             <div className="detail_prop trending_videos mt_5">
                                 <div className="contain">
                                     <div className="profile-data-display">
                                         <h3 className="other_profile_title">Trending dance videos</h3>
-                                        {/* <Divider style={{ margin: 0 }} /> */}
                                         {
                                             fetchingData ?
                                                 <div className="video-skeleton">
@@ -404,24 +371,17 @@ const ProfileVideoToPlay = props => {
                                                     <div className="other-dance-styles plan_video_display">
                                                         <div className="grid-4">
                                                             {
-                                                                videoData?.videoCategory?.videos.slice(minRandomFilter, +minRandomFilter + 4).map((videoData, index) => (
+                                                                videoData?.videoCategory?.videos.slice(minRandomFilter, +minRandomFilter + 4).map((otherVideosData, index) => (
                                                                     <div key={index}>
                                                                         <Link to={props.auth.isAuthenticated ?
-                                                                            `/profile/video/play/${videoData?._id}/${videoData?.title}` : `/signin?auth_redirect=/profile/video/play/${videoData?._id}/${videoData?.title}`}>
+                                                                            `/profile/video/play/${otherVideosData?._id}/${otherVideosData?.title}` : `/signin?auth_redirect=/profile/video/play/${otherVideosData?._id}/${otherVideosData?.title}`}>
                                                                             <div className="">
                                                                                 <div className="card-display">
                                                                                     <div className="card-header">
-                                                                                        {/* <img src={videoData.poster} alt={videoData.name} /> */}
-                                                                                        {
-                                                                                            (index % 2 === 1) ?
-                                                                                                <img src={Image1} alt="_1" />
-                                                                                                :
-                                                                                                <img src={Image2} alt="_1" />
-                                                                                        }
-                                                                                        {/* <img src={Image1} alt="_1" /> */}
+                                                                                        <img src={otherVideosData.poster} alt={otherVideosData.name} />
                                                                                         <div className="card-header-fee">
                                                                                             {
-                                                                                                videoData?.amount !== 0 ?
+                                                                                                otherVideosData?.amount !== 0 ?
                                                                                                     <div className="card-header-cover">
                                                                                                         <ion-icon name="lock-closed-outline"></ion-icon>
                                                                                                     </div>
@@ -433,16 +393,12 @@ const ProfileVideoToPlay = props => {
                                                                                     </div>
                                                                                     <div className="card-body">
                                                                                         <div className="card-body-header">
-                                                                                            <p>Dance Trends</p>
-                                                                                            <p>02:20 mins</p>
+                                                                                            <p>{videoData?.videoCategory?.name}</p>
+                                                                                            <p>{otherVideosData.videoLength}</p>
                                                                                         </div>
-                                                                                        <h4 className="card-body-title">{videoData?.title}</h4>
-                                                                                        {/* <div className="inline_video_flex">
-                                                                                                <p>{videoData?.videoCategory.name}</p>
-                                                                                                <p>{videoData?.videoLength}mins</p>
-                                                                                            </div> */}
+                                                                                        <h4 className="card-body-title">{otherVideosData?.title}</h4>
                                                                                         <div className="card-body-footer noMargin={true}">
-                                                                                            <p>Adeleke Ifeoluwase</p>
+                                                                                            <p>{otherVideosData.instructorName}</p>
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
@@ -456,41 +412,65 @@ const ProfileVideoToPlay = props => {
                                         }
                                     </div>
                                 </div>
-                                <div className="pt-4">
-
-                                </div>
                             </div>
                         </div>
             }
-            <Footer noMargin={true} />
+            <Footer />
             <Modal open={openVideoPurchaseModal} className="paymentModal" footer={null}
                 maskClosable={false} onCancel={() => setOpenVideoPurchaseModal(false)}>
                 <div className="referral-story">
-                    <div className="center-div">
+                    <div className="center-div checkout-button">
                         <div>
                             <div>
                                 <img src={LockImage} alt="locked video" />
                             </div>
-                            <h3>Payment Required</h3>
-                            <p>This is a paid video. Invite a friend to Dancerapy and earn 0.25% on all their transactions</p>
+                            {/* <h3>Payment Required</h3>
                             {
-                                loadingPayment ?
+                                (+videoData.amount > +userWalletData.balance) && (+videoData.amount > +userWalletData.tokens) ?
                                     <div>
-                                        <Spin />
+                                        <p>This video costs <span className="currency">NGN</span>{videoData.amount} to access. You currently have {userWalletData.tokens} tokens
+                                            and <span className="currency">NGN</span><NumberFormat value={(+userWalletData?.balance).toFixed(2)} displayType="text" thousandSeparator={true} /> in your wallet. Please
+                                            fund wallet to buy video.</p>
+                                        <div>
+                                            <Link className="btn-red" to={AllAppRoutes.profilePlanOrders}>Fund Wallet</Link>
+
+                                            <button
+                                                onClick={() => addVideoToCart()}
+                                                className="btn-default">Add to Cart to Buy Later</button>
+                                        </div>
                                     </div>
                                     :
-                                    <div className="btn-grid">
-                                        <button
-                                            onClick={() => completeVideoPurchaseWithTokens()}
-                                            className="btn-red">Buy with Tokens</button>
-                                        <button
-                                            onClick={() => completeVideoPurchaseWithWalletBalance()}
-                                            className="btn-red">Buy with Wallet Balance</button>
-                                        <button
-                                            onClick={() => addVideoToCart()}
-                                            className="btn-red">Add to Cart</button>
+                                    <div>
+                                        <p>This video costs <span className="currency">NGN</span>{videoData.amount} to access. You currently have {userWalletData.tokens} tokens
+                                            and <span className="currency">NGN</span><NumberFormat value={(+userWalletData?.balance).toFixed(2)} displayType="text" thousandSeparator={true} /> in your wallet. Please click below
+                                            to buy video.</p>
+                                        <div className="btn-gri btn-block">
+                                            {
+                                                +videoData.amount <= +userWalletData.balance ?
+                                                    <button
+                                                        onClick={() => completeVideoPurchaseWithWalletBalance()}
+                                                        className="btn-red">Buy with Wallet Balance</button> : ""
+                                            }
+                                            {
+                                                +videoData.amount <= +userWalletData.tokens ?
+                                                    <button
+                                                        onClick={() => completeVideoPurchaseWithTokens()}
+                                                        className="btn-red-border">Buy with Tokens</button> : ""
+                                            }
+                                            <button
+                                                onClick={() => addVideoToCart()}
+                                                className="btn-default">Add to Cart to Buy Later</button>
+                                        </div>
                                     </div>
-                            }
+                            } */}
+                            <h3>Subscription Required</h3>
+                            <p>This is an exclusive video and requires an active subscription to access. Please subscribe to
+                                continue.
+                            </p>
+                            <Link className="btn-red" to={AllAppRoutes.products}>See all products plans</Link>
+                            <Link className="btn-default"
+                                style={{ marginTop: 5, display: 'block', textDecoration: 'none' }}
+                                to={AllAppRoutes.appVideos}>See all videos</Link>
                         </div>
                     </div>
                 </div>

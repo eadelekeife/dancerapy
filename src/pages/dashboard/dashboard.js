@@ -4,6 +4,7 @@ import React, { useEffect, useRef, useState } from "react";
 
 import { Controller, useForm } from 'react-hook-form';
 import { Divider, Input, Tabs, Spin, Modal, notification } from 'antd';
+import { Link } from "react-router-dom";
 import * as yup from 'yup';
 import { LoadingOutlined } from '@ant-design/icons';
 import axios from '../../utils/axiosCall';
@@ -13,21 +14,25 @@ import { updateUser } from '../../utils/reducers/auth';
 import { useNavigate } from "react-router";
 import { v4 as uuid } from 'uuid';
 import NumberFormat from 'react-number-format';
+import { ReactComponent as AvatarIcon } from "../../assets/images/icons/Avatar.svg";
 
 import TopNav from "./top-bar";
 import SideBar from "./side-bar";
 import Footer from "../../components/footer";
 
-import ReferImage from "../../assets/images/a-company/refer.png";
-import ReferralImage from "../../assets/images/illustrations/5_bell.png";
+import WalletImg from "../../assets/images/illustrations/14_rhombus.png";
+import TokenImg from "../../assets/images/illustrations/17_soap.png";
+import User1 from "../../assets/images/illustrations/user-1.png";
+import { ReactComponent as PlusIcon } from "../../assets/images/icons/pluc-circle-r.svg";
 
-import Dash1 from "../../assets/images/illustrations/1_circle.png";
 import CheckSymbol from "../../assets/images/illustrations/Check.png";
-import Dash2 from "../../assets/images/illustrations/12_jug.png";
-import Dash3 from "../../assets/images/illustrations/14_rhombus.png";
-import Dash4 from "../../assets/images/illustrations/17_soap.png";
-import ModalDisplay from "../../components/referral-modal";
-import { _cancel_fund_user_wallet, _fetch_user_wallet, _fund_user_wallet_balance, _initiate_fund_user_wallet_balance } from "../../utils/axiosroutes";
+
+import { ReactComponent as Calendar } from "../../assets/images/icons/pie-chart -cropped.svg";
+import { ReactComponent as ArchiveIcon } from "../../assets/images/icons/archive-cropped.svg";
+import { ReactComponent as Settings } from "../../assets/images/icons/settings-cropped.svg";
+import { ReactComponent as MerchandiseIcon } from "../../assets/images/icons/shopping-bag-cropped.svg";
+
+import { _cancel_fund_user_wallet, _cancel_user_subscription, _complete_user_subscription, _complete_user_subscription_with_wallet, _fetch_subscription_plans, _fetch_user_wallet, _fund_user_wallet_balance, _initiate_fund_user_wallet_balance, _initiate_user_subscription, _initiate_user_subscription_with_wallet } from "../../utils/axiosroutes";
 
 import { usePaystackPayment } from 'react-paystack';
 import AllAppRoutes from "../../utils/routes";
@@ -37,6 +42,7 @@ const Dashboard = props => {
     const navigate = useNavigate();
     const referralMessage = useRef();
     const paystackButton = useRef(null);
+    const fundWalletPaystackButton = useRef(null);
     const [loadingData, setLoadingData] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
     const [size, setSize] = useState('small');
@@ -46,6 +52,10 @@ const Dashboard = props => {
     const [loadUserUpdate, setLoadUserUpdate] = useState(false);
     const [loadUserError, setLoadUserError] = useState(false);
     const [openFundWalletModal, setOpenFundWalletModal] = useState(false);
+    const [openSubscriptionModal, setOpenSubscriptionModal] = useState(false);
+    const [subscriptionPlans, setSubscriptionPlans] = useState([]);
+    const [selectedSubscriptionPackage, setSelectedSubscriptionPackage] = useState({});
+    const [activeSubPackage, setActiveSubPackage] = useState(0);
     const [referralModal, setReferralModal] = useState(false);
     const [userWalletData, setUserWalletData] = useState({});
     const [loadingWalletData, setLoadingWalletData] = useState(true);
@@ -273,28 +283,136 @@ const Dashboard = props => {
         }
     }
 
-
-    const componentProps = {
-        email: userData.emailAddress,
-        // email: 'eadelekeife@yahoo.com',
-        amount: topupAmount + '00',
-        metadata: {
-            name: userData.firstName + ' ' + userData.lastName,
-            phone: userData?.phoneNumber,
-        },
-        publicKey,
-        text: `Complete Order`,
-        onSuccess: e => completeUserFundWallet(e),
-        onClose: () => {
-            // setIsModalOpen(false);
-            openNotificationWithIcon('error', 'Transaction cancelled')
-        },
+    const initiateUserSubscription = async e => {
+        setLoadingData(true);
+        try {
+            let initiateSubscription = await _initiate_user_subscription({
+                subscriptionPackageId: selectedSubscriptionPackage._id,
+                amount: selectedSubscriptionPackage.amount,
+                couponDiscount: 0
+            });
+            if (initiateSubscription.data.statusMessage === "success") {
+                localStorage.setItem('subscriptionInitializationKey', initiateSubscription.data.message)
+                fundWalletPaystackButton.current.click();
+                setOpenSubscriptionModal(false);
+            } else {
+                setLoadingData(false);
+                openNotificationWithIcon('error', initiateSubscription?.data?.summary);
+            }
+        } catch (err) {
+            setLoadingData(false);
+            openNotificationWithIcon('error', 'An error occurred while completing transaction. Please try again');
+        }
     }
+
+    const completeUserSubscription = async paymentData => {
+        setOpenFundWalletModal(false);
+        if (paymentData?.status === "success") {
+            setLoaderSpinning(true)
+            try {
+                let userPaymentData = {
+                    subscriptionPackageId: selectedSubscriptionPackage._id,
+                    subscriptionId: localStorage.getItem('subscriptionInitializationKey'),
+                    transactionKey: paymentData?.trxref,
+                };
+                let completeUserSubscription = await _complete_user_subscription(userPaymentData);
+                if (completeUserSubscription.data.statusMessage === "success") {
+                    localStorage.removeItem('subscriptionInitializationKey');
+                    localStorage.setItem('subscriptionAmount', completeUserSubscription.data.message.amount);
+                    localStorage.setItem('subscriptionDuration', completeUserSubscription.data.message.duration);
+                    localStorage.setItem('subscriptionDurationTitle', completeUserSubscription.data.message.name);
+                    navigate(AllAppRoutes.profileSubscriptionSuccess);
+                } else {
+                    setLoadingData(false);
+                    openNotificationWithIcon('error', completeUserSubscription?.data?.summary);
+                }
+            } catch (err) {
+                setLoadingData(false);
+                openNotificationWithIcon('error', 'An error occurred while completing your subscription. Please try again or reach out to us if your account has been debited.');
+            }
+        } else {
+            openNotificationWithIcon('error', 'We could not process payment. Please try again.');
+        }
+    }
+
+    const cancelUserSubscription = async () => {
+        setLoadingData(true);
+        try {
+            let subscribeUser = await _cancel_user_subscription({
+                transactionKey: (new Date()).getTime().toString(),
+                subscriptionId: localStorage.getItem('subscriptionInitializationKey')
+            });
+            if (subscribeUser.data.statusMessage === "success") {
+                setLoadingData(false);
+                localStorage.removeItem('subscriptionInitializationKey');
+                openNotificationWithIcon('error', 'Transaction cancelled');
+            } else {
+                setLoadingData(false);
+                openNotificationWithIcon('error', 'Transaction cancelled');
+            }
+        } catch (err) {
+            setLoadingData(false);
+            openNotificationWithIcon('error', 'Transaction cancelled');
+        }
+    }
+
+    const completeUserSubscriptionWithWallet = async paymentData => {
+        setOpenFundWalletModal(false);
+        setLoaderSpinning(true)
+        try {
+            let userPaymentData = {
+                subscriptionPackageId: selectedSubscriptionPackage._id,
+                subscriptionId: paymentData,
+                transactionKey: (new Date()).getTime().toString(),
+            };
+            let completeUserSubscription = await _complete_user_subscription_with_wallet(userPaymentData);
+            if (completeUserSubscription.data.statusMessage === "success") {
+                localStorage.removeItem('subscriptionInitializationKey');
+                localStorage.setItem('subscriptionAmount', completeUserSubscription.data.message.amount);
+                localStorage.setItem('subscriptionDuration', completeUserSubscription.data.message.duration);
+                localStorage.setItem('subscriptionDurationTitle', completeUserSubscription.data.message.name);
+                navigate(AllAppRoutes.profileSubscriptionSuccess);
+            } else {
+                setLoadingData(false);
+                openNotificationWithIcon('error', completeUserSubscription?.data?.summary);
+            }
+        } catch (err) {
+            console.log(err)
+            setLoadingData(false);
+            openNotificationWithIcon('error', 'An error occurred while completing your subscription. Please try again or reach out to us if your account has been debited.');
+        }
+    }
+
+    const initiateUserSubscriptionWithWallet = async e => {
+        setLoadingData(true);
+        try {
+            let initiateSubscription = await _initiate_user_subscription_with_wallet({
+                subscriptionPackageId: selectedSubscriptionPackage._id,
+                amount: selectedSubscriptionPackage.amount,
+                couponDiscount: 0
+            });
+            if (initiateSubscription.data.statusMessage === "success") {
+                localStorage.setItem('subscriptionInitializationKey', initiateSubscription.data.message)
+                // fundWalletPaystackButton.current.click();
+                completeUserSubscriptionWithWallet(initiateSubscription.data.message);
+                setOpenSubscriptionModal(false);
+            } else {
+                setLoadingData(false);
+                openNotificationWithIcon('error', initiateSubscription?.data?.summary);
+            }
+        } catch (err) {
+            setLoadingData(false);
+            openNotificationWithIcon('error', 'An error occurred while completing transaction. Please try again');
+        }
+    }
+
     // paystack
     const onSuccess = (reference) => completeUserFundWallet(reference);
+    const onSuccessUserSubscription = (reference) => completeUserSubscription(reference);
 
     // you can call this function anything
     const onClose = (reference) => cancelFundWallet(reference);
+    const onCloseUserSubscription = (reference) => cancelUserSubscription(reference);
 
     const paystackConfig = {
         reference: (new Date()).getTime().toString(),
@@ -302,7 +420,40 @@ const Dashboard = props => {
         amount: topupAmount + '00', //Amount is in the country's lowest currency. E.g Kobo, so 20000 kobo = N200
         publicKey: 'pk_test_6001cfe393365d476119a4e494f32bcb1290cfea',
     };
+    const paystackSubConfig = {
+        reference: (new Date()).getTime().toString(),
+        email: userData.emailAddress,
+        amount: +selectedSubscriptionPackage.amount + '00', //Amount is in the country's lowest currency. E.g Kobo, so 20000 kobo = N200
+        publicKey: 'pk_test_6001cfe393365d476119a4e494f32bcb1290cfea',
+    };
     const initializePayment = usePaystackPayment(paystackConfig);
+    const initializeSubscriptionPayment = usePaystackPayment(paystackSubConfig);
+
+    const fetchSubscriptionData = async () => {
+        setLoadingData(true);
+        try {
+            let subPlans = await _fetch_subscription_plans();
+            if (subPlans.data.statusMessage === "success") {
+                setSubscriptionPlans(subPlans.data.message);
+                let planIndex;
+                subPlans.data.message.find((plan, index) => {
+                    if (plan.duration === 12) planIndex = index
+                })
+                setActiveSubPackage(planIndex);
+                setLoadingData(false);
+                setSelectedSubscriptionPackage(subPlans.data.message[planIndex]);
+                setOpenSubscriptionModal(true);
+            } else {
+                setLoadingData(false);
+                openNotificationWithIcon('error', subPlans.data.summary);
+            }
+        } catch (err) {
+            console.log(err)
+            setLoadingData(false);
+            openNotificationWithIcon('error', 'An error occurred while fetching subscription plans. Please reload page to try again');
+        }
+    }
+
     return (
         <div>
             <Spin spinning={loadingData} indicator={spinnerIcon}>
@@ -314,215 +465,85 @@ const Dashboard = props => {
                     <div className="dash-main-div">
                         <div className="contain">
                             <div className="dash-main-content">
-                                {/* <h3>Hello Ifeoluwase,</h3>
-                            <div className="grid-4">
-                                <div className="dash-block _1">
-                                    <h3><span className="currency">NGN</span>2,000.00</h3>
-                                    <p>Wallet Balance</p>
-
-                                    <img src={Dash1} alt="" />
-                                </div>
-                                <div className="dash-block _2">
-                                    <h3>05</h3>
-                                    <p>Total Tokens</p>
-                                    <img src={Dash2} alt="" />
-                                </div>
-                                <div className="dash-block _3">
-                                    <h3>20</h3>
-                                    <p>Total Points</p>
-                                    <img src={Dash3} alt="" />
-                                </div>
-                                <div className="dash-block _4">
-                                    <h3>45</h3>
-                                    <p>Total Video Views</p>
-                                    <img src={Dash4} alt="" />
-                                </div>
-                            </div> */}
-                                {/* <div className="mt_3">
-                                <button className="btn-red">Top Up Wallet</button>
-                            </div> */}
-                                <div className="">
-                                    <div className="white-dash-grid">
-                                        <div className="">
-                                            <div className="white-dash-data">
-                                                <h5 className="white-dash-title">Available balance</h5>
-                                                <p className="white-dash-desc">This is a total of all the assets you have in your portfolio</p>
-                                                <div className="grid-4">
-                                                    <div className="border-gray">
-                                                        <h2 className="balance-display"><span>NGN</span>{!loadingWalletData ? (userWalletData?.balance.toFixed(2).split('.')[0]) : '-'}.<span>{userWalletData?.balance ? (userWalletData?.balance.toFixed(2).split('.')[1]) : '00'}</span></h2>
-                                                        <p>Wallet Balance</p>
-                                                    </div>
-                                                    <div className="border-gray">
-                                                        <h2 className="balance-display text">{!loadingWalletData ? userWalletData?.tokens : '-'}</h2>
-                                                        <p>Available Tokens</p>
-                                                    </div>
-                                                    <div className="border-gray">
-                                                        <h2 className="balance-display text">{!loadingWalletData ? userWalletData?.points : '-'}</h2>
-                                                        <p>Accrued Points</p>
-                                                    </div>
-                                                    <div className="border-gray">
-                                                        <h2 className="balance-display text">{props?.auth?.userDetails?.referralCode}</h2>
-                                                        <p>Referral Code</p>
-                                                    </div>
-                                                </div>
-                                                <div className="wallet-action grid-flex">
-                                                    <button className="btn-default">View portfolio breakdown</button>
-                                                    <button
-                                                        onClick={() => setOpenFundWalletModal(true)}
-                                                        className="btn-red">Fund Wallet</button>
-                                                </div>
+                                <div className="dash-overview">
+                                    <div className="dash-data-block">
+                                        <div className="dash-text-block">
+                                            <div className="avatar-cover">
+                                                {/* <AvatarIcon /> */}
+                                                <img src={User1} alt="user avatar" className="user-avatar" />
                                             </div>
-                                            <div className="white-dash-data">
-                                                <h5 className="white-dash-title">Update Profile Data</h5>
-                                                <Tabs type="card">
-                                                    <Tabs.TabPane tab="Basic settings" key="1">
-                                                        <div className="width_7">
-                                                            {loadUserError ?
-                                                                <p className="error-message">{loadUserError}</p> : ''
-                                                            }
-                                                            <form onSubmit={handleSubmit(updateUserInfo)}>
-                                                                <div className="form_flex">
-                                                                    <div className="form-group space">
-                                                                        <label htmlFor="firstName">First name</label>
-                                                                        <Controller name="firstName" control={control} defaultValue={props.auth.userDetails.firstName}
-                                                                            render={({ field }) => {
-                                                                                return (
-                                                                                    <Input style={{ height: '5rem' }} type="text" {...field}
-                                                                                        name="firstName" />
-                                                                                )
-                                                                            }} />
-                                                                        {errors.firstName && <p className="errorMessage">{errors.firstName.message}</p>}
-                                                                    </div>
-                                                                    <div className="form-group">
-                                                                        <label htmlFor="lastName">Last name</label>
-                                                                        <Controller name="lastName" control={control} defaultValue={props.auth.userDetails.lastName}
-                                                                            render={({ field }) => {
-                                                                                return (
-                                                                                    <Input style={{ height: '5rem' }} type="text" {...field}
-                                                                                        name="lastName" />
-                                                                                )
-                                                                            }} />
-                                                                        {errors.lastName && <p className="errorMessage">{errors.lastName.message}</p>}
-                                                                    </div>
-                                                                </div>
-                                                                <div className="form-group">
-                                                                    <label htmlFor="phoneNumber">Phone number</label>
-                                                                    <Controller name="phoneNumber" control={control} defaultValue={props.auth.userDetails.phoneNumber}
-                                                                        render={({ field }) => {
-                                                                            return (
-                                                                                <Input type="tel" style={{ height: '5rem' }} {...field}
-                                                                                    name="phoneNumber" />
-                                                                            )
-                                                                        }} />
-                                                                    {errors.phoneNumber && <p className="errorMessage">{errors.phoneNumber.message}</p>}
-                                                                </div>
-                                                                <div className="form-group">
-                                                                    <label htmlFor="emailAddress">Email address</label>
-                                                                    <Controller name="emailAddress" control={control} defaultValue={props.auth.userDetails.emailAddress}
-                                                                        render={({ field }) => {
-                                                                            return (
-                                                                                <Input style={{ height: '5rem' }} disabled type="email" {...field}
-                                                                                    name="emailAddress" />
-                                                                            )
-                                                                        }} />
-                                                                    {errors.emailAddress && <p className="errorMessage">{errors.emailAddress.message}</p>}
-                                                                </div>
-                                                                <div style={{ marginTop: '5%', display: 'block' }}></div>
-                                                                {
-                                                                    !loadUserUpdate ?
-                                                                        <button type="submit"
-                                                                            className="btn-red"
-                                                                            style={{ display: 'block', width: "100%", height: '4.5rem', borderRadius: '2px' }}
-                                                                            id="submit-form">Update profile</button>
-                                                                        :
-                                                                        <button id="submit-form" className="btn-red"
-                                                                            style={{ display: 'block', width: "100%", height: '4.5rem', borderRadius: '2px' }}
-                                                                            disabled>
-                                                                            Updating profile.Please wait <Spin style={{ marginLeft: '10px' }} indicator={antIcon} /></button>
-                                                                }
-                                                            </form>
-                                                        </div>
-                                                    </Tabs.TabPane>
-                                                    <Tabs.TabPane tab="Change Password" key="2">
-                                                        <div className="width_7">
-                                                            {loadPasswordError ?
-                                                                <p className="error-message">{loadPasswordError}</p> : ''
-                                                            }
-                                                            <form onSubmit={handleSubmit(changePassword)}>
-                                                                <div className="form-group">
-                                                                    <label htmlFor="oldPassword">Old Password</label>
-                                                                    <Controller name="oldPassword" control={control} defaultValue=""
-                                                                        render={({ field }) => {
-                                                                            return (
-                                                                                <Input.Password style={{ height: '5rem' }} type="password" {...field}
-                                                                                    name="oldPassword" />
-                                                                            )
-                                                                        }} />
-                                                                    {errors.oldPassword && <p className="errorMessage">{errors.oldPassword.message}</p>}
-                                                                </div>
-                                                                <div className="form-group">
-                                                                    <label htmlFor="newPassword">New Password</label>
-                                                                    <Controller name="newPassword" control={control} defaultValue=""
-                                                                        render={({ field }) => {
-                                                                            return (
-                                                                                <Input.Password type="password" style={{ height: '5rem' }} {...field}
-                                                                                    name="newPassword" />
-                                                                            )
-                                                                        }} />
-                                                                    {errors.newPassword && <p className="errorMessage">{errors.newPassword.message}</p>}
-                                                                </div>
-                                                                <div style={{ marginTop: '5%', display: 'block' }}></div>
-
-                                                                {
-                                                                    !loadPasswordUpdate ?
-                                                                        <button type="submit"
-                                                                            className="btn-red"
-                                                                            style={{ display: 'block', width: "100%", height: '4.5rem', borderRadius: '2px' }}
-                                                                            id="submit-form">Update password</button>
-                                                                        :
-                                                                        <button id="submit-form"
-                                                                            className="btn-red"
-                                                                            style={{ display: 'block', width: "100%", height: '4.5rem', borderRadius: '2px' }}
-                                                                            disabled>
-                                                                            Updating password. Please wait <Spin style={{ marginLeft: '10px' }} indicator={antIcon} /></button>
-                                                                }
-                                                            </form>
-                                                        </div>
-                                                    </Tabs.TabPane>
-                                                </Tabs>
+                                            <div>
+                                                <h2>{`${userData.firstName} ${userData.lastName}`}</h2>
+                                                <p>{userData.referralCode}</p>
                                             </div>
                                         </div>
-                                        <div>
-                                            <div className="white-dash-data side">
-                                                <ModalDisplay />
-                                            </div>
-                                            <div className="white-dash-data side">
+                                        <div className="grid-2">
+                                            <div className="data-block-sec">
                                                 <div className="grid-2">
                                                     <div>
-                                                        <img src={ReferImage} alt="" />
+                                                        {/* <h3><small>expires -</small> </h3> */}
+                                                        <h3>&mdash;</h3>
+                                                        {/* <h3 className="balance-display"><span className="currency">NGN </span>{!loadingWalletData ? ((+userWalletData?.balance)?.toFixed(2)?.split('.')[0]) : '-'}.<span>{userWalletData?.balance ? ((+userWalletData?.balance)?.toFixed(2)?.split('.')[1]) : '00'}</span></h3> */}
+                                                        <p>Active Subscription</p>
                                                     </div>
                                                     <div>
-                                                        <p>Earn extra income</p>
-                                                        <h4>Invite a friend to Dancerapy and earn 0.25% on all their transactions</h4>
+                                                        <img src={WalletImg} alt="" />
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div className="white-dash-data side">
+                                            <div className="data-block-sec">
                                                 <div className="grid-2">
                                                     <div>
-                                                        <img src={ReferImage} alt="" />
+                                                        <h3 className="balance-display"><span className="currency">NGN </span>{!loadingWalletData ? ((+userWalletData?.balance)?.toFixed(2)?.split('.')[0]) : '-'}.<span>{userWalletData?.balance ? ((+userWalletData?.balance)?.toFixed(2)?.split('.')[1]) : '00'}</span></h3>
+                                                        <p>Wallet Balance</p>
                                                     </div>
                                                     <div>
-                                                        <p>Earn extra income</p>
-                                                        <h4>Invite a friend to Dancerapy and earn 0.25% on all their transactions</h4>
+                                                        <img src={TokenImg} alt="" />
                                                     </div>
                                                 </div>
+                                                {/* <div className="grid-2">
+                                                    <div>
+                                                        <h3>{!loadingWalletData ? userWalletData?.tokens : '-'}</h3>
+                                                        <p>Token Balance</p>
+                                                    </div>
+                                                    <div>
+                                                        <img src={TokenImg} alt="" />
+                                                    </div>
+                                                </div> */}
+                                            </div>
+                                        </div>
+                                        <div className="data-block">
+                                            <div className="data-block-sec">
+                                                <Link to={AllAppRoutes.profileSettings}>
+                                                    <Settings className="side-nav-icon _1" /><span>Update Profile Data</span>
+                                                </Link>
+                                            </div>
+                                            <div className="data-block-sec">
+                                                <Link to={AllAppRoutes.profileTransactionHistory}>
+                                                    <ArchiveIcon className="side-nav-icon" /><span>Transaction History</span>
+                                                </Link>
+                                            </div>
+                                            <div className="data-block-sec">
+                                                <Link to={AllAppRoutes.videoViewsAnalytics}>
+                                                    <Calendar className="side-nav-icon" /><span>Video Analytics</span>
+                                                </Link>
+                                            </div>
+                                            <div className="data-block-sec">
+                                                <Link to={AllAppRoutes.profileMerchandise}>
+                                                    <MerchandiseIcon className="side-nav-icon" /><span>Merchandise Orders</span>
+                                                </Link>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div className="mt_5"></div>
                             </div>
+                        </div>
+                        <div className="fund-wallet-dashboard-button">
+                            <button onClick={() => fetchSubscriptionData()}>Subscribe</button>
+                            <div className="mt-4"></div>
+                            <button onClick={() => setOpenFundWalletModal(true)}>
+                                <PlusIcon /><span>Fund Wallet</span></button>
                         </div>
                     </div>
                 </div>
@@ -597,7 +618,6 @@ const Dashboard = props => {
                                                 <button
                                                     onClick={initiateFundWallet}
                                                     className="btn-red">Fund Wallet</button>
-                                            // <PaystackButton className="btn-red" {...componentProps} />
                                         }
                                     </form>
                                 </div> :
@@ -620,14 +640,78 @@ const Dashboard = props => {
                         }
                     </div>
                 </Modal>
+
+                <Modal open={openSubscriptionModal} footer={null} onCancel={() => {
+                    setOpenSubscriptionModal(false)
+                }}>
+                    <div className="">
+                        <div>
+                            <div className="fund-modal-content">
+                                <h3>Fund Wallet</h3>
+                                <p>Invite a friend to Dancerapy and earn 0.25% on all their
+                                    transactions. This is a total of all the assets you have in your portfolio</p>
+                            </div>
+                            <form onSubmit={handleFundWalletSubmit(fundWallet)}>
+                                <div>
+                                    <div className="grid-3">
+                                        {
+                                            subscriptionPlans.map((subPlans, index) => (
+                                                <div key={index}
+                                                    onClick={() => {
+                                                        setSelectedSubscriptionPackage(subPlans)
+                                                        setActiveSubPackage(index)
+                                                    }}
+                                                    className={`sub-card ${activeSubPackage === index ? 'active' : ''}`}>
+                                                    <div className="subscription-card">
+                                                        <h3><span className="currency">NGN </span>
+                                                            <NumberFormat thousandSeparator={true}
+                                                                prefix={''} displayType="text"
+                                                                className="numeric" value={subPlans.amount.toFixed(2)} /></h3>
+                                                        <p>{subPlans.name}</p>
+                                                    </div>
+                                                </div>
+                                            ))
+                                        }
+                                    </div>
+                                    <div className="mt-5"></div>
+                                    {
+                                        !loadingData ?
+                                            <button
+                                                onClick={() => initiateUserSubscription()}
+                                                className="btn-red curve full_width">Subscribe with Card</button>
+                                            :
+                                            <button disabled
+                                                className="btn-red curve full_width"><Spin indicator={antIcon} /></button>
+                                    }
+                                    <div className="mt-3"></div>
+                                    {
+                                        !loadingData ?
+                                            <button
+                                                onClick={() => initiateUserSubscriptionWithWallet()}
+                                                className="btn-border-red curve full_width">Subscribe with Wallet Balance</button>
+                                            :
+                                            <button disabled
+                                                className="btn-border-red curve full_width"><Spin indicator={antIcon} /></button>
+                                    }
+                                    <button
+                                        onClick={() => setOpenSubscriptionModal(false)}
+                                        className="btn-white full_width">Cancel</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </Modal>
                 <div className="mobile-only">
                     <Footer noMargin={true} />
                 </div>
-            </Spin>
+            </Spin >
             <button ref={paystackButton} className="paystack-button" onClick={() => {
                 initializePayment(onSuccess, onClose)
             }}>Paystack Hooks Implementation</button>
-        </div>
+            <button ref={fundWalletPaystackButton} className="paystack-button" onClick={() => {
+                initializeSubscriptionPayment(onSuccessUserSubscription, onCloseUserSubscription)
+            }}>Paystack Hooks Implementation</button>
+        </div >
     )
 }
 

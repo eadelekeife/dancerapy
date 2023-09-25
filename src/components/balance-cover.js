@@ -38,9 +38,9 @@ const UserBalance = () => {
     return (
         <div>
             <h5 className="white-dash-title">Available balance</h5>
-            <h2 className="balance-display"><span>NGN </span>{!loadingWalletData ? (userWalletData?.balance.toFixed(2).split('.')[0]) : '-'}.<span>{userWalletData?.balance ? (userWalletData?.balance.toFixed(2).split('.')[1]) : '00'}</span></h2>
+            <h2 className="balance-display"><span>NGN </span>{!loadingWalletData ? ((+userWalletData?.balance)?.toFixed(2).split('.')[0]) : '-'}.<span>{userWalletData?.balance ? ((+userWalletData?.balance)?.toFixed(2).split('.')[1]) : '00'}</span></h2>
             <p className="white-dash-desc">This is a total of all the assets you have in your portfolio</p>
-            <Link className="btn-default" to={AllAppRoutes.videoViewsAnalytics}>View views breakdown</Link>
+            <Link className="btn-default" to={AllAppRoutes.videoViewsAnalytics}>View Transaction History</Link>
         </div>
     )
 }

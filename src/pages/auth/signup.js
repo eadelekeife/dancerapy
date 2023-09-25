@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 
 import { Link } from 'react-router-dom';
-import { Input, Spin, notification } from 'antd';
+import { Input, Spin, notification, Avatar } from 'antd';
 import { LoadingOutlined } from '@ant-design/icons';
+import { AntDesignOutlined, UserOutlined } from '@ant-design/icons';
 import { Controller, useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -55,6 +56,34 @@ const SignUpPage = () => {
             <Nav />
             <div className="auth-display">
                 <div className="grid-2">
+                    <div className="auth-image-bg">
+                        <div>
+                            <h2>Ready to Dance Your Way to Fitness? Join our community of fitness enthusiasts
+                                and dance lovers.</h2>
+                            <Avatar.Group>
+                                <Avatar src="https://xsgames.co/randomusers/avatar.php?g=pixel&key=1" />
+                                <Avatar
+                                    style={{
+                                        backgroundColor: '#f56a00',
+                                    }}
+                                >
+                                    K
+                                </Avatar>
+                                <Avatar
+                                    style={{
+                                        backgroundColor: '#87d068',
+                                    }}
+                                    icon={<UserOutlined />}
+                                />
+                                <Avatar
+                                    style={{
+                                        backgroundColor: '#1677ff',
+                                    }}
+                                    icon={<AntDesignOutlined />}
+                                />
+                            </Avatar.Group>
+                        </div>
+                    </div>
                     <div>
                         <div className="form_detail contain">
                             <div className="first-display">
@@ -149,22 +178,6 @@ const SignUpPage = () => {
                                 <Link to="/signin"
                                     className="margin-bottom">Have an account already? Sign in here</Link> */}
                             </form>
-                        </div>
-                    </div>
-                    <div className="auth-image-bg">
-                        <div>
-                            <img src={SignInImage} alt="people dancing" />
-                            <div className="bg_dark">
-
-                            </div>
-                            <div className="signup-text">
-                                <div className="signup-text-cover">
-                                    <h3>Turn up the fun and burn the calories anytime in the comfort of your home</h3>
-                                    <p>Our mix of low-impact movement and unique equipment offers intense sculpting—minus
-                                        the drain of traditional workouts. Our mix of low-impact movement and unique
-                                        equipment offers intense sculpting.</p>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>

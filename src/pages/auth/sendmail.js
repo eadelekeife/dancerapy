@@ -3,8 +3,9 @@ import { connect } from 'react-redux';
 import { Controller, useForm } from 'react-hook-form';
 
 import { Link } from 'react-router-dom';
-import { Input, Spin, notification } from 'antd';
+import { Input, Spin, notification, Avatar } from 'antd';
 import { loginUser } from '../../utils/reducers/auth';
+import { AntDesignOutlined, UserOutlined } from '@ant-design/icons';
 import * as yup from 'yup';
 import { LoadingOutlined } from '@ant-design/icons';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -12,6 +13,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import axios from '../../utils/axiosCall';
 import Nav from '../../components/nav';
 import Footer from '../../components/footer';
+import { _send_token_to_mail } from '../../utils/axiosroutes';
 
 const SendMail = props => {
 
@@ -36,44 +38,74 @@ const SendMail = props => {
         },
         resolver: yupResolver(validator)
     });
-    const submitMe = e => {
+    const resetPassword = async e => {
         setErrorMessage('');
         setSendingMessage(true);
-        axios.post('/sendrecoveryemail', {
-            emailAddress: e.emailAddress
-        })
-            .then(data => {
-                if (data.data.statusMessage === "success") {
-                    openNotificationWithIcon('success', `If an account exists for ${e.emailAddress}, you will receive password reset instructions.`);
-                    setValue('emailAddress', '');
-                    setSendingMessage(false);
-                } else {
-                    setErrorMessage('Could not send mail. Please try again');
-                    setSendingMessage(false);
-                }
-            })
-            .catch(err => {
+        try {
+            let data = await _send_token_to_mail({ emailAddress: e.emailAddress });
+            if (data.data.statusMessage === "success") {
+                openNotificationWithIcon('success', `If an account exists for ${e.emailAddress}, you will receive password reset instructions.`);
+                setValue('emailAddress', '');
+                setSendingMessage(false);
+            } else {
                 setErrorMessage('Could not send mail. Please try again');
                 setSendingMessage(false);
-            })
-        // let { emailAddress, password } = e;
+            }
+        } catch (err) {
+            setErrorMessage('Could not send mail. Please try again');
+            setSendingMessage(false);
+        }
     }
     return (
         <div>
             <Nav border={true} />
-            <div className="auth-display account-verification">
+            <div className="auth-display account-verification sendmail">
+                <div className="mobile-only">
+                    <div className="auth-image-bg">
+                        <div>
+                            <h2>Ready to Dance Your Way to Fitness? Join our community of fitness enthusiasts
+                                and dance lovers.</h2>
+                            <Avatar.Group>
+                                <Avatar src="https://xsgames.co/randomusers/avatar.php?g=pixel&key=1" />
+                                <Avatar
+                                    style={{
+                                        backgroundColor: '#f56a00',
+                                    }}
+                                >
+                                    K
+                                </Avatar>
+                                <Avatar
+                                    style={{
+                                        backgroundColor: '#87d068',
+                                    }}
+                                    icon={<UserOutlined />}
+                                />
+                                <Avatar
+                                    style={{
+                                        backgroundColor: '#1677ff',
+                                    }}
+                                    icon={<AntDesignOutlined />}
+                                />
+                            </Avatar.Group>
+                        </div>
+                    </div>
+                </div>
                 <div className="auth-display-center">
-                    <div className="real_form_boxes">
-                        <div className="form_detail contain">
+                    <div
+                        style={{ width: 'auto', textAlign: 'left' }}
+                        className="message-div">
+                        <div className="form_detail">
                             <div>
                                 <h3>Reset Password</h3>
                                 <p>Enter your email address and we will send you a link to reset your password</p>
                             </div>
                             {
                                 errorMessage ?
-                                    <p className="error-message">{errorMessage}</p> : ''
+                                    <p className="errorMessage">{errorMessage}</p> : ''
                             }
-                            <form onSubmit={handleSubmit(submitMe)}>
+                            <form
+                                style={{ width: '100%' }}
+                                onSubmit={handleSubmit(resetPassword)}>
                                 <div className="form-group">
                                     <label htmlFor="emailAddress" style={{ width: '100%' }}>Email address</label>
                                     <Controller control={control} defaultValue="" name="emailAddress"
@@ -88,10 +120,10 @@ const SendMail = props => {
                                 {
                                     !sendingMessage
                                         ?
-                                        <button id="submit-form" className="btn-accent"
+                                        <button id="submit-form" className="btn-red"
                                             style={{ width: '100%', borderRadius: '3px' }} type="submit">Reset Password</button>
                                         :
-                                        <button id="submit-form" className="btn-accent" disabled={true}
+                                        <button id="submit-form" className="btn-red" disabled={true}
                                             style={{ width: '100%', borderRadius: '3px' }} type="submit">
                                             <Spin indicator={antIcon} /></button>
                                 }
@@ -106,7 +138,7 @@ const SendMail = props => {
                     </div>
                 </div>
             </div>
-            <Footer />
+            <Footer noMargin={true} />
         </div>
     )
 }

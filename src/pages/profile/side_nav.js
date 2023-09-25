@@ -122,7 +122,7 @@ const Profile = () => {
             </ul>
             <Divider style={{ margin: '10px 0px' }} />
             <ul>
-                <li>
+                <li className="signout-link">
                     <NavLink to="/signout"
                         style={({ isActive }) => ({
                             color: !isActive ? '#111111' : '#258635',

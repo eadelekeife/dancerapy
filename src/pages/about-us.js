@@ -65,7 +65,7 @@ const AboutUs = () => {
                                 <Link
                                     to={AllAppRoutes.contact_us}
                                     className="btn-black curve">Reach out to us <ArrowRight /></Link>
-                                <Link to={AllAppRoutes.corporate} className="btn-blank">See how we impact</Link>
+                                <Link to={AllAppRoutes.corporate} className="btn-blank-yellow">See how we impact</Link>
                             </div>
                             <div>
                                 <div>

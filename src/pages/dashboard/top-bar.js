@@ -3,14 +3,17 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { connect } from 'react-redux';
 import { Avatar, Badge, Divider, Drawer, notification, Spin } from 'antd';
+import { ReactComponent as AvatarIcon } from "../../assets/images/icons/Avatar.svg";
 import { LoadingOutlined } from '@ant-design/icons';
 
 import Logo from "../../assets/images/logo.jpg";
-import { ReactComponent as Cart } from "../../assets/images/cart.svg";
+import { ReactComponent as Cart } from "../../assets/images/icons/shopping-cart.svg";
+import { ReactComponent as LogOut } from "../../assets/images/icons/log-out-cropped.svg";
+// import { ReactComponent as Cart } from "../../assets/images/cart.svg";
 import { ReactComponent as Menu } from "../../assets/images/menu.svg";
 import AllAppRoutes from "../../utils/routes";
-import ArrowLeftWhite from "../../assets/images/arrow-left-white.svg";
-import CancelWhite from "../../assets/images/x-white.svg";
+import ArrowLeftWhite from "../../assets/images/arrow-left.svg";
+import CancelWhite from "../../assets/images/x.svg";
 import { _complete_cart_purchase, _delete_video_from_cart, _fetch_videos_from_cart } from "../../utils/axiosroutes";
 
 
@@ -100,6 +103,7 @@ const TopNav = props => {
     };
     const closeDrawer = () => {
         setOpenDrawer(false);
+        setOpenCartModal(false)
     };
 
     return (
@@ -112,38 +116,42 @@ const TopNav = props => {
                             <img src={Logo} alt="dancerapy logo" />
                         </Link>
                     </div>
-                    <ul className="desktop-only">
-                        <li>
-                            <Link to="">Become a Dancerapy Instructor</Link>
-                        </li>
-                        <li>
-                            <Link to="">Contact Us</Link>
-                        </li>
-                    </ul>
                 </div>
                 <div>
                     {/* <h3>{props.pageTitle}</h3> */}
                 </div>
                 <div className="inner-nav desktop-only">
+                    <div>
+                        <Link to="/signout">
+                            <LogOut className="topnav icon" />
+                        </Link>
+                    </div>
+                    {/* <div>
+                        <i class="uil uil-signout"></i>
+                    </div> */}
                     <Badge count={localStorage.getItem('cartQuantity')}
-                        onClick={() => setOpenCartModal(true)}>
-                        <Cart />
+                    // onClick={() => setOpenCartModal(true)}
+                    >
+                        <Cart className="topnav icon" />
                     </Badge>
                     <div className="avatar-cover">
-                        <div className="avatar">
-
-                        </div>
-                        <h3>Hi Ifeoluwase Adeleke,</h3>
+                        <AvatarIcon />
+                        <h3>Ifeoluwase Adeleke,</h3>
                     </div>
                 </div>
 
                 <div className="mobile-only">
                     <ul>
+                        <div>
+                            <LogOut className="topnav icon" />
+                        </div>
+                        <Badge count={localStorage.getItem('cartQuantity')}
+                        // onClick={() => setOpenCartModal(true)}
+                        >
+                            <Cart className="topnav icon" />
+                        </Badge>
                         <li>
-                            <button className="btn-black">Your Videos</button>
-                        </li>
-                        <li>
-                            <Menu className="menu" onClick={showDrawer} />
+                            <Menu className="men topnav icon" onClick={showDrawer} />
                         </li>
                     </ul>
                 </div>
@@ -187,6 +195,15 @@ const TopNav = props => {
                                 <Link
                                     // onClick={e => { e.preventDefault(); setExtraNavDisplay(1) }}
                                     onClick={() => setOpenDrawer(false)}
+                                    to={AllAppRoutes.appVideos}>
+                                    <span>Fitness Videos</span>
+                                    {/* <ion-icon name="arrow-forward-outline"></ion-icon> */}
+                                </Link>
+                            </li>
+                            <li>
+                                <Link
+                                    // onClick={e => { e.preventDefault(); setExtraNavDisplay(2) }}
+                                    onClick={() => setOpenDrawer(false)}
                                     to={AllAppRoutes.about_us}>
                                     <span>About Us</span>
                                     {/* <ion-icon name="arrow-forward-outline"></ion-icon> */}
@@ -196,26 +213,17 @@ const TopNav = props => {
                                 <Link
                                     // onClick={e => { e.preventDefault(); setExtraNavDisplay(2) }}
                                     onClick={() => setOpenDrawer(false)}
-                                    to={AllAppRoutes.trainings}>
-                                    <span>Physical Classes</span>
-                                    {/* <ion-icon name="arrow-forward-outline"></ion-icon> */}
-                                </Link>
-                            </li>
-                            <li>
-                                <Link
-                                    // onClick={e => { e.preventDefault(); setExtraNavDisplay(2) }}
-                                    onClick={() => setOpenDrawer(false)}
-                                    to={AllAppRoutes.products}>
-                                    <span>Dancerapy Products and Services</span>
-                                    {/* <ion-icon name="arrow-forward-outline"></ion-icon> */}
-                                </Link>
-                            </li>
-                            <li>
-                                <Link
-                                    // onClick={e => { e.preventDefault(); setExtraNavDisplay(3) }}
-                                    onClick={() => setOpenDrawer(false)}
                                     to={AllAppRoutes.merch}>
-                                    <span>Shop Now</span>
+                                    <span>Dancerapy Merchandise</span>
+                                    {/* <ion-icon name="arrow-forward-outline"></ion-icon> */}
+                                </Link>
+                            </li>
+                            <li>
+                                <Link
+                                    // onClick={e => { e.preventDefault(); setExtraNavDisplay(5) }}
+                                    onClick={() => setOpenDrawer(false)}
+                                    to={AllAppRoutes.contact_us}>
+                                    <span>Contact Us</span>
                                     {/* <ion-icon name="arrow-forward-outline"></ion-icon> */}
                                 </Link>
                             </li>
@@ -223,7 +231,7 @@ const TopNav = props => {
                                 <Link
                                     // onClick={e => { e.preventDefault(); setExtraNavDisplay(4) }}
                                     onClick={() => setOpenDrawer(false)}
-                                    to={AllAppRoutes.instructors}>
+                                    to="#">
                                     <span>Become a Dancerapy Instructor</span>
                                     {/* <ion-icon name="arrow-forward-outline"></ion-icon> */}
                                 </Link>
@@ -231,7 +239,7 @@ const TopNav = props => {
                             <li>
                                 <Link
                                     onClick={() => setOpenDrawer(false)}
-                                    to={AllAppRoutes.schools}>
+                                    to="#">
                                     <span>Events and Schools</span>
                                     {/* <ion-icon name="arrow-forward-outline"></ion-icon> */}
                                 </Link>
@@ -240,17 +248,8 @@ const TopNav = props => {
                                 <Link
                                     // onClick={e => { e.preventDefault(); setExtraNavDisplay(4) }}
                                     onClick={() => setOpenDrawer(false)}
-                                    to={AllAppRoutes.corporate}>
+                                    to="#">
                                     <span>Dancerapy and Corporates</span>
-                                    {/* <ion-icon name="arrow-forward-outline"></ion-icon> */}
-                                </Link>
-                            </li>
-                            <li>
-                                <Link
-                                    // onClick={e => { e.preventDefault(); setExtraNavDisplay(5) }}
-                                    onClick={() => setOpenDrawer(false)}
-                                    to={AllAppRoutes.contact}>
-                                    <span>Contact Us</span>
                                     {/* <ion-icon name="arrow-forward-outline"></ion-icon> */}
                                 </Link>
                             </li>
@@ -260,7 +259,7 @@ const TopNav = props => {
                                         <li>
                                             <Link
                                                 onClick={() => setOpenDrawer(false)}
-                                                to={AllAppRoutes.signin}>
+                                                to={AllAppRoutes.sign_in}>
                                                 <span>Login to your Account</span>
                                                 <ion-icon name="arrow-forward-outline"></ion-icon>
                                             </Link>
@@ -268,7 +267,7 @@ const TopNav = props => {
                                         <li>
                                             <Link
                                                 onClick={() => setOpenDrawer(false)}
-                                                to={AllAppRoutes.signup}>
+                                                to={AllAppRoutes.sign_up}>
                                                 <span>Sign Up</span>
                                                 <ion-icon name="arrow-forward-outline"></ion-icon>
                                             </Link>
@@ -285,65 +284,37 @@ const TopNav = props => {
                                 {/* <img src={Logo} className="nav-logo" alt="logo" /> */}
                             </div>
                             <img onClick={() => setShowUserProfileNav(false)} src={ArrowLeftWhite} alt="ArrowLeft" />
-                            {/* <ion-icon
-                                onClick={() => setShowUserProfileNav(false)}
-                                class="menu-bar"
-                                name="arrow-back-outline"></ion-icon> */}
                         </div>
                         <ul>
                             <li>
                                 <Link onClick={() => setOpenDrawer(false)} to={AllAppRoutes.profile} exact
                                 >
                                     Profile Overview
-                                    {/* <ion-icon name="arrow-forward-outline"></ion-icon> */}
                                 </Link>
                             </li>
                             <li>
-                                <Link onClick={() => setOpenDrawer(false)} to={AllAppRoutes.profileVideos}
+                                <Link onClick={() => setOpenDrawer(false)} to={AllAppRoutes.profileSettings}
                                 >
-                                    Your Videos
-                                    {/* <ion-icon name="arrow-forward-outline"></ion-icon> */}
+                                    Profile Settings
                                 </Link>
                             </li>
                             <li>
-                                <Link onClick={() => setOpenDrawer(false)} to={AllAppRoutes.profileVirtualSubscription}
+                                <Link onClick={() => setOpenDrawer(false)} to={AllAppRoutes.profileTransactionHistory}
                                 >
-                                    Past Live Classes
-                                    {/* <ion-icon name="arrow-forward-outline"></ion-icon> */}
+                                    Transaction History
                                 </Link>
                             </li>
                             <li>
-                                <Link onClick={() => setOpenDrawer(false)} to={AllAppRoutes.profilePlanOrders}
+                                <Link onClick={() => setOpenDrawer(false)} to={AllAppRoutes.videoViewsAnalytics}
                                 >
-                                    Physical Classes
-                                    {/* <ion-icon name="arrow-forward-outline"></ion-icon> */}
-                                </Link>
-                            </li>
-                            <li>
-                                <Link onClick={() => setOpenDrawer(false)} to={AllAppRoutes.profileProductOrders}
-                                >
-                                    Your Product Orders
-                                    {/* <ion-icon name="arrow-forward-outline"></ion-icon> */}
+                                    Video Views Analytics
                                 </Link>
                             </li>
                             <li>
                                 <Link onClick={() => setOpenDrawer(false)} to={AllAppRoutes.profileMerchandise}
                                 >
                                     Merchandise Orders
-                                    {/* <ion-icon name="arrow-forward-outline"></ion-icon> */}
                                 </Link>
-                            </li>
-                            <li>
-                                <Link onClick={() => setOpenDrawer(false)} to={AllAppRoutes.contact}
-                                >
-                                    Contact Us
-                                    {/* <ion-icon name="arrow-forward-outline"></ion-icon> */}
-                                </Link>
-                            </li>
-                            <li>
-                                <Link onClick={() => setOpenDrawer(false)} to="/signout">
-                                    {/* <span className="lnr lnr-exit"></span> */}
-                                    Sign Out</Link>
                             </li>
                         </ul>
                     </div>
@@ -387,21 +358,21 @@ const TopNav = props => {
                     <div className="bottom-drawer-buttons">
                         <Divider />
                         <div>
-                            <button className="btn-red">Buy by Tokens</button>
+                            {/* <button className="btn-red">Buy by Tokens</button> */}
                             {
                                 loadingSpinner ?
                                     <button disabled
                                         className="btn-red"><Spin indicator={antIcon} /></button>
                                     :
-                                    <button
+                                    <button style={{ padding: '14px 25px' }}
                                         onClick={finalizeCartPurchase}
-                                        className="btn-red">Buy by Wallet Balance</button>
+                                        className="btn-red">Buy videos with Wallet Balance</button>
                             }
                         </div>
                     </div>
                 </div>
             </Drawer>
-        </div>
+        </div >
     )
 }
 

@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
 
 import { Link, Navigate, useNavigate, useParams } from 'react-router-dom';
-import { Input, Spin, notification } from 'antd';
 import { LoadingOutlined } from '@ant-design/icons';
-import { Controller, useForm } from 'react-hook-form';
+
+import { Input, Spin, notification, Avatar } from 'antd';
+import { loginUser } from '../../utils/reducers/auth';
+import { AntDesignOutlined, UserOutlined } from '@ant-design/icons';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { connect } from 'react-redux';
-import { loginUser } from '../../utils/reducers/auth';
 
 import SignInImage from "../../assets/images/mini/signup.jpeg";
 
@@ -58,7 +59,37 @@ const SignInPage = props => {
         <Spin spinning={loadingData} indicator={antIcon}>
             <div>
                 <Nav />
-                <div className="auth-display account-verification">
+                <div className="auth-display account-verification verification-only">
+                    <div className="mobile-only">
+                        <div className="auth-image-bg">
+                            <div>
+                                <h2>Ready to Dance Your Way to Fitness? Join our community of fitness enthusiasts
+                                    and dance lovers.</h2>
+                                <Avatar.Group>
+                                    <Avatar src="https://xsgames.co/randomusers/avatar.php?g=pixel&key=1" />
+                                    <Avatar
+                                        style={{
+                                            backgroundColor: '#f56a00',
+                                        }}
+                                    >
+                                        K
+                                    </Avatar>
+                                    <Avatar
+                                        style={{
+                                            backgroundColor: '#87d068',
+                                        }}
+                                        icon={<UserOutlined />}
+                                    />
+                                    <Avatar
+                                        style={{
+                                            backgroundColor: '#1677ff',
+                                        }}
+                                        icon={<AntDesignOutlined />}
+                                    />
+                                </Avatar.Group>
+                            </div>
+                        </div>
+                    </div>
                     {
                         !loadingData ?
                             !errorOccurred ?

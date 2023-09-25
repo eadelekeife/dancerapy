@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import { PieChart, Pie, Sector, Cell, ResponsiveContainer } from 'recharts';
 
-const COLORS = ['#599EEA', '#FAB70A', '#F09468', '#844FF6', '#0FB77A'];
+// const COLORS = ['#0FB77A', '#599EEA', '#FAB70A', '#F09468', '#844FF6'];
 
 export default class PieChartDefault extends PureComponent {
     static demoUrl = 'https://codesandbox.io/s/pie-chart-with-padding-angle-7ux0o';
@@ -9,10 +9,8 @@ export default class PieChartDefault extends PureComponent {
         super(props);
     }
     render() {
-        // console.log(this.props.categoryData);
-        // const data = [this.props.categoryData];
-        const data = [{ name: 'Dance Trends', value: 1 }]
-        // console.log(data)
+        const data = this.props.categoryData;
+        const COLORS = this.props.colorBox;
         return (
             // <ResponsiveContainer>
             <PieChart width={160} height={150} onMouseEnter={this.onPieEnter} >

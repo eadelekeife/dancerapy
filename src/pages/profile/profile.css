@@ -330,6 +330,11 @@ ul.physical_plans_list li {
     justify-content: space-between;
     margin-bottom: 10px;
     font-size: 1.2rem;
+    align-items: center;
+}
+
+.ant-collapse.ant-collapse-icon-position-start {
+    margin-bottom: 20px;
 }
 
 .mobile-only .mt-5 .ant-collapse-header .ant-collapse-header-text {

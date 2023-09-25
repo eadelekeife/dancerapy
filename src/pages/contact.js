@@ -134,7 +134,7 @@ const Contact = () => {
                                 <p>For general inquiries, please call 08169511139
                                 </p>
                                 <p>For Dancerapy online registration, please call 08023414932</p>
-                                <p className="mt_3">To watch fun Dancerapy videos and images, kindly visit our
+                                <p className="mt_3">To watch fun Dancerapy videos, kindly visit our
                                     Instagram page @dancerapy</p>
                             </div>
                             <img src={locationMap} style={{ width: 'unset' }} alt="locationMap" />

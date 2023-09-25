@@ -1,13 +1,15 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
-import { Navigate, useLocation } from "react-router-dom";
+import { Navigate, useLocation, useSearchParams } from "react-router-dom";
 
 import AppRoutes from "./routes";
 
 export const ProtectedRoute = (props) => {
+    const [urlLocation] = useSearchParams();
+    const redirectURL = urlLocation.get('auth_redirect');
     if (props.auth.isAuthenticated && localStorage.getItem('token')) {
-        if (localStorage.getItem('redirectWebsite')) {
-            let url = localStorage.getItem('redirectWebsite');
+        if (redirectURL) {
+            let url = redirectURL;
             localStorage.removeItem('redirectWebsite');
             return <Navigate to={url} />;
         } else {

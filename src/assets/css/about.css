@@ -275,7 +275,8 @@
     margin-bottom: 5px;
 }
 
-.team_member_role {
+.team_member_role,
+.about-us-page .dance-props-sect.sec-homepage-extra-desc p {
     margin-bottom: 0%;
     font-size: 1.3rem;
 }
@@ -419,17 +420,17 @@
 }
 
 .about-sub-props .grid-2 h3 {
-    font-size: 3.5rem;
-    width: 90%;
+    font-size: 3rem;
+    width: 70%;
 }
 
 .about-sub-props .grid-2 p {
-    font-size: 1.6rem;
+    font-size: 1.5rem;
     line-height: 1.8;
 }
 
 .about-sub-props .grid-2 {
-    margin-bottom: 15px;
+    margin-bottom: 5px;
 }
 
 .video-sec-bg {
@@ -484,13 +485,13 @@
 
 .video-message-bg p {
     color: rgb(229, 233, 252);
-    font-size: 1.4rem;
+    font-size: 1.3rem;
     line-height: 1.8;
 }
 
 .video-message-bg h3 {
     color: rgb(229, 233, 252);
-    font-size: 2rem;
+    font-size: 1.8rem;
     /* line-height: 1.8; */
 }
 
@@ -562,9 +563,9 @@
 }
 
 .about-sub-message h2 {
-    font-size: 5rem;
+    font-size: 4rem;
     color: #fff;
-    width: 70%;
+    width: 80%;
     margin: 0px auto;
     display: block;
     margin-bottom: 40px;

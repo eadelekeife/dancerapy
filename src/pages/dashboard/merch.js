@@ -13,14 +13,14 @@ import VideoPlans from "../profile/product-plans";
 import TopNav from "./top-bar";
 import SideBar from "./side-bar";
 
-import ZoomLogo from "../../assets/images/content/zoom.jpg";
-import ReferImage from "../../assets/images/a-company/refer.png";
+import EmptyTransactions from "../../assets/images/illustrations/14_rhombus.png";
 
 import Empty from "../../assets/images/auth/empty.svg";
 import _1 from "../../assets/images/content/_1.avif";
 import _2 from "../../assets/images/content/_2.avif";
 import axiosCall from "../../utils/axiosCall";
 import ModalDisplay from "../../components/referral-modal";
+import TokensModal from "../../components/tokens-modal";
 import UserBalance from "../../components/balance-cover";
 import Footer from "../../components/footer";
 import { _fetch_user_wallet_transactions } from "../../utils/axiosroutes";
@@ -118,96 +118,22 @@ const VideosPage = props => {
                                         <div className="white-dash-data">
                                             <UserBalance />
                                         </div>
-                                        {
-                                            loadingdata ?
-                                                <div>
-                                                    {skeleton.map((placeHolder, index) => (
-                                                        <div className="item" key={index}>
-                                                            {placeHolder}
-                                                            <Divider />
-                                                        </div>
-                                                    ))}
-                                                </div>
-                                                :
-                                                errorOccurred ?
-                                                    <ErrorPageDisplay link={<button
-                                                        onClick={() => Navigate(0)}
-                                                        className="btn-red">Click here to reload page</button>} />
-                                                    :
-                                                    walletData.length ?
-                                                        <div className="white-dash-data">
-                                                            <h5 className="white-dash-title">Transaction History</h5>
-                                                            <div>
-                                                                <div className="desktop-only">
-                                                                    <Table
-                                                                        columns={columns}
-                                                                        dataSource={data}
-                                                                        bordered
-                                                                        title={null}
-                                                                        footer={null}
-                                                                    />
-                                                                </div>
-                                                                <div>
-                                                                    <div className="mobile-only">
-                                                                        <div className="mt-5">
-                                                                            {walletData.map((plan, index) => {
-                                                                                return (
-                                                                                    <Collapse defaultActiveKey={['1']} key={index}>
-                                                                                        <Panel key={index + 1}
-                                                                                            header={`${plan.productPlan?.title} purchased on ${DateTime.fromISO(plan?.createdAt).toLocaleString(DateTime.DATE_HUGE)}`}>
-                                                                                            <ul className="transactionHistory">
-                                                                                                <li>
-                                                                                                    <span>Name:</span>
-                                                                                                    <span>{plan.productPlan?.title}</span>
-                                                                                                </li>
-                                                                                                <li>
-                                                                                                    <span>Date:</span>
-                                                                                                    <span>{DateTime.fromISO(plan?.createdAt).toLocaleString(DateTime.DATE_HUGE)}</span>
-                                                                                                </li>
-                                                                                                <li>
-                                                                                                    <span>Expiry Date:</span>
-                                                                                                    {/* <span>{DateTime.fromFormat(plan?.expiryDate.split(' ')[0], 'yyyy-MM-dd').toLocaleString(DateTime.DATE_HUGE)}</span> */}
-                                                                                                </li>
-                                                                                                <li>
-                                                                                                    <span>Transaction Id:</span>
-                                                                                                    <span>{plan?.transactionId}</span>
-                                                                                                </li>
-                                                                                            </ul>
-                                                                                        </Panel>
-                                                                                    </Collapse>
-                                                                                )
-                                                                            })}
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        :
-                                                        <div className="product-display empty_div_product mt-4">
-                                                            <div>
-                                                                <div className="empty_div_square">
-                                                                </div>
-                                                                <h4>No activity yet</h4>
-                                                                <p>When you buy a video, your transaction history would appear here</p>
-                                                                <Link to={AppRoute.profileVideos} className="btn-red">View All Videos</Link>
-                                                            </div>
-                                                        </div>
-                                        }
+                                        <div className="white-dash-data">
+                                            <div className="emptyTrans">
+                                                <img src={EmptyTransactions} alt="empty transaction bar" />
+                                                <h4>No Transactions Yet!</h4>
+                                                <p>There are no records in the transaction history currently. When you
+                                                    make a purchase, the spending transactions will be
+                                                    displayed in this section.</p>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div>
+                                    <div className="desktop-onl">
                                         <div className="white-dash-data side">
                                             <ModalDisplay />
                                         </div>
-                                        <div className="white-dash-data side">
-                                            <div className="grid-2">
-                                                <div>
-                                                    <img src={ReferImage} alt="" />
-                                                </div>
-                                                <div>
-                                                    <p>Earn extra income</p>
-                                                    <h4>Invite a friend to Dancerapy and earn 0.25% on all their transactions</h4>
-                                                </div>
-                                            </div>
+                                        <div className="white-dash-data side desktop-only">
+                                            <TokensModal />
                                         </div>
                                     </div>
                                 </div>

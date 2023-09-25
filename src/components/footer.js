@@ -24,7 +24,7 @@ const Footer = props => {
                                 </div>
                                 <ul className={`${currentNav === 1 ? 'show-on-mobile' : 'hide-on-mobile'}`}>
                                     <li>
-                                        <Link to={AppRoute.about_us}>About DanceRapy</Link>
+                                        <Link to={AppRoute.about_us}>About Dancerapy</Link>
                                     </li>
                                     <li>
                                         <Link to={AppRoute.our_team}>Our Team</Link>
@@ -33,7 +33,7 @@ const Footer = props => {
                                         <Link to={AppRoute.merch}>Merchandise</Link>
                                     </li>
                                     <li>
-                                        <Link to={AppRoute.signup}>Create a free account</Link>
+                                        <Link to={AppRoute.sign_up}>Create a free account</Link>
                                     </li>
                                 </ul>
                             </div>
@@ -46,13 +46,13 @@ const Footer = props => {
                                 </div>
                                 <ul className={`${currentNav === 2 ? 'show-on-mobile' : 'hide-on-mobile'}`}>
                                     <li>
-                                        <Link to={AppRoute.faqs}>FAQs</Link>
+                                        <Link to="#">FAQs</Link>
                                     </li>
                                     <li>
                                         <Link to={AppRoute.contact_us}>Contact Us</Link>
                                     </li>
                                     <li>
-                                        <Link to={AppRoute.instructors}>Become an Instructor</Link>
+                                        <Link to="#">Become an Instructor</Link>
                                     </li>
                                     <li>
                                         <Link to={AppRoute.profileMerchandise}>Track your Order</Link>
@@ -69,19 +69,19 @@ const Footer = props => {
                             </div>
                             <ul className={`${currentNav === 3 ? 'show-on-mobile' : 'hide-on-mobile'}`}>
                                 <li>
-                                    <Link to={AppRoute.trainings}>Physical Classes</Link>
+                                    <Link to={AppRoute.physical_plans}>Physical Classes</Link>
                                 </li>
                                 {/* <li>
                                 <Link to={AppRoute.virtual}>Virtual Classes</Link>
                             </li> */}
                                 <li>
-                                    <Link to={AppRoute.product_detail}>DanceRapy Products and Services</Link>
+                                    <Link to="#">DanceRapy Products and Services</Link>
                                 </li>
                                 <li>
-                                    <Link to={AppRoute.corporate}>Dancerapy corporate events/schools</Link>
+                                    <Link to="#">Dancerapy corporate events/schools</Link>
                                 </li>
                                 <li>
-                                    <Link to={AppRoute.corporate}>Dancerapy and Corporates</Link>
+                                    <Link to="#">Dancerapy and Corporates</Link>
                                 </li>
                                 {/* <li>
                                 <Link to={AppRoute.ourteam}>Our Team</Link>

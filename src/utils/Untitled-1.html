@@ -1,0 +1,167 @@
+
+
+<div className="main_info videos-specific-page">
+    {/* <div className=""> */}
+    {/* <div className="contai"> */}
+    <div className="profile-data-display">
+        <div className="main-video-display pt_5 pb_5">
+            {/* <div className="contain"> */}
+            <div className="main-video-content-display">
+                <div className="main-video-content-list">
+                    <ul>
+                        <li
+                            onClick={() => filterVideos("all")}
+                            className={`${currFilter === "all" ? "active-bar" : ''}`}>
+                            <Link>All Videos</Link>
+                        </li>
+                        <li
+                            onClick={() => filterVideos("free")}
+                            className={`${currFilter === "free" ? "active-bar" : ''}`}>
+                            <Link>Free Videos</Link>
+                        </li>
+                        <li
+                            onClick={() => filterVideos("paid")}
+                            className={`${currFilter === "paid" ? "active-bar" : ''}`}>
+                            <Link>Paid Videos</Link>
+                        </li>
+                        <li
+                            onClick={() => filterVideos("trends")}
+                            className={`${currFilter === "trends" ? "active-bar" : ''}`}>
+                            <Link>Dance Trends</Link>
+                        </li>
+                        <li
+                            onClick={() => filterVideos("choreography")}
+                            className={`${currFilter === "choreography" ? "active-bar" : ''}`}>
+                            <Link>Dance Choreographies</Link>
+                        </li>
+                        <li
+                            onClick={() => filterVideos("blast")}
+                            className={`${currFilter === "blast" ? "active-bar" : ''}`}>
+                            <Link>Dance Blast</Link>
+                        </li>
+                        <li
+                            onClick={() => filterVideos("long")}
+                            className={`${currFilter === "long" ? "active-bar" : ''}`}>
+                            <Link>10 min Videos</Link>
+                        </li>
+                        <li
+                            onClick={() => filterVideos("fitness")}
+                            className={`${currFilter === "fitness" ? "active-bar" : ''}`}>
+                            <Link>Fitness Videos</Link>
+                        </li>
+                        <li
+                            onClick={() => filterVideos("short")}
+                            className={`${currFilter === "short" ? "active-bar" : ''}`}>
+                            <Link>Short Videos</Link>
+                        </li>
+                        <li
+                            onClick={() => filterVideos("beginner")}
+                            className={`${currFilter === "beginner" ? "active-bar" : ''}`}>
+                            <Link>Beginner</Link>
+                        </li>
+                        <li
+                            onClick={() => filterVideos("african")}
+                            className={`${currFilter === "african" ? "active-bar" : ''}`}>
+                            <Link>African Dance</Link>
+                        </li>
+                        <li
+                            onClick={() => filterVideos("hiphop")}
+                            className={`${currFilter === "hiphop" ? "active-bar" : ''}`}>
+                            <Link>Hip Hop</Link>
+                        </li>
+                    </ul>
+                </div>
+                <div className="main-video-content">
+                    <div className="video-list">
+                        <div className="main-content-banner">
+                            <div className="desktop-only">
+                                <img src={VideoBanner} alt="video banner" />
+                            </div>
+                            <div className="mobile-only">
+                                <img src={VideoBannerMobile} alt="video banner" />
+                            </div>
+                        </div>
+                        <div className="banner-tab">
+                            <button>Weight Loss</button>
+                            <button>Burn Calories</button>
+                            <button>Empowerment</button>
+                            <button>Enhanced Flexibility</button>
+                            <button>Muscle Strength</button>
+                            <button>Cardio</button>
+                            <button>Versatility</button>
+                            <button>Self Confidence</button>
+                            <button>Muscle Toning</button>
+                            <button>Improved Coordination</button>
+                            <button>Community Feeling</button>
+                        </div>
+                        <div>
+                            <h4 className="page-tile">Dance Trend Videos</h4>
+                            <div>
+                                <OwlCarousel className="owl-theme" lazyLoad={true}
+                                    responsive={responsive} autoPlay={true}
+                                    responsiveClass={true} loop={true} margin={10} nav>
+                                    {
+                                        trendVideos.map((productPlans, index) => (
+                                            <div className="card-display" key={index}>
+                                                <Link to={`/profile/video/play/${productPlans._id}/${productPlans.title}`}>
+                                                    <div class='item'>
+                                                        <img src={productPlans.poster} alt={productPlans.title} />
+                                                    </div>
+                                                </Link>
+                                            </div>
+                                        ))}
+                                </OwlCarousel>
+                            </div>
+                        </div>
+                        <div className="mt_4">
+                            <h4 className="page-tile">Fitness Videos</h4>
+                            <div className="grid-3">
+                                {
+                                    fitnessVideos.map((productPlans, index) => (
+                                        <div key={index}>
+                                            <Link to={props.auth.isAuthenticated ?
+                                                `/profile/video/play/${productPlans._id}/${productPlans.title}` : `/signin?auth_redirect=/profile/video/play/${productPlans._id}/${productPlans.title}`}>
+                                                <div
+                                                    onClick={e => updateCurrentVideo(productPlans)}>
+                                                    <div className="">
+                                                        <div className="card-display">
+                                                            <div className="card-header">
+                                                                <img src={productPlans.poster} alt={productPlans.name} />
+                                                                <div className="card-header-fee">
+                                                                    <div className="card-header-cover">
+                                                                        <ion-icon name="lock-closed-outline"></ion-icon>
+                                                                    </div>
+                                                                </div>
+                                                                <div className="card-overlay">
+                                                                </div>
+                                                            </div>
+                                                            <div className="card-body">
+                                                                <div className="card-body-header">
+                                                                    <p>{productPlans?.videoCategory?.name}</p>
+                                                                    <p>{productPlans.videoLength}</p>
+                                                                </div>
+                                                                <div className="card-body-title-cover">
+                                                                    <h4 className="card-body-title">{productPlans.title}</h4>
+                                                                </div>
+                                                                <div className="card-body-footer noMargin={true}">
+                                                                    <p>{productPlans.instructorName}</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </Link>
+                                        </div>
+                                    ))
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {/* </div> */}
+        </div>
+    </div>
+    {/* </div> */}
+    {/* </div> */}
+</div>

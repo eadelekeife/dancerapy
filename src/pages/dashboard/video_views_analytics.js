@@ -41,7 +41,8 @@ const VideoViewsAnalytics = props => {
     const [userData] = useState(props.auth.isAuthenticated ? props.auth.userDetails : '');
     const [allVideoViews, setAllVideoViews] = useState([]);
     const [referralModal, setReferralModal] = useState(false);
-    const [categoryViews, setCategoryViews] = useState([{}]);
+    const [categoryViews, setCategoryViews] = useState([]);
+    const [colorBox] = useState(['#F09468', '#599EEA', '#FAB70A', '#844FF6', '#0FB77A']);
 
     let fetchAllUserVideoViews = async () => {
         try {
@@ -50,7 +51,28 @@ const VideoViewsAnalytics = props => {
                 setLoadingData(false);
                 let videoCatData = [{}];
                 const newArr = [];
-                setAllVideoViews(videoViews.data.message);
+                let catBox = [];
+                videoViews.data.message.videoCat.forEach((category, index) => {
+                    let obj = {
+                        name: category.name,
+                        value: 0,
+                        color: colorBox[index]
+                    }
+                    catBox.push(obj);
+                });
+
+                videoViews.data.message.videoData.filter(videoViews => {
+                    if (videoViews.half) {
+                        newArr.push(videoViews);
+                        catBox.forEach(category => {
+                            if (videoViews.video.videoCategory.name === category.name) {
+                                category.value += 1;
+                            }
+                        })
+                    }
+                })
+                setCategoryViews(catBox);
+                setAllVideoViews(newArr);
             } else {
                 setLoadingData(false);
                 openNotificationWithIcon('error', videoViews.data.summary);
@@ -155,11 +177,29 @@ const VideoViewsAnalytics = props => {
                                                     </div>
                                                 </div>
                                                 :
-                                                !userPlans.length ?
+                                                allVideoViews.length ?
                                                     <div>
                                                         <div>
+                                                            <div className="white-dash-data side mobile-only">
+                                                                <h5 className="white-dash-title">Category Views Estimate</h5>
+                                                                <div className="grid-2 pie-block-cover">
+                                                                    <PieChart categoryData={categoryViews} colorBox={colorBox} />
+                                                                    <div>
+                                                                        {
+                                                                            categoryViews.map((cat, index) => (
+                                                                                <div className="pie-block" key={index}>
+                                                                                    <div
+                                                                                        style={{ background: cat.color }}
+                                                                                        className="pie-key red-bg"></div>
+                                                                                    <p>{cat.name}</p>
+                                                                                </div>
+                                                                            ))
+                                                                        }
+                                                                    </div>
+                                                                </div>
+                                                            </div>
                                                             <div className="white-dash-data side">
-                                                                <div className="desktop-onl">
+                                                                <div className="desktop-only">
                                                                     <Table
                                                                         columns={viewsColumn}
                                                                         dataSource={viewsData}
@@ -167,6 +207,27 @@ const VideoViewsAnalytics = props => {
                                                                         title={null}
                                                                         footer={null}
                                                                     />
+                                                                </div>
+                                                                <div className="mobile-only">
+                                                                    <div>
+                                                                        {allVideoViews.map((video, index) => (
+                                                                            <Collapse defaultActiveKey={[0]}>
+                                                                                <Collapse.Panel showArrow={false} key={index} header={<p style={{ display: 'inline' }}>{video?.video?.title} watched
+                                                                                    on {DateTime.fromISO(video.createdAt).toLocaleString(DateTime.DATE_HUGE)}</p>}>
+                                                                                    <div>
+                                                                                        <ul className="mobile-list-flex">
+                                                                                            <li><span>Video Title:</span><span>{video?.video?.title}</span></li>
+                                                                                            <li>
+                                                                                                <span>Category:</span><span>{video?.video?.videoCategory?.name}</span>
+                                                                                            </li>
+                                                                                            <li><span>Date:</span><span>{DateTime.fromISO(video.createdAt).toLocaleString(DateTime.DATE_HUGE)}</span></li>
+                                                                                            <li><span>Time:</span><span>{DateTime.fromISO(video.createdAt).toLocaleString(DateTime.TIME_WITH_SECONDS)}</span></li>
+                                                                                        </ul>
+                                                                                    </div>
+                                                                                </Collapse.Panel>
+                                                                            </Collapse>
+                                                                        ))}
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -222,23 +283,21 @@ const VideoViewsAnalytics = props => {
                                     <div className="white-dash-data side">
                                         <ModalDisplay />
                                     </div>
-                                    <div className="white-dash-data side">
+                                    <div className="white-dash-data side desktop-only">
                                         <h5 className="white-dash-title">Category Views Estimate</h5>
                                         <div className="grid-2 pie-block-cover">
-                                            <PieChart categoryData={categoryViews} />
+                                            <PieChart categoryData={categoryViews} colorBox={colorBox} />
                                             <div>
-                                                <div className="pie-block">
-                                                    <div className="pie-key red-bg"></div>
-                                                    <p>Dance Trends</p>
-                                                </div>
-                                                <div className="pie-block">
-                                                    <div className="pie-key _2"></div>
-                                                    <p>Choreography</p>
-                                                </div>
-                                                <div className="pie-block">
-                                                    <div className="pie-key _3"></div>
-                                                    <p>Dance Blast</p>
-                                                </div>
+                                                {
+                                                    categoryViews.map((cat, index) => (
+                                                        <div className="pie-block" key={index}>
+                                                            <div
+                                                                style={{ background: cat.color }}
+                                                                className="pie-key red-bg"></div>
+                                                            <p>{cat.name}</p>
+                                                        </div>
+                                                    ))
+                                                }
                                             </div>
                                         </div>
                                     </div>
@@ -252,7 +311,7 @@ const VideoViewsAnalytics = props => {
             <div className="mobile-only">
                 <Footer noMargin={true} />
             </div>
-        </div>
+        </div >
     )
 }
 

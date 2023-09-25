@@ -12,6 +12,7 @@ import { connect } from "react-redux";
 import Footer from "../components/footer";
 import Nav from "../components/nav";
 import AllAppRoutes from "../utils/routes";
+import { _add_merchandise_to_cart, _get_all_merchandise } from "../utils/axiosroutes";
 
 const Merchandise = props => {
     const openNotificationWithIcon = (type, message) => {
@@ -32,49 +33,50 @@ const Merchandise = props => {
         openNotificationWithIcon('error', message);
     }
 
+    let getAllMerchandise = async () => {
+        try {
+            let allMerch = await _get_all_merchandise()
+            if (allMerch.data.statusMessage === "success") {
+                setErrorOccurred(false);
+                setFetchingData(false);
+                setAllMerchandise(allMerch.data.message);
+            } else {
+                axiosErrorResponse(allMerch.data.summary)
+            }
+        }
+        catch (err) {
+            axiosErrorResponse('An error occurred while fetching product plans. Please reload page to try again');
+        }
+    }
+
     useEffect(() => {
-        axiosCall.get('/all-merchandise')
-            .then(products => {
-                if (products.data.statusMessage === "success") {
-                    setErrorOccurred(false);
-                    setFetchingData(false);
-                    setAllMerchandise(products.data.message);
-                } else {
-                    console.log('wetin sup')
-                    axiosErrorResponse(products.data.summary)
-                }
-            })
-            .catch(err => {
-                console.log(err)
-                axiosErrorResponse('An error occurred while fetching product plans. Please reload page to try again');
-            })
+        getAllMerchandise();
     }, [])
     const { Option } = Select;
     let skeleton = [];
     for (let i = 0; i < 6; i++) {
         skeleton.push(<Skeleton active />)
     }
-    const addMerchToCart = product => {
+    const addMerchToCart = async product => {
         setSpinning(true)
-        axiosCall.post('/add-merch-to-cart', {
-            userId: props.auth.userDetails.id,
-            productId: product.id,
-            cartId: localStorage.getItem('cart-token')
-        })
-            .then(cartResponse => {
-                if (cartResponse.data.statusMessage === "success") {
-                    localStorage.setItem('cart-token', cartResponse.data.message);
-                    setSpinning(false);
-                    openNotificationWithIcon('success', 'Product added to cart successfully');
-                } else {
-                    setSpinning(false);
-                    openNotificationWithIcon('error', 'An error occurred while adding product to cart. Please try again');
-                }
+        try {
+            let cartResponse = await _add_merchandise_to_cart({
+                userId: props.auth.userDetails.id,
+                productId: product.id,
+                cartId: localStorage.getItem('cart-token')
             })
-            .catch(err => {
+            if (cartResponse.data.statusMessage === "success") {
+                localStorage.setItem('cart-token', cartResponse.data.message);
+                setSpinning(false);
+                openNotificationWithIcon('success', 'Product added to cart successfully');
+            } else {
                 setSpinning(false);
                 openNotificationWithIcon('error', 'An error occurred while adding product to cart. Please try again');
-            })
+            }
+        } catch (err) {
+            setSpinning(false);
+            openNotificationWithIcon('error', 'An error occurred while adding product to cart. Please try again');
+        }
     }
     return (
         <div className="shop">
@@ -130,9 +132,9 @@ const Merchandise = props => {
                                                                 <NumberFormat className="new_product_amount" value={product.price} displayType={'text'} thousandSeparator={true} />
                                                             </p>
                                                     }
-                                                    <button
+                                                    <button disabled
                                                         style={{ padding: '5px 10px', fontSize: '1.2rem' }}
-                                                        onClick={() => addMerchToCart(product)}
+                                                        // onClick={() => addMerchToCart(product)}
                                                         className="btn-red">Add to Cart</button>
                                                 </div>
                                             </div>

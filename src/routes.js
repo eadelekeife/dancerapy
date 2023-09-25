@@ -9,9 +9,10 @@ import ProtectedRoutes from "./utils/protectedRoutes";
 import AuthProtectedRoutes from "./utils/AuthProtectedRoute";
 
 
-import Homepage from "./pages/homepage";
-import AboutUs from "./pages/about";
-import About from "./pages/about-us";
+// import Homepage from "./pages/homepage";
+import Homepage from "./pages/home3";
+import About from "./pages/about";
+import AboutUs from "./pages/about-us";
 import Contact from "./pages/contact";
 import SignInPage from "./pages/auth/signin";
 import OurTeam from "./pages/team";
@@ -47,6 +48,7 @@ import ProductsOrders from "./pages/dashboard/product";
 import Merchandise from "./pages/dashboard/merch";
 import Physical from "./pages/dashboard/physical";
 import Companies from "./pages/companies";
+import ProfileSettings from "./pages/dashboard/settings";
 import TransactionHistory from "./pages/dashboard/transactionHistory";
 import Lifestyle from "./pages/dashboard/lifestyle";
 import Healthhcare from "./pages/dashboard/healthhcare";
@@ -59,6 +61,7 @@ import Videoplayer from "./pages/dashboard/videoplayer";
 import VideoPage from "./pages/videos";
 import HelpPage from "./pages/help";
 import HealthcarePage from "./pages/healthcare";
+import SubscriptionSuccess from "./pages/dashboard/success-page/subscription-successful";
 // import Merchandise from "./pages/dashboard/merch";
 
 const Wrapper = ({ children }) => {
@@ -80,6 +83,7 @@ const AppRoutes = () => {
                         {/* <Route path="/videos" element={<VideoPage />} /> */}
                         {/* <Route path={AllAppRoutes.about_us} element={<AboutUs />} /> */}
                         <Route path={AllAppRoutes.about_us} element={<About />} />
+                        <Route path="/abb" element={<AboutUs />} />
                         <Route path={AllAppRoutes.instructors} element={<Instructors />} />
                         <Route path={AllAppRoutes.contact_us} element={<Contact />} />
                         <Route path={AllAppRoutes.corporate} element={<Companies />} />
@@ -96,7 +100,7 @@ const AppRoutes = () => {
                         <Route path={AllAppRoutes.physical_plans} element={<PhysicalPlans />} />
 
                         <Route path={AllAppRoutes.sign_in} element={<AuthProtectedRoutes><SignInPage /></AuthProtectedRoutes>} />
-                        <Route path={AllAppRoutes.sign_out} element={<AuthProtectedRoutes><SignOutPage /></AuthProtectedRoutes>} />
+                        <Route path={AllAppRoutes.sign_out} element={<SignOutPage />} />
                         <Route path={AllAppRoutes.sign_up} element={<AuthProtectedRoutes><SignUpPage /></AuthProtectedRoutes>} />
                         <Route path={AllAppRoutes.sign_up_verification} element={<AuthProtectedRoutes><SignUpVerificationPage /></AuthProtectedRoutes>} />
                         <Route path={AllAppRoutes.verification_successful} element={<AuthProtectedRoutes><VerificationSuccessfulPage /></AuthProtectedRoutes>} />
@@ -107,6 +111,7 @@ const AppRoutes = () => {
                         {/* profile */}
 
                         <Route path="/dash" exact element={<Dashboard />} />
+                        <Route path={AllAppRoutes.profileSettings} exact element={<ProfileSettings />} />
                         <Route path={AllAppRoutes.profileVideos} exact element={<Videopage />} />
                         <Route path={AllAppRoutes.profileVirtualSubscription} exact element={<VirtualSubscription />} />
                         <Route path={AllAppRoutes.profilePlanOrders} exact element={<Physical />} />
@@ -119,6 +124,7 @@ const AppRoutes = () => {
                         <Route path={AllAppRoutes.profileProductOrders} exact element={<ProductsOrders />} />
                         <Route path={AllAppRoutes.profileVideoPurchaseSuccess} exact element={<VideoPurchaseSuccess />} />
                         <Route path={AllAppRoutes.profileFundWalletSuccess} exact element={<FundWalletSuccess />} />
+                        <Route path={AllAppRoutes.profileSubscriptionSuccess} exact element={<SubscriptionSuccess />} />
                         {/* <Route path={AllAppRoutes.profilePlanOrders} exact element={<ProfileOrders />} /> */}
 
                         {/* <Route path={AllAppRoutes.profile} exact element={<ProtectedRoutes><Profile /></ProtectedRoutes>} />
