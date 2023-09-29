@@ -440,14 +440,6 @@ const ProfileSettings = props => {
                                         <div className="white-dash-data side">
                                             <ModalDisplay />
                                         </div>
-                                        <div className="desktop-only">
-                                            <div className="white-dash-data side">
-                                                <TokensModal />
-                                            </div>
-                                            <div className="white-dash-data side">
-                                                <FundWalletModal spinnerIcon={loadModalSpinner} />
-                                            </div>
-                                        </div>
                                     </div>
                                 </div>
                                 <div className="mt_5"></div>

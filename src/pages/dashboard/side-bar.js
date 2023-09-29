@@ -82,7 +82,7 @@ const SideBar = () => {
                     <li>
                         <Link
                             className={({ isActive }) => isActive ? 'active-link' : ''}
-                            to="/signout"><SignOutIcon className="side-nav-icon _1" />Sign Out</Link>
+                            to="/signout"><SignOutIcon className="side-nav-icon" />Sign Out</Link>
                     </li>
                 </ul>
             </div>

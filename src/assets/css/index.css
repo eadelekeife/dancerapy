@@ -375,13 +375,26 @@ button {
     font-size: 1.4rem;
 }
 
+.btn-green {
+    background: var(--green);
+    padding: 13px 25px;
+    border: 1px solid var(--green);
+    border-radius: 4px;
+    color: #fff;
+    cursor: pointer;
+    display: block;
+    width: max-content;
+    font-size: 1.4rem;
+}
+
 .btn-yellow svg {
     /* stroke: #fff; */
     fill: #fff;
 }
 
 .btn-black.curve,
-.btn-yellow.curve {
+.btn-yellow.curve,
+.btn-green.curve {
     border-radius: 50px;
 }
 

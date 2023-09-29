@@ -65,17 +65,16 @@ const VideosPage = props => {
     const [showTrends, setShowTrends] = useState(true);
     const [showFitness, setShowFitness] = useState(true);
     const [searchKey, setSearchKey] = useState('');
+    const [filteredTrendsVideos, setFilteredTrendsVideos] = useState([]);
 
     const [userPlans, setUserPlans] = useState([]);
-    const [loadingdata, setLoadingData] = useState(true);
-    const [errorOccurred, setErrorOccurred] = useState(false);
-    const [userActiveSubscription, setUserActiveSubscription] = useState(false);
+    const [loadingVideos, setLoadingVideos] = useState(true);
     const [userData] = useState(props.auth.isAuthenticated ? props.auth.userDetails : '');
-    const [openVideoPurchaseModal, setOpenVideoPurchaseModal] = useState(false);
     const [currentVideo, setCurrentVideo] = useState({});
     const [currFilter, setCurrFilter] = useState('all');
     const [trendVideos, setTrendVideos] = useState([]);
     const [fitnessVideos, setFitnessVideos] = useState([]);
+    const [filterTag, setFilterTag] = useState('all');
 
     const settings = {
         dots: false,
@@ -102,28 +101,27 @@ const VideosPage = props => {
                     }
                 })
                 setTrendVideos(trends);
+                setFilteredTrendsVideos(trends);
                 setFitnessVideos(fitness);
                 setFilteredVideos(fitness);
                 setVideoBox(fitness);
-                setLoadingData(false);
+                setLoadingVideos(false);
             } else {
-                setLoadingData(false);
-                setErrorOccurred(true);
+                setLoadingVideos(false);
                 openNotificationWithIcon('error', userPlans.data.summary);
             }
         } catch (err) {
-            setErrorOccurred(true);
-            setLoadingData(false);
+            setLoadingVideos(false);
             openNotificationWithIcon('error', 'An error occurred while fetching data. Please reload to try again');
         }
     }
 
     const responsive = {
         0: {
-            items: 1,
+            items: 2,
             nav: false,
             margin: 10,
-            stagePadding: 50,
+            stagePadding: 15,
             loop: true
         },
         600: {
@@ -144,7 +142,7 @@ const VideosPage = props => {
 
     const updateCurrentVideo = e => {
         setCurrentVideo(e);
-        setOpenVideoPurchaseModal(true);
+        // setOpenVideoPurchaseModal(true);
     }
 
     useEffect(() => {
@@ -152,8 +150,14 @@ const VideosPage = props => {
     }, [])
 
     let skeleton = [];
-    for (let i = 0; i < 6; i++) {
-        skeleton.push(<Skeleton active />)
+    for (let i = 0; i < 12; i++) {
+        skeleton.push(
+            <div>
+                <Skeleton.Image active />
+                <div style={{ marginTop: 10 }}></div>
+                <Skeleton.Button style={{ width: '100%' }} active />
+            </div>
+        )
     }
 
     const filterVideos = filter => {
@@ -161,23 +165,37 @@ const VideosPage = props => {
         if (filter === "all") {
             setShowTrends(true);
             setShowFitness(true);
+            setFilterTag('all');
             setFilteredVideos(videoBox);
+            setFilteredTrendsVideos(trendVideos);
         } else if (filter === "free") {
             let newVideoBox = [];
+            let newTrendBox = [];
             videoBox.filter(videos => {
                 if (videos.amount === 0) newVideoBox.push(videos);
             })
+            trendVideos.filter(videos => {
+                if (videos.amount === 0) newTrendBox.push(videos);
+            })
+            setFilterTag('Free Videos');
             setShowTrends(true);
             setShowFitness(true);
             setFilteredVideos(newVideoBox);
+            setFilteredTrendsVideos(newTrendBox);
         } else if (filter === "paid") {
             let newVideoBox = [];
+            let newTrendBox = [];
             videoBox.filter(videos => {
                 if (videos.amount !== 0) newVideoBox.push(videos);
             })
-            setShowTrends(false);
+            trendVideos.filter(videos => {
+                if (videos.amount !== 0) newTrendBox.push(videos);
+            })
+            setShowTrends(true);
             setShowFitness(true);
+            setFilterTag('Paid Videos');
             setFilteredVideos(newVideoBox);
+            setFilteredTrendsVideos(newTrendBox);
         } else if (filter === "trends") {
             let newVideoBox = [];
             videoBox.filter(videos => {
@@ -185,7 +203,9 @@ const VideosPage = props => {
             })
             setShowTrends(true);
             setShowFitness(false);
+            setFilterTag('Dance Trends');
             setFilteredVideos(newVideoBox);
+            setFilteredTrendsVideos(trendVideos);
         } else if (filter === "choreography") {
             let newVideoBox = [];
             videoBox.filter(videos => {
@@ -193,7 +213,9 @@ const VideosPage = props => {
             })
             setShowTrends(false);
             setShowFitness(true);
+            setFilterTag('Choreographies');
             setFilteredVideos(newVideoBox);
+            setFilteredTrendsVideos(trendVideos);
         } else if (filter === "blast") {
             let newVideoBox = [];
             videoBox.filter(videos => {
@@ -201,7 +223,9 @@ const VideosPage = props => {
             })
             setShowTrends(false);
             setShowFitness(true);
+            setFilterTag('10 mins Dance Blast');
             setFilteredVideos(newVideoBox);
+            setFilteredTrendsVideos(trendVideos);
         } else if (filter === "fitness") {
             let newVideoBox = [];
             videoBox.filter(videos => {
@@ -209,7 +233,9 @@ const VideosPage = props => {
             })
             setShowTrends(false);
             setShowFitness(true);
+            setFilterTag('Fitness Videos');
             setFilteredVideos(newVideoBox);
+            setFilteredTrendsVideos(trendVideos);
         } else if (filter === "short") {
             let newVideoBox = [];
             videoBox.filter(videos => {
@@ -217,19 +243,27 @@ const VideosPage = props => {
             })
             setShowTrends(true);
             setShowFitness(false);
+            setFilterTag('Short Videos');
             setFilteredVideos(newVideoBox);
+            setFilteredTrendsVideos(trendVideos);
         } else if (filter === "beginner") {
             setFilteredVideos(videoBox);
             setShowTrends(true);
             setShowFitness(true);
+            setFilterTag('Beginners');
+            setFilteredTrendsVideos(trendVideos);
         } else if (filter === "african") {
             setFilteredVideos(videoBox);
             setShowTrends(true);
             setShowFitness(true);
+            setFilterTag('African Music');
+            setFilteredTrendsVideos(trendVideos);
         } else if (filter === "hiphop") {
             setFilteredVideos(videoBox);
             setShowTrends(true);
             setShowFitness(true);
+            setFilterTag('Hip Hop Songs');
+            setFilteredTrendsVideos(trendVideos);
         } else if (filter === "long") {
             let newVideoBox = [];
             videoBox.filter(videos => {
@@ -238,6 +272,8 @@ const VideosPage = props => {
             setShowTrends(false);
             setShowFitness(true);
             setFilteredVideos(newVideoBox);
+            setFilterTag('Long Videos');
+            setFilteredTrendsVideos(trendVideos);
         }
     }
 
@@ -896,80 +932,109 @@ const VideosPage = props => {
                                         <img src={VideoBannerMobile} alt="video banner" />
                                     </div>
                                 </div>
-                                <div>
-                                    {showTrends ?
+                                {
+                                    !loadingVideos ?
                                         <div>
-                                            <h4 className="page-tile">Dance Trend Videos</h4>
                                             <div>
-                                                {
-                                                    trendVideos.length ?
-                                                        <OwlCarousel className="owl-theme" lazyLoad={true}
-                                                            responsive={responsive} autoPlay={true}
-                                                            responsiveClass={true} loop={true} margin={10}>
+                                                {showTrends ?
+                                                    filteredTrendsVideos.length ?
+                                                        <div>
+                                                            <h4 className="page-tile">{filterTag === "all" ? "Dance Trend Videos" : filterTag}</h4>
+                                                            <div>
+
+                                                                <OwlCarousel className="owl-theme" lazyLoad={true}
+                                                                    responsive={responsive} autoPlay={true}
+                                                                    responsiveClass={true} loop={true} margin={10}>
+                                                                    {
+                                                                        filteredTrendsVideos.map((productPlans, index) => (
+                                                                            <div className="card-display" key={index}>
+                                                                                <Link to={`/profile/video/play/${productPlans._id}/${productPlans.title}`}>
+                                                                                    <div class='item'>
+                                                                                        <img src={productPlans.poster} alt={productPlans.title} />
+                                                                                        {
+                                                                                            productPlans?.amount !== 0 ?
+                                                                                                <div className="card-header-fee">
+                                                                                                    <div className="card-header-cover">
+                                                                                                        <ion-icon name="lock-closed-outline"></ion-icon>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                                : ''
+                                                                                        }
+                                                                                    </div>
+                                                                                </Link>
+                                                                            </div>
+                                                                        ))}
+                                                                </OwlCarousel>
+                                                            </div>
+                                                        </div>
+                                                        : ''
+                                                    : ''
+                                                }
+                                            </div>
+                                            <div className="mt_5">
+                                                {showFitness ?
+                                                    <>
+                                                        <h4 className="page-tile">{filterTag === "all" ? "Fitness Videos" : filterTag}</h4>
+                                                        <div className="grid-4">
                                                             {
-                                                                trendVideos.map((productPlans, index) => (
-                                                                    <div className="card-display" key={index}>
-                                                                        <Link to={`/profile/video/play/${productPlans._id}/${productPlans.title}`}>
-                                                                            <div class='item'>
-                                                                                <img src={productPlans.poster} alt={productPlans.title} />
+                                                                filteredVideos.map((productPlans, index) => (
+                                                                    <div key={index}>
+                                                                        <Link to={props.auth.isAuthenticated ?
+                                                                            `/profile/video/play/${productPlans._id}/${productPlans.title}` : `/signin?auth_redirect=/profile/video/play/${productPlans._id}/${productPlans.title}`}>
+                                                                            <div
+                                                                                onClick={e => updateCurrentVideo(productPlans)}>
+                                                                                <div className="">
+                                                                                    <div className="card-display">
+                                                                                        <div className="card-header">
+                                                                                            <img src={productPlans.poster} alt={productPlans.name} />
+                                                                                            {
+                                                                                                productPlans?.amount !== 0 ?
+                                                                                                    <div className="card-header-fee">
+                                                                                                        <div className="card-header-cover">
+                                                                                                            <ion-icon name="lock-closed-outline"></ion-icon>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                    : ''
+                                                                                            }
+                                                                                            <div className="card-overlay">
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div className="card-body">
+                                                                                            <div className="card-body-header">
+                                                                                                <p>{productPlans?.videoCategory?.name}</p>
+                                                                                                <p className="desktop-only">{productPlans.videoLength}</p>
+                                                                                            </div>
+                                                                                            <div className="card-body-title-cover">
+                                                                                                <h4 className="card-body-title">{productPlans.title}</h4>
+                                                                                            </div>
+                                                                                            <div className="card-body-footer noMargin={true}">
+                                                                                                <p>{productPlans.instructorName}</p>
+                                                                                                <p className="mobile-only">{productPlans.videoLength}</p>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
                                                                             </div>
                                                                         </Link>
                                                                     </div>
-                                                                ))}
-                                                        </OwlCarousel>
-                                                        : ''
+                                                                ))
+                                                            }
+                                                        </div>
+                                                    </> : ""
                                                 }
                                             </div>
                                         </div>
-                                        : ''}
-                                </div>
-                                <div className="mt_5">
-                                    {showFitness ?
-                                        <>
-                                            <h4 className="page-tile">Fitness Videos</h4>
-                                            <div className="grid-4">
-                                                {
-                                                    filteredVideos.map((productPlans, index) => (
-                                                        <div key={index}>
-                                                            <Link to={props.auth.isAuthenticated ?
-                                                                `/profile/video/play/${productPlans._id}/${productPlans.title}` : `/signin?auth_redirect=/profile/video/play/${productPlans._id}/${productPlans.title}`}>
-                                                                <div
-                                                                    onClick={e => updateCurrentVideo(productPlans)}>
-                                                                    <div className="">
-                                                                        <div className="card-display">
-                                                                            <div className="card-header">
-                                                                                <img src={productPlans.poster} alt={productPlans.name} />
-                                                                                <div className="card-header-fee">
-                                                                                    <div className="card-header-cover">
-                                                                                        <ion-icon name="lock-closed-outline"></ion-icon>
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div className="card-overlay">
-                                                                                </div>
-                                                                            </div>
-                                                                            <div className="card-body">
-                                                                                <div className="card-body-header">
-                                                                                    <p>{productPlans?.videoCategory?.name}</p>
-                                                                                    <p className="desktop-only">{productPlans.videoLength}</p>
-                                                                                </div>
-                                                                                <div className="card-body-title-cover">
-                                                                                    <h4 className="card-body-title">{productPlans.title}</h4>
-                                                                                </div>
-                                                                                <div className="card-body-footer noMargin={true}">
-                                                                                    <p>{productPlans.instructorName}</p>
-                                                                                    <p className="mobile-only">{productPlans.videoLength}</p>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </Link>
-                                                        </div>
-                                                    ))
-                                                }
-                                            </div>
-                                        </> : ''}
-                                </div>
+                                        :
+                                        <div className="grid-4">
+                                            {
+                                                skeleton.map((skeletonCheck, index) => (
+                                                    <div key={index}>
+                                                        {skeletonCheck}
+                                                    </div>
+                                                ))
+                                            }
+                                        </div>
+                                }
                             </div>
                         </div>
                     </div>
@@ -1040,6 +1105,7 @@ const VideosPage = props => {
                 </div>
             </Modal>
             <div className="mobile-only">
+                <div className="mt_5"></div>
                 <Footer noMargin={true} />
             </div>
         </div>

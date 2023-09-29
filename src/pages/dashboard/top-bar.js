@@ -11,6 +11,7 @@ import { ReactComponent as Cart } from "../../assets/images/icons/shopping-cart.
 import { ReactComponent as LogOut } from "../../assets/images/icons/log-out-cropped.svg";
 // import { ReactComponent as Cart } from "../../assets/images/cart.svg";
 import { ReactComponent as Menu } from "../../assets/images/menu.svg";
+import User1 from "../../assets/images/illustrations/user-1.png";
 import AllAppRoutes from "../../utils/routes";
 import ArrowLeftWhite from "../../assets/images/arrow-left.svg";
 import CancelWhite from "../../assets/images/x.svg";
@@ -27,6 +28,7 @@ const TopNav = props => {
     const [cartData, setCartData] = useState([]);
     const [openCartModal, setOpenCartModal] = useState(false);
     const [loadingSpinner, setLoadingSpinner] = useState(false);
+    const [userData] = useState(props.auth.isAuthenticated ? props.auth.userDetails : '');
     // const antIcon = <Load
     const antIcon = (<LoadingOutlined style={{ fontSize: 24, color: '#fff' }} spin />);
 
@@ -38,6 +40,9 @@ const TopNav = props => {
                 localStorage.setItem('cartQuantity', videoCart.data.message.length);
                 setCartData(videoCart.data.message);
             } else {
+                if (videoCart.data.summary === "Authorization failed. You need to log in to access this route") {
+                    Navigate(AllAppRoutes.sign_out)
+                }
                 openNotificationWithIcon('error', videoCart.data.summary);
             }
         } catch (err) {
@@ -135,8 +140,8 @@ const TopNav = props => {
                         <Cart className="topnav icon" />
                     </Badge>
                     <div className="avatar-cover">
-                        <AvatarIcon />
-                        <h3>Ifeoluwase Adeleke,</h3>
+                        <img src={User1} alt="user avatar" className="user-avatar" />
+                        <h3>{`${userData.firstName} ${userData.lastName}`},</h3>
                     </div>
                 </div>
 
@@ -314,6 +319,12 @@ const TopNav = props => {
                                 <Link onClick={() => setOpenDrawer(false)} to={AllAppRoutes.profileMerchandise}
                                 >
                                     Merchandise Orders
+                                </Link>
+                            </li>
+                            <li>
+                                <Link onClick={() => setOpenDrawer(false)} to={AllAppRoutes.sign_out} exact
+                                >
+                                    Log Out
                                 </Link>
                             </li>
                         </ul>

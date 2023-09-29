@@ -142,7 +142,7 @@ const Homepage = props => {
                                 to={AllAppRoutes.sign_up}>Get Started</Link> */}
                             <div className="btn-flex">
                                 <Link
-                                    to={AllAppRoutes.contact_us}
+                                    to={AllAppRoutes.sign_in}
                                     className="btn-yellow curve">Get Started <ArrowRight /></Link>
                                 <Link to={AllAppRoutes.corporate} className="btn-blank">See how we impact</Link>
                             </div>

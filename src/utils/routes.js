@@ -15,7 +15,7 @@ const AllAppRoutes = {
     physical_plans: "/physical-plans/all",
     physical_detail: "/physical/detail",
     sign_up: "/signup",
-    profile: "/dash",
+    profile: "/dashboard",
     appVideos: "/videos",
     help: "/help",
     healthcare: "/healthcare",

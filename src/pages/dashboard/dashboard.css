@@ -214,11 +214,27 @@ thead tr th {
     width: auto;
 }
 
+.data-block .data-block-sec.logout .side-nav-icon {
+    color: #D43361;
+}
+
+.data-block .data-block-sec.logout span {
+    color: #D43361;
+}
+
 img.user-avatar {
     width: 20%;
     margin: 0px auto;
     display: block;
     margin-bottom: 10px;
+}
+
+.top-nav-navigation img.user-avatar {
+    width: 20%;
+    height: 40px;
+    width: auto;
+    margin: 0px auto;
+    display: block;
 }
 
 .fund-wallet-dashboard-button {
@@ -865,6 +881,11 @@ img.checkmark {
     color: #b5bac1 !important;
 }
 
+.paymentModal.video-player-payment .ant-modal-content .grid-3 p,
+.paymentModal.video-player-payment .ant-modal-content .grid-3 h3 {
+    color: #000 !important;
+}
+
 .paymentModal .ant-modal-content h3 {
     font-size: 2rem;
     color: #f2f3f5;
@@ -896,6 +917,40 @@ img.checkmark {
     margin-bottom: 15px;
     font-size: 1.3rem;
     justify-content: space-between;
+}
+
+.dash-main-content .dash-overview .btn-dash-array {
+    width: 60%;
+    margin: 0px auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    grid-gap: 20px;
+}
+
+.dash-main-content .dash-overview .btn-dash-array button span {
+    margin-left: 5px;
+    margin-bottom: 0px;
+}
+
+.dash-main-content .dash-overview .btn-dash-array button svg {
+    color: #fff;
+    margin: 0px;
+    height: 20px;
+    stroke: #fff;
+}
+
+
+.dash-main-content .dash-overview .btn-dash-array button {
+    width: 100%;
+    border-radius: 50px;
+    padding: 12px 25px;
+    color: #fff;
+    font-size: 1.4rem;
+    display: flex;
+    justify-content: center;
+    align-items: end;
+    grid-gap: 10px;
 }
 
 
@@ -1062,4 +1117,7 @@ img.checkmark {
     }
 
     .white-dash-data.side img {}
+    .dash-main-content .dash-overview .btn-dash-array {
+        width: 100%;
+    }
 }

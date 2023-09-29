@@ -48,7 +48,6 @@ const VideosPage = props => {
         try {
             let userPurchase = await _fetch_user_wallet_transactions();
             if (userPurchase.data.statusMessage === "success") {
-                console.log(userPurchase);
                 setWalletData(userPurchase.data.message);
                 setLoadingData(false);
             } else {

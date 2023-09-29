@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { connect } from 'react-redux';
 import { Drawer, Skeleton, Divider, notification, Select, Spin } from 'antd';
 import AllAppRoutes from "../utils/routes";
@@ -17,6 +17,7 @@ import CancelWhite from "../assets/images/x.svg";
 const Nav = props => {
     const [fixedNav, setFixed] = useState(false);
     const [open, setOpen] = useState(false);
+    const [openUserCart, setOpenUserCart] = useState(false);
     const [openDrawer, setOpenDrawer] = useState(false);
     const [fetchingData, setFetchingData] = useState(true);
     const [spinnerLoading, setSpinnerLoading] = useState(false);
@@ -97,10 +98,10 @@ const Nav = props => {
                                 :
                                 <React.Fragment>
                                     <li>
-                                        <NavLink className={({ isActive }) => isActive ? 'active-link' : ''} to={AllAppRoutes.sign_in}>Log In<span className="cover-nav-bg"></span></NavLink>
+                                        <NavLink className={({ isActive }) => isActive ? 'active-link' : ''} to={AllAppRoutes.sign_in}>Log In</NavLink>
                                     </li>
                                     <li className="bg-auth">
-                                        <NavLink className={({ isActive }) => isActive ? 'active-link' : ''} to={AllAppRoutes.sign_up}>Create Account<span className="cover-nav-bg"></span></NavLink>
+                                        <NavLink className={({ isActive }) => isActive ? 'active-link' : ''} to={AllAppRoutes.sign_up}>Create Account</NavLink>
                                     </li>
                                 </React.Fragment>
                         }
@@ -112,9 +113,11 @@ const Nav = props => {
                             <button className="btn-black">Your Videos</button>
                         </li> */}
                         <li>
-                            <AvatarIcon className="menu" />
+                            <Link to={AllAppRoutes.sign_up}>
+                                <AvatarIcon className="menu" />
+                            </Link>
                         </li>
-                        <li>
+                        <li onClick={() => setOpenUserCart()}>
                             <Cart className="menu" />
                         </li>
                         <li>
@@ -275,6 +278,20 @@ const Nav = props => {
                     </div>
                 }
             </Drawer>
+            {/* <Drawer
+                className="nav-drawer"
+                title={null} placement="right" onClose={closeDrawer} open={openDrawer}>
+                {!showUserProfileNav ?
+                    <div>
+                        <div className="drawer-nav-block">
+                            <div>
+                            </div>
+                            <img onClick={closeDrawer} src={CancelWhite} alt="Cancel" />
+                        </div>
+                    </div>
+                }
+            </Drawer>
+            openUserCart */}
         </div>
     )
 }

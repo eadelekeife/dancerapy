@@ -1,7 +1,7 @@
 import "./assets/css/index.css";
 
 import React from "react";
-import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
+import { BrowserRouter, Route, Routes, useLocation, Navigate } from "react-router-dom";
 
 import AllAppRoutes from "./utils/routes";
 import { useLayoutEffect } from 'react';
@@ -79,7 +79,7 @@ const AppRoutes = () => {
                 <Wrapper>
                     <Routes>
                         <Route path="/" element={<Homepage />} />
-                        <Route path="/aa" element={<TestPlayer />} />
+                        <Route path="*" element={<Navigate to="/videos" />} />
                         {/* <Route path="/videos" element={<VideoPage />} /> */}
                         {/* <Route path={AllAppRoutes.about_us} element={<AboutUs />} /> */}
                         <Route path={AllAppRoutes.about_us} element={<About />} />
@@ -92,7 +92,7 @@ const AppRoutes = () => {
                         <Route path={AllAppRoutes.help} element={<HelpPage />} />
                         <Route path={AllAppRoutes.merch} element={<Merch />} />
                         <Route path={AllAppRoutes.appVideos} element={<VideoPage />} />
-                        <Route path={AllAppRoutes.playProfileVideo} element={<Videoplayer />} />
+                        <Route path={AllAppRoutes.playProfileVideo} element={<ProtectedRoutes><Videoplayer /></ProtectedRoutes>} />
 
                         <Route path={AllAppRoutes.products} element={<Products />} />
                         <Route path={AllAppRoutes.physical_detail} element={<PhysicalDetail />} />
@@ -110,21 +110,22 @@ const AppRoutes = () => {
 
                         {/* profile */}
 
-                        <Route path="/dash" exact element={<Dashboard />} />
-                        <Route path={AllAppRoutes.profileSettings} exact element={<ProfileSettings />} />
-                        <Route path={AllAppRoutes.profileVideos} exact element={<Videopage />} />
-                        <Route path={AllAppRoutes.profileVirtualSubscription} exact element={<VirtualSubscription />} />
-                        <Route path={AllAppRoutes.profilePlanOrders} exact element={<Physical />} />
-                        <Route path={AllAppRoutes.videoViewsAnalytics} exact element={<VideoViewsAnalytics />} />
-                        <Route path={AllAppRoutes.profileTransactionHistory} exact element={<TransactionHistory />} />
-                        <Route path={AllAppRoutes.profileVideoUploads} exact element={<VideoUploads />} />
-                        <Route path={AllAppRoutes.profileLifestylePlans} exact element={<Lifestyle />} />
-                        <Route path={AllAppRoutes.profileHealthcarePlans} exact element={<Healthhcare />} />
-                        <Route path={AllAppRoutes.profileMerchandise} exact element={<Merchandise />} />
-                        <Route path={AllAppRoutes.profileProductOrders} exact element={<ProductsOrders />} />
-                        <Route path={AllAppRoutes.profileVideoPurchaseSuccess} exact element={<VideoPurchaseSuccess />} />
-                        <Route path={AllAppRoutes.profileFundWalletSuccess} exact element={<FundWalletSuccess />} />
-                        <Route path={AllAppRoutes.profileSubscriptionSuccess} exact element={<SubscriptionSuccess />} />
+                        <Route path="/dash" exact element={<ProtectedRoutes><Dashboard /></ProtectedRoutes>} />
+                        <Route path="/dashboard" exact element={<ProtectedRoutes><Dashboard /></ProtectedRoutes>} />
+                        <Route path={AllAppRoutes.profileSettings} exact element={<ProtectedRoutes><ProfileSettings /></ProtectedRoutes>} />
+                        <Route path={AllAppRoutes.profileVideos} exact element={<ProtectedRoutes><Videopage /></ProtectedRoutes>} />
+                        <Route path={AllAppRoutes.profileVirtualSubscription} exact element={<ProtectedRoutes><VirtualSubscription /></ProtectedRoutes>} />
+                        <Route path={AllAppRoutes.profilePlanOrders} exact element={<ProtectedRoutes><Physical /></ProtectedRoutes>} />
+                        <Route path={AllAppRoutes.videoViewsAnalytics} exact element={<ProtectedRoutes><VideoViewsAnalytics /></ProtectedRoutes>} />
+                        <Route path={AllAppRoutes.profileTransactionHistory} exact element={<ProtectedRoutes><TransactionHistory /></ProtectedRoutes>} />
+                        <Route path={AllAppRoutes.profileVideoUploads} exact element={<ProtectedRoutes><VideoUploads /></ProtectedRoutes>} />
+                        <Route path={AllAppRoutes.profileLifestylePlans} exact element={<ProtectedRoutes><Lifestyle /></ProtectedRoutes>} />
+                        <Route path={AllAppRoutes.profileHealthcarePlans} exact element={<ProtectedRoutes><Healthhcare /></ProtectedRoutes>} />
+                        <Route path={AllAppRoutes.profileMerchandise} exact element={<ProtectedRoutes><Merchandise /></ProtectedRoutes>} />
+                        <Route path={AllAppRoutes.profileProductOrders} exact element={<ProtectedRoutes><ProductsOrders /></ProtectedRoutes>} />
+                        <Route path={AllAppRoutes.profileVideoPurchaseSuccess} exact element={<ProtectedRoutes><VideoPurchaseSuccess /></ProtectedRoutes>} />
+                        <Route path={AllAppRoutes.profileFundWalletSuccess} exact element={<ProtectedRoutes><FundWalletSuccess /></ProtectedRoutes>} />
+                        <Route path={AllAppRoutes.profileSubscriptionSuccess} exact element={<ProtectedRoutes><SubscriptionSuccess /></ProtectedRoutes>} />
                         {/* <Route path={AllAppRoutes.profilePlanOrders} exact element={<ProfileOrders />} /> */}
 
                         {/* <Route path={AllAppRoutes.profile} exact element={<ProtectedRoutes><Profile /></ProtectedRoutes>} />

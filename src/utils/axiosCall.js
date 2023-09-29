@@ -9,11 +9,11 @@ import Axios from "axios";
 // https://backend-test.dancerapy.org/
 
 const axiosCall = Axios.create({
-    baseURL: "https://backend-test.dancerapy.org/api/v1/dancerapy/"
+    baseURL: "https://backend.dancerapy.org/api/v1/dancerapy/"
 });
 
 export const userAxiosCall = Axios.create({
-    baseURL: "https://backend-test.dancerapy.org/api/v1/users/"
+    baseURL: "https://backend.dancerapy.org/api/v1/users/"
 });
 
 export default axiosCall;

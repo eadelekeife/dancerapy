@@ -1782,6 +1782,9 @@ ul.props {
     object-position: center;
 }
 
+/* .card-display .item {
+    position: relative;
+} */
 @media screen and (max-width:720px) {
 
     .new-video-player,

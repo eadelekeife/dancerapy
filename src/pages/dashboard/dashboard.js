@@ -24,6 +24,8 @@ import WalletImg from "../../assets/images/illustrations/14_rhombus.png";
 import TokenImg from "../../assets/images/illustrations/17_soap.png";
 import User1 from "../../assets/images/illustrations/user-1.png";
 import { ReactComponent as PlusIcon } from "../../assets/images/icons/pluc-circle-r.svg";
+import { ReactComponent as WalletIcon } from "../../assets/images/icons/wallet-t-cropped.svg";
+import { ReactComponent as SignOutIcon } from "../../assets/images/icons/log-out-cropped.svg";
 
 import CheckSymbol from "../../assets/images/illustrations/Check.png";
 
@@ -64,12 +66,7 @@ const Dashboard = props => {
     const [inputTopupAmount, setInputTopupAmount] = useState(0);
     const [fundWalletStatus, setFundWalletStatus] = useState(false);
     const [userWalletInitializationKey, setUserWalletInitializationKey] = useState('');
-    // const [loadingData, setLoadingData] = useState(false);
 
-
-    // const publicKey = process.env.REACT_APP_DANCERAPY_PAYMENT_KEY;
-    // const publicKey = "pk_live_76740464a53c7a4656f2eaca00433836d01f4e24";
-    const publicKey = "pk_test_6001cfe393365d476119a4e494f32bcb1290cfea";
     const [uuidv4] = useState(uuid());
     const [amount, setAmount] = useState(0); // Remember, set in kobo!
     const [userData] = useState(props.auth.isAuthenticated ? props.auth.userDetails : '');
@@ -135,8 +132,31 @@ const Dashboard = props => {
                 openNotificationWithIcon('error', 'An error occurred while fetching wallet data. Please try again');
             }
         } catch (err) {
-            console.log(err)
             openNotificationWithIcon('error', 'An error occurred while fetching wallet data. Please try again');
+        }
+    }
+    const fetchSubscriptionData = async () => {
+        setLoadingData(true);
+        try {
+            let subPlans = await _fetch_subscription_plans();
+            if (subPlans.data.statusMessage === "success") {
+                setSubscriptionPlans(subPlans.data.message);
+                let planIndex;
+                subPlans.data.message.find((plan, index) => {
+                    if (plan.duration === 12) planIndex = index
+                })
+                setActiveSubPackage(planIndex);
+                setLoadingData(false);
+                setSelectedSubscriptionPackage(subPlans.data.message[planIndex]);
+                setOpenSubscriptionModal(true);
+            } else {
+                setLoadingData(false);
+                openNotificationWithIcon('error', subPlans.data.summary);
+            }
+        } catch (err) {
+            console.log(err)
+            setLoadingData(false);
+            openNotificationWithIcon('error', 'An error occurred while fetching subscription plans. Please reload page to try again');
         }
     }
     useEffect(() => {
@@ -154,7 +174,6 @@ const Dashboard = props => {
             }
         })
             .then(data => {
-                console.log(data)
                 if (data.data.statusMessage === 'success') {
                     navigate(0)
                     // history.go(0);
@@ -418,41 +437,16 @@ const Dashboard = props => {
         reference: (new Date()).getTime().toString(),
         email: userData.emailAddress,
         amount: topupAmount + '00', //Amount is in the country's lowest currency. E.g Kobo, so 20000 kobo = N200
-        publicKey: 'pk_test_6001cfe393365d476119a4e494f32bcb1290cfea',
+        publicKey: process.env.REACT_APP_DANCERAPY_PAYMENT_KEY,
     };
     const paystackSubConfig = {
         reference: (new Date()).getTime().toString(),
         email: userData.emailAddress,
         amount: +selectedSubscriptionPackage.amount + '00', //Amount is in the country's lowest currency. E.g Kobo, so 20000 kobo = N200
-        publicKey: 'pk_test_6001cfe393365d476119a4e494f32bcb1290cfea',
+        publicKey: process.env.REACT_APP_DANCERAPY_PAYMENT_KEY,
     };
     const initializePayment = usePaystackPayment(paystackConfig);
     const initializeSubscriptionPayment = usePaystackPayment(paystackSubConfig);
-
-    const fetchSubscriptionData = async () => {
-        setLoadingData(true);
-        try {
-            let subPlans = await _fetch_subscription_plans();
-            if (subPlans.data.statusMessage === "success") {
-                setSubscriptionPlans(subPlans.data.message);
-                let planIndex;
-                subPlans.data.message.find((plan, index) => {
-                    if (plan.duration === 12) planIndex = index
-                })
-                setActiveSubPackage(planIndex);
-                setLoadingData(false);
-                setSelectedSubscriptionPackage(subPlans.data.message[planIndex]);
-                setOpenSubscriptionModal(true);
-            } else {
-                setLoadingData(false);
-                openNotificationWithIcon('error', subPlans.data.summary);
-            }
-        } catch (err) {
-            console.log(err)
-            setLoadingData(false);
-            openNotificationWithIcon('error', 'An error occurred while fetching subscription plans. Please reload page to try again');
-        }
-    }
 
     return (
         <div>
@@ -475,6 +469,12 @@ const Dashboard = props => {
                                             <div>
                                                 <h2>{`${userData.firstName} ${userData.lastName}`}</h2>
                                                 <p>{userData.referralCode}</p>
+                                                <div className="btn-dash-array">
+                                                    <button
+                                                        className="btn-green curve" onClick={() => fetchSubscriptionData()}><WalletIcon /> Subscribe</button>
+                                                    <button
+                                                        className="btn-green curve" onClick={() => setOpenFundWalletModal()}><PlusIcon /> Fund Wallet</button>
+                                                </div>
                                             </div>
                                         </div>
                                         <div className="grid-2">
@@ -533,18 +533,23 @@ const Dashboard = props => {
                                                     <MerchandiseIcon className="side-nav-icon" /><span>Merchandise Orders</span>
                                                 </Link>
                                             </div>
+                                            <div className="data-block-sec logout">
+                                                <Link to={AllAppRoutes.sign_out}>
+                                                    <SignOutIcon className="side-nav-icon _1" /><span>Log Out</span>
+                                                </Link>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div className="mt_5"></div>
                             </div>
                         </div>
-                        <div className="fund-wallet-dashboard-button">
+                        {/* <div className="fund-wallet-dashboard-button">
                             <button onClick={() => fetchSubscriptionData()}>Subscribe</button>
                             <div className="mt-4"></div>
                             <button onClick={() => setOpenFundWalletModal(true)}>
                                 <PlusIcon /><span>Fund Wallet</span></button>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
                 <Modal open={openFundWalletModal} footer={null} onCancel={() => {
