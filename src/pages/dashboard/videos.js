@@ -3,37 +3,36 @@ import "./dashboard.css";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import OwlCarousel from 'react-owl-carousel';
-import { Skeleton, notification, Input, Divider, Modal, Table, Drawer, Spin } from 'antd';
+import { Skeleton, notification, Modal } from 'antd';
 import { LoadingOutlined } from '@ant-design/icons';
-import AppRoute from "../../utils/routes";
 import Footer from "../../components/footer";
-import { DateTime } from 'luxon';
-import { Controller, useForm } from "react-hook-form";
-import VideoPlans from "../profile/product-plans";
 
 import TopNav from "./top-bar";
 import SideBar from "./side-bar";
 
-import Empty from "../../assets/images/auth/empty.svg";
 import _1 from "../../assets/images/content/_1.avif";
 import _2 from "../../assets/images/content/_2.avif";
-import ArrowLeft from "../../assets/images/arrow-left.svg";
-import ModalDisplay from "../../components/referral-modal";
-import ReferImage from "../../assets/images/a-company/refer.png";
-import axiosCall from "../../utils/axiosCall";
+
+import { ReactComponent as ArrowRight } from "../../assets/images/arrow-right.svg";
+import { ReactComponent as ArrowLeft } from "../../assets/images/arrow-left-circle.svg";
+
+import { Swiper, SwiperSlide, useSwiper } from 'swiper/react';
+import 'swiper/css';
 
 import LockImage from "../../assets/images/illustrations/Lock.png";
-import Image1 from "../../assets/images/product/_1.png";
-import Image2 from "../../assets/images/product/_2.png";
 
-import Dash1 from "../../assets/images/illustrations/1_circle.png";
-import Dash2 from "../../assets/images/illustrations/12_jug.png";
-import Dash3 from "../../assets/images/illustrations/14_rhombus.png";
-import Dash4 from "../../assets/images/illustrations/17_soap.png";
-import { _add_video_to_cart, _buy_single_video, _buy_single_video_with_tokens, _fetch_app_videos } from "../../utils/axiosroutes";
-import UserBalance from "../../components/balance-cover";
-import AllAppRoutes from "../../utils/routes";
+import { _add_video_to_cart, _buy_single_video, _buy_single_video_with_tokens, _check_user_access, _fetch_app_videos } from "../../utils/axiosroutes";
+
+
+export const SwiperButtonNext = ({ children }) => {
+    const swiper = useSwiper();
+    return <button className="carousel-controller" onClick={() => swiper.slideNext()}>{children}</button>;
+};
+
+export const SwiperButtonPrev = ({ children }) => {
+    const swiper = useSwiper();
+    return <button className="carousel-controller" onClick={() => swiper.slidePrev()}>{children}</button>;
+};
 
 const VideosPage = props => {
 
@@ -44,11 +43,7 @@ const VideosPage = props => {
         });
     };
 
-    const antIcon = <LoadingOutlined style={{ fontSize: 24, color: '#fff' }} spin />;
 
-    const { handleSubmit, control, setValue } = useForm({});
-    const [currentNav, setCurrentNav] = useState(0);
-    const [isModalOpen, setIsModalOpen] = useState(false);
     const [searchVideoDisplay, setSearchVideoDisplay] = useState(false);
     const [searchedVideos, setSearchedVideo] = useState([]);
     const [loadingSearchButton, setLoadingSearchButton] = useState(false);
@@ -57,8 +52,6 @@ const VideosPage = props => {
     const [userPlans, setUserPlans] = useState([]);
     const [loadingdata, setLoadingData] = useState(true);
     const [errorOccurred, setErrorOccurred] = useState(false);
-    const [userActiveSubscription, setUserActiveSubscription] = useState(false);
-    const [categoryBox, setCategoryBox] = useState([]);
     const [userData] = useState(props.auth.isAuthenticated ? props.auth.userDetails : '');
     const [filter, setFilter] = useState('all');
     const [videoBox, setVideoBox] = useState([]);
@@ -66,7 +59,20 @@ const VideosPage = props => {
     const [currentVideo, setCurrentVideo] = useState({});
     const [trendVideos, setTrendVideos] = useState([]);
     const [fitnessVideos, setFitnessVideos] = useState([]);
-    const [trendingVideos, setTrendingVideos] = useState([]);
+    const [activeSub, setActveSub] = useState(false);
+    const [loadingVideos, setLoadingVideos] = useState(true);
+
+    const breakpoints = {
+        0: {
+            slidesPerView: 2.1
+        },
+        600: {
+            slidesPerView: 4.2
+        },
+        1000: {
+            slidesPerView: 5.2
+        }
+    }
 
     const fetchUserVideosData = async () => {
         try {
@@ -95,40 +101,14 @@ const VideosPage = props => {
                 // setTrendingVideos();
                 setTrendVideos(trends);
                 setFitnessVideos(fitness);
-                setLoadingData(false);
+                setLoadingVideos(false);
             } else {
-                setLoadingData(false);
                 setErrorOccurred(true);
                 openNotificationWithIcon('error', userPlans.data.summary);
             }
         } catch (err) {
             setErrorOccurred(true);
-            setLoadingData(false);
             openNotificationWithIcon('error', 'An error occurred while fetching data. Please reload to try again');
-        }
-    }
-
-    const responsive = {
-        0: {
-            items: 1,
-            nav: false,
-            margin: 10,
-            stagePadding: 50,
-            loop: true
-        },
-        600: {
-            items: 3,
-            nav: false,
-            margin: 20,
-            stagePadding: 50,
-            loop: true
-        },
-        1000: {
-            items: 4,
-            nav: false,
-            margin: 10,
-            stagePadding: 20,
-            loop: true
         }
     }
 
@@ -181,6 +161,21 @@ const VideosPage = props => {
         }
     }
 
+    const checkUserAccess = async () => {
+        try {
+            let userPlans = await _check_user_access();
+            if (userPlans.data.statusMessage === "success") {
+                setActveSub(userPlans.data.message);
+            } else {
+                setLoadingVideos(false);
+                openNotificationWithIcon('error', userPlans.data.summary);
+            }
+        } catch (err) {
+            setLoadingVideos(false);
+            openNotificationWithIcon('error', 'An error occurred while checking user subscription history. Please reload to try again');
+        }
+    }
+
     const updateCurrentVideo = e => {
         setCurrentVideo(e);
         setOpenVideoPurchaseModal(true);
@@ -191,10 +186,11 @@ const VideosPage = props => {
             openNotificationWithIcon('success', 'Transaction completed successfully. Please check your mail for further information');
             localStorage.removeItem('purchaseSuccessful');
         }
-        fetchUserVideosData()
+        fetchUserVideosData();
+        checkUserAccess();
     }, [])
     let skeleton = [];
-    for (let i = 0; i < 6; i++) {
+    for (let i = 0; i < 16; i++) {
         skeleton.push(<Skeleton active />)
     }
 
@@ -211,7 +207,7 @@ const VideosPage = props => {
             setSearchVideoDisplay(true);
             setLoadingSearchButton(false);
             setSearchKey(e.videoName);
-            setValue('videoName', '');
+            // setValue('videoName', '');
         }, 2000)
     }
 
@@ -237,66 +233,121 @@ const VideosPage = props => {
                                 <button className="tab">10 Mins Dance Blast</button>
                                 <button className="tab">Dancerapy Choreographies</button>
                             </div> */}
-                            <div>
-                                <h4 className="page-tile">Dance Trend Videos</h4>
-                                <div>
-                                    {
-                                        trendVideos.length ?
-                                            <OwlCarousel className="owl-theme" lazyLoad={true}
-                                                responsive={responsive} autoPlay={true}
-                                                responsiveClass={true} loop={true} margin={10} nav>
-                                                {
-                                                    trendVideos.map((productPlans, index) => (
-                                                        <div className="card-display" key={index}>
-                                                            <Link to={`/profile/video/play/${productPlans._id}/${productPlans.title}`}>
-                                                                <div class='item'>
-                                                                    <img src={productPlans.poster} alt={productPlans.title} />
+                            {
+                                !loadingVideos ?
+                                    <div>
+                                        <div>
+                                            {
+                                                trendVideos.length ?
+                                                    <div className="carousel-cover">
+                                                        <h4 className="page-tile">Dance Trend Videos</h4>
+                                                        <>
+                                                            <Swiper
+                                                                spaceBetween={5} slidesPerView={4.2} centeredSlides={true}
+                                                                loop={true} breakpoints={breakpoints}>
+                                                                <div className="new-swiper-box">
+                                                                    <SwiperButtonPrev><ArrowLeft /></SwiperButtonPrev>
+                                                                    <SwiperButtonNext><ArrowRight /></SwiperButtonNext>
                                                                 </div>
-                                                            </Link>
-                                                        </div>
-                                                    ))}
-                                            </OwlCarousel>
-                                            : ''
-                                    }
-                                </div>
-                            </div>
-                            <div className="mt_4">
-                                <h4 className="page-tile">Fitness Videos</h4>
-                                <div className="grid-4">
-                                    {
-                                        fitnessVideos.map((productPlans, index) => (
-                                            <div className="card-display" key={index}>
-                                                <Link to={`/profile/video/play/${productPlans._id}/${productPlans.title}`}>
-                                                    <div>
-                                                        <div className="card-header">
-                                                            <img src={productPlans.poster} alt={productPlans.name} />
-                                                            <div className="card-header-fee">
-                                                                <div className="card-header-cover">
-                                                                    <ion-icon name="lock-closed-outline"></ion-icon>
-                                                                </div>
-                                                            </div>
-                                                            <div className="card-overlay">
-                                                            </div>
-                                                        </div>
-                                                        <div className="card-body">
-                                                            <div className="card-body-header">
-                                                                <p>{productPlans?.videoCategory?.name}</p>
-                                                                <p>{productPlans.videoLength}</p>
-                                                            </div>
-                                                            <div className="card-body-title-cover">
-                                                                <h4 className="card-body-title">{productPlans.title}</h4>
-                                                            </div>
-                                                            <div className="card-body-footer noMargin={true}">
-                                                                <p>{productPlans.instructorName}</p>
-                                                            </div>
-                                                        </div>
+                                                                {trendVideos.map((productPlans, index) => (
+                                                                    <SwiperSlide key={index}>
+                                                                        <div className={`card-display ${index}`} key={index} style={{ position: "relative" }}>
+                                                                            <Link to={`/profile/video/play/${productPlans._id}/${productPlans.title}`}>
+                                                                                <div className='item'>
+                                                                                    <img src={productPlans.poster} alt={productPlans.title} />
+                                                                                    {
+                                                                                        productPlans?.amount !== 0 ?
+                                                                                            <div className="card-header-fee">
+                                                                                                <div className="card-header-cover">
+                                                                                                    {
+                                                                                                        activeSub ?
+                                                                                                            <ion-icon name="lock-open-outline"></ion-icon>
+                                                                                                            :
+                                                                                                            <ion-icon name="lock-closed-outline"></ion-icon>
+                                                                                                    }
+                                                                                                </div>
+                                                                                            </div>
+                                                                                            : ''
+                                                                                    }
+                                                                                </div>
+                                                                            </Link>
+                                                                        </div>
+                                                                    </SwiperSlide>
+                                                                ))}
+                                                            </Swiper>
+                                                        </>
                                                     </div>
-                                                </Link>
-                                            </div>
-                                        ))
-                                    }
-                                </div>
-                            </div>
+                                                    : ''
+                                            }
+                                        </div>
+                                        <div className="mt_5">
+                                            <>
+                                                <h4 className="page-tile">Fitness Videos</h4>
+                                                <div className="grid-4">
+                                                    {
+                                                        fitnessVideos.map((productPlans, index) => (
+                                                            <div key={index}>
+                                                                <Link to={props.auth.isAuthenticated ?
+                                                                    `/profile/video/play/${productPlans._id}/${productPlans.title}` : `/signin?auth_redirect=/profile/video/play/${productPlans._id}/${productPlans.title}`}>
+                                                                    <div
+                                                                        onClick={e => updateCurrentVideo(productPlans)}>
+                                                                        <div className="">
+                                                                            <div className="card-display">
+                                                                                <div className="card-header">
+                                                                                    <img src={productPlans.poster} alt={productPlans.name} />
+                                                                                    {
+                                                                                        productPlans?.amount !== 0 ?
+                                                                                            <div className="card-header-fee">
+                                                                                                <div className="card-header-cover">
+                                                                                                    {
+                                                                                                        activeSub ?
+                                                                                                            <ion-icon name="lock-open-outline"></ion-icon>
+                                                                                                            :
+                                                                                                            <ion-icon name="lock-closed-outline"></ion-icon>
+                                                                                                    }
+                                                                                                    {/* <ion-icon name="lock-closed-outline"></ion-icon> */}
+                                                                                                </div>
+                                                                                            </div>
+                                                                                            : ''
+                                                                                    }
+                                                                                    <div className="card-overlay">
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div className="card-body">
+                                                                                    <div className="card-body-header">
+                                                                                        <p>{productPlans?.videoCategory?.name}</p>
+                                                                                        <p className="desktop-only">{productPlans.videoLength}</p>
+                                                                                    </div>
+                                                                                    <div className="card-body-title-cover">
+                                                                                        <h4 className="card-body-title">{productPlans.title}</h4>
+                                                                                    </div>
+                                                                                    <div className="card-body-footer noMargin={true}">
+                                                                                        <p>{productPlans.instructorName}</p>
+                                                                                        <p className="mobile-only">{productPlans.videoLength}</p>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </Link>
+                                                            </div>
+                                                        ))
+                                                    }
+                                                </div>
+                                            </>
+                                        </div>
+                                    </div>
+                                    :
+                                    <div className="grid-4">
+                                        {
+                                            skeleton.map((skeletonCheck, index) => (
+                                                <div key={index}>
+                                                    {skeletonCheck}
+                                                </div>
+                                            ))
+                                        }
+                                    </div>
+                            }
                             <div className="mt_5"></div>
                         </div>
                     </div>

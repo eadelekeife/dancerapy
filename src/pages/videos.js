@@ -3,43 +3,44 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { Skeleton, notification, Input, Divider, Modal, Table, Tabs, Spin, Checkbox } from 'antd';
 import { LoadingOutlined } from '@ant-design/icons';
-import AppRoute from "../utils/routes";
-import OwlCarousel from 'react-owl-carousel';
-import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
+
+import 'tiny-slider/dist/tiny-slider.css';
+// import "slick-carousel/slick/slick.css";
+// import "slick-carousel/slick/slick-theme.css";
+
+import { Swiper, SwiperSlide, useSwiper } from 'swiper/react';
+import 'swiper/css';
+
 import Footer from "../components/footer";
-import { DateTime } from 'luxon';
 import { Controller, useForm } from "react-hook-form";
 import Nav from "../components/nav";
-import AllAppRoutes from "../utils/routes";
 
-import Logo from "../assets/images/logo.jpg";
-import Empty from "../assets/images/auth/empty.svg";
 import _1 from "../assets/images/content/_1.avif";
 import _2 from "../assets/images/content/_2.avif";
 import VideoBanner from "../assets/images/homepage/95.jpg";
 import VideoBannerMobile from "../assets/images/homepage/96.jpg";
-import ArrowLeft from "../assets/images/arrow-left.svg";
-import axiosCall from "../utils/axiosCall";
-import { _fetch_app_videos } from "../utils/axiosroutes";
+import { _check_user_access, _fetch_app_videos } from "../utils/axiosroutes";
 
+import { ReactComponent as ArrowRight } from "../assets/images/arrow-right.svg";
+import { ReactComponent as ArrowLeft } from "../assets/images/arrow-left-circle.svg";
 import { ReactComponent as Headphones } from "../assets/images/icons/filter-icons/headphones-t.svg";
 import { ReactComponent as Eye } from "../assets/images/icons/filter-icons/eye-t.svg";
-import { ReactComponent as Gear } from "../assets/images/icons/filter-icons/gear-t.svg";
 import { ReactComponent as LockOpened } from "../assets/images/icons/filter-icons/lock-opened-t.svg";
 import { ReactComponent as Lock } from "../assets/images/icons/filter-icons/lock-t.svg";
 import { ReactComponent as Microphones } from "../assets/images/icons/filter-icons/microphone-t.svg";
-import { ReactComponent as Rocket } from "../assets/images/icons/filter-icons/rocket-t.svg";
-import { ReactComponent as Star } from "../assets/images/icons/filter-icons/star-t.svg";
 import { ReactComponent as Focus } from "../assets/images/icons/filter-icons/focus-t.svg";
-import { ReactComponent as Clock } from "../assets/images/icons/filter-icons/clock-t.svg";
 import { ReactComponent as GearAlt } from "../assets/images/icons/filter-icons/gear-alt-t.svg";
 
-import LockImage from "../assets/images/illustrations/Lock.png";
-import Image1 from "../assets/images/product/_1.png";
-import Image2 from "../assets/images/product/_2.png";
-import axios from "axios";
+
+export const SwiperButtonNext = ({ children }) => {
+    const swiper = useSwiper();
+    return <button className="carousel-controller" onClick={() => swiper.slideNext()}>{children}</button>;
+};
+
+export const SwiperButtonPrev = ({ children }) => {
+    const swiper = useSwiper();
+    return <button className="carousel-controller" onClick={() => swiper.slidePrev()}>{children}</button>;
+};
 
 const VideosPage = props => {
 
@@ -66,6 +67,7 @@ const VideosPage = props => {
     const [showFitness, setShowFitness] = useState(true);
     const [searchKey, setSearchKey] = useState('');
     const [filteredTrendsVideos, setFilteredTrendsVideos] = useState([]);
+    const [activeSub, setActveSub] = useState(false);
 
     const [userPlans, setUserPlans] = useState([]);
     const [loadingVideos, setLoadingVideos] = useState(true);
@@ -76,15 +78,17 @@ const VideosPage = props => {
     const [fitnessVideos, setFitnessVideos] = useState([]);
     const [filterTag, setFilterTag] = useState('all');
 
-    const settings = {
-        dots: false,
-        infinite: true,
-        speed: 500,
-        slidesToShow: 5,
-        slidesToScroll: 1,
-        stagePadding: 20,
-        margin: 20
-    };
+    const breakpoints = {
+        0: {
+            slidesPerView: 2.1
+        },
+        600: {
+            slidesPerView: 4.2
+        },
+        1000: {
+            slidesPerView: 5.2
+        }
+    }
 
     const fetchUserVideosData = async () => {
         try {
@@ -93,9 +97,13 @@ const VideosPage = props => {
                 // setVideoBox(videoTempData.data.message);
                 let trends = [];
                 let fitness = [];
+                let freeTrends = [];
                 videoTempData.data.message.forEach(video => {
                     if (video.videoCategory.name === "Dance Trends") {
                         trends.push(video);
+                        if (video.amount === 0) {
+                            freeTrends.push(video);
+                        }
                     } else {
                         fitness.push(video);
                     }
@@ -108,7 +116,7 @@ const VideosPage = props => {
                 setLoadingVideos(false);
             } else {
                 setLoadingVideos(false);
-                openNotificationWithIcon('error', userPlans.data.summary);
+                openNotificationWithIcon('error', videoTempData.data.summary);
             }
         } catch (err) {
             setLoadingVideos(false);
@@ -116,27 +124,18 @@ const VideosPage = props => {
         }
     }
 
-    const responsive = {
-        0: {
-            items: 2,
-            nav: false,
-            margin: 10,
-            stagePadding: 15,
-            loop: true
-        },
-        600: {
-            items: 3,
-            nav: false,
-            margin: 20,
-            stagePadding: 50,
-            loop: true
-        },
-        1000: {
-            items: 4,
-            nav: false,
-            margin: 10,
-            stagePadding: 20,
-            loop: true
+    const checkUserAccess = async () => {
+        try {
+            let userPlans = await _check_user_access();
+            if (userPlans.data.statusMessage === "success") {
+                setActveSub(userPlans.data.message);
+            } else {
+                setLoadingVideos(false);
+                openNotificationWithIcon('error', userPlans.data.summary);
+            }
+        } catch (err) {
+            setLoadingVideos(false);
+            openNotificationWithIcon('error', 'An error occurred while checking user subscription history. Please reload to try again');
         }
     }
 
@@ -146,6 +145,7 @@ const VideosPage = props => {
     }
 
     useEffect(() => {
+        if (props.auth.isAuthenticated) checkUserAccess();
         fetchUserVideosData();
     }, [])
 
@@ -169,6 +169,8 @@ const VideosPage = props => {
             setFilteredVideos(videoBox);
             setFilteredTrendsVideos(trendVideos);
         } else if (filter === "free") {
+            // setFilteredTrendsVideos([]);
+            // setShowTrends(false);
             let newVideoBox = [];
             let newTrendBox = [];
             videoBox.filter(videos => {
@@ -938,24 +940,32 @@ const VideosPage = props => {
                                             <div>
                                                 {showTrends ?
                                                     filteredTrendsVideos.length ?
-                                                        <div>
+                                                        <div className="carousel-cover">
                                                             <h4 className="page-tile">{filterTag === "all" ? "Dance Trend Videos" : filterTag}</h4>
-                                                            <div>
-
-                                                                <OwlCarousel className="owl-theme" lazyLoad={true}
-                                                                    responsive={responsive} autoPlay={true}
-                                                                    responsiveClass={true} loop={true} margin={10}>
-                                                                    {
-                                                                        filteredTrendsVideos.map((productPlans, index) => (
-                                                                            <div className="card-display" key={index}>
+                                                            <>
+                                                                <Swiper
+                                                                    spaceBetween={5} slidesPerView={4.2} centeredSlides={true}
+                                                                    loop={true} breakpoints={breakpoints}>
+                                                                    <div className="new-swiper-box">
+                                                                        <SwiperButtonPrev><ArrowLeft /></SwiperButtonPrev>
+                                                                        <SwiperButtonNext><ArrowRight /></SwiperButtonNext>
+                                                                    </div>
+                                                                    {filteredTrendsVideos.map((productPlans, index) => (
+                                                                        <SwiperSlide key={index}>
+                                                                            <div className={`card-display ${index}`} key={index} style={{ position: "relative" }}>
                                                                                 <Link to={`/profile/video/play/${productPlans._id}/${productPlans.title}`}>
-                                                                                    <div class='item'>
+                                                                                    <div className='item'>
                                                                                         <img src={productPlans.poster} alt={productPlans.title} />
                                                                                         {
                                                                                             productPlans?.amount !== 0 ?
                                                                                                 <div className="card-header-fee">
                                                                                                     <div className="card-header-cover">
-                                                                                                        <ion-icon name="lock-closed-outline"></ion-icon>
+                                                                                                        {
+                                                                                                            activeSub ?
+                                                                                                                <ion-icon name="lock-open-outline"></ion-icon>
+                                                                                                                :
+                                                                                                                <ion-icon name="lock-closed-outline"></ion-icon>
+                                                                                                        }
                                                                                                     </div>
                                                                                                 </div>
                                                                                                 : ''
@@ -963,9 +973,10 @@ const VideosPage = props => {
                                                                                     </div>
                                                                                 </Link>
                                                                             </div>
-                                                                        ))}
-                                                                </OwlCarousel>
-                                                            </div>
+                                                                        </SwiperSlide>
+                                                                    ))}
+                                                                </Swiper>
+                                                            </>
                                                         </div>
                                                         : ''
                                                     : ''
@@ -991,7 +1002,13 @@ const VideosPage = props => {
                                                                                                 productPlans?.amount !== 0 ?
                                                                                                     <div className="card-header-fee">
                                                                                                         <div className="card-header-cover">
-                                                                                                            <ion-icon name="lock-closed-outline"></ion-icon>
+                                                                                                            {
+                                                                                                                activeSub ?
+                                                                                                                    <ion-icon name="lock-open-outline"></ion-icon>
+                                                                                                                    :
+                                                                                                                    <ion-icon name="lock-closed-outline"></ion-icon>
+                                                                                                            }
+                                                                                                            {/* <ion-icon name="lock-closed-outline"></ion-icon> */}
                                                                                                         </div>
                                                                                                     </div>
                                                                                                     : ''

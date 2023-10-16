@@ -37,14 +37,14 @@
 }
 
 * {
-    margin: 0px;
-    padding: 0px;
+    /* margin: 0px;
+    padding: 0px; */
     font-family: 'Gilroy Regular';
 }
 
 ul {
-    margin: 0px !important;
-    padding: 0px !important;
+    margin: 0px;
+    padding: 0px;
 }
 
 h1,
@@ -566,6 +566,7 @@ button {
 
 .sec_footer ul {
     margin: 0%;
+    padding-left: 0px;
 }
 
 .sec_footer ul li {
@@ -619,6 +620,11 @@ button {
 
 .footer .footer-grid-title ion-icon {
     display: none;
+}
+
+.footer .compartment ul {
+    margin: 0px;
+    padding: 0px;
 }
 
 /* form */
@@ -758,6 +764,11 @@ label {
     font-size: 1.3rem;
 }
 
+.ant-drawer-body ul {
+    margin: 0px;
+    padding-left: 0px;
+}
+
 @media screen and (max-width: 720px) {
     video {
         width: 100%;
@@ -853,7 +864,7 @@ label {
     .footer .sec_footer .grid-flex {
         display: flex;
         flex-direction: column;
-        margin-top: 15%;
+        margin-top: 5%;
     }
 
     .sec_footer .grid-flex .sec_footer_block {
@@ -875,7 +886,20 @@ label {
     .footer-sec.footer .footer-grid .biased_grid_4 {
         display: flex;
         grid-gap: 30px;
+        grid-gap: 0px;
         flex-direction: column;
+    }
+
+    .footer-sec.footer .footer-grid .biased_grid_4 .grid-2 {
+        margin-bottom: 30px;
+    }
+
+    .footer-sec.footer .footer-grid .biased_grid_4 .compartment {
+        margin-bottom: 30px;
+    }
+
+    .footer-sec.footer .footer-grid .biased_grid_4 .grid-2 .compartment {
+        margin-bottom: 0px;
     }
 
     .footer-sec.footer .footer-grid .biased_grid_4 .footer-grid-title {
@@ -891,9 +915,13 @@ label {
         width: 90px;
     }
 
-    /* .navigation .nav {
-        background: #F5FCFF !important;
-    } */
+    .sec_footer form {
+        width: 100%;
+    }
+
+    .sec_footer {
+        margin-top: 0px;
+    }
 
     .ant-modal {
         width: 100% !important;
@@ -910,4 +938,29 @@ label {
 
 .slick-slide {
     margin-right: 20px;
+}
+
+.new-swiper-box {
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    z-index: 10;
+}
+
+.carousel-controller {
+    background: transparent;
+    border: none;
+}
+
+.carousel-controller svg {
+    height: 2rem;
+    width: 100%;
+}
+
+.carousel-cover {
+    position: relative;
+}
+
+.swiper {
+    position: unset !important;
 }

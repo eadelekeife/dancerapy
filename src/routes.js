@@ -1,4 +1,3 @@
-import "./assets/css/index.css";
 
 import React from "react";
 import { BrowserRouter, Route, Routes, useLocation, Navigate } from "react-router-dom";

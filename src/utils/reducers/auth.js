@@ -8,7 +8,6 @@ export const loginUser = (e) => async dispatch => {
             emailAddress,
             password,
         });
-        console.log(submitData)
         if (submitData.data.statusMessage === 'success') {
             dispatch({ type: 'LOGIN_SUCCESS', payload: submitData.data.message });
         } else {

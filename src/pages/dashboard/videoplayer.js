@@ -403,10 +403,11 @@ const ProfileVideoToPlay = props => {
         <div className="extra-videos-detail-display">
             <Spin spinning={loadingData} indicator={spinnerIcon}>
                 <Nav />
-                {
-                    fetchingData ?
-                        <div className="">
-                            {/* <div className="grid-4">
+                <div className="extra-video-single-display">
+                    {
+                        fetchingData ?
+                            <div className="">
+                                {/* <div className="grid-4">
                             {skeleton.map((placeHolder, index) => (
                                 <div className="item" key={index}>
                                     {placeHolder}
@@ -414,182 +415,183 @@ const ProfileVideoToPlay = props => {
                                 </div>
                             ))}
                         </div> */}
-                        </div>
-                        :
-                        errorOccurred ?
-                            <div className="center_align_message">
-                                <div>
-                                    <h3>Oops!</h3>
-                                    <p>An error occurred while we were trying to fetch data. Please reload page to
-                                        try again.</p>
-                                </div>
                             </div>
                             :
-                            <div>
-                                <div className="new-video-player">
-                                    <div className="contain">
-                                        <div className="video-story">
-                                            <h2>{videoData.title}</h2>
-                                            <div className="specific-dance-detail">
-                                                <p>&mdash; {videoData.instructorName}</p>
-                                                <p>&mdash; {videoData.videoLength}</p>
-                                                <p>&mdash; {videoData?.videoCategory?.name}</p>
-                                            </div>
-                                        </div>
-                                        <div>
-                                            <div className="video-player-sect">
-                                                <div>
-                                                    <div className="video-cover">
-                                                        <div>
-                                                            {
-                                                                videoPurchased ?
-                                                                    <VideoJS options={videoJsOptions} videoId={videoId}
-                                                                        onReady={handlePlayerReady} />
-                                                                    :
-                                                                    <div className="div-poster"></div>
-                                                            }
-                                                        </div>
-                                                    </div>
+                            errorOccurred ?
+                                <div className="center_align_message">
+                                    <div>
+                                        <h3>Oops!</h3>
+                                        <p>An error occurred while we were trying to fetch data. Please reload page to
+                                            try again.</p>
+                                    </div>
+                                </div>
+                                :
+                                <div>
+                                    <div className="new-video-player">
+                                        <div className="contain">
+                                            <div className="video-story">
+                                                <h2>{videoData.title}</h2>
+                                                <div className="specific-dance-detail">
+                                                    <p>&mdash; {videoData.instructorName}</p>
+                                                    <p>&mdash; {videoData.videoLength}</p>
+                                                    <p>&mdash; {videoData?.videoCategory?.name}</p>
                                                 </div>
-                                                <div className="extra-unnecessary-data">
-                                                    <div className="grid-2">
-                                                        <div className="video-sect-story">
-                                                            <h4>Video Summary</h4>
-                                                            <div className="video-sect-story-description">
-                                                                <p dangerouslySetInnerHTML={{ __html: videoData.videoDescription }}></p>
+                                            </div>
+                                            <div>
+                                                <div className="video-player-sect">
+                                                    <div>
+                                                        <div className="video-cover">
+                                                            <div>
+                                                                {
+                                                                    videoPurchased ?
+                                                                        <VideoJS options={videoJsOptions} videoId={videoId}
+                                                                            onReady={handlePlayerReady} />
+                                                                        :
+                                                                        <div className="div-poster"></div>
+                                                                }
                                                             </div>
                                                         </div>
-                                                        <div className="video-sect-story _2">
-                                                            <h4>Video Summary</h4>
-                                                            <p>Dancerapy is a fitness and lifestyle brand invested in
-                                                                reintroducing dance as a choice therapy for healthy living. As a
-                                                                movement, Dancerapy personalizes the idea of dance as a culture towards
-                                                                achieving wholeness in health and fitness.</p>
-                                                        </div>
                                                     </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="contain video-extra-content mt_5">
-                                    <div className="grid-2">
-                                        <div>
-                                            <div className="avatar-sect">
-                                                <div className="avatar-circle-showcase"></div>
-                                                <div>
-                                                    <h3>{videoData.instructorName}</h3>
-                                                    <p>Dance Instrutor</p>
-                                                </div>
-                                            </div>
-                                            <Divider />
-                                            <div dangerouslySetInnerHTML={{ __html: videoData.videoDescription }}>
-                                            </div>
-                                        </div>
-                                        <div>
-                                            <div className="side-banner-tab">
-                                                <div className="banner-tab">
-                                                    <button>Weight Loss</button>
-                                                    <button>Burn Calories</button>
-                                                    <button>Empowerment</button>
-                                                    <button>Enhanced Flexibility</button>
-                                                    <button>Muscle Strength</button>
-                                                    <button>Cardio</button>
-                                                    <button>Versatility</button>
-                                                    <button>Self Confidence</button>
-                                                    <button>Muscle Toning</button>
-                                                    <button>Improved Coordination</button>
-                                                    <button>Community Feeling</button>
-                                                    <button>Social Interaction</button>
-                                                </div>
-                                                <div>
-                                                    <div className="grid-4 mt_4">
-                                                        <div className="small-card">
-                                                            <ion-icon name="tv-outline"></ion-icon>
-                                                            <p>Responsive</p>
-                                                        </div>
-                                                        <div className="small-card">
-                                                            <ion-icon name="cellular-outline"></ion-icon>
-                                                            <p>Easy to use</p>
-                                                        </div>
-                                                        <div className="small-card">
-                                                            <ion-icon name="expand-outline"></ion-icon>
-                                                            <p>Fullscreen</p>
-                                                        </div>
-                                                        <div className="small-card">
-                                                            <ion-icon name="ticket-outline"></ion-icon>
-                                                            <p>Free Tokens</p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="detail_prop trending_videos mt_5">
-                                    <div className="contain">
-                                        <div className="profile-data-display">
-                                            <h3 className="other_profile_title">Trending dance videos</h3>
-                                            {
-                                                fetchingData ?
-                                                    <div className="video-skeleton">
-                                                        <div className="grid-4">
-                                                            {skeleton.map((placeHolder, index) => (
-                                                                <div className="item" key={index}>
-                                                                    {placeHolder}
+                                                    <div className="extra-unnecessary-data">
+                                                        <div className="grid-2">
+                                                            <div className="video-sect-story">
+                                                                <h4>Video Summary</h4>
+                                                                <div className="video-sect-story-description">
+                                                                    <p dangerouslySetInnerHTML={{ __html: videoData.videoDescription }}></p>
                                                                 </div>
-                                                            ))}
+                                                            </div>
+                                                            <div className="video-sect-story _2">
+                                                                <h4>Video Summary</h4>
+                                                                <p>Dancerapy is a fitness and lifestyle brand invested in
+                                                                    reintroducing dance as a choice therapy for healthy living. As a
+                                                                    movement, Dancerapy personalizes the idea of dance as a culture towards
+                                                                    achieving wholeness in health and fitness.</p>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                    :
-                                                    videoData?.videoCategory?.videos.length ?
-                                                        <div className="other-dance-styles plan_video_display">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="contain video-extra-content mt_5">
+                                        <div className="grid-2">
+                                            <div>
+                                                <div className="avatar-sect">
+                                                    <div className="avatar-circle-showcase"></div>
+                                                    <div>
+                                                        <h3>{videoData.instructorName}</h3>
+                                                        <p>Dance Instrutor</p>
+                                                    </div>
+                                                </div>
+                                                <Divider />
+                                                <div dangerouslySetInnerHTML={{ __html: videoData.videoDescription }}>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <div className="side-banner-tab">
+                                                    <div className="banner-tab">
+                                                        <button>Weight Loss</button>
+                                                        <button>Burn Calories</button>
+                                                        <button>Empowerment</button>
+                                                        <button>Enhanced Flexibility</button>
+                                                        <button>Muscle Strength</button>
+                                                        <button>Cardio</button>
+                                                        <button>Versatility</button>
+                                                        <button>Self Confidence</button>
+                                                        <button>Muscle Toning</button>
+                                                        <button>Improved Coordination</button>
+                                                        <button>Community Feeling</button>
+                                                        <button>Social Interaction</button>
+                                                    </div>
+                                                    <div>
+                                                        <div className="grid-4 mt_4">
+                                                            <div className="small-card">
+                                                                <ion-icon name="tv-outline"></ion-icon>
+                                                                <p>Responsive</p>
+                                                            </div>
+                                                            <div className="small-card">
+                                                                <ion-icon name="cellular-outline"></ion-icon>
+                                                                <p>Easy to use</p>
+                                                            </div>
+                                                            <div className="small-card">
+                                                                <ion-icon name="expand-outline"></ion-icon>
+                                                                <p>Fullscreen</p>
+                                                            </div>
+                                                            <div className="small-card">
+                                                                <ion-icon name="ticket-outline"></ion-icon>
+                                                                <p>Free Tokens</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="detail_prop trending_videos mt_5">
+                                        <div className="contain">
+                                            <div className="profile-data-display">
+                                                <h3 className="other_profile_title">Trending dance videos</h3>
+                                                {
+                                                    fetchingData ?
+                                                        <div className="video-skeleton">
                                                             <div className="grid-4">
-                                                                {
-                                                                    videoData?.videoCategory?.videos.slice(minRandomFilter, +minRandomFilter + 4).map((otherVideosData, index) => (
-                                                                        <div key={index}>
-                                                                            <Link to={props.auth.isAuthenticated ?
-                                                                                `/profile/video/play/${otherVideosData?._id}/${otherVideosData?.title}` : `/signin?auth_redirect=/profile/video/play/${otherVideosData?._id}/${otherVideosData?.title}`}>
-                                                                                <div className="">
-                                                                                    <div className="card-display">
-                                                                                        <div className="card-header">
-                                                                                            <img src={otherVideosData.poster} alt={otherVideosData.name} />
-                                                                                            <div className="card-header-fee">
-                                                                                                {
-                                                                                                    otherVideosData?.amount !== 0 ?
-                                                                                                        <div className="card-header-cover">
-                                                                                                            <ion-icon name="lock-closed-outline"></ion-icon>
-                                                                                                        </div>
-                                                                                                        : ''
-                                                                                                }
+                                                                {skeleton.map((placeHolder, index) => (
+                                                                    <div className="item" key={index}>
+                                                                        {placeHolder}
+                                                                    </div>
+                                                                ))}
+                                                            </div>
+                                                        </div>
+                                                        :
+                                                        videoData?.videoCategory?.videos.length ?
+                                                            <div className="other-dance-styles plan_video_display">
+                                                                <div className="grid-4">
+                                                                    {
+                                                                        videoData?.videoCategory?.videos.slice(minRandomFilter, +minRandomFilter + 4).map((otherVideosData, index) => (
+                                                                            <div key={index}>
+                                                                                <Link to={props.auth.isAuthenticated ?
+                                                                                    `/profile/video/play/${otherVideosData?._id}/${otherVideosData?.title}` : `/signin?auth_redirect=/profile/video/play/${otherVideosData?._id}/${otherVideosData?.title}`}>
+                                                                                    <div className="">
+                                                                                        <div className="card-display">
+                                                                                            <div className="card-header">
+                                                                                                <img src={otherVideosData.poster} alt={otherVideosData.name} />
+                                                                                                <div className="card-header-fee">
+                                                                                                    {
+                                                                                                        otherVideosData?.amount !== 0 ?
+                                                                                                            <div className="card-header-cover">
+                                                                                                                <ion-icon name="lock-closed-outline"></ion-icon>
+                                                                                                            </div>
+                                                                                                            : ''
+                                                                                                    }
+                                                                                                </div>
+                                                                                                <div className="card-overlay">
+                                                                                                </div>
                                                                                             </div>
-                                                                                            <div className="card-overlay">
-                                                                                            </div>
-                                                                                        </div>
-                                                                                        <div className="card-body">
-                                                                                            <div className="card-body-header">
-                                                                                                <p>{videoData?.videoCategory?.name}</p>
-                                                                                                <p>{otherVideosData.videoLength}</p>
-                                                                                            </div>
-                                                                                            <h4 className="card-body-title">{otherVideosData?.title}</h4>
-                                                                                            <div className="card-body-footer noMargin={true}">
-                                                                                                <p>{otherVideosData.instructorName}</p>
+                                                                                            <div className="card-body">
+                                                                                                <div className="card-body-header">
+                                                                                                    <p>{videoData?.videoCategory?.name}</p>
+                                                                                                    <p>{otherVideosData.videoLength}</p>
+                                                                                                </div>
+                                                                                                <h4 className="card-body-title">{otherVideosData?.title}</h4>
+                                                                                                <div className="card-body-footer noMargin={true}">
+                                                                                                    <p>{otherVideosData.instructorName}</p>
+                                                                                                </div>
                                                                                             </div>
                                                                                         </div>
                                                                                     </div>
-                                                                                </div>
-                                                                            </Link>
-                                                                        </div>
-                                                                    ))
-                                                                }
-                                                            </div>
-                                                        </div> : ''
-                                            }
+                                                                                </Link>
+                                                                            </div>
+                                                                        ))
+                                                                    }
+                                                                </div>
+                                                            </div> : ''
+                                                }
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                }
+                    }
+                </div>
                 <Footer />
                 <Modal open={openVideoPurchaseModal} className="paymentModal video-player-payment" footer={null}
                     maskClosable={false} onCancel={() => setOpenVideoPurchaseModal(false)}>

@@ -8,20 +8,16 @@ import "owl.carousel/dist/assets/owl.theme.default.css";
 import { Link } from "react-router-dom";
 
 import { ReactComponent as ArrowRight } from "../assets/images/arrow-right.svg";
-import CodeMain from "../assets/images/homepage/code_main.png";
-import Hero1 from "../assets/images/homepage/main1.png";
-import Hero2 from "../assets/images/homepage/main2.png";
-import Image1 from "../assets/images/product/_1.png";
-import Image2 from "../assets/images/product/_2.png";
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
 
 
-import VideoJS from '../components/main-video-player';
 import 'video.js/dist/video-js.css';
 
-import GTCoLogo from "../assets/images/companies/gtco.png";
-import MTNLogo from "../assets/images/companies/mtn.png";
-import ShellLogo from "../assets/images/companies/shell.png";
-import AccessLogo from "../assets/images/companies/access.webp";
+// import GTCoLogo from "../assets/images/companies/gtco.png";
+// import MTNLogo from "../assets/images/companies/mtn.png";
+// import ShellLogo from "../assets/images/companies/shell.png";
+// import AccessLogo from "../assets/images/companies/access.webp";
 
 import Props1 from "../assets/images/illustrations/1_sneaker.png";
 import Props2 from "../assets/images/illustrations/3_cup.png";
@@ -77,7 +73,6 @@ const Homepage = props => {
             let videoTempData = await _fetch_app_videos();
             if (videoTempData.data.statusMessage === "success") {
                 setVideoBox(videoTempData.data.message);
-                setLoadingData(false);
                 let fitness = [];
                 videoTempData.data.message.forEach(video => {
                     if (video.videoCategory.name !== "Dance Trends") {
@@ -88,12 +83,13 @@ const Homepage = props => {
                 let videoLength = fitness.length;
                 let minRandom = Math.trunc(Math.random() * (videoLength - 8));
                 setMinRandomFilter(minRandom);
-            } else {
                 setLoadingData(false);
+            } else {
+                // setLoadingData(false);
                 openNotificationWithIcon('error', videoTempData.data.summary);
             }
         } catch (err) {
-            setLoadingData(false);
+            // setLoadingData(false);
             openNotificationWithIcon('error', 'An error occurred while fetching data. Please reload to try again');
         }
     }
@@ -107,6 +103,18 @@ const Homepage = props => {
             <Skeleton.Image active={true} />
             <Skeleton.Input style={{ marginTop: 10 }} active={true} />
         </span>)
+    }
+
+    const breakpoints = {
+        0: {
+            slidesPerView: 1.3
+        },
+        600: {
+            slidesPerView: 4.2
+        },
+        1000: {
+            slidesPerView: 5.2
+        }
     }
 
     const videoJsOptions = {
@@ -218,9 +226,9 @@ const Homepage = props => {
                             <button className="btn-default">Weight Loss</button>
                             <button className="btn-default">Burn Calories</button>
                             <button className="btn-default">Empowerment</button>
+                            <button className="btn-default">Cardio</button>
                             <button className="btn-default">Enhanced Flexibility</button>
                             <button className="btn-default">Muscle Strength</button>
-                            <button className="btn-default">Cardio</button>
                             <button className="btn-default">Versatility</button>
                             <button className="btn-default">Self Confidence</button>
                             <button className="btn-default">Muscle Toning</button>
@@ -233,7 +241,7 @@ const Homepage = props => {
                             loadingdata ?
                                 <div className="grid-4">
                                     {skeleton.map((placeHolder, index) => (
-                                        <div>
+                                        <div key={index}>
                                             {placeHolder}
                                         </div>
                                     ))}
@@ -279,7 +287,7 @@ const Homepage = props => {
                                             ))
                                             :
                                             skeleton.map((placeHolder, index) => (
-                                                <div>
+                                                <div key={index}>
                                                     {placeHolder}
                                                 </div>
                                             ))
@@ -290,66 +298,59 @@ const Homepage = props => {
                     <div className="mobile-only">
                         {
                             !loadingdata ?
-                                <OwlCarousel className="owl-theme" lazyLoad={true}
-                                    responsive={responsive}
-                                    responsiveClass={true} loop={true} margin={20} nav>
-                                    {
-                                        videoBox.length ?
-                                            videoBox.slice(minRandomFilter, +minRandomFilter + 8).map((productPlans, index) => (
-                                                <div className="card-display item" key={index}>
-                                                    <Link to={props.auth.isAuthenticated ?
-                                                        `/profile/video/play/${productPlans._id}/${productPlans.title}` : `/signin?auth_redirect=/profile/video/play/${productPlans._id}/${productPlans.title}`}>
-                                                        <div>
-                                                            <div className="card-header">
-                                                                <img src={productPlans.poster} alt={productPlans.name} />
-                                                                <div className="card-header-fee">
-                                                                    {
-                                                                        productPlans.amount !== 0 ?
-                                                                            <div className="card-header-cover">
-                                                                                <ion-icon name="lock-closed-outline"></ion-icon>
-                                                                            </div>
-                                                                            : ''
-                                                                    }
-                                                                </div>
-                                                                <div className="card-overlay">
-                                                                </div>
+                                <Swiper
+                                    spaceBetween={5} slidesPerView={4.2} centeredSlides={true}
+                                    loop={true} breakpoints={breakpoints}>
+                                    {/* <SwiperSlide>Slide 1</SwiperSlide> */}
+                                    {videoBox.slice(minRandomFilter, +minRandomFilter + 8).map((productPlans, index) => (
+                                        <SwiperSlide key={index}>
+                                            <div className="card-display item" key={index}>
+                                                <Link to={props.auth.isAuthenticated ?
+                                                    `/profile/video/play/${productPlans._id}/${productPlans.title}` : `/signin?auth_redirect=/profile/video/play/${productPlans._id}/${productPlans.title}`}>
+                                                    <div>
+                                                        <div className="card-header">
+                                                            <img src={productPlans.poster} alt={productPlans.name} />
+                                                            <div className="card-header-fee">
+                                                                {
+                                                                    productPlans.amount !== 0 ?
+                                                                        <div className="card-header-cover">
+                                                                            <ion-icon name="lock-closed-outline"></ion-icon>
+                                                                        </div>
+                                                                        : ''
+                                                                }
                                                             </div>
-                                                            <div className="card-body">
-                                                                <div className="card-body-header">
-                                                                    <p>{productPlans?.videoCategory?.name}</p>
-                                                                    <p>{productPlans.videoLength}</p>
-                                                                </div>
-                                                                <div className="card-body-title-cover">
-                                                                    <h4 className="card-body-title">{productPlans.title}</h4>
-                                                                </div>
-                                                                <div className="card-body-footer noMargin={true}">
-                                                                    <p>Adeleke Ifeoluwase</p>
-                                                                </div>
+                                                            <div className="card-overlay">
                                                             </div>
                                                         </div>
-                                                    </Link>
-                                                </div>
-                                            ))
-                                            :
-                                            ''
-                                        // skeleton.map((placeHolder, index) => (
-                                        //     <div key={index}>
-                                        //         {placeHolder}
-                                        //     </div>
-                                        // ))
-                                    }
-                                </OwlCarousel>
-                                :
-                                ''
-                                // <OwlCarousel className="owl-theme" lazyLoad={true}
-                                //     responsive={responsive}
-                                //     responsiveClass={true} loop={true} margin={20} nav>
-                                //     {skeleton.map((placeHolder, index) => (
-                                //         <div key={index}>
-                                //             {placeHolder}
-                                //         </div>
-                                //     ))}
-                                // </OwlCarousel>
+                                                        <div className="card-body">
+                                                            <div className="card-body-header">
+                                                                <p>{productPlans?.videoCategory?.name}</p>
+                                                                <p>{productPlans.videoLength}</p>
+                                                            </div>
+                                                            <div className="card-body-title-cover">
+                                                                <h4 className="card-body-title">{productPlans.title}</h4>
+                                                            </div>
+                                                            <div className="card-body-footer noMargin={true}">
+                                                                <p>Adeleke Ifeoluwase</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </Link>
+                                            </div>
+                                        </SwiperSlide>
+                                    ))}
+                                </Swiper> :
+                                <Swiper
+                                    spaceBetween={5} slidesPerView={4.2} centeredSlides={true}
+                                    loop={true} breakpoints={breakpoints}>
+                                    {skeleton.map((skeletonCheck, index) => (
+                                        <SwiperSlide key={index}>
+                                            <div key={index}>
+                                                {skeletonCheck}
+                                            </div>
+                                        </SwiperSlide>
+                                    ))}
+                                </Swiper>
                         }
                     </div>
                 </div>

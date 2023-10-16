@@ -176,6 +176,14 @@ export const _fetch_app_videos = req => {
     })
 }
 
+export const _check_user_access = req => {
+    return userAxiosCall('/users/check-user-access', {
+        headers: {
+            authorization: `Bearer ${localStorage.getItem('token')}`
+        }
+    })
+}
+
 export const _buy_single_video = req => {
     return userAxiosCall.post('/users/buy-single-video', req, {
         headers: {

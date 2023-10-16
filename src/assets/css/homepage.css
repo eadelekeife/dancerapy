@@ -1810,6 +1810,7 @@ h3.main-text {
 
     .center-div .btn-array {
         justify-content: left;
+        grid-gap: 0px;
     }
 
     .sec-homepage-extra-desc p {
@@ -1841,6 +1842,11 @@ h3.main-text {
 
     .card-display .card-body h4.card-body-title {
         font-size: 1.3rem;
+    }
+
+    .card-display .card-body .card-body-footer p,
+    .card-display .card-body .card-body-header p {
+        font-size: 1rem;
     }
 }
 
@@ -2065,17 +2071,9 @@ h3.main-text {
 
 /* .real-homepage */
 
-@media screen and (max-width:720px) {
-    .real-homepage .hero-section .grid-2 {}
-}
-
-/* .real-homepage .contain {
-    padding: 0px 5% !important;
-} */
-
-.real-homepage p {
+/* .real-homepage p {
     font-family: 'Graphik';
-}
+} */
 
 .about-us-page .hero-section img {
     width: 60%;
@@ -2141,8 +2139,29 @@ h3.main-text {
 
 @media screen and (max-width: 720px) {
     .real-homepage .hero-section .grid-2 {
+        grid-template-rows: unset;
+        display: block;
+    }
+
+    .about-us-page .hero-section .btn-flex, .homepage-content .hero-section .btn-flex {
+        display: grid;
+        grid-template-columns: repeat(2,1fr);
+        grid-gap: 10px;
+    }
+    .real-homepage .hero-section .grid-2 div:first-child {
+        margin-bottom: 20px;
+    }
+
+    .homepage-content .hero-section a {
+        width: 100% !important;
+        padding: 12px 15px !important;
         display: flex;
-        flex-direction: column;
+        grid-gap: 0px !important;
+        justify-content: center !important;
+    }
+
+    .homepage-content .hero-section a svg {
+        padding-left: 10px;
     }
 
     .real-homepage .hero-section .grid-2 h2 {
@@ -2156,6 +2175,7 @@ h3.main-text {
     .real-homepage .card-display .card-header img {
         height: 18rem;
         border-radius: 8px 8px 0px 0px;
+        width: 100%;
     }
 
     .real-homepage .hero-section .grid-2 {
@@ -2175,6 +2195,11 @@ h3.main-text {
     .dance-props-sect .grid-3 {
         flex-direction: column;
         display: flex;
+
+        display: grid;
+        grid-template-columns: unset;
+        grid-template-rows: repeat(3,1fr);
+        grid-gap: 30px;
     }
 
     .real-homepage .video-display-sect {
@@ -2189,6 +2214,8 @@ h3.main-text {
     .real-homepage .center-div .btn-array .btn-default {
         font-size: 1.2rem;
         padding: 6px 10px;
+        margin-right: 10px;
+        margin-bottom: 10px;
     }
 
     .real-homepage .video-display-sect h2 {
@@ -2201,13 +2228,42 @@ h3.main-text {
 
     .dance-props-sect.sec-homepage-extra-desc .grid-2.grid-first-outline {
         flex-direction: column-reverse;
+        grid-gap: 0px;
+    }
+
+    .dance-props-sect.sec-homepage-extra-desc .grid-2.grid-first-outline img {
+        margin-bottom: 20px;
     }
 
     .dance-props-sect .grid-2 p {
         font-size: 1.5rem;
         line-height: 1.8;
         color: #10162f;
-        margin-bottom: 30px;
+        margin-bottom: 20px;
+    }
+
+    .sec-homepage-extra-desc .grid-2 .grid-2 p {
+        grid-gap: 0px;
+    }
+
+    .sec-homepage-extra-desc .grid-2 .grid-2 p svg {
+        margin-right: 10px;
+    }
+
+    .sec-homepage-extra-desc .button-grid .btn-yellow.curve {
+        grid-gap: 0px;
+        padding: 12px 25px;
+    }
+    .sec-homepage-extra-desc .button-grid .btn-yellow.curve svg {
+        padding-left: 10px;
+    }
+
+    .dance-props-sect .first-container {
+        margin: 0px;
+    }
+
+    .dance-props-sect .grid-3 p {
+        margin-bottom: 0px;
     }
 
     .dance-props-sect.first-div .mt_5 {
@@ -2254,6 +2310,7 @@ h3.main-text {
         width: 100%;
         line-height: 1.3;
         margin-bottom: 10px;
+        font-size: 2.3rem;
     }
 
 

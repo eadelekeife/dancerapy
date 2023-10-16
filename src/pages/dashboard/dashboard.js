@@ -473,7 +473,7 @@ const Dashboard = props => {
                                                     <button
                                                         className="btn-green curve" onClick={() => fetchSubscriptionData()}><WalletIcon /> Subscribe</button>
                                                     <button
-                                                        className="btn-green curve" onClick={() => setOpenFundWalletModal()}><PlusIcon /> Fund Wallet</button>
+                                                        className="btn-green curve" onClick={() => setOpenFundWalletModal(true)}><PlusIcon /> Fund Wallet</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -562,8 +562,11 @@ const Dashboard = props => {
                                 <div>
                                     <div className="fund-modal-content">
                                         <h3>Fund Wallet</h3>
-                                        <p>Invite a friend to Dancerapy and earn 0.25% on all their
-                                            transactions. This is a total of all the assets you have in your portfolio</p>
+                                        <p>Take a step closer to dance fitness bliss. Add funds to your wallet now and 
+                                            keep saving up to have enough to complete your subscription.
+                                        </p>
+                                        {/* <p>Invite a friend to Dancerapy and earn 0.25% on all their
+                                            transactions. This is a total of all the assets you have in your portfolio</p> */}
                                     </div>
                                     <form onSubmit={handleFundWalletSubmit(fundWallet)}>
                                         <div className="form-group">
@@ -652,9 +655,11 @@ const Dashboard = props => {
                     <div className="">
                         <div>
                             <div className="fund-modal-content">
-                                <h3>Fund Wallet</h3>
-                                <p>Invite a friend to Dancerapy and earn 0.25% on all their
-                                    transactions. This is a total of all the assets you have in your portfolio</p>
+                                <h3>Start Your Fitness Journey Today!</h3>
+                                <p>Subscribe now and embark on a journey to better health, a more 
+                                    confident you, and loads of fun. Let's dance our way to fitness together!</p>
+                                {/* <p>Invite a friend to Dancerapy and earn 0.25% on all their
+                                    transactions. This is a total of all the assets you have in your portfolio</p> */}
                             </div>
                             <form onSubmit={handleFundWalletSubmit(fundWallet)}>
                                 <div>

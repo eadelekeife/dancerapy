@@ -5,79 +5,25 @@ import Nav from "../components/nav";
 import { notification, Skeleton } from "antd";
 import { connect } from "react-redux";
 
-import VideoJS from '../components/video-player';
 import OwlCarousel from 'react-owl-carousel';
 import "owl.carousel/dist/assets/owl.carousel.css";
 import "owl.carousel/dist/assets/owl.theme.default.css";
 
-import YoungMan from "../assets/images/youngin.png";
 import Footer from "../components/footer";
-
-// import MTNImage from "../assets/images/team/_4.jpg";
-import AccessImage from '../assets/images/companies/access.webp';
-import ShellImage from '../assets/images/companies/shell.png';
-import TerraImage from '../assets/images/companies/terra.png';
-import CoronaImage from '../assets/images/companies/corona.png';
-import DansolImage from '../assets/images/companies/dansol.png';
-import GtcoImage from '../assets/images/companies/gtco.png';
-import MtnImage from '../assets/images/companies/mtn.png';
-
-import { ReactComponent as Company1 } from "../assets/images/a-company/_1.svg";
-import { ReactComponent as Company2 } from "../assets/images/a-company/_2.svg";
-import { ReactComponent as Company3 } from "../assets/images/a-company/_3.svg";
-import { ReactComponent as Company4 } from "../assets/images/a-company/_4.svg";
-import { ReactComponent as Company5 } from "../assets/images/a-company/_5.svg";
-
-import Grid1 from "../assets/images/a-company/grid1.jpg";
-import Grid2 from "../assets/images/a-company/grid2.jpg";
-import Grid3 from "../assets/images/a-company/grid3.jpg";
-
-import { ReactComponent as PlusIcon } from "../assets/images/plus.svg";
-import Instructor2 from "../assets/images/team/_4.jpg";
-import Instructor3 from "../assets/images/team/_5.jpg";
-import Instructor4 from "../assets/images/team/_6.jpg";
-import Instructor5 from "../assets/images/team/_7.jpg";
-import Instructor6 from "../assets/images/team/_8.jpg";
 
 // import Hero1 from "../assets/images/a-company/_1.webp";
 import Hero1 from "../assets/images/homepage/main1.png";
 import Hero2 from "../assets/images/homepage/main2.png";
-import Image1 from "../assets/images/product/_1.png";
-import Image2 from "../assets/images/product/_2.png";
-// import Props1 from "../assets/images/illustrations/1_sneaker.png";
-// import Props2 from "../assets/images/illustrations/3_cup.png";
-// import Props3 from "../assets/images/illustrations/7_gift.png";
-// import Props4 from "../assets/images/illustrations/9_sketchbook.png";
+
 import Props1 from "../assets/images/homepage/home1.jpg";
 import Props2 from "../assets/images/homepage/home1.jpg";
 import Props3 from "../assets/images/homepage/home1.jpg";
-import Props4 from "../assets/images/homepage/home1.jpg";
 
 import { ReactComponent as ColoredCircle } from "../assets/images/colored_circle.svg";
 
-
-import Test1 from "../assets/images/content/testi.jpg";
-import Test2 from "../assets/images/content/event_1.jpg";
-import Test3 from "../assets/images/content/signup.jpeg";
-
-import School1 from "../assets/images/a-company/clatallahassee1.jpg";
-import School2 from "../assets/images/a-company/clatallahassee2.jpg";
-import School3 from "../assets/images/a-company/clatallahassee3.jpg";
-import School4 from "../assets/images/a-company/clatallahassee4.jpg";
-
-
-import ResponsiveImage from "../assets/images/illustrations/responsive.png";
-
-import AboutHero from "../assets/images/content/about_hero.jpg";
-import HomepageImg from "../assets/images/a-company/homepage-accordion-goals-en-3x.webp";
-import DeviceImg from "../assets/images/a-company/device-pile.png"
-import { ReactComponent as ExternalLink } from "../assets/images/external-link.svg";
-import CorporateHero from "../assets/images/content/event4.jpg";
-import InstructorHero from "../assets/images/content/event3.jpg";
 import AllAppRoutes from "../utils/routes";
 import { Link } from "react-router-dom";
 import { _fetch_app_videos } from "../utils/axiosroutes";
-// import OfficePeople from "../assets/images/homepage/office.jpg";
 
 const Homepage = props => {
     const [videoBox, setVideoBox] = useState([]);
@@ -107,40 +53,6 @@ const Homepage = props => {
             loop: true
         }
     }
-    const secResponsive = {
-        0: {
-            items: 1,
-            nav: false,
-            margin: 10,
-            stagePadding: 60,
-            loop: true
-        },
-        600: {
-            items: 3,
-            nav: false,
-            margin: 20,
-            stagePadding: 50,
-            loop: true
-        },
-        1000: {
-            items: 6,
-            nav: false,
-            margin: 10,
-            stagePadding: 20,
-            loop: true
-        }
-    }
-    const videoJsOptions = {
-        autoplay: true,
-        controls: false,
-        responsive: true,
-        loop: true,
-        fluid: true,
-        sources: [{
-            src: "https://lagostheatrevideos.s3.amazonaws.com/intro.mp4",
-            type: 'video/mp4'
-        }]
-    };
 
     const openNotificationWithIcon = (type, message) => {
         notification[type]({
@@ -172,16 +84,6 @@ const Homepage = props => {
         fetchUserVideosData()
     }, [])
 
-    const handlePlayerReady = (player) => {
-        // playerRef.current = player;
-    };
-    // let skeleton = [];
-    // for (let i = 0; i < 6; i++) {
-    //     skeleton.push(<div>
-    //         <Skeleton.Image active={true} />
-    //         <Skeleton active />
-    //     </div>)
-    // }
     let skeleton = [];
     for (let i = 0; i < 8; i++) {
         skeleton.push(<span>
@@ -189,6 +91,7 @@ const Homepage = props => {
             <Skeleton.Input style={{ marginTop: 10 }} active={true} />
         </span>)
     }
+    
     return (
         <div className="homepage">
             <Nav />

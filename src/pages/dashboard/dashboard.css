@@ -955,6 +955,11 @@ img.checkmark {
 
 
 @media screen and (max-width:720px) {
+
+    .page-tile {
+        font-size: 1.8rem;
+    }
+
     .dash-side-bar {
         display: none;
     }
@@ -1080,6 +1085,8 @@ img.checkmark {
 
     .navigation ul {
         grid-gap: 20px;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
     }
 
     .emptyTrans {
@@ -1117,7 +1124,12 @@ img.checkmark {
     }
 
     .white-dash-data.side img {}
+
     .dash-main-content .dash-overview .btn-dash-array {
         width: 100%;
+    }
+
+    .fund-wallet-quick-button.grid-4 {
+        grid-template-columns: repeat(3, 1fr);
     }
 }
