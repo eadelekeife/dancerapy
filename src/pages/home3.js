@@ -174,50 +174,6 @@ const Homepage = props => {
                     </div>
                 </div>
             </div>
-            <div className="dance-props-sect first-div">
-                <div className="contain">
-                    <div className="grid-2">
-                        <div>
-                            <h3>We are a vibrant African-themed dance fitness workout platform</h3>
-                            <p>Led by passionate instructors who are not only skilled dancers but also dedicated
-                                fitness enthusiasts, our classes are designed to get your heart racing, your body
-                                moving, and your spirits soaring. </p>
-                            <p className="desktop-only">Come discover the power of rhythm, the magic of movement, and the unity of culture
-                                on our African-themed dance fitness platform. Unleash your inner dancer, groove to
-                                the beat, and embark on a journey that will invigorate your body, refresh your mind, and
-                                uplift your soul.</p>
-                        </div>
-                        <div className="ash desktop-only">
-                            <img src={AfricanCommunity} alt="vibrant african community" />
-                        </div>
-                    </div>
-                    <div className="mt_5">
-                        <div className="first-container">
-                            <h3 className="desktop-only">We are not just your average fitness platform</h3>
-                        </div>
-                        <div className="grid-3">
-                            <div>
-                                <img src={Props1} alt="" />
-                                <h5>Expert-led fitness videos</h5>
-                                <p>We offer carefully curated workout calendars designed by fitness experts to maximize results
-                                    and keep users motivated throughout their fitness journey.</p>
-                            </div>
-                            <div>
-                                <img src={Props2} alt="" />
-                                <h5>Personalized African meal plans.</h5>
-                                <p>Our users have access to meal plans designed and curated by nutrition and culinary
-                                    experts specializing in African cuisine to complement fitness sessions.</p>
-                            </div>
-                            <div>
-                                <img src={Props3} alt="" />
-                                <h5>Complete Health Checkup</h5>
-                                <p>Conducted by qualified healthcare professionals, Users have access to a thorough medical
-                                    checkup, providing with valuable insights into overall health and well-being.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
             <div className="video-display-sect">
                 <div className="contain">
                     <div className="center-div">
@@ -352,6 +308,50 @@ const Homepage = props => {
                                     ))}
                                 </Swiper>
                         }
+                    </div>
+                </div>
+            </div>
+            <div className="dance-props-sect colored first-div">
+                <div className="contain">
+                    <div className="grid-2">
+                        <div>
+                            <h3>We are a vibrant African-themed dance fitness workout platform</h3>
+                            <p>Led by passionate instructors who are not only skilled dancers but also dedicated
+                                fitness enthusiasts, our classes are designed to get your heart racing, your body
+                                moving, and your spirits soaring. </p>
+                            <p className="desktop-only">Come discover the power of rhythm, the magic of movement, and the unity of culture
+                                on our African-themed dance fitness platform. Unleash your inner dancer, groove to
+                                the beat, and embark on a journey that will invigorate your body, refresh your mind, and
+                                uplift your soul.</p>
+                        </div>
+                        <div className="ash desktop-only">
+                            <img src={AfricanCommunity} alt="vibrant african community" />
+                        </div>
+                    </div>
+                    <div className="mt_5">
+                        <div className="first-container">
+                            <h3 className="desktop-only">We are not just your average fitness platform</h3>
+                        </div>
+                        <div className="grid-3">
+                            <div>
+                                <img src={Props1} alt="" />
+                                <h5>Expert-led fitness videos</h5>
+                                <p>We offer carefully curated workout calendars designed by fitness experts to maximize results
+                                    and keep users motivated throughout their fitness journey.</p>
+                            </div>
+                            <div>
+                                <img src={Props2} alt="" />
+                                <h5>Personalized African meal plans.</h5>
+                                <p>Our users have access to meal plans designed and curated by nutrition and culinary
+                                    experts specializing in African cuisine to complement fitness sessions.</p>
+                            </div>
+                            <div>
+                                <img src={Props3} alt="" />
+                                <h5>Complete Health Checkup</h5>
+                                <p>Conducted by qualified healthcare professionals, Users have access to a thorough medical
+                                    checkup, providing with valuable insights into overall health and well-being.</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

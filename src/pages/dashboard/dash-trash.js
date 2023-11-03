@@ -37,7 +37,6 @@ import { ReactComponent as MerchandiseIcon } from "../../assets/images/icons/sho
 import { _cancel_fund_user_wallet, _cancel_user_subscription, _complete_user_subscription, _complete_user_subscription_with_wallet, _fetch_subscription_plans, _fetch_user_wallet, _fund_user_wallet_balance, _initiate_fund_user_wallet_balance, _initiate_user_subscription, _initiate_user_subscription_with_wallet } from "../../utils/axiosroutes";
 
 import { usePaystackPayment } from 'react-paystack';
-import { useFlutterwave, closePaymentModal } from 'flutterwave-react-v3';
 import AllAppRoutes from "../../utils/routes";
 
 const Dashboard = props => {
@@ -164,6 +163,38 @@ const Dashboard = props => {
         fetchUserWalletBalance();
     }, [])
 
+    const changePassword = e => {
+        setLoadPasswordUpdate(true);
+        axios.post('/user/update-password', {
+            oldPassword: e.oldPassword,
+            newPassword: e.newPassword
+        }, {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}`
+            }
+        })
+            .then(data => {
+                if (data.data.statusMessage === 'success') {
+                    navigate(0)
+                    // history.go(0);
+                } else {
+                    setLoadPasswordError(data.data.summary);
+                    setLoadPasswordUpdate(false);
+                }
+            })
+            .catch(err => {
+                console.log(err)
+                setLoadPasswordError('An error occurred. Please try again later');
+                setLoadPasswordUpdate(false);
+            })
+    }
+
+    const copyReferralMessage = () => {
+        // referralMessage.current.focus().select();
+        // document.execCommand('copy');
+        // console.log(message)
+    }
+
     const quickEnterPaymentOption = e => {
         setTopupAmount(e);
         setInputTopupAmount(e);
@@ -171,6 +202,31 @@ const Dashboard = props => {
 
     const fundWallet = e => {
 
+    }
+
+    const updateUserInfo = e => {
+        setLoadUserUpdate(true);
+        let { emailAddress, firstName, lastName, phoneNumber } = e;
+        axios.post('/user/update-profile', {
+            emailAddress, firstName, lastName, phoneNumber
+        }, {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}`
+            }
+        })
+            .then(data => {
+                if (data.data.statusMessage === 'success') {
+                    props.updateUser(data.data.message);
+                    navigate(0);
+                } else {
+                    setLoadUserError(data.data.summary);
+                    setLoadUserUpdate(false);
+                }
+            })
+            .catch(err => {
+                setLoadUserError('An error occurred. Please try again later');
+                setLoadUserUpdate(false);
+            })
     }
 
     const initiateFundWallet = async e => {
@@ -215,13 +271,12 @@ const Dashboard = props => {
 
     const completeUserFundWallet = async paymentData => {
         setOpenFundWalletModal(false);
-        if (paymentData?.status === "successful") {
+        if (paymentData?.status === "success") {
             setLoaderSpinning(true)
             try {
                 let userPaymentData = {
                     amount: topupAmount,
-                    // transactionKey: paymentData?.trxref,
-                    transactionKey: paymentData?.tx_ref,
+                    transactionKey: paymentData?.trxref,
                     walletTransId: localStorage.getItem('prevSetInitializationKey')
                 };
                 let fundUserWallet = await _fund_user_wallet_balance(userPaymentData);
@@ -271,14 +326,13 @@ const Dashboard = props => {
 
     const completeUserSubscription = async paymentData => {
         setOpenFundWalletModal(false);
-        if (paymentData?.status === "successful") {
+        if (paymentData?.status === "success") {
             setLoaderSpinning(true)
             try {
                 let userPaymentData = {
                     subscriptionPackageId: selectedSubscriptionPackage._id,
                     subscriptionId: localStorage.getItem('subscriptionInitializationKey'),
-                    // transactionKey: paymentData?.trxref,
-                    transactionKey: paymentData?.tx_ref
+                    transactionKey: paymentData?.trxref,
                 };
                 let completeUserSubscription = await _complete_user_subscription(userPaymentData);
                 if (completeUserSubscription.data.statusMessage === "success") {
@@ -375,43 +429,35 @@ const Dashboard = props => {
     const onSuccess = (reference) => completeUserFundWallet(reference);
     const onSuccessUserSubscription = (reference) => completeUserSubscription(reference);
 
-    const flutterwaveConfig = {
-        public_key: process.env.REACT_APP_FLUTTERWAVE_PAYMENT_KEY,
-        tx_ref: (new Date()).getTime().toString(),
-        amount: topupAmount,
+    const config = {
+        public_key: 'FLWPUBK-**************************-X',
+        tx_ref: Date.now(),
+        amount: 100,
         currency: 'NGN',
         payment_options: 'card,mobilemoney,ussd',
         customer: {
-            email: userData.emailAddress,
-            phone_number: userData.phoneNumber,
-            name: `${userData.firstName} ${userData.lastName}`,
+            email: 'user@gmail.com',
+            phone_number: '070********',
+            name: 'john doe',
         },
         customizations: {
-            title: 'Fund Dancerapy Wallet',
-            description: '',
-            logo: 'https://danceimages.s3.amazonaws.com/logo.jpg',
-        },
-    };
-    const flutterwaveSubConfig = {
-        public_key: process.env.REACT_APP_FLUTTERWAVE_PAYMENT_KEY,
-        tx_ref: (new Date()).getTime().toString(),
-        amount: +selectedSubscriptionPackage.amount,
-        currency: 'NGN',
-        payment_options: 'card,mobilemoney,ussd',
-        customer: {
-            email: userData.emailAddress,
-            phone_number: userData.phoneNumber,
-            name: `${userData.firstName} ${userData.lastName}`,
-        },
-        customizations: {
-            title: 'Dancerapy Subscription',
-            description: '',
-            logo: 'https://danceimages.s3.amazonaws.com/logo.jpg',
+            title: 'my Payment Title',
+            description: 'Payment for items in cart',
+            logo: 'https://st2.depositphotos.com/4403291/7418/v/450/depositphotos_74189661-stock-illustration-online-shop-log.jpg',
         },
     };
 
-    const handleWalletPayment = useFlutterwave(flutterwaveConfig);
-    const handleSubscriptionPayment = useFlutterwave(flutterwaveSubConfig);
+    const handleFlutterPayment = useFlutterwave(config);
+
+    const fwConfig = {
+        ...config,
+        text: 'Pay with Flutterwave!',
+        callback: (response) => {
+           console.log(response);
+          closePaymentModal() // this will close the modal programmatically
+        },
+        onClose: () => {},
+      };
 
     // you can call this function anything
     const onClose = (reference) => cancelFundWallet(reference);
@@ -700,30 +746,10 @@ const Dashboard = props => {
                 </div>
             </Spin >
             <button ref={paystackButton} className="paystack-button" onClick={() => {
-                // initializePayment(onSuccess, onClose)
-                //
-                handleWalletPayment({
-                    callback: (response) => {
-                        // console.log(response);
-                        // onSuccess();
-                        completeUserFundWallet(response);
-                        closePaymentModal() // this will close the modal programmatically
-                    },
-                    onClose: () => cancelFundWallet(),
-                });
-                //
+                initializePayment(onSuccess, onClose)
             }}>Paystack Hooks Implementation</button>
             <button ref={fundWalletPaystackButton} className="paystack-button" onClick={() => {
-                // initializeSubscriptionPayment(onSuccessUserSubscription, onCloseUserSubscription)
-                handleSubscriptionPayment({
-                    callback: (response) => {
-                        // console.log(response);
-                        // onSuccess();
-                        completeUserSubscription(response);
-                        closePaymentModal() // this will close the modal programmatically
-                    },
-                    onClose: () => cancelUserSubscription('fnfn'),
-                });
+                initializeSubscriptionPayment(onSuccessUserSubscription, onCloseUserSubscription)
             }}>Paystack Hooks Implementation</button>
         </div >
     )

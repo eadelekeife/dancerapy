@@ -75,19 +75,14 @@ const ProfileSettings = props => {
     const spinnerIcon = <LoadingOutlined style={{ fontSize: 40 }} spin />;
 
     const digitsOnly = (value) => /^\d+$/.test(value);
-    const signupValidator = yup.object().shape({
-        emailAddress: yup.string().email('Please enter a valid email address').required('Please enter your email address'),
-        password: yup.string().required('Please enter your password'),
-        firstName: yup.string().required('Please enter your first name'),
-        lastName: yup.string().required('Please enter your last name')
-    })
 
     const userValidator = yup.object().shape({
         emailAddress: yup.string().email('Email address is not valid').required('Email address field is required'),
         firstName: yup.string().required('First name field is required'),
         lastName: yup.string().required('Last name field is required'),
         phoneNumber: yup.string()
-            .min(9, 'Please enter a valid phone number')
+            .min(11, 'Please enter a valid phone number')
+            .max(11, 'Please enter a valid phone number')
             .required('Phone number field is required')
             .test('Digits only', 'The field should have digits only', digitsOnly)
             .nullable()
@@ -111,8 +106,16 @@ const ProfileSettings = props => {
         });
 
     const changePasswordValidator = yup.object().shape({
-        oldPassword: yup.string().min(6, 'Password can not be less than 6 characters').required('Please enter old password'),
-        newPassword: yup.string().min(6, 'Password can not be less than 6 characters').required('Please enter new password')
+        // oldPassword: yup.string().min(6, 'Password can not be less than 6 characters').required('Please enter old password'),
+        // newPassword: yup.string().min(6, 'Password can not be less than 6 characters').required('Please enter new password')
+        oldPassword: yup.string().min(8).required('Password field can not be empty').matches(
+            /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/,
+            "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and One Special Case Character"
+        ),
+        newPassword: yup.string().min(8).required('Password field can not be empty').matches(
+            /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/,
+            "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and One Special Case Character"
+        )
     })
     const { handleSubmit: handleChangePassword, control: controlPasswordChange,
         formState: { errors: errorsChangePassword } } = useForm({

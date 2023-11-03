@@ -914,6 +914,16 @@ p.tile-summary {
     border-radius: 8px;
 }
 
+.video-display-sect h2 {
+    font-size: 3.2rem;
+    margin-bottom: 10px;
+}
+
+.center-div .btn-array button.btn-default {
+    border: 2px solid #212529;
+    color: #212529;
+}
+
 @media screen and (max-width:720px) {
     .hero-sec-props-bg {
         padding: 15% 0px;
@@ -1998,22 +2008,37 @@ h3.main-text {
     color: #10162F;
 }
 
-.real-homepage .video-display-sect {
+.real-homepage .colored.dance-props-sect.first-div {
     background: #10162F;
     padding: 5% 0px;
 }
 
-.real-homepage .video-display-sect h2 {
-    font-size: 3.5rem;
+.real-homepage .colored.dance-props-sect.first-div h3,
+.real-homepage .colored.dance-props-sect.first-div h5 {
     color: #fff;
+}
+
+.real-homepage .colored.dance-props-sect.first-div p {
+    color: rgba(253, 253, 253, .8);
+}
+
+.real-homepage .dance-props-sect.first-div h2 {
+    font-size: 3rem;
+    /* color: #fff; */
     margin-bottom: 10px;
+}
+
+.real-homepage .dance-props-sect.first-div .btn-default {
+    border: 2px solid #212529;
+    color: #212529;
 }
 
 .real-homepage .card-display .card-header img {
     height: 15rem;
 }
 
-.dance-props-sect {
+.dance-props-sect,
+.video-display-sect {
     background: #E8E2D6;
     background: rgba(232, 226, 214, .2);
     /* background: #F5FCFF; */
@@ -2137,17 +2162,28 @@ h3.main-text {
     height: 2.5rem;
 }
 
+.video-display-sect.dance-props-sect h3,
+.video-display-sect.dance-props-sect h5 {
+    color: #fff;
+}
+
+.video-display-sect.dance-props-sect p {
+    color: rgba(253, 253, 253, .8);
+}
+
 @media screen and (max-width: 720px) {
     .real-homepage .hero-section .grid-2 {
         grid-template-rows: unset;
         display: block;
     }
 
-    .about-us-page .hero-section .btn-flex, .homepage-content .hero-section .btn-flex {
+    .about-us-page .hero-section .btn-flex,
+    .homepage-content .hero-section .btn-flex {
         display: grid;
-        grid-template-columns: repeat(2,1fr);
+        grid-template-columns: repeat(2, 1fr);
         grid-gap: 10px;
     }
+
     .real-homepage .hero-section .grid-2 div:first-child {
         margin-bottom: 20px;
     }
@@ -2198,13 +2234,13 @@ h3.main-text {
 
         display: grid;
         grid-template-columns: unset;
-        grid-template-rows: repeat(3,1fr);
+        grid-template-rows: repeat(3, 1fr);
         grid-gap: 30px;
     }
 
-    .real-homepage .video-display-sect {
+    /* .real-homepage .video-display-sect {
         padding: 15% 0px;
-    }
+    } */
 
     .real-homepage .center-div {
         width: 100%;
@@ -2212,14 +2248,14 @@ h3.main-text {
     }
 
     .real-homepage .center-div .btn-array .btn-default {
-        font-size: 1.2rem;
+        font-size: 1.1rem;
         padding: 6px 10px;
-        margin-right: 10px;
-        margin-bottom: 10px;
+        margin-right: 5px;
+        margin-bottom: 8px;
     }
 
     .real-homepage .video-display-sect h2 {
-        font-size: 3rem;
+        font-size: 2.8rem;
     }
 
     .real-homepage .grid-4 {
@@ -2254,6 +2290,7 @@ h3.main-text {
         grid-gap: 0px;
         padding: 12px 25px;
     }
+
     .sec-homepage-extra-desc .button-grid .btn-yellow.curve svg {
         padding-left: 10px;
     }
@@ -2293,6 +2330,12 @@ h3.main-text {
 
     .dance-props-sect.first-div {
         text-align: center;
+    }
+
+    /* .dance-props-sect  */
+    .real-homepage .colored.dance-props-sect.first-div {
+        padding-top: 15%;
+        padding-bottom: 15%;
     }
 
     .dance-props-sect {
@@ -2342,7 +2385,17 @@ h3.main-text {
         margin-bottom: 0px;
         font-size: 1.4rem;
     }
+
     .companies-tab {
         display: none;
+    }
+
+    .video-display-sect {
+        padding: 15% 0px;
+        padding-bottom: 10%;
+    }
+
+    .video-display-sect .swiper {
+        padding-bottom: 5%;
     }
 }

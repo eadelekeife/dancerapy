@@ -27,6 +27,10 @@ const SignInPage = props => {
     const validator = yup.object().shape({
         emailAddress: yup.string().email('Email is not valid').required('Email field can not be empty'),
         password: yup.string().min(6).required('Password field can not be empty')
+        // password: yup.string().min(8).required('Password field can not be empty').matches(
+        //     /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/,
+        //     "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and One Special Case Character"
+        // )
     })
 
     const { handleSubmit, control, formState: { errors } } = useForm({
@@ -56,7 +60,11 @@ const SignInPage = props => {
             } else window.location = "/videos";
         }
         if (props.loginError.loginError.length) {
-            setErrorMessage(props.loginError.loginError);
+            if (props.loginError.loginError === "User not found.") {
+                setErrorMessage("Incorrect signin credentials");
+            } else {
+                setErrorMessage(props.loginError.loginError);
+            }
             setLoadingData(false);
         }
     }, [props.auth, props.loginError]);
@@ -80,11 +88,11 @@ const SignInPage = props => {
     return (
         <div>
             <Nav />
-            <div className="auth-display">
+            <div className="auth-display signin">
                 <div className="grid-2">
                     <div className="auth-image-bg">
                         <div>
-                            <h2>Ready to Dance Your Way to Fitness? Join our community of fitness enthusiasts 
+                            <h2>Ready to Dance Your Way to Fitness? Join our community of fitness enthusiasts
                                 and dance lovers.</h2>
                             <Avatar.Group>
                                 <Avatar src="https://xsgames.co/randomusers/avatar.php?g=pixel&key=1" />

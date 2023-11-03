@@ -65,6 +65,9 @@ html {
     font-family: 'Gilroy Regular';
     background-color: rgba(245, 245, 245, .1);
     overflow-x: hidden;
+    max-width: 1540px;
+    margin: 0px auto;
+    display: block;
 }
 
 button {

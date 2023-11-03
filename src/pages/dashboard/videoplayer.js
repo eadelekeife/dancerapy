@@ -23,6 +23,7 @@ import Nav from "../../components/nav";
 import { connect } from "react-redux";
 import AppRoute from "../../utils/routes";
 import { usePaystackPayment } from 'react-paystack';
+import { useFlutterwave, closePaymentModal } from 'flutterwave-react-v3';
 import { _add_video_to_cart, _buy_single_video, _buy_single_video_with_tokens, _cancel_user_subscription, _complete_user_subscription, _complete_user_subscription_with_wallet, _fetch_subscription_plans, _find_video_by_id, _initiate_user_subscription, _initiate_user_subscription_with_wallet, _update_video_data, _update_video_full_data, _update_video_half_data } from "../../utils/axiosroutes";
 import AllAppRoutes from "../../utils/routes";
 
@@ -281,13 +282,14 @@ const ProfileVideoToPlay = props => {
 
     const completeUserSubscription = async paymentData => {
         setOpenVideoPurchaseModal(false);
-        if (paymentData?.status === "success") {
+        if (paymentData?.status === "successful") {
             setLoaderSpinning(true)
             try {
                 let userPaymentData = {
                     subscriptionPackageId: selectedSubscriptionPackage._id,
                     subscriptionId: localStorage.getItem('subscriptionInitializationKey'),
-                    transactionKey: paymentData?.trxref,
+                    // transactionKey: paymentData?.trxref,
+                    transactionKey: paymentData?.tx_ref,
                 };
                 let completeUserSubscription = await _complete_user_subscription(userPaymentData);
                 if (completeUserSubscription.data.statusMessage === "success") {
@@ -397,7 +399,26 @@ const ProfileVideoToPlay = props => {
         publicKey: process.env.REACT_APP_DANCERAPY_PAYMENT_KEY,
     };
 
+    const flutterwaveSubConfig = {
+        public_key: process.env.REACT_APP_FLUTTERWAVE_PAYMENT_KEY,
+        tx_ref: (new Date()).getTime().toString(),
+        amount: +selectedSubscriptionPackage.amount,
+        currency: 'NGN',
+        payment_options: 'card,mobilemoney,ussd',
+        customer: {
+            email: userData.emailAddress,
+            phone_number: userData.phoneNumber,
+            name: `${userData.firstName} ${userData.lastName}`,
+        },
+        customizations: {
+            title: 'Dancerapy Subscription',
+            description: '',
+            logo: 'https://danceimages.s3.amazonaws.com/logo.jpg',
+        },
+    };
+
     const initializeSubscriptionPayment = usePaystackPayment(paystackSubConfig);
+    const handleSubscriptionPayment = useFlutterwave(flutterwaveSubConfig);
 
     return (
         <div className="extra-videos-detail-display">
@@ -691,8 +712,21 @@ const ProfileVideoToPlay = props => {
                         </div>
                     </div>
                 </Modal>
-                <button ref={fundWalletPaystackButton} className="paystack-button" onClick={() => {
+                {/* <button ref={fundWalletPaystackButton} className="paystack-button" onClick={() => {
                     initializeSubscriptionPayment(onSuccessUserSubscription, onCloseUserSubscription)
+                }}>Paystack Hooks Implementation</button> */}
+
+                <button ref={fundWalletPaystackButton} className="paystack-button" onClick={() => {
+                    // initializeSubscriptionPayment(onSuccessUserSubscription, onCloseUserSubscription)
+                    handleSubscriptionPayment({
+                        callback: (response) => {
+                            // console.log(response);
+                            // onSuccess();
+                            completeUserSubscription(response);
+                            closePaymentModal() // this will close the modal programmatically
+                        },
+                        onClose: () => cancelUserSubscription(),
+                    });
                 }}>Paystack Hooks Implementation</button>
             </Spin>
         </div >

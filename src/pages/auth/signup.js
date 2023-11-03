@@ -20,9 +20,21 @@ const SignUpPage = () => {
     const [errorMessage, setErrorMessage] = useState('');
 
     const antIcon = <LoadingOutlined style={{ fontSize: 24, color: '#fff' }} spin />;
+    const digitsOnly = (value) => /^\d+$/.test(value);
     const validator = yup.object().shape({
+        firstName: yup.string().required('First name field is required'),
+        lastName: yup.string().required('Last name field is required'),
+        phoneNumber: yup.string()
+            .min(11, 'Please enter a valid phone number')
+            .max(11, 'Please enter a valid phone number')
+            .required('Phone number field is required')
+            .test('Digits only', 'The field should have digits only', digitsOnly)
+            .nullable(),
         emailAddress: yup.string().email('Email is not valid').required('Email field can not be empty'),
-        password: yup.string().min(6).required('Password field can not be empty')
+        password: yup.string().min(8).required('Password field can not be empty').matches(
+            /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/,
+            "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and One Special Case Character"
+        )
     })
 
     const { handleSubmit, control, formState: { errors } } = useForm({
@@ -84,101 +96,99 @@ const SignUpPage = () => {
                             </Avatar.Group>
                         </div>
                     </div>
-                    <div>
-                        <div className="form_detail contain">
-                            <div className="first-display">
-                                <h3 style={{ margin: 0, padding: 0 }}>Create a free account</h3>
-                                <p>Enter the following details to create a free account and get access to videos</p>
+                    <div className="form_detail contain">
+                        <div className="first-display">
+                            <h3 style={{ margin: 0, padding: 0 }}>Create a free account</h3>
+                            <p>Enter the following details to create a free account and get access to videos</p>
+                        </div>
+                        {
+                            errorMessage ?
+                                <p className="errorMessage">{errorMessage}</p> : ''
+                        }
+                        <form onSubmit={handleSubmit(signUpUser)}>
+                            <div className="form_flex">
+                                <div className="form-group space">
+                                    <label htmlFor="firstName">First name</label>
+                                    <Controller name="firstName" control={control}
+                                        render={({ field }) => {
+                                            return (
+                                                <Input style={{ height: '5rem' }} type="text" {...field}
+                                                    name="firstName" />
+                                            )
+                                        }} />
+                                    {errors.firstName && <p className="errorMessage">{errors.firstName.message}</p>}
+                                </div>
+                                <div className="form-group">
+                                    <label htmlFor="lastName">Last name</label>
+                                    <Controller name="lastName" control={control}
+                                        render={({ field }) => {
+                                            return (
+                                                <Input style={{ height: '5rem' }} type="text" {...field}
+                                                    name="lastName" />
+                                            )
+                                        }} />
+                                    {errors.lastName && <p className="errorMessage">{errors.lastName.message}</p>}
+                                </div>
+                            </div>
+                            <div className="form_flex">
+                                <div className="form-group">
+                                    <label htmlFor="emailAddress">Email address</label>
+                                    <Controller name="emailAddress" control={control}
+                                        render={({ field }) => {
+                                            return (
+                                                <Input style={{ height: '5rem' }} type="email" {...field}
+                                                    name="emailAddress" />
+                                            )
+                                        }} />
+                                    {errors.emailAddress && <p className="errorMessage">{errors.emailAddress.message}</p>}
+                                </div>
+                                <div className="form-group">
+                                    <label htmlFor="phoneNumber">Phone number</label>
+                                    <Controller name="phoneNumber" control={control}
+                                        render={({ field }) => {
+                                            return (
+                                                <Input style={{ height: '5rem' }} type="text" {...field}
+                                                    name="phoneNumber" />
+                                            )
+                                        }} />
+                                    {errors.phoneNumber && <p className="errorMessage">{errors.phoneNumber.message}</p>}
+                                </div>
+                            </div>
+                            <div className="form-group">
+                                <label htmlFor="password">Password</label>
+                                <Controller name="password" control={control}
+                                    render={({ field }) => {
+                                        return (
+                                            <Input.Password type="password" style={{ height: '5rem' }} {...field}
+                                                name="password" />
+                                        )
+                                    }} />
+                                {errors.password && <p className="errorMessage">{errors.password.message}</p>}
+                            </div>
+                            <div className="form-group">
+                                <label htmlFor="referral">Referral Code</label>
+                                <Controller name="referral" control={control}
+                                    render={({ field }) => {
+                                        return (
+                                            <Input type="text" style={{ height: '5rem' }} {...field}
+                                                name="referral" />
+                                        )
+                                    }} />
+                                {errors.referral && <p className="errorMessage">{errors.referral.message}</p>}
                             </div>
                             {
-                                errorMessage ?
-                                    <p className="errorMessage">{errorMessage}</p> : ''
+                                loadingData
+                                    ?
+                                    <button className="btn-red" disabled>
+                                        <Spin indicator={antIcon} /></button>
+                                    :
+                                    <button className="btn-red">Create account now</button>
                             }
-                            <form onSubmit={handleSubmit(signUpUser)}>
-                                <div className="form_flex">
-                                    <div className="form-group space">
-                                        <label htmlFor="firstName">First name</label>
-                                        <Controller name="firstName" control={control}
-                                            render={({ field }) => {
-                                                return (
-                                                    <Input style={{ height: '5rem' }} type="text" {...field}
-                                                        name="firstName" />
-                                                )
-                                            }} />
-                                        {errors.firstName && <p className="errorMessage">{errors.firstName.message}</p>}
-                                    </div>
-                                    <div className="form-group">
-                                        <label htmlFor="lastName">Last name</label>
-                                        <Controller name="lastName" control={control}
-                                            render={({ field }) => {
-                                                return (
-                                                    <Input style={{ height: '5rem' }} type="text" {...field}
-                                                        name="lastName" />
-                                                )
-                                            }} />
-                                        {errors.lastName && <p className="errorMessage">{errors.lastName.message}</p>}
-                                    </div>
-                                </div>
-                                <div className="form_flex">
-                                    <div className="form-group">
-                                        <label htmlFor="emailAddress">Email address</label>
-                                        <Controller name="emailAddress" control={control}
-                                            render={({ field }) => {
-                                                return (
-                                                    <Input style={{ height: '5rem' }} type="email" {...field}
-                                                        name="emailAddress" />
-                                                )
-                                            }} />
-                                        {errors.emailAddress && <p className="errorMessage">{errors.emailAddress.message}</p>}
-                                    </div>
-                                    <div className="form-group">
-                                        <label htmlFor="phoneNumber">Phone number</label>
-                                        <Controller name="phoneNumber" control={control}
-                                            render={({ field }) => {
-                                                return (
-                                                    <Input style={{ height: '5rem' }} type="text" {...field}
-                                                        name="phoneNumber" />
-                                                )
-                                            }} />
-                                        {errors.phoneNumber && <p className="errorMessage">{errors.phoneNumber.message}</p>}
-                                    </div>
-                                </div>
-                                <div className="form-group">
-                                    <label htmlFor="password">Password</label>
-                                    <Controller name="password" control={control}
-                                        render={({ field }) => {
-                                            return (
-                                                <Input.Password type="password" style={{ height: '5rem' }} {...field}
-                                                    name="password" />
-                                            )
-                                        }} />
-                                    {errors.password && <p className="errorMessage">{errors.password.message}</p>}
-                                </div>
-                                <div className="form-group">
-                                    <label htmlFor="referral">Referral Code</label>
-                                    <Controller name="referral" control={control}
-                                        render={({ field }) => {
-                                            return (
-                                                <Input type="text" style={{ height: '5rem' }} {...field}
-                                                    name="referral" />
-                                            )
-                                        }} />
-                                    {errors.referral && <p className="errorMessage">{errors.referral.message}</p>}
-                                </div>
-                                {
-                                    loadingData
-                                        ?
-                                        <button className="btn-red" disabled>
-                                            <Spin indicator={antIcon} /></button>
-                                        :
-                                        <button className="btn-red">Create account now</button>
-                                }
-                                <p>No account yet? <Link to="/signin">Sign in here</Link></p>
-                                {/* <Divider orientation="left">Or</Divider>
+                            <p>No account yet? <Link to="/signin">Sign in here</Link></p>
+                            {/* <Divider orientation="left">Or</Divider>
                                 <Link to="/signin"
                                     className="margin-bottom">Have an account already? Sign in here</Link> */}
-                            </form>
-                        </div>
+                        </form>
                     </div>
                 </div>
             </div>

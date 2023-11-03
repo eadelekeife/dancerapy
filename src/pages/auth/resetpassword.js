@@ -17,6 +17,7 @@ import { _reset_password } from '../../utils/axiosroutes';
 
 const ResetPassword = props => {
 
+    const Navigate = useNavigate();
     const antIcon = (<LoadingOutlined style={{ fontSize: 24, color: '#fff' }} spin />);
     const [errorMessage, setErrorMessage] = useState('');
     const [sendingMessage, setSendingMessage] = useState(false);
@@ -29,7 +30,11 @@ const ResetPassword = props => {
     };
 
     const validator = yup.object().shape({
-        password: yup.string().min(6).required('Password field can not be empty')
+        // password: yup.string().min(6).required('Password field can not be empty')
+        password: yup.string().min(8).required('Password field can not be empty').matches(
+            /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/,
+            "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and One Special Case Character"
+        )
     })
 
     const { handleSubmit, control, formState: { errors }, setValue } = useForm({
@@ -50,6 +55,7 @@ const ResetPassword = props => {
                 setValue('password', '');
                 setSendingMessage(false);
                 openNotificationWithIcon('success', `Your password has been reset successfully. Please login with your new password to continue.`);
+                Navigate('/signin');
             } else {
                 setErrorMessage(resetPassword.data.summary);
                 setSendingMessage(false);

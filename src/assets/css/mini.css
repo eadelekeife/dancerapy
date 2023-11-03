@@ -112,7 +112,7 @@
     height: 100%;
     width: 100%;
     height: inherit;
-    /* align-items: center; */
+    align-items: center;
 }
 
 .auth-image-bg {
@@ -233,8 +233,12 @@
     box-shadow: rgba(0, 0, 0, 0.03) 0px 30px 60px;
     padding: 30px 30px 15px;
     /* padding-top: 10%; */
-    width: max-content;
+    /* width: max-content; */
     border-radius: 4px;
+}
+
+.signin .form_detail {
+    width: 70%;
 }
 
 .auth-form-content {
@@ -332,6 +336,10 @@
         padding: 0px 3%;
         padding-bottom: 15%;
         width: 100%;
+    }
+
+    .signin .form_detail {
+        width: 100% !important;
     }
 
     .form_detail p,
